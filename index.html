@@ -1313,7 +1313,7 @@
   <!-- Top Bar -->
   <div class="top-bar">
     <div class="logo"><span>MS</span> Microsoft</div>
-    <div class="exam-title">AI-102: <span id="sectionTitle">Practice</span></div>
+    <div class="exam-title"><span id="examCodePrefix">AI-102:</span> <span id="sectionTitle">Practice</span></div>
     <div style="display:flex;align-items:center;gap:16px">
       <button class="btn btn-secondary" style="padding:6px 12px;font-size:12px" onclick="backToSections()">☰ Sections</button>
       <div class="timer-block">
@@ -9323,6 +9323,796 @@ with project_client.get_openai_client() as openai_client:
     },
     userSelections: {}
   }
+  ,
+
+  // ============================================================
+  // DP-700 ACTUAL EXAM QUESTIONS (EXAM TOPICS)
+  // Implementing Data Engineering Solutions Using Microsoft Fabric.
+  // Original questions authored on the same topics seen in community
+  // exam discussions. No verbatim source content.
+  // ============================================================
+  {
+    id: 2000, topic: 21, discussions: 0, isDP700: true, dp700Domain: 'ingest',
+    type: 'MULTIPLE CHOICE',
+    title: 'OneLake Shortcut to an External ADLS Gen2 Account',
+    text: `<p>You have a Fabric lakehouse named Lakehouse1. Your organization also has an Azure Data Lake Storage Gen2 account named storage1 that contains files used by several other non-Fabric applications.</p>
+    <p>You need to make the files in storage1 available in Lakehouse1 <strong>without copying or duplicating the data</strong>, and any changes made in storage1 must be reflected in Lakehouse1 immediately.</p>
+    <p>What should you create in Lakehouse1?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. A OneLake shortcut that targets storage1.',
+      'B. A scheduled Data pipeline Copy activity that runs every 5 minutes.',
+      'C. A Dataflow Gen2 that imports the files on a fixed refresh schedule.',
+      'D. A mirrored database pointed at storage1.'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — a OneLake shortcut</strong><br><br>
+    A <strong>shortcut</strong> is a reference/pointer that surfaces data from another location (ADLS Gen2, S3, another lakehouse/warehouse) inside OneLake <strong>without copying it</strong>. Reads through the shortcut always reflect the current state of the source, satisfying "immediately reflected" with zero duplication.<br><br>
+    B and C both physically copy data on a schedule, which duplicates storage and introduces latency between refreshes. D (mirroring) is designed for continuously replicating operational databases (e.g. Azure SQL, Cosmos DB), not a general-purpose ADLS Gen2 account.`,
+    userChoice: null
+  },
+  {
+    id: 2001, topic: 20, discussions: 0, isDP700: true, dp700Domain: 'manage',
+    type: 'MULTIPLE CHOICE',
+    title: 'Choosing Direct Lake for a Large, Frequently-Updated Semantic Model',
+    text: `<p>You have a Fabric lakehouse that stores a fact table with 900 million rows. The table is updated continuously throughout the day by a streaming ingestion pipeline.</p>
+    <p>You need to build a Power BI semantic model over the table. The solution must minimize refresh latency so that reports reflect new data as quickly as possible, and it must avoid importing a full copy of the table into the model.</p>
+    <p>Which storage mode should you use for the semantic model?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Import mode.',
+      'B. DirectQuery mode.',
+      'C. Direct Lake mode.',
+      'D. Composite mode combining Import and DirectQuery.'
+    ],
+    correctOption: 'C',
+    solution: `<strong>Correct Answer: C — Direct Lake mode</strong><br><br>
+    <strong>Direct Lake</strong> reads Delta Parquet files directly from OneLake into memory on demand, giving near-Import query performance <strong>without a scheduled refresh or a duplicated copy</strong> of the data — new rows written to the Delta table become visible to reports as soon as the model's transactions pick them up, with no ETL step in between.<br><br>
+    A (Import) requires a full copy and scheduled refreshes, adding latency. B (DirectQuery) avoids duplication but pushes every visual query back to the lakehouse/warehouse compute, which is far slower at this scale. D still relies on an Import partition for part of the model, which reintroduces refresh latency for that portion.`,
+    userChoice: null
+  },
+  {
+    id: 2002, topic: 20, discussions: 0, isDP700: true, dp700Domain: 'manage',
+    type: 'HOTSPOT',
+    title: 'Fabric Capacity SKUs and Feature Parity',
+    text: `<p>Your organization is moving from Power BI Premium capacity to a Fabric capacity (F SKU) to unlock Data Engineering and Data Factory workloads in the same tenant.</p>
+    <p>For each statement, select Yes if the statement is true; otherwise select No.</p>`,
+    note: 'NOTE: Each correct selection is worth one point.',
+    render: 'hotspot_yesno',
+    solution: `• An F64 Fabric capacity provides Power BI Premium P1-equivalent capabilities: <span class="correct-badge">Yes</span><br>
+    • Fabric capacity compute is shared exclusively by Power BI; Data Engineering and Data Factory items cannot run on the same capacity: <span class="correct-badge">No</span><br>
+    • Fabric capacities can be paused and resumed to stop compute billing when not in use: <span class="correct-badge">Yes</span><br><br>
+    <em>Microsoft has published F64 as the SKU that roughly matches P1 in Power BI capability, so treating F64 as the P1-equivalent baseline is correct (Yes). A core benefit of Fabric capacities is that a <strong>single capacity's compute pool is shared across every Fabric workload</strong> — Power BI, Data Engineering, Data Factory, Real-Time Intelligence, Data Science — which is the opposite of the second statement (No). F-SKU capacities support pause/resume from the Azure portal, stopping consumption-based billing while paused (Yes); trial and P-SKU capacities behave differently.</em>`,
+    statements: [
+      { text: 'An F64 Fabric capacity provides Power BI Premium P1-equivalent capabilities.', answer: 'Yes' },
+      { text: 'Fabric capacity compute is shared exclusively by Power BI; Data Engineering and Data Factory items cannot run on the same capacity.', answer: 'No' },
+      { text: 'Fabric capacities can be paused and resumed to stop compute billing when not in use.', answer: 'Yes' }
+    ],
+    userSelections: {}
+  },
+  {
+    id: 2003, topic: 20, discussions: 0, isDP700: true, dp700Domain: 'manage',
+    type: 'DRAG DROP',
+    title: 'Matching Fabric Item Types to Their Purpose',
+    text: `<p><strong>DRAG DROP</strong> — Your team is designing a Fabric solution and needs to select the correct item type for each requirement.</p>
+    <p>Match each requirement to the Fabric item type that satisfies it. Each item type may be used once, more than once, or not at all.</p>`,
+    note: 'NOTE: Each correct selection is worth one point.',
+    render: 'dragdrop_exam',
+    sourceLabel: 'Fabric item types',
+    dragPool: ['Lakehouse', 'Warehouse', 'Eventhouse', 'KQL Queryset'],
+    targets: [
+      { id: 'req1', label: 'Store files as managed/unmanaged Delta tables and query them with Spark or SQL:' },
+      { id: 'req2', label: 'Provide a fully T-SQL, transactional, multi-table warehousing experience with stored procedures:' },
+      { id: 'req3', label: 'Ingest and store high-volume, time-series event data for near real-time analytics with KQL:' }
+    ],
+    correctAnswers: {
+      req1: 'Lakehouse',
+      req2: 'Warehouse',
+      req3: 'Eventhouse'
+    },
+    solution: `• <strong>Files + Delta tables queried by Spark or SQL:</strong> <span class="correct-badge">Lakehouse</span><br>
+    • <strong>Fully T-SQL, transactional warehousing with stored procedures:</strong> <span class="correct-badge">Warehouse</span><br>
+    • <strong>High-volume time-series ingestion queried with KQL:</strong> <span class="correct-badge">Eventhouse</span><br><br>
+    <em>A <strong>Lakehouse</strong> combines a files area with managed Delta tables and can be queried by both Spark notebooks and the built-in SQL analytics endpoint. A <strong>Warehouse</strong> is the fully transactional, T-SQL-first item that supports multi-table transactions, views, and stored procedures — capabilities a lakehouse's SQL endpoint does not offer. An <strong>Eventhouse</strong> is purpose-built to ingest streaming/event data at scale and query it with KQL for near real-time analytics; a <strong>KQL Queryset</strong> is just a saved set of queries against an Eventhouse, not a storage/ingestion target, so it doesn't fit any of these requirements.</em>`,
+    userAnswers: {}
+  },
+  {
+    id: 2004, topic: 21, discussions: 0, isDP700: true, dp700Domain: 'ingest',
+    type: 'MULTIPLE CHOICE',
+    title: 'Dataflow Gen2 vs. Data Pipeline for a Reusable Transform',
+    text: `<p>You need to build a reusable, low-code transformation that cleans and reshapes data from a SharePoint list and several CSV files, using Power Query-style steps that business analysts can maintain themselves. The output must land in a lakehouse table on a schedule.</p>
+    <p>You do NOT need complex orchestration such as conditional branching, parameterized child pipeline calls, or on-failure alerting logic — only the transform itself.</p>
+    <p>Which Fabric item should you use to build the transformation?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. A Data pipeline with a single Copy data activity.',
+      'B. A Dataflow Gen2.',
+      'C. A notebook running PySpark.',
+      'D. A KQL Queryset.'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — Dataflow Gen2</strong><br><br>
+    <strong>Dataflow Gen2</strong> gives a Power Query editor (the same low-code, step-based experience) that business analysts already know, supports many connectors including SharePoint and local files, and can write its output directly to a lakehouse table — exactly the "reusable, low-code, analyst-maintainable" requirement, with no orchestration logic needed.<br><br>
+    A (Copy activity) moves data as-is without Power Query-style shaping. C (PySpark notebook) is code-first and not something business analysts typically maintain. D (KQL Queryset) is for querying an Eventhouse, not transforming files.`,
+    userChoice: null
+  },
+  {
+    id: 2005, topic: 20, discussions: 0, isDP700: true, dp700Domain: 'manage',
+    type: 'MULTIPLE CHOICE',
+    title: 'Optimizing Small-File Delta Tables in a Lakehouse',
+    text: `<p>You have a lakehouse table that is loaded by many small, frequent streaming micro-batch writes. Query performance against the table has degraded over time, and analysts report the table now contains thousands of small Parquet files.</p>
+    <p>You need to improve read performance without changing the ingestion pattern.</p>
+    <p>What should you do?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Run an OPTIMIZE command on the table to compact small files, and enable V-Order.',
+      'B. Run a VACUUM command with a retention of 0 hours.',
+      'C. Convert the table from a managed Delta table to a CSV-based external table.',
+      'D. Disable schema enforcement on the table.'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — OPTIMIZE with V-Order</strong><br><br>
+    <strong>OPTIMIZE</strong> compacts many small Parquet files into fewer, larger files, which directly addresses the "thousands of small files" problem and speeds up subsequent reads. Enabling <strong>V-Order</strong> additionally sorts and encodes the Parquet files for faster reads by the Fabric query engines (including Direct Lake and the SQL endpoint).<br><br>
+    B (VACUUM) only removes files no longer referenced by the Delta log after the retention window — it does not compact or reorganize active files, and a 0-hour retention risks breaking time-travel/concurrent readers. C moves away from Delta entirely, losing ACID transactions and Direct Lake compatibility. D affects write-time validation, not read performance.`,
+    userChoice: null
+  },
+  {
+    id: 2006, topic: 21, discussions: 0, isDP700: true, dp700Domain: 'ingest',
+    type: 'HOTSPOT',
+    title: 'Completing a PySpark Notebook to Append to a Delta Table',
+    text: `<p><strong>HOTSPOT</strong> — You have a Fabric notebook that reads a source dataframe named df_new and must append its rows to an existing managed lakehouse table named sales_silver, without overwriting the existing rows.</p>
+    <p>How should you complete the code? Select the appropriate options in the answer area.</p>`,
+    note: 'NOTE: Each correct selection is worth one point.',
+    render: 'hotspot_code',
+    codeTemplate: `df_new.write \\
+    .format("delta") \\
+    .mode({{mode}}) \\
+    .{{save_call}}("sales_silver")`,
+    solution: `• <strong>mode = </strong> <span class="correct-badge">"append"</span><br>
+    • <strong>.</strong> <span class="correct-badge">saveAsTable</span><br><br>
+    <em>Writing with <code>mode("append")</code> adds the new rows to whatever already exists in the target instead of replacing it — <code>"overwrite"</code> would delete and replace existing data, and <code>"error"</code> (the default) would fail because the table already exists. <code>saveAsTable</code> writes to (and registers) a managed table in the lakehouse's metastore by name; <code>.load(...)</code> is a read operation, not a write, so it doesn't apply here.</em>`,
+    dropdowns: {
+      'mode': {
+        label: '.mode(',
+        options: ['"append"', '"overwrite"', '"error"'],
+        correct: '"append"'
+      },
+      'save_call': {
+        label: 'write call:',
+        options: ['saveAsTable', 'load', 'readStream'],
+        correct: 'saveAsTable'
+      }
+    },
+    userSelections: {}
+  },
+  {
+    id: 2007, topic: 20, discussions: 0, isDP700: true, dp700Domain: 'manage',
+    type: 'MULTIPLE CHOICE',
+    title: 'Isolating In-Development Pipeline Changes with Git Integration',
+    text: `<p>You have a Fabric workspace connected to a Git repository. A developer needs to make and test breaking changes to a Data pipeline without affecting the pipeline that other team members are actively using.</p>
+    <p>What should the developer do first?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Disconnect the workspace from Git, make the changes, then reconnect.',
+      'B. Create a new branch in the Git repository and a corresponding new Fabric workspace connected to that branch.',
+      'C. Export the pipeline as a .zip file, edit it locally, and re-import it into the same workspace.',
+      'D. Duplicate the pipeline manually within the same workspace and rename the copy.'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — branch out to a new workspace</strong><br><br>
+    Fabric's Git integration supports <strong>"branching out"</strong>: creating a new Git branch and connecting a new (often workspace-per-developer) Fabric workspace to that branch. This gives the developer an isolated environment to make and test breaking changes, which can later be merged back and synced into the shared workspace's branch — without disrupting anyone using the original workspace.<br><br>
+    A removes version control entirely and risks losing change history. C is a manual, error-prone workaround that doesn't use source control at all. D creates drift with no link back to Git and no clean way to merge the change later.`,
+    userChoice: null
+  },
+  {
+    id: 2008, topic: 21, discussions: 0, isDP700: true, dp700Domain: 'ingest',
+    type: 'MULTIPLE CHOICE',
+    title: 'Routing Streaming Telemetry into an Eventhouse',
+    text: `<p>You have IoT devices that publish JSON telemetry to an Azure Event Hubs namespace. You need to land this data in Fabric so that engineers can run near real-time KQL queries over the last few minutes of readings, with sub-second ingestion latency where possible.</p>
+    <p>Which Fabric item should you use as the ingestion component in front of the Eventhouse?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. A Dataflow Gen2 scheduled every 15 minutes.',
+      'B. An Eventstream connected to the Event Hubs source, with an Eventhouse destination.',
+      'C. A Data pipeline Copy activity with a tumbling window trigger.',
+      'D. A notebook that polls Event Hubs on a fixed schedule using PySpark.'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — Eventstream into an Eventhouse</strong><br><br>
+    <strong>Eventstream</strong> is Fabric's no-code real-time ingestion item: it connects to sources like Event Hubs, IoT Hub, or Kafka, can apply light stream transformations, and streams events directly into a destination such as an <strong>Eventhouse</strong> (KQL Database) with very low latency — exactly matching "near real-time" and "sub-second" requirements.<br><br>
+    A and C are batch/scheduled mechanisms that introduce minutes of latency by design. D is a manual, code-heavy approach that reinvents what Eventstream already provides, and polling on a fixed schedule cannot achieve sub-second latency.`,
+    userChoice: null
+  },
+  {
+    id: 2009, topic: 20, discussions: 0, isDP700: true, dp700Domain: 'manage',
+    type: 'MULTIPLE CHOICE',
+    title: 'Enforcing Row-Level Security in a Fabric Warehouse',
+    text: `<p>You have a Fabric warehouse with a Sales table. You need to ensure that sales representatives can only see rows where the RegionId column matches their own assigned region, while managers can see all rows. The restriction must be enforced at the data layer, not in each individual report.</p>
+    <p>What should you implement?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. A Power BI row-level security (RLS) role defined only in the semantic model.',
+      'B. A T-SQL security policy in the warehouse that uses a predicate function filtering on RegionId, applied with CREATE SECURITY POLICY.',
+      'C. Separate warehouse copies, one per region, with manual data copies.',
+      'D. Column-level permissions (GRANT/DENY) on the RegionId column.'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — a T-SQL row-level security policy</strong><br><br>
+    Fabric Warehouse supports T-SQL <strong>row-level security</strong>: you write an inline table-valued predicate function that returns rows matching the caller's context (e.g. their region), then bind it with <code>CREATE SECURITY POLICY ... ADD FILTER PREDICATE</code>. This enforces the restriction centrally, at the data layer, for every consumer of the warehouse — reports, ad hoc queries, and other tools alike.<br><br>
+    A only protects Power BI reports built on that specific semantic model; any other tool querying the warehouse directly would bypass it. C is an operationally expensive, error-prone duplication strategy. D restricts visibility of the RegionId column itself, not which <em>rows</em> a user can see.`,
+    userChoice: null
+  },
+  {
+    id: 2010, topic: 22, discussions: 0, isDP700: true, dp700Domain: 'monitor',
+    type: 'HOTSPOT',
+    title: 'Interpreting Fabric Capacity Throttling States',
+    text: `<p>Your Fabric capacity has been running above its purchased compute for a sustained period. You review the Capacity Metrics app and see capacity utilization consistently over 100%, with users reporting item creation being blocked.</p>
+    <p>For each statement, select Yes if true; otherwise select No.</p>`,
+    note: 'NOTE: Each correct selection is worth one point.',
+    render: 'hotspot_yesno',
+    statements: [
+      { text: 'Sustained overuse can move a capacity from interactive delay into interactive rejection, where new interactive operations are blocked.', answer: 'Yes' },
+      { text: 'Background operations (such as scheduled pipeline runs) are throttled using the same rules as interactive operations.', answer: 'No' },
+      { text: 'Scaling up to a larger F SKU increases available compute and can relieve throttling.', answer: 'Yes' }
+    ],
+    solution: `• Sustained overuse moves a capacity from interactive delay to interactive rejection: <span class="correct-badge">Yes</span><br>
+    • Background operations are throttled by the same rules as interactive operations: <span class="correct-badge">No</span><br>
+    • Scaling up to a larger F SKU can relieve throttling: <span class="correct-badge">Yes</span><br><br>
+    <em>Fabric's throttling model has progressive stages: as a capacity carries forward more overage, it moves from no impact, to <strong>interactive delay</strong> (operations slow down), to <strong>interactive rejection</strong> (new interactive operations are blocked outright), and eventually background rejection as well — so sustained overuse escalating to rejection is expected (Yes). Background operations (like scheduled pipeline or dataflow runs) are throttled on a <strong>separate, more lenient</strong> schedule than interactive user operations, so they are not governed by identical rules (No). Because throttling is driven by exceeding the capacity's purchased compute, moving to a larger SKU raises the ceiling and directly relieves the pressure (Yes).</em>`,
+    userSelections: {}
+  },
+  {
+    id: 2011, topic: 22, discussions: 0, isDP700: true, dp700Domain: 'monitor',
+    type: 'MULTIPLE CHOICE',
+    title: 'Choosing Between the Monitoring Hub and the Capacity Metrics App',
+    text: `<p>A data engineer wants to see the run history and status of a specific Data pipeline, including which activity inside it failed on the most recent run and why.</p>
+    <p>A capacity administrator separately wants to see overall compute (CU) consumption trends across all workspaces on the capacity over the past 14 days.</p>
+    <p>Which tool should each person use?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Both should use the Capacity Metrics app.',
+      'B. The data engineer should use the Monitoring hub; the capacity administrator should use the Capacity Metrics app.',
+      'C. The data engineer should use the Capacity Metrics app; the capacity administrator should use the Monitoring hub.',
+      'D. Both should use Azure Monitor workbooks, since Fabric has no built-in monitoring UI.'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B</strong><br><br>
+    The <strong>Monitoring hub</strong> is item-run-focused: it lists runs of pipelines, dataflows, notebooks, and other jobs, with per-activity status and failure details — exactly what the data engineer needs to debug a specific pipeline run. The <strong>Capacity Metrics app</strong> is capacity-focused: it visualizes CU (capacity unit) consumption, throttling, and utilization trends across the whole capacity over time, which is what the capacity administrator needs.<br><br>
+    A and C reverse or misapply these tools. D is incorrect — Fabric ships both of these monitoring experiences natively, without requiring separate Azure Monitor setup for this scenario.`,
+    userChoice: null
+  },
+  {
+    id: 2012, topic: 20, discussions: 0, isDP700: true, dp700Domain: 'manage',
+    type: 'DRAG DROP',
+    title: 'Ordering a Deployment Pipeline Promotion',
+    text: `<p><strong>DRAG DROP</strong> — You use a Fabric deployment pipeline with three stages: Development, Test, and Production. You need to promote a set of tested items from Development all the way to Production, deployment-rule variables (such as connection strings) already configured per stage.</p>
+    <p>Arrange the actions in the order you should perform them.</p>`,
+    note: '',
+    render: 'sequence_generic',
+    correctOrder: [
+      'Validate and finish testing the items in the Development stage.',
+      'Deploy the content from Development to the Test stage.',
+      'Run validation checks and user acceptance testing in the Test stage.',
+      'Deploy the content from Test to the Production stage.'
+    ],
+    actions: [
+      'Deploy the content from Development to the Production stage directly.',
+      'Validate and finish testing the items in the Development stage.',
+      'Deploy the content from Development to the Test stage.',
+      'Run validation checks and user acceptance testing in the Test stage.',
+      'Deploy the content from Test to the Production stage.'
+    ],
+    solution: `<strong>Correct order:</strong><br>
+    1. Validate and finish testing the items in the Development stage.<br>
+    2. Deploy the content from Development to the Test stage.<br>
+    3. Run validation checks and user acceptance testing in the Test stage.<br>
+    4. Deploy the content from Test to the Production stage.<br><br>
+    <em>A Fabric deployment pipeline promotes content <strong>one adjacent stage at a time</strong> (Development → Test, then Test → Production) — you cannot skip directly from Development to Production. Each stage should be validated before promoting further, so testing happens in Development first, then again after the Test deployment, before the final promotion to Production.</em>`,
+    userSequence: [null, null, null, null]
+  },
+  {
+    id: 2013, topic: 21, discussions: 0, isDP700: true, dp700Domain: 'ingest',
+    type: 'MULTIPLE CHOICE',
+    title: 'Assigning Medallion Layers to Fabric Lakehouse Tables',
+    text: `<p>Your team is designing a medallion architecture in a Fabric lakehouse. Raw files land unmodified from source systems; a second layer applies cleansing, type conversion, and deduplication; a third layer contains business-aggregated, report-ready tables.</p>
+    <p>Which layer names correspond to these three stages, in order?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Gold, Silver, Bronze',
+      'B. Bronze, Silver, Gold',
+      'C. Staging, Curated, Raw',
+      'D. Silver, Bronze, Gold'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — Bronze, Silver, Gold</strong><br><br>
+    In the medallion pattern, <strong>Bronze</strong> holds raw, unmodified source data for lineage and reprocessing; <strong>Silver</strong> holds cleansed, conformed, deduplicated data; <strong>Gold</strong> holds business-level, aggregated data ready for reporting and consumption. This matches the described stages in the same order given in the question.<br><br>
+    A and D reverse the order. C uses non-standard terminology that doesn't map cleanly onto the three described stages.`,
+    userChoice: null
+  },
+  {
+    id: 2014, topic: 22, discussions: 0, isDP700: true, dp700Domain: 'monitor',
+    type: 'MULTIPLE CHOICE',
+    title: 'Getting Notified When a Scheduled Pipeline Fails',
+    text: `<p>You have a Data pipeline that runs nightly on a schedule. You need the on-call engineer to be notified automatically by email or Teams message whenever a run fails, without requiring anyone to manually check the Monitoring hub each morning.</p>
+    <p>What should you configure?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. A scheduled Power BI report that shows recent run status.',
+      'B. An activity in the pipeline that sends a Teams message or Outlook email, connected to run only on failure.',
+      'C. Increase the pipeline\'s time-out value so failures are less likely.',
+      'D. Rely on capacity throttling alerts, since they cover all failure types.'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — a failure-triggered notification activity</strong><br><br>
+    Fabric Data pipelines let you wire an activity's <strong>"on failure"</strong> output path to a Teams message or Outlook email activity, so a notification is sent automatically the moment the preceding activity (or the whole pipeline, via an "on any failure" path) fails — no manual monitoring required.<br><br>
+    A still requires someone to remember to open the report. C only reduces false timeouts and does nothing for genuine failures, and may mask real problems. D is unrelated — capacity throttling alerts concern CU consumption, not individual pipeline run outcomes.`,
+    userChoice: null
+  },
+  {
+    id: 2015, topic: 21, discussions: 0, isDP700: true, dp700Domain: 'ingest',
+    type: 'MULTIPLE CHOICE',
+    title: 'Choosing Between a T-SQL Notebook and a Spark Notebook',
+    text: `<p>An engineer who knows T-SQL well, but not Python or Spark, needs to write a set of set-based transformation queries against tables in a Fabric warehouse, including a multi-statement stored procedure.</p>
+    <p>Which authoring experience should they use?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. A Spark notebook using the PySpark DataFrame API.',
+      'B. A Spark notebook using Spark SQL cells only.',
+      'C. A SQL query editor / T-SQL notebook against the warehouse, supporting native stored procedures.',
+      'D. A KQL Queryset.'
+    ],
+    correctOption: 'C',
+    solution: `<strong>Correct Answer: C — a T-SQL notebook / query editor against the warehouse</strong><br><br>
+    A Fabric <strong>Warehouse</strong> is queried and managed with native <strong>T-SQL</strong>, including full support for stored procedures, multi-statement transactions, and set-based operations — matching both the engineer's existing skill set and the stored-procedure requirement.<br><br>
+    A and B require Spark/Python fluency (or at least Spark SQL semantics, which differ from T-SQL) and Spark notebooks do not support native T-SQL stored procedures against a warehouse. D (KQL) is for querying an Eventhouse, an entirely different item type and query language.`,
+    userChoice: null
+  },
+  {
+    id: 2016, topic: 22, discussions: 0, isDP700: true, dp700Domain: 'monitor',
+    type: 'HOTSPOT',
+    title: 'Completing a KQL Query Against an Eventhouse',
+    text: `<p><strong>HOTSPOT</strong> — You have an Eventhouse table named DeviceReadings with columns Timestamp, DeviceId, and Temperature. You need to write a KQL query that returns only rows from the last 30 minutes, then returns the average Temperature grouped by DeviceId.</p>
+    <p>How should you complete the query? Select the appropriate options in the answer area.</p>`,
+    note: 'NOTE: Each correct selection is worth one point.',
+    render: 'hotspot_generic',
+    solution: `• <strong>Time filter:</strong> <span class="correct-badge">| where Timestamp > ago(30m)</span><br>
+    • <strong>Aggregation:</strong> <span class="correct-badge">| summarize avg(Temperature) by DeviceId</span><br><br>
+    <em><code>ago(30m)</code> computes the timestamp 30 minutes before now, so <code>where Timestamp > ago(30m)</code> keeps only recent rows — <code>ago(30d)</code> would filter to 30 days, and a static literal date wouldn't stay relative to "now" on each run. <code>summarize avg(Temperature) by DeviceId</code> is KQL's grouped-aggregation syntax, equivalent to a SQL <code>GROUP BY</code>; <code>project</code> only reshapes/selects columns and cannot aggregate, and <code>count()</code> counts rows rather than averaging a column.</em>`,
+    dropdowns: {
+      'time-filter': {
+        label: 'Time filter clause:',
+        options: ['| where Timestamp > ago(30m)', '| where Timestamp > ago(30d)', '| where Timestamp > now()'],
+        correct: '| where Timestamp > ago(30m)'
+      },
+      'aggregation': {
+        label: 'Aggregation clause:',
+        options: ['| project avg(Temperature) by DeviceId', '| summarize avg(Temperature) by DeviceId', '| summarize count() by DeviceId']
+        ,
+        correct: '| summarize avg(Temperature) by DeviceId'
+      }
+    },
+    userSelections: {}
+  },
+  {
+    id: 2017, topic: 20, discussions: 0, isDP700: true, dp700Domain: 'manage',
+    type: 'MULTIPLE CHOICE',
+    title: 'Automating Fabric Item Deployment with the REST API',
+    text: `<p>You need to automate the creation of a new workspace and the deployment of several items into it as part of a CI/CD release process, triggered from an external DevOps pipeline rather than done manually in the Fabric portal.</p>
+    <p>What should you use?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. The Fabric REST APIs, called from the DevOps pipeline.',
+      'B. Manually recreate the workspace and items in the portal for every release.',
+      'C. Power BI Desktop\'s "Publish" feature only.',
+      'D. A Dataflow Gen2 that copies workspace metadata.'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — the Fabric REST APIs</strong><br><br>
+    Fabric exposes <strong>REST APIs</strong> for managing workspaces and items (create, update, deploy, list) that can be called programmatically from an external CI/CD pipeline (e.g. Azure DevOps or GitHub Actions), enabling exactly this kind of automated, repeatable release process.<br><br>
+    B is manual and error-prone, defeating the purpose of automation. C only publishes a single Power BI file and isn't a general workspace/item automation mechanism. D is not a deployment/automation tool — Dataflow Gen2 transforms data, not Fabric metadata or item definitions.`,
+    userChoice: null
+  },
+  {
+    id: 2018, topic: 22, discussions: 0, isDP700: true, dp700Domain: 'monitor',
+    type: 'MULTIPLE CHOICE',
+    title: 'Speeding Up a Spark Job with the Native Execution Engine',
+    text: `<p>A Spark notebook performs heavy aggregations and joins over large Delta tables in a lakehouse. You need to reduce the job's run time without rewriting the Spark code or changing the cluster size, by taking advantage of a Fabric-provided Spark acceleration feature.</p>
+    <p>What should you enable?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. The Native Execution Engine for the Spark session.',
+      'B. High concurrency mode for notebooks.',
+      'C. A larger single-node Spark pool with autoscale disabled.',
+      'D. Data Activator.'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — the Native Execution Engine</strong><br><br>
+    Fabric's <strong>Native Execution Engine</strong> is a vectorized, native (C++/Velox-based) execution layer for Spark that can transparently speed up eligible queries — including aggregations and joins over Parquet/Delta data — without any code changes, simply by enabling it for the Spark pool/session.<br><br>
+    B (high concurrency) improves session sharing across multiple users/notebooks, not the raw speed of a single heavy job. C changes capacity allocation but not execution efficiency, and disabling autoscale removes flexibility rather than adding acceleration. D (Data Activator) is for triggering actions based on data conditions/patterns, unrelated to Spark job performance.`,
+    userChoice: null
+  },
+  {
+    id: 2019, topic: 21, discussions: 0, isDP700: true, dp700Domain: 'ingest',
+    type: 'MULTIPLE CHOICE',
+    title: 'Mirroring an Operational Database into Fabric',
+    text: `<p>You have an Azure SQL Database that is updated continuously by a line-of-business application. Analysts need near real-time, read-only access to this data inside Fabric for reporting, joined with data already in a lakehouse — without adding load to the source database from repeated custom extraction jobs and without building any pipeline logic.</p>
+    <p>What should you configure?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Database mirroring for the Azure SQL Database into Fabric.',
+      'B. A Data pipeline Copy activity running every minute.',
+      'C. A Dataflow Gen2 refreshing every 15 minutes.',
+      'D. A manual nightly export/import job.'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — Fabric database mirroring</strong><br><br>
+    <strong>Mirroring</strong> is a Fabric capability purpose-built for this scenario: it continuously and automatically replicates changes from supported operational sources (such as Azure SQL Database) into OneLake as Delta tables, with low latency and minimal load on the source, and with no pipeline or dataflow logic to build or maintain — the mirrored tables can then be joined directly with lakehouse tables.<br><br>
+    B and C are custom, scheduled extraction approaches that add repeated load on the source and still leave minutes of latency, and both require building/maintaining pipeline or dataflow logic. D introduces hours of latency and manual effort.`,
+    userChoice: null
+  },
+
+  // ============================================================
+  // DP-700 case study: Contoso, Ltd (Fabric migration).
+  // Original scenario authored on the same general themes as
+  // community exam discussions — renamed entities, reworded
+  // requirements, no verbatim source content.
+  // ============================================================
+  {
+    id: 2020, topic: 20, discussions: 0, isDP700: true, dp700Domain: 'manage',
+    isCaseStudy: true,
+    caseTitle: 'Contoso, Ltd (Fabric Migration)',
+    type: 'MULTIPLE CHOICE',
+    title: 'Case Study: Grant the Data Analysts Read-Only Access to the Gold Lakehouse',
+    caseStudy: `<h3>Overview — Company Information</h3>
+    <p><strong>Contoso, Ltd</strong> is an online retailer that wants to modernize its analytics platform by moving to <strong>Microsoft Fabric</strong>, starting with retail sales analytics.</p>
+    <h3>Overview — IT Structure</h3>
+    <p>The IT department has a team of <strong>data engineers</strong> and a team of <strong>data analysts</strong>. The data engineers handle ingestion, transformation, and loading, and prefer <strong>Python or Spark SQL</strong>. The data analysts query data and build semantic models and reports, and are fluent in <strong>Power Query and T-SQL</strong>.</p>
+    <h3>Existing Environment — Fabric</h3>
+    <p>Contoso has an F64 capacity named <strong>Cap1</strong>. All Fabric users can create items. Contoso has two workspaces, <strong>SalesWorkspace</strong> and <strong>ReportingWorkspace</strong>, both currently on Pro license mode.</p>
+    <h3>Existing Environment — Source Systems</h3>
+    <p>A point-of-sale system named <strong>StorePOS</strong> runs on SQL Server on an Azure VM in the same Microsoft Entra tenant as Fabric. The VM sits on a private virtual network with public access blocked, and it contains all sales transactions processed through the company's website.</p>
+    <p>Contoso also uses a SaaS marketing app named <strong>MarketPulse</strong>, which tracks email opens, click rates, and website interactions across seven entities, each with its own REST API endpoint. Fabric has held one year of MarketPulse data; older interaction history is archived as Parquet files in an Amazon S3 bucket — 12 files ranging from 300 MB to 900 MB.</p>
+    <h3>Existing Environment — Product Data</h3>
+    <p>StorePOS also contains product data across three tables: <strong>Products</strong>, <strong>ProductCategories</strong>, and <strong>ProductSubcategories</strong>. Products relate to subcategories, and subcategories relate to categories.</p>
+    <h3>Existing Environment — Azure</h3>
+    <p>Contoso's Microsoft Entra tenant has two mail-enabled security groups: <strong>DataAnalysts</strong> (contains the data analysts) and <strong>DataEngineers</strong> (contains the data engineers). Contoso has an Azure subscription and an existing Azure DevOps organization with a new project created for Fabric-related repositories.</p>
+    <h3>Existing Environment — Problems</h3>
+    <p>The VP of Marketing wants to analyze the effectiveness of different email content types; compiling this by hand currently takes a week, and Contoso wants Fabric to bring that under a day. The data engineering team also reports that exports from MarketPulse periodically fail due to <strong>transient connectivity errors</strong>.</p>
+    <h3>Requirements — Planned Changes</h3>
+    <p>Contoso will create two lakehouses: <strong>Lakehouse1</strong> to hold raw and cleansed data from the sources, and <strong>Lakehouse2</strong> to serve a dimensional model to analysts for reporting. Additional items will be added over time to support ingestion and transformation, and Contoso will use <strong>Azure Repos</strong> for source control.</p>
+    <h3>Requirements — Technical Requirements</h3>
+    <ul>
+      <li>The new lakehouses must follow a <strong>medallion architecture</strong> with bronze, silver, and gold layers. Substantial cleansing is required to populate the MarketPulse data in the silver layer, including deduplication, handling missing values, and standardizing capitalization.</li>
+      <li>Each layer must be fully populated before the next layer begins. If any step populating the lakehouses fails, an email must be sent to the data engineers.</li>
+      <li>Data imports must run simultaneously wherever possible.</li>
+      <li>Use of the archived MarketPulse data in Amazon S3 must minimize egress costs associated with cross-cloud access, and must avoid saving a duplicate copy of the raw data inside the lakehouses beyond what is already required.</li>
+      <li>Items related to data ingestion must be source controlled alongside the rest of the workspace items.</li>
+      <li>Ingested data must land in the bronze layer of Lakehouse1 in <strong>Delta format</strong>, with no other file-format changes applied before the data lands in bronze.</li>
+      <li>Development effort must be minimized, and a <strong>built-in connector</strong> must be used to connect to StorePOS. If a connectivity error occurs, the ingestion process must automatically attempt to reconnect.</li>
+      <li>Lakehouses, data pipelines, and notebooks must be stored in <strong>SalesWorkspace</strong>. Semantic models, reports, and dataflows must be stored in <strong>ReportingWorkspace</strong>.</li>
+      <li>Once a week, old files that are no longer referenced by a Delta table log must be removed.</li>
+    </ul>
+    <h3>Requirements — Data Transformation</h3>
+    <p>In the StorePOS product data, ProductID values are unique. The product dimension in the gold layer must include only active products, identified by an IsActive value of 1. Some product categories and subcategories are not assigned to any product; they are not analytically relevant and must be excluded from the gold-layer product dimension.</p>
+    <h3>Requirements — Data Security</h3>
+    <ul>
+      <li>The data engineers must have <strong>read and write access to all the lakehouses, including the underlying files</strong>.</li>
+      <li>The data analysts must have <strong>read-only access to the Delta tables in the gold layer only</strong>.</li>
+      <li>The data analysts must <strong>NOT</strong> have any access to the data in the bronze or silver layers.</li>
+      <li>The data engineers must be able to commit changes to source control from <strong>SalesWorkspace</strong>.</li>
+    </ul>`,
+    text: `<p>You need to ensure that the data analysts can access the gold-layer lakehouse (Lakehouse2) in a way that satisfies the data security requirements.</p>
+    <p>What should you do?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Add the DataAnalysts group to the Viewer role for SalesWorkspace.',
+      'B. Share Lakehouse2 with the DataAnalysts group and grant the Build reports on the default semantic model permission.',
+      'C. Share Lakehouse2 with the DataAnalysts group and grant the Read all SQL endpoint data permission.',
+      'D. Share Lakehouse2 with the DataAnalysts group and grant the Read all Apache Spark permission.'
+    ],
+    correctOption: 'C',
+    solution: `<strong>Correct Answer: C — Share Lakehouse2 with Read all SQL endpoint data</strong><br><br>
+    The requirement is <strong>read-only access to the gold-layer Delta tables only</strong>, with no access to bronze/silver and no file-level access. Sharing <strong>Lakehouse2 specifically</strong> (the gold, dimensional-model lakehouse) scopes access to the correct layer, and granting <strong>Read all SQL endpoint data</strong> gives table-level, query-only access through the SQL analytics endpoint — no ability to browse or modify underlying files, and no access to Lakehouse1 (bronze/silver) at all.<br><br>
+    A adds the group at the <strong>workspace</strong> level, which would expose every item in SalesWorkspace — including Lakehouse1's bronze and silver data, pipelines, and notebooks — violating "must NOT have any access to bronze or silver." B (Build reports on the default semantic model) only lets analysts build reports against the auto-generated semantic model; it does not grant general read access to the Delta tables themselves, which the requirement calls for. D (Read all Apache Spark) grants access via the Spark engine, which also exposes the underlying files in the lakehouse — more access than "read-only access to the Delta tables," and inconsistent with keeping analysts away from file-level access.`,
+    userChoice: null
+  },
+  {
+    id: 2021, topic: 20, discussions: 0, isDP700: true, dp700Domain: 'manage',
+    type: 'MULTIPLE CHOICE',
+    title: 'Storing Semi-Structured Data Written Only by Spark, Read by T-SQL, KQL, and Spark',
+    text: `<p>You have a Fabric workspace that will store semi-structured JSON data.</p>
+    <p>The data must be written exclusively by a Spark notebook. It must also be readable by using T-SQL, KQL, and Apache Spark.</p>
+    <p>Which item should you use to store the data?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. a lakehouse',
+      'B. an eventhouse',
+      'C. a datamart',
+      'D. a warehouse'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — a lakehouse</strong><br><br>
+    A <strong>lakehouse</strong> stores data as Delta tables that are written natively by <strong>Spark</strong> notebooks/jobs, and exposes those same tables for reading through three separate engines at once: the built-in <strong>SQL analytics endpoint</strong> (T-SQL, read-only), <strong>Spark</strong> itself, and — through a KQL database shortcut into the lakehouse — the <strong>KQL</strong> query engine. Because the SQL endpoint only supports reads, and Spark remains the only way to write, this naturally satisfies "written only by Spark, read by T-SQL/KQL/Spark" with no extra plumbing.<br><br>
+    B (eventhouse) is built for streaming event ingestion and is queried primarily with KQL; it doesn't expose a T-SQL surface or take normal batch Spark writes as its primary ingestion path. C (datamart) is a self-contained, Power BI-oriented store with no Spark or KQL access. D (warehouse) is written and read primarily through T-SQL, not Spark, so it can't satisfy "written only by using Spark."`,
+    userChoice: null
+  },
+  {
+    id: 2022, topic: 21, discussions: 0, isDP700: true, dp700Domain: 'ingest',
+    type: 'MULTIPLE CHOICE',
+    title: 'Scheduled Copy from an On-Premises SQL Server into a Fabric Warehouse',
+    text: `<p>You have a Fabric workspace that contains a warehouse named WarehouseA.</p>
+    <p>You need to copy data on a nightly schedule from an on-premises SQL Server database into WarehouseA, connecting through an on-premises data gateway that is already registered in the tenant. The solution must use a built-in Copy activity, and its run history must be visible in the Monitoring hub.</p>
+    <p>Which item should you create?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. a Dataflow Gen1 dataflow',
+      'B. a data pipeline',
+      'C. a KQL queryset',
+      'D. a notebook'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — a data pipeline</strong><br><br>
+    A Fabric <strong>data pipeline</strong> provides a native <strong>Copy data</strong> activity that can connect through a registered <strong>on-premises data gateway</strong> to a SQL Server source, run on a schedule, and land the result in a warehouse — and every run appears in the <strong>Monitoring hub</strong> with per-activity status, exactly matching the requirements.<br><br>
+    A (Dataflow Gen1) is a legacy Power BI dataflow concept, not the current Fabric-native scheduled-copy mechanism. C (KQL queryset) only queries an existing Eventhouse/KQL database — it isn't an ingestion item. D (notebook) would require custom Spark/Python code to reach the gateway and load a warehouse, which is more effort than the built-in Copy activity and isn't the native on-premises gateway integration point.`,
+    userChoice: null
+  },
+  {
+    id: 2023, topic: 21, discussions: 0, isDP700: true, dp700Domain: 'ingest',
+    type: 'MULTIPLE CHOICE',
+    title: 'Low-Code, Extensible Copy from On-Premises SQL Server into a Warehouse',
+    text: `<p>You have a Fabric workspace that contains a warehouse named WarehouseA.</p>
+    <p>You need to copy data from an on-premises SQL Server database, reached through an existing on-premises data gateway, into WarehouseA. The solution must minimize custom code, and it must support parameterized, reusable Copy activities that can later be extended with additional orchestration logic such as conditional branching.</p>
+    <p>Which item should you create?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. an Apache Spark job definition',
+      'B. a data pipeline',
+      'C. a Dataflow Gen1 dataflow',
+      'D. an eventstream'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — a data pipeline</strong><br><br>
+    A <strong>data pipeline</strong> is a low-code, activity-based orchestrator: its <strong>Copy data</strong> activity supports the on-premises data gateway, can be parameterized and reused, and can be extended with additional activities — If Condition, ForEach, Wait, and more — without writing code, exactly matching "minimize custom code" and "extended with conditional branching."<br><br>
+    A (Spark job definition) is a code-first item requiring a compiled/scripted Spark application, the opposite of "minimize custom code." C (Dataflow Gen1) is a legacy Power BI construct, not Fabric's current orchestration item, and doesn't support pipeline-style branching logic. D (eventstream) is for continuous streaming ingestion, not an on-demand/scheduled batch copy from an on-premises relational source.`,
+    userChoice: null
+  },
+  {
+    id: 2024, topic: 22, discussions: 0, isDP700: true, dp700Domain: 'monitor',
+    type: 'MULTIPLE CHOICE',
+    title: 'Direct Lake Report Errors Caused by Hash-Based Surrogate Keys',
+    text: `<p>You have a Fabric F32 capacity that hosts a workspace containing a warehouse named DW1. DW1 is modeled with <strong>MD5 hash surrogate keys</strong> and includes a single fact table that has grown from 200 million to 500 million rows.</p>
+    <p>Power BI reports built against DW1 use <strong>Direct Lake</strong> mode and show year-over-year values. Users report that report performance has degraded over time, and some visuals now show errors.</p>
+    <p>You need to resolve the performance issues. The solution must provide the best possible query performance and must minimize additional operating costs.</p>
+    <p>What should you do?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Change the hash algorithm from MD5 to SHA256.',
+      'B. Increase the size of the capacity.',
+      'C. Enable V-Order on the fact table.',
+      'D. Change the surrogate keys to use a different, Direct-Lake-friendly data type.',
+      'E. Create SQL views over the tables.'
+    ],
+    correctOption: 'D',
+    solution: `<strong>Correct Answer: D — change the surrogate key data type</strong><br><br>
+    Direct Lake has restrictions on the column/relationship data types it can use directly; a large <strong>MD5 hash</strong> stored as a wide binary/varbinary value is a poor fit for Direct Lake relationships and can force the model to <strong>fall back to DirectQuery</strong> for affected visuals — which explains both the degraded performance and the visual errors. Replacing the hash-based surrogate key with a compact, Direct-Lake-friendly type (such as a bigint identity) removes the fallback trigger and restores fast, native Direct Lake reads, at <strong>no extra running cost</strong>.<br><br>
+    A (SHA256) makes the hash even larger, worsening the problem. B (increase capacity) adds ongoing cost without addressing the actual incompatibility, so it fails "minimize operating costs." C (V-Order) helps general read performance but does not fix a Direct Lake fallback caused by an unsupported key type. E (create views) does not resolve Direct Lake's underlying relationship/type restriction — Direct Lake semantic models read tables directly, not through warehouse views.`,
+    userChoice: null
+  },
+  {
+    id: 2025, topic: 21, discussions: 0, isDP700: true, dp700Domain: 'ingest',
+    type: 'HOTSPOT',
+    title: 'T-SQL: Per-Year Product Totals Plus a Year-Level Subtotal',
+    text: `<p><strong>HOTSPOT</strong> — You have a Fabric warehouse named DW1 that contains the following tables and columns:</p>
+    <table style="border-collapse:collapse;width:100%;margin:8px 0" border="1" cellpadding="6">
+      <tr style="background:#f3f2f1"><th>Table</th><th>Column</th><th>Description</th></tr>
+      <tr><td>OrderLine</td><td>ProductID</td><td>ID of the ordered product</td></tr>
+      <tr><td>OrderLine</td><td>OrderDate</td><td>Date the order line was placed</td></tr>
+      <tr><td>OrderLine</td><td>Quantity</td><td>Quantity ordered</td></tr>
+      <tr><td>Product</td><td>ProductID</td><td>Unique ID of a product</td></tr>
+      <tr><td>Product</td><td>ProductName</td><td>Name of the product</td></tr>
+    </table>
+    <p>You need to write a query that returns the summarized order quantity for <strong>every year-and-product combination</strong>, and additionally returns a <strong>subtotal of quantity per year across all products</strong> — with no extra rows (such as a by-product-only summary or an overall grand total).</p>
+    <p>How should you complete the code? Select the appropriate options in the answer area.</p>`,
+    note: 'NOTE: Each correct selection is worth one point.',
+    render: 'hotspot_code',
+    codeTemplate: `{{year_fn}} (OL.OrderDate) AS OrderYear
+    ,P.ProductName
+    ,SUM(OL.Quantity) AS TotalQty
+FROM [dbo].[OrderLine] OL
+INNER JOIN [dbo].[Product] P
+    ON P.ProductID = OL.ProductID
+GROUP BY {{group_clause}}
+ORDER BY OrderYear`,
+    solution: `• <strong>Year function:</strong> <span class="correct-badge">SELECT YEAR</span><br>
+    • <strong>GROUP BY clause:</strong> <span class="correct-badge">GROUPING SETS ((YEAR(OL.OrderDate), P.ProductName), (YEAR(OL.OrderDate)))</span><br><br>
+    <em>The T-SQL <code>YEAR()</code> function extracts the calendar year needed for the "by year" grouping; <code>CAST</code>/<code>CONVERT</code> alone don't derive a year the way <code>YEAR()</code> does. For the grouping, <strong>GROUPING SETS</strong> lets you list the <em>exact</em> combinations of grouping columns you want — here, (year, product) for the detailed rows and (year) alone for the year-level subtotal — and nothing else. <strong>ROLLUP</strong> would additionally produce an unwanted overall grand total row, and <strong>CUBE</strong> would additionally produce an unwanted by-product-only summary (across all years) as well as a grand total — both return more summary rows than the requirement calls for.</em>`,
+    dropdowns: {
+      'year_fn': {
+        label: 'Year function:',
+        options: ['SELECT CAST', 'SELECT CONVERT', 'SELECT YEAR'],
+        correct: 'SELECT YEAR'
+      },
+      'group_clause': {
+        label: 'GROUP BY clause:',
+        options: [
+          'CUBE(YEAR(OL.OrderDate), P.ProductName)',
+          'GROUPING SETS ((YEAR(OL.OrderDate), P.ProductName), (YEAR(OL.OrderDate)))',
+          'ROLLUP(YEAR(OL.OrderDate), P.ProductName)',
+          'YEAR(OL.OrderDate), P.ProductName'
+        ],
+        correct: 'GROUPING SETS ((YEAR(OL.OrderDate), P.ProductName), (YEAR(OL.OrderDate)))'
+      }
+    },
+    userSelections: {}
+  },
+  {
+    id: 2026, topic: 21, discussions: 0, isDP700: true, dp700Domain: 'ingest',
+    type: 'MULTIPLE CHOICE',
+    title: 'Choosing Columns for a Slowly Changing DimProduct Table',
+    text: `<p>You have a Fabric lakehouse that contains a lakehouse table named RawSales, ingested as a single flat table with the following columns:</p>
+    <table style="border-collapse:collapse;width:100%;margin:8px 0" border="1" cellpadding="6">
+      <tr style="background:#f3f2f1"><th>Column</th><th>Description</th></tr>
+      <tr><td>OrderLineID</td><td>Unique ID of each transaction line</td></tr>
+      <tr><td>OrderDate</td><td>Date of the transaction</td></tr>
+      <tr><td>ProductID</td><td>Unique ID of each product</td></tr>
+      <tr><td>ProductColor</td><td>Descriptive attribute for the color of the product</td></tr>
+      <tr><td>ProductName</td><td>Unique name of the product</td></tr>
+      <tr><td>SalesAmount</td><td>Sales amount of the transaction</td></tr>
+    </table>
+    <p>You plan to load the data into a dimensional model as a star schema, producing two tables named <strong>FactSales</strong> and <strong>DimProduct</strong>. Changes made to product attributes over time must be tracked in DimProduct.</p>
+    <p>Which <strong>three</strong> columns should you include in DimProduct? Each correct answer presents part of the solution.</p>`,
+    note: 'NOTE: Each correct selection is worth one point.',
+    render: 'mcq',
+    options: [
+      'A. OrderDate',
+      'B. ProductName',
+      'C. ProductColor',
+      'D. OrderLineID',
+      'E. SalesAmount',
+      'F. ProductID'
+    ],
+    correctOptions: ['B', 'C', 'F'],
+    solution: `<strong>Correct Answer: B, C, and F</strong><br><br>
+    A dimension table holds the <strong>descriptive attributes</strong> of the entity being described, plus its key. <strong>ProductID</strong> (F) is the dimension's key, and <strong>ProductName</strong> (B) and <strong>ProductColor</strong> (C) are descriptive product attributes that can change over time and need to be tracked — exactly what a slowly changing dimension is for.<br><br>
+    A (OrderDate), D (OrderLineID), and E (SalesAmount) are all transaction-level facts/keys that belong in the <strong>FactSales</strong> table, not in a dimension describing the product.`,
+    userChoices: []
+  },
+  {
+    id: 2027, topic: 22, discussions: 0, isDP700: true, dp700Domain: 'monitor',
+    type: 'MULTIPLE CHOICE',
+    title: 'Sharing a Spark Session Between Two Notebooks',
+    text: `<p>You have a Fabric workspace named Workspace1 that contains a notebook named NotebookA.</p>
+    <p>In Workspace1, you create a new notebook named NotebookB.</p>
+    <p>You need to ensure that NotebookB can attach to and run in the <strong>same Apache Spark session</strong> as NotebookA.</p>
+    <p>What should you do?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Enable high concurrency for notebooks.',
+      'B. Enable dynamic allocation for the Spark pool.',
+      'C. Change the Spark runtime version.',
+      'D. Increase the number of executors.'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — enable high concurrency for notebooks</strong><br><br>
+    <strong>High concurrency mode</strong> lets multiple notebooks in the same workspace share a single running Spark session/application, instead of each notebook starting its own — this is precisely the mechanism that lets NotebookB attach to the same session already used by NotebookA, avoiding a new session's startup time and consuming shared cluster resources more efficiently.<br><br>
+    B (dynamic allocation) changes how executors scale within a session but doesn't let two separate notebooks share one session. C (runtime version) affects which Spark/library versions are available, not session sharing. D (more executors) adds capacity to a session but does nothing to make a second notebook join it.`,
+    userChoice: null
+  },
+  {
+    id: 2028, topic: 20, discussions: 0, isDP700: true, dp700Domain: 'manage',
+    type: 'MULTIPLE CHOICE',
+    title: 'Isolating a PII Table While Allowing Writes to a Sibling Table',
+    text: `<p>You have a Fabric workspace named WorkspaceA that contains a lakehouse named LakehouseA. LakehouseA contains three tables: <strong>Orders</strong>, <strong>Customer</strong>, and <strong>Employee</strong>. The Employee table contains Personally Identifiable Information (PII).</p>
+    <p>A data engineer is building a workflow that writes data to the Customer table. The engineer must NOT have the elevated permissions required to view the contents of the Employee table.</p>
+    <p>You need to ensure that the data engineer can write data to the Customer table without being able to read data from the Employee table.</p>
+    <p>Which <strong>three</strong> actions should you perform? Each correct answer presents part of the solution.</p>`,
+    note: 'NOTE: Each correct selection is worth one point.',
+    render: 'mcq',
+    options: [
+      'A. Share LakehouseA with the data engineer.',
+      'B. Assign the data engineer the Contributor role for WorkspaceB.',
+      'C. Assign the data engineer the Viewer role for WorkspaceB.',
+      'D. Assign the data engineer the Contributor role for WorkspaceA.',
+      'E. Migrate the Employee table from LakehouseA to LakehouseB.',
+      'F. Create a new workspace named WorkspaceB that contains a new lakehouse named LakehouseB.',
+      'G. Assign the data engineer the Viewer role for WorkspaceA.'
+    ],
+    correctOptions: ['D', 'E', 'F'],
+    solution: `<strong>Correct Answer: D, E, and F</strong><br><br>
+    Because Orders/Customer and Employee currently sit in the <strong>same lakehouse</strong>, any permission broad enough to let the engineer write to Customer would also expose Employee — permissions in Fabric are granted at the workspace/item level, not per table. The fix is to physically separate the PII table out of the engineer's reach: <strong>create a new workspace WorkspaceB with a new lakehouse LakehouseB</strong> (F), <strong>migrate the Employee table into LakehouseB</strong> (E) so it now lives somewhere the engineer is never granted access to, and <strong>assign the engineer the Contributor role on WorkspaceA</strong> (D) — the workspace that still contains Customer — so they can write to it.<br><br>
+    A (sharing the lakehouse) and G (Viewer role) don't grant the write access the engineer needs. B and C both target WorkspaceB, which is exactly the workspace the engineer must be kept out of once Employee is moved there — granting either role there would defeat the isolation.`,
+    userChoices: []
+  },
+  {
+    id: 2029, topic: 20, discussions: 0, isDP700: true, dp700Domain: 'manage',
+    type: 'MULTIPLE CHOICE',
+    title: 'The Warehouse Object Required to Implement Row-Level Security',
+    text: `<p>You have a Fabric warehouse named DW1. DW1 contains a table that stores sales data and is used by multiple sales representatives.</p>
+    <p>You plan to implement row-level security (RLS) so that each sales representative can see only their own rows.</p>
+    <p>Which warehouse object do you require to implement RLS?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. a stored procedure',
+      'B. a constraint',
+      'C. a schema',
+      'D. a function'
+    ],
+    correctOption: 'D',
+    solution: `<strong>Correct Answer: D — a function</strong><br><br>
+    T-SQL row-level security in a Fabric warehouse is implemented with an <strong>inline table-valued function</strong> that acts as a security predicate — it returns the rows a given caller is allowed to see (for example, matching a sales rep's own ID) — which is then bound to the target table with <code>CREATE SECURITY POLICY ... ADD FILTER PREDICATE</code>. The function is the core object required; without it there is nothing for the security policy to filter with.<br><br>
+    A (stored procedure) executes logic on demand but isn't the predicate mechanism RLS binds to. B (constraint) enforces data integrity rules, not per-user row visibility. C (schema) is just a namespace/grouping construct and has no filtering behavior of its own.`,
+    userChoice: null
+  },
+  {
+    id: 2030, topic: 20, discussions: 0, isDP700: true, dp700Domain: 'manage',
+    type: 'HOTSPOT',
+    title: 'What a Fabric Deployment Pipeline Does and Does Not Deploy',
+    text: `<p><strong>HOTSPOT</strong> — You have a Fabric workspace named AnalyticsWS_Dev that contains the following items:</p>
+    <ul>
+      <li>12 reports</li>
+      <li>Five notebooks</li>
+      <li>Two lakehouses</li>
+      <li>Three data pipelines</li>
+      <li>One Dataflow Gen1 dataflow</li>
+      <li>Four Dataflow Gen2 dataflows</li>
+      <li>Six semantic models, each with a scheduled refresh policy configured</li>
+    </ul>
+    <p>You create a deployment pipeline named PipelineA to move items from AnalyticsWS_Dev to a new workspace named AnalyticsWS_Test. You deploy all the items from AnalyticsWS_Dev to AnalyticsWS_Test.</p>
+    <p>For each statement, select Yes if the statement is true. Otherwise, select No.</p>`,
+    note: 'NOTE: Each correct selection is worth one point.',
+    render: 'hotspot_yesno',
+    statements: [
+      { text: 'The underlying data cached in the semantic models will be deployed to the target stage.', answer: 'No' },
+      { text: 'The Dataflow Gen1 dataflow will be deployed to the target stage.', answer: 'No' },
+      { text: 'The scheduled refresh policies will be deployed to the target stage.', answer: 'No' }
+    ],
+    solution: `• Underlying semantic model data deployed to target stage: <span class="correct-badge">No</span><br>
+    • Dataflow Gen1 dataflow deployed to target stage: <span class="correct-badge">No</span><br>
+    • Scheduled refresh policies deployed to target stage: <span class="correct-badge">No</span><br><br>
+    <em>A Fabric deployment pipeline promotes the <strong>metadata/definition</strong> of supported items — not the underlying imported data cached inside a semantic model, which is not carried across stages (No). <strong>Dataflow Gen1</strong> is a legacy Power BI item type that deployment pipelines do not support as a deployable item — only Dataflow Gen2 dataflows are supported — so it is left behind (No). <strong>Scheduled refresh policies</strong> on semantic models are also not copied by a deployment; each stage's schedule must be configured independently after deployment (No).</em>`,
+    userSelections: {}
+  },
+  {
+    id: 2031, topic: 20, discussions: 0, isDP700: true, dp700Domain: 'manage',
+    type: 'MULTIPLE CHOICE',
+    title: 'Including an Eventhouse in an Automated Deployment Process',
+    text: `<p>You have a Fabric deployment pipeline that uses three workspaces named Dev, Test, and Prod.</p>
+    <p>You need to deploy an Eventhouse as part of the deployment process.</p>
+    <p>What should you use to add the Eventhouse to the deployment process?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. GitHub Actions',
+      'B. the deployment pipeline',
+      'C. an Azure DevOps pipeline'
+    ],
+    correctOption: 'C',
+    solution: `<strong>Correct Answer: C — an Azure DevOps pipeline</strong><br><br>
+    An <strong>Eventhouse</strong> is not one of the item types natively supported for promotion by Fabric <strong>deployment pipelines</strong>, so option B cannot move it between Dev/Test/Prod. To include an unsupported item type in an automated release process, you build a custom <strong>Azure DevOps pipeline</strong> that calls the Fabric REST APIs directly to create/update the Eventhouse in each target workspace, alongside whatever the native deployment pipeline handles.<br><br>
+    A (GitHub Actions) could technically call the same REST APIs, but it isn't the CI/CD platform this Contoso-style environment is already standardized on, and the scenario doesn't set up a GitHub-based release process. B is directly ruled out since deployment pipelines don't support Eventhouse promotion.`,
+    userChoice: null
+  }
 
 ];
 
@@ -9340,6 +10130,18 @@ var ET103_SEQ = (function () {
   var ids = [];
   for (var i = 0; i < questions.length; i++) {
     if (questions[i].isExamTopics) ids.push(questions[i].id);
+  }
+  ids.sort(function (a, b) { return a - b; });
+  for (var j = 0; j < ids.length; j++) { m[ids[j]] = j + 1; }
+  return m;
+})();
+
+// Same idea, for the DP-700 ExamTopics-style pool.
+var DP700_SEQ = (function () {
+  var m = {};
+  var ids = [];
+  for (var i = 0; i < questions.length; i++) {
+    if (questions[i].isDP700) ids.push(questions[i].id);
   }
   ids.sort(function (a, b) { return a - b; });
   for (var j = 0; j < ids.length; j++) { m[ids[j]] = j + 1; }
@@ -9430,6 +10232,7 @@ function answersRevealed() {
 // ============================================================
 // Classify each question into an exam-style section by its behaviour.
 function sectionOf(q) {
+  if (q.isDP700) return 'dp700';                          // grouped DP-700 ExamTopics-style pool
   if (q.isExamTopics) return 'examtopics';               // grouped ExamTopics-style pool
   if (q.isCertPractice) return 'certpractice';           // grouped certification-practice pool
   if (q.isLearnPool) return 'learn';                     // grouped Microsoft Learn pool
@@ -9455,6 +10258,7 @@ const SECTION_DEFS = [
   { key: 'learn',     name: 'New Questions from Microsoft Learn', icon: '📘', desc: 'Practice questions mapped to the current official AI-102 objectives (skills measured, Dec 2025).' },
   { key: 'certpractice', name: 'New AI 103 Questions From Certification Practice', icon: '🆕', desc: 'AI-103 scenario-based questions captured from certification practice sessions — generative AI, planning, vision, NLP, and agentic solutions.' },
   { key: 'examtopics', name: 'AI-103 Questions from Exam Topics', icon: '📝', desc: 'AI-103 exam-style questions on the same topics seen in community exam discussions — originally authored with verified reasoning, no verbatim content.' },
+  { key: 'dp700',     name: 'DP-700 Actual Exam Questions (Exam Topics)', icon: '🧱', desc: 'DP-700 (Implementing Data Engineering Solutions Using Microsoft Fabric) exam-style questions on the same topics seen in community exam discussions — originally authored with verified reasoning, no verbatim content.' },
   { key: 'casestudy', name: 'Case Studies',     icon: '📕', desc: 'Scenario-based questions referencing a case study.' },
   { key: 'mc',        name: 'Multiple Choice',  icon: '🔘', desc: 'Single- and multi-answer questions.' },
   { key: 'dragdrop',  name: 'Drag & Drop',      icon: '🔀', desc: 'Drag values onto targets or arrange actions in the correct order.' },
@@ -9473,6 +10277,16 @@ const DOMAIN_DEFS = {
   mining:  { name: 'Knowledge Mining & Info Extract',  short: 'Knowledge Mining',weight: '15–20%', weightPct: 17, color: '#c19c00' }
 };
 
+// ── Official DP-700 skill domains (Implementing Data Engineering Solutions
+// Using Microsoft Fabric) ──────────────────────────────────────────
+const DOMAIN_DP700_DEFS = {
+  manage:  { name: 'Implement and Manage an Analytics Solution', short: 'Implement & Manage', weight: '30–35%', weightPct: 32, color: '#00863f' },
+  ingest:  { name: 'Ingest and Transform Data',                  short: 'Ingest & Transform', weight: '30–35%', weightPct: 32, color: '#0078d4' },
+  monitor: { name: 'Monitor and Optimize an Analytics Solution', short: 'Monitor & Optimize', weight: '35–40%', weightPct: 36, color: '#8661c5' }
+};
+
+function domainDP700Of(q) { return q.dp700Domain || 'manage'; }
+
 // per-question domain overrides keyed by "topic:id" (for topics that mix domains)
 const DOMAIN_OVERRIDES = {
   // Topic 2 is mostly Vision, but a couple are speech/NLP handled below by keyword
@@ -9482,6 +10296,7 @@ const DOMAIN_OVERRIDES = {
 };
 
 function domainOf(q) {
+  if (q.isDP700) return 'dp700_' + (q.dp700Domain || 'manage'); // kept out of the AI-102 legend on purpose
   const key = `${q.topic}:${q.id}`;
   if (DOMAIN_OVERRIDES[key]) return DOMAIN_OVERRIDES[key];
   switch (q.topic) {
@@ -9497,7 +10312,7 @@ function domainOf(q) {
 }
 
 function domainBadge(q) {
-  const d = DOMAIN_DEFS[domainOf(q)];
+  const d = q.isDP700 ? DOMAIN_DP700_DEFS[domainDP700Of(q)] : DOMAIN_DEFS[domainOf(q)];
   if (!d) return '';
   return `<span class="domain-badge" style="--dchip:${d.color}">${d.short}</span>`;
 }
@@ -9510,10 +10325,12 @@ const SOURCE_DEFS = {
   et102:    { short: 'AI-102 · ExamTopics',     label: 'AI-102 ExamTopics',        color: '#0067b8', exam: 'AI-102' },
   learn102: { short: 'AI-102 · MS Learn',       label: 'AI-102 Microsoft Learn',   color: '#107c10', exam: 'AI-102' },
   cert103:  { short: 'AI-103 · Cert Practice',  label: 'AI-103 Certification Practice', color: '#e3008c', exam: 'AI-103' },
-  et103:    { short: 'AI-103 · ExamTopics',     label: 'AI-103 ExamTopics',        color: '#8661c5', exam: 'AI-103' }
+  et103:    { short: 'AI-103 · ExamTopics',     label: 'AI-103 ExamTopics',        color: '#8661c5', exam: 'AI-103' },
+  dp700:    { short: 'DP-700 · ExamTopics',     label: 'DP-700 Actual Exam Questions (Exam Topics)', color: '#00863f', exam: 'DP-700' }
 };
 
 function sourceOf(q) {
+  if (q.isDP700)       return 'dp700';      // DP-700 ExamTopics-style
   if (q.isLearnPool)   return 'learn102';   // AI-102 Microsoft Learn pool
   if (q.isCertPractice) return 'cert103';   // AI-103 certification practice
   if (q.isExamTopics)  return 'et103';      // AI-103 ExamTopics-style
@@ -9617,6 +10434,7 @@ function startTodaysExam() {
   currentStage = 0;
   sealedUpTo = 0;
   document.getElementById('sectionTitle').textContent = "Today's Exam (Full, Weighted)";
+  { const p = document.getElementById('examCodePrefix'); if (p) p.textContent = 'AI-102:'; }
   document.getElementById('sectionScreen').classList.add('hidden');
   document.getElementById('examUI').classList.remove('hidden');
   examStarted = true;
@@ -9806,6 +10624,7 @@ function startAI102Filtered(domainKey) {
   activeQuestions.forEach(i => resetQuestion(questions[i]));
   timeLeft = Math.max(300, activeQuestions.length * 90);
   document.getElementById('sectionTitle').textContent = `AI-102 · ${d.name} (${srcLabel})`;
+  { const p = document.getElementById('examCodePrefix'); if (p) p.textContent = 'AI-102:'; }
   document.getElementById('sectionScreen').classList.add('hidden');
   document.getElementById('examUI').classList.remove('hidden');
   examStarted = true;
@@ -9928,6 +10747,7 @@ function startExamTopicsFiltered(kind, value) {
   activeQuestions.forEach(i => resetQuestion(questions[i]));
   timeLeft = Math.max(300, activeQuestions.length * 90);
   document.getElementById('sectionTitle').textContent = `AI-103 ExamTopics · ${label}`;
+  { const p = document.getElementById('examCodePrefix'); if (p) p.textContent = 'AI-102:'; }
   document.getElementById('sectionScreen').classList.add('hidden');
   document.getElementById('examUI').classList.remove('hidden');
   examStarted = true;
@@ -9953,6 +10773,8 @@ function startSection(key) {
   timeLeft = key === 'casestudy' ? Math.max(900, activeQuestions.length * 300) : Math.max(300, activeQuestions.length * 90);
   const def = SECTION_DEFS.find(d => d.key === key);
   document.getElementById('sectionTitle').textContent = def.name;
+  const prefixEl = document.getElementById('examCodePrefix');
+  if (prefixEl) prefixEl.textContent = key === 'dp700' ? 'DP-700:' : 'AI-102:';
   document.getElementById('sectionScreen').classList.add('hidden');
   document.getElementById('examUI').classList.remove('hidden');
   examStarted = true;
@@ -9981,6 +10803,7 @@ function startDomain(domainKey) {
   activeQuestions.forEach(i => resetQuestion(questions[i]));
   timeLeft = Math.max(300, activeQuestions.length * 90);
   document.getElementById('sectionTitle').textContent = def.name + ' (Domain)';
+  { const p = document.getElementById('examCodePrefix'); if (p) p.textContent = 'AI-102:'; }
   document.getElementById('sectionScreen').classList.add('hidden');
   document.getElementById('examUI').classList.remove('hidden');
   examStarted = true;
@@ -10487,8 +11310,13 @@ function renderQuestion() {
   const q = questions[currentQ];
   // Authentic Microsoft/Pearson VUE exam look is applied only to ExamTopics questions.
   const examUIEl = document.getElementById('examUI');
-  if (examUIEl) examUIEl.classList.toggle('exam-mode', !!q.isExamTopics);
-  if (q.isExamTopics) {
+  if (examUIEl) examUIEl.classList.toggle('exam-mode', !!(q.isExamTopics || q.isDP700));
+  if (q.isDP700) {
+    // DP-700 ExamTopics-style: sequential #1..#N under "Topic 1 - Exam A"
+    var dpNum = DP700_SEQ[q.id] || q.id;
+    document.getElementById('qId').textContent = `Question #${dpNum}`;
+    document.getElementById('qTopic').innerHTML = `${domainBadge(q)} ${sourceBadge(q)} <span class="topic-tag">Topic 1 - Exam A</span>`;
+  } else if (q.isExamTopics) {
     // AI-103 ExamTopics: sequential #1..#N under "Topic 1 - Exam A"
     var etNum = ET103_SEQ[q.id] || q.id;
     document.getElementById('qId').textContent = `Question #${etNum}`;
@@ -11673,8 +12501,9 @@ function submitExam() {
   const bdEl = document.getElementById('todayBreakdown');
   if (bdEl) {
     const isAI103set = activeQuestions.some(qi => questions[qi].isExamTopics || questions[qi].isCertPractice);
-    const DOMS = isAI103set ? DOMAIN103_DEFS : DOMAIN_DEFS;
-    const domOf = isAI103set ? domain103Of : domainOf;
+    const isDP700set = activeQuestions.some(qi => questions[qi].isDP700);
+    const DOMS = isDP700set ? DOMAIN_DP700_DEFS : (isAI103set ? DOMAIN103_DEFS : DOMAIN_DEFS);
+    const domOf = isDP700set ? domainDP700Of : (isAI103set ? domain103Of : domainOf);
     const dom = {};
     activeQuestions.forEach(qi => {
       const q = questions[qi];
@@ -11699,7 +12528,7 @@ function submitExam() {
     // overall progress line from persistent history
     const ps = progressSummary();
     const progLine = `<div class="bd-progress">📈 Overall progress: <strong>${ps.mastered}</strong> mastered · <strong>${ps.partial}</strong> partial · <strong>${ps.wrong}</strong> to review · ${ps.seen}/${ps.total} attempted across all sessions.</div>`;
-    bdEl.innerHTML = `<div class="bd-title">Score by official ${isAI103set ? 'AI-103' : 'AI-102'} domain</div>${rows}${foot}${progLine}`;
+    bdEl.innerHTML = `<div class="bd-title">Score by official ${isDP700set ? 'DP-700' : (isAI103set ? 'AI-103' : 'AI-102')} domain</div>${rows}${foot}${progLine}`;
     bdEl.style.display = 'block';
   }
 

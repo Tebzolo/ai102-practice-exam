@@ -10424,6 +10424,1454 @@ ORDER BY OrderYear`,
     The <strong>Organization profile</strong> and related <strong>Org settings</strong> pages in the Microsoft 365 admin center are where an administrator configures the company name, technical contact details, and tenant-wide <strong>branding</strong> — logo, background image, and theme colors — that appear on the sign-in page and across Microsoft 365 experiences.<br><br>
     A (ID Protection) is a security risk-detection service, unrelated to branding/org profile settings. C (Purview Data Map) catalogs data sources for governance, not organization branding. D (Teams meeting policies) controls in-meeting behavior, not tenant-wide branding.`,
     userChoice: null
+  },
+  {
+    id: 3015, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Applying a Campaign Sign-In Background to a Single Registered Application',
+    text: `<p>Contoso has a registered expense application. When users authenticate to this application, the entire space behind the sign-in box must use a campaign color. Authentication pages for other applications and the Microsoft 365 suite header must retain their existing branding.</p>
+    <p>What should you configure?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Change the colors in the default Microsoft 365 organization theme.',
+      'B. Create a Microsoft Entra branding theme for the expense application and set its page background color.',
+      'C. Set the page background color in the tenant\'s default Microsoft Entra branding.',
+      'D. Create a Microsoft Entra branding theme for the expense application and change only its header.'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — a custom Entra branding theme scoped to the expense application, with its background color set</strong><br><br>
+    Microsoft Entra ID supports multiple <strong>company branding themes</strong>, where a custom theme can be associated with one or more specific applications so that only sign-in traffic for those apps sees the custom look. Setting the <strong>background color/image</strong> (the space behind the sign-in box) on a theme scoped to the expense application satisfies "campaign color for this app only" while every other application continues to use the tenant's default branding.<br><br>
+    A and C both edit the <strong>default/organization-wide</strong> theme, which would recolor the sign-in experience for every application, not just the expense app — the opposite of what's required. D changes the wrong element: the header is the Microsoft 365 suite bar, which the requirement explicitly says must retain its existing branding, and it leaves the background — the actual element that needs the campaign color — untouched.`,
+    userChoice: null
+  },
+  {
+    id: 3016, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Assigning a Custom Sign-In Logo and Transition Portal to a Microsoft 365 Group',
+    text: `<p>Contoso already uses one corporate theme for all Microsoft 365 users. Members of the Microsoft 365 group named <strong>Mergers</strong> must instead see the acquired company's logo in the Microsoft 365 experience. When those members select the logo, a transition portal must open. Users outside Mergers must retain the corporate theme.</p>
+    <p>Which configuration should you implement?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Create a Microsoft 365 group theme, assign it to a security group containing the Mergers members, and configure the logo and its transition-portal URL.',
+      'B. Replace the logo in the default Microsoft 365 organization theme and configure the transition-portal URL on its Logos page.',
+      'C. Create a Microsoft Entra application branding theme for Mergers and set its background image and page background color to the acquired company\'s assets.',
+      'D. Create a Microsoft 365 group theme assigned to the Mergers group, add the acquired company\'s logo, and configure the transition-portal URL for that theme.'
+    ],
+    correctOption: 'D',
+    solution: `<strong>Correct Answer: D — a group branding theme assigned directly to the Mergers Microsoft 365 group</strong><br><br>
+    Microsoft Entra company branding supports <strong>group-specific themes</strong> that can be assigned directly to a Microsoft 365 group, so only that group's members see a different logo (and other custom elements) while everyone else continues to see the default organization theme. The <strong>banner logo click-through (transition-portal) URL</strong> is a per-theme setting on the Logos page, so it's configured on the Mergers theme itself, taking members to the transition portal when they select the logo.<br><br>
+    A adds an unnecessary layer: Mergers is already the Microsoft 365 group that needs the custom experience, so wrapping it in a separate security group is redundant — Entra group branding assigns directly to the target group. B edits the <strong>default/organization-wide</strong> theme, which would change the logo for every user, not just Mergers — the opposite of what's required. C is scoped to an <strong>application</strong>, not a group, so it wouldn't target Mergers members across the Microsoft 365 experience, and it changes background imagery/color rather than the logo and click-through URL the scenario actually needs.`,
+    userChoice: null
+  },
+  {
+    id: 3017, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Sharing and Splitting Nondefault Suite-Header Designs Across Multiple Groups',
+    text: `<p>Fabrikam will retain one default Microsoft 365 organization theme. Legal and Sales can share one nondefault suite-header design, while HR, Finance, and Research each require a different nondefault design. Each department is represented by a Microsoft 365 group.</p>
+    <p>Which design plan is supported?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Create a separate default organization theme for each department and retire the tenant-wide default theme.',
+      'B. Create five additional group themes and assign one theme separately to each department group.',
+      'C. Create four Microsoft Entra application branding themes and assign them to the department groups.',
+      'D. Create four additional group themes, assign the shared theme to both Legal and Sales, and assign one of the other themes to each remaining department group.'
+    ],
+    correctOption: 'D',
+    solution: `<strong>Correct Answer: D — four group themes, with one theme assigned to both Legal and Sales</strong><br><br>
+    Fabrikam needs exactly <strong>four distinct nondefault designs</strong> in total: one shared design for Legal + Sales, and one unique design each for HR, Finance, and Research. Microsoft Entra <strong>group branding themes</strong> can be assigned to more than one Microsoft 365 group, so a single theme created once can be linked to both the Legal group and the Sales group, while three additional themes are created and each assigned to exactly one of HR, Finance, and Research. That's four themes total, matching the four required designs, on top of the retained default.<br><br>
+    A is disallowed by the tenant needing to <strong>retain</strong> one default theme — replacing it per department violates the requirement outright. B creates one theme per group (five themes) instead of recognizing that Legal and Sales can reuse a single shared theme — wasteful and not what "share one design" calls for. C uses <strong>application</strong> branding, which scopes by registered app, not by Microsoft 365 group membership, so it can't target "members of the Legal/Sales/HR/etc. group" the way this scenario requires.`,
+    userChoice: null
+  },
+  {
+    id: 3018, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Adding a Custom Domain Without Domain Connect While Protecting Mail Continuity',
+    text: `<p>Fabrikam is adding fabrikam.example to Microsoft 365. Its registrar does not support Domain Connect, and the domain will be used for email. The migration plan must establish ownership, configure the records required by the selected Microsoft 365 services, and avoid interrupting mail when the Microsoft 365 MX record is added.</p>
+    <p>Which plan meets the requirements?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Add the Microsoft 365 service DNS records manually, create the users and mailboxes, and omit the separate domain-ownership confirmation.',
+      'B. Authorize Domain Connect to confirm ownership and add the service DNS records, and then create the mailboxes after the MX record is active.',
+      'C. Add only the ownership-verification record manually, add the Microsoft 365 MX record, and then create the users and mailboxes.',
+      'D. Manually confirm ownership and add the appropriate service DNS records at the registrar; after adding the custom domain, create all email users and mailboxes before adding the Microsoft 365 MX record.'
+    ],
+    correctOption: 'D',
+    solution: `<strong>Correct Answer: D — manual ownership + service records, mailboxes created before the MX cutover</strong><br><br>
+    Because the registrar doesn't support <strong>Domain Connect</strong>, ownership verification and the required service DNS records must be added <strong>manually</strong> at the registrar. Critically, "avoid interrupting mail when the MX record is added" means the Microsoft 365 mailboxes for every affected user must already exist <strong>before</strong> the MX record is switched — otherwise there's a window where mail is routed to Microsoft 365 for a domain that has no mailboxes yet, and messages are lost. Creating all users and mailboxes first, then adding MX last, closes that gap.<br><br>
+    A skips domain-ownership confirmation entirely, which Microsoft 365 requires before a custom domain can be used. B relies on <strong>Domain Connect</strong>, which the registrar doesn't support — it isn't an available option here. C adds the MX record before the mailboxes exist, creating exactly the mail-loss window the requirement is designed to prevent.`,
+    userChoice: null
+  },
+  {
+    id: 3019, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Sequencing a Custom-Domain Email Migration to Avoid Inbound Mail Loss',
+    text: `<p>Northwind is moving production email for an existing custom domain from another provider to Microsoft 365. The migration must avoid interrupting inbound email for users on the domain.</p>
+    <p>Which sequence should the administrator use?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Add the custom domain, add the Microsoft 365 MX record, and then add users and set up their Microsoft 365 mailboxes.',
+      'B. Add all email users and set up their Microsoft 365 mailboxes, add the custom domain, and then add the Microsoft 365 MX record.',
+      'C. Add the custom domain, add all email users and set up their Microsoft 365 mailboxes, and then add the Microsoft 365 MX record.',
+      'D. Add the Microsoft 365 MX record, add the custom domain, and then add all email users and set up their Microsoft 365 mailboxes.'
+    ],
+    correctOption: 'C',
+    solution: `<strong>Correct Answer: C — domain, then mailboxes, then MX last</strong><br><br>
+    The <strong>MX record</strong> is what actually redirects inbound mail flow to Microsoft 365, so it must be the <strong>last</strong> step, only after every mailbox that will receive that mail already exists. The correct order is: add the custom domain to the tenant (required before mailboxes on that domain can be created), create all email users and set up their Microsoft 365 mailboxes, and only then repoint MX so mail arrives at mailboxes that are already provisioned and ready.<br><br>
+    A and D both add the MX record before the mailboxes exist, creating a window where inbound mail is routed to Microsoft 365 but has nowhere to land — causing bounced or lost messages. B tries to create mailboxes before the custom domain has even been added to the tenant, which isn't a supported order — the domain must be added first.`,
+    userChoice: null
+  },
+  {
+    id: 3020, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Expanding a Pilot to Full Recipient Readiness Before an MX Cutover',
+    text: `<p>A migration team has tested Microsoft 365 email with a pilot group. The final change will replace the MX record for the entire custom domain. To preserve email continuity when that record is changed, which recipient-readiness plan should the team use?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Create Microsoft 365 mailboxes for every domain user before adding the custom domain, and then change the MX record.',
+      'B. After adding the custom domain, add every email user on the domain and set up each Microsoft 365 mailbox before changing the MX record.',
+      'C. Before changing the MX record, set up Microsoft 365 mailboxes only for the pilot users; provision the remaining domain users after cutover.',
+      'D. Add the custom domain and change the MX record, and then create Microsoft 365 mailboxes for every email user as messages arrive.'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — every user on the domain gets a mailbox before the MX record changes</strong><br><br>
+    The MX record change affects the <strong>entire domain</strong>, not just the pilot group, so recipient readiness must be expanded to <strong>every</strong> email user on that domain before the cutover — the custom domain is added first (a prerequisite for creating mailboxes on it), then all mailboxes are provisioned, and only then is the MX record changed so inbound mail immediately has somewhere to land tenant-wide.<br><br>
+    A tries to create domain mailboxes before the domain itself has been added to the tenant, which isn't a supported order. C leaves the majority of users without mailboxes at the moment of cutover — mail for anyone outside the original pilot would have nowhere to go. D flips the sequence entirely, changing MX before mailboxes exist, guaranteeing lost mail for users provisioned "as messages arrive" rather than in advance.`,
+    userChoice: null
+  },
+  {
+    id: 3021, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Routing Organization Profile and Password Expiration Requests to the Correct Admin-Center Area',
+    text: `<p>A Microsoft 365 administrator receives two tenant-wide requests: update the organization profile and change the password policy expiration date. The administrator must route each request to a documented Microsoft 365 admin-center settings area without assuming unsupported field-level steps.</p>
+    <p>Which two actions should the administrator take?</p>`,
+    note: 'NOTE: Each correct selection is worth one point.',
+    render: 'mcq',
+    multiSelect: true,
+    options: [
+      'A. For the password policy and expiration request, use the Microsoft 365 admin center Settings category.',
+      'B. For the organization profile request, deploy a Microsoft 365 Apps diagnostic-data privacy policy.',
+      'C. For the password policy and expiration request, create a Microsoft Entra application branding theme.',
+      'D. For the organization profile request, go to Settings > Org settings > Organization profile.'
+    ],
+    correctOptions: ['A', 'D'],
+    solution: `<strong>Correct Answers: A and D</strong><br><br>
+    The <strong>organization profile</strong> — company name, technical contact, and related tenant details — is documented under <strong>Settings > Org settings > Organization profile</strong> in the Microsoft 365 admin center (D). The <strong>password expiration policy</strong> (including the expiration date/duration) is likewise managed from within the admin center's broader <strong>Settings</strong> category — under Org settings > Security & privacy — so routing that request to the Settings category (A) is the accurate, documented answer without overstating an exact field-level path that isn't being asked about.<br><br>
+    B (a Microsoft 365 Apps diagnostic-data privacy policy) governs telemetry from Office apps, not organization profile details — unrelated. C (Microsoft Entra application branding) controls sign-in page appearance for a specific application, not password expiration behavior — a mismatched, unrelated area entirely.`,
+    userChoices: []
+  },
+  {
+    id: 3022, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Governing Connected Experiences in Microsoft 365 Apps via Cloud Policy',
+    text: `<p>An organization must centrally govern whether Microsoft 365 Apps for enterprise can use cloud-based functionality that provides enhanced Office features. The endpoint team will deploy the control through Microsoft's cloud policy mechanism and must not change the tenant organization profile.</p>
+    <p>Which two configuration choices meet the requirement?</p>`,
+    note: 'NOTE: Each correct selection is worth one point.',
+    render: 'mcq',
+    multiSelect: true,
+    options: [
+      'A. Configure the Microsoft 365 Apps privacy-control axis for diagnostic data.',
+      'B. Make the change from Settings > Org settings > Organization profile.',
+      'C. Implement the selected privacy policy by using Cloud Policy.',
+      'D. Configure the Microsoft 365 Apps privacy-control axis for connected experiences.'
+    ],
+    correctOptions: ['C', 'D'],
+    solution: `<strong>Correct Answers: C and D</strong><br><br>
+    The cloud-based, enhanced-Office-feature functionality described is governed by the <strong>connected experiences</strong> privacy-control axis in Microsoft 365 Apps — a separate control from diagnostic data — and it is deployed centrally through <strong>Cloud Policy</strong>, Microsoft's cloud-based policy service for managing Microsoft 365 Apps settings without Group Policy or Intune device enrollment. Configuring the connected-experiences axis (D) and implementing that policy via Cloud Policy (C) together satisfy the requirement.<br><br>
+    A targets the wrong control axis — <strong>diagnostic data</strong> governs telemetry sent to Microsoft, not the optional cloud-based features (like online image search or translation) described in the scenario. B is explicitly excluded by the requirement: editing the tenant's <strong>organization profile</strong> is a different, unrelated setting and the scenario states it must not be changed.`,
+    userChoices: []
+  },
+  {
+    id: 3023, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Routing Release-Preference and Partner-Access Requests in the Admin Center',
+    text: `<p>Operations must adjust how the tenant receives service updates and must control whether a delegated partner can enter the Microsoft 365 admin center.</p>
+    <p>Which two admin-center actions are documented for these requests?</p>`,
+    note: 'NOTE: Each correct selection is worth one point.',
+    render: 'mcq',
+    multiSelect: true,
+    options: [
+      "A. Use Settings to change the tenant's release preferences.",
+      'B. Use Health to control whether partners can access the admin center.',
+      'C. Use Settings to choose whether partners can access the admin center.',
+      "D. Use Setup to change the tenant's release preferences."
+    ],
+    correctOptions: ['A', 'C'],
+    solution: `<strong>Correct Answers: A and C</strong><br><br>
+    Both requests are documented under the Microsoft 365 admin center's <strong>Settings</strong> category. <strong>Release preferences</strong> — controlling whether the tenant receives Standard or Targeted release updates — are managed from Settings > Org settings (A). Whether a <strong>delegated partner</strong> can access and act within the admin center on the organization's behalf is likewise controlled from Settings > Partner relationships (C).<br><br>
+    B misroutes the request: <strong>Health</strong> reports on service incidents and advisories, it has no partner-access controls. D misroutes the other request to <strong>Setup</strong>, which hosts guided onboarding/configuration tasks, not the release-preferences setting that actually lives under Settings.`,
+    userChoices: []
+  },
+  {
+    id: 3024, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Moving a User Between Group-Based Licensed Groups Without a License Gap',
+    text: `<p>A reorganization requires moving a user from the Research licensed group to the Engineering licensed group. Both groups use group-based licensing, and the user's licensed services must remain available throughout the move.</p>
+    <p>Which procedure should the administrator use?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      "A. Add the user to Engineering, immediately remove the user from Research, and then confirm the new license on the user's Licenses page.",
+      "B. Remove the user from Research, add the user to Engineering, and then confirm the new license on the user's Licenses page.",
+      "C. Confirm the Engineering license on the user's Licenses page, remove the user from Research, and then add the user to Engineering.",
+      "D. Add the user to Engineering, confirm the new license on the user's Licenses page, and then remove the user from Research."
+    ],
+    correctOption: 'D',
+    solution: `<strong>Correct Answer: D — add, confirm, then remove</strong><br><br>
+    Group-based licensing processes assignment changes asynchronously, so there can be a short delay before a newly assigned license is fully applied. To guarantee the user's licensed services are <strong>never interrupted</strong>, the administrator should add the user to Engineering first, then explicitly <strong>confirm</strong> on the user's Licenses page that the Engineering-derived license has actually been applied, and only <strong>then</strong> remove the user from Research. Verifying before removing eliminates any race condition where the old license is revoked before the new one has finished provisioning.<br><br>
+    A and B both remove the user from Research before (or without ever) confirming the new license is active, risking a gap where neither license is fully in effect. C tries to confirm the Engineering license before the user has even been added to Engineering, which isn't possible — there's nothing to confirm yet.`,
+    userChoice: null
+  },
+  {
+    id: 3025, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Preparing the Azure Billing Boundary for a Microsoft 365 Pay-As-You-Go Service',
+    text: `<p>A tenant is preparing a Microsoft 365 pay-as-you-go service. Finance requires the service to use the correct Azure billing boundary and wants post-setup visibility into consumption and cost.</p>
+    <p>Which three elements should be included in the plan?</p>`,
+    note: 'NOTE: Each correct selection is worth one point.',
+    render: 'mcq',
+    multiSelect: true,
+    options: [
+      'A. Use an Azure subscription in the same tenant as Microsoft 365.',
+      'B. Use an Azure resource group in that subscription.',
+      'C. Use an Azure subscription from a separate tenant to isolate Microsoft 365 charges.',
+      'D. After setup, monitor metered consumption only from the Microsoft 365 seat-license inventory.',
+      'E. After setup, monitor usage and costs in Microsoft Cost Management for Azure with at least read access to the billing resource group.'
+    ],
+    correctOptions: ['A', 'B', 'E'],
+    solution: `<strong>Correct Answers: A, B, and E</strong><br><br>
+    Microsoft 365 pay-as-you-go, metered services bill through an <strong>Azure subscription</strong> that must live in the <strong>same tenant</strong> as Microsoft 365 (A), with a dedicated <strong>resource group</strong> in that subscription acting as the billing boundary for the service (B). Once running, ongoing consumption and cost are visible through <strong>Microsoft Cost Management for Azure</strong>, which requires at minimum <strong>read access</strong> to the billing resource group to view usage and spend (E).<br><br>
+    C is incorrect — using a <strong>separate tenant</strong> breaks the required billing relationship; the subscription must be in the same tenant as the Microsoft 365 organization consuming the service. D is incorrect because <strong>seat-license inventory</strong> tracks traditional per-user license assignment, not metered/consumption-based charges — pay-as-you-go usage and cost are tracked in Azure Cost Management, not the seat-license view.`,
+    userChoices: []
+  },
+  {
+    id: 3026, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Licensing Designated Makers for Both Copilot Studio and Microsoft 365 Copilot',
+    text: `<p>Contoso wants 20 designated makers to create and manage agents in Microsoft Copilot Studio. The same users must also use Microsoft 365 Copilot. The organization has not yet completed licensing for either service.</p>
+    <p>Which three licensing actions are required?</p>`,
+    note: 'NOTE: Each correct selection is worth one point.',
+    render: 'mcq',
+    multiSelect: true,
+    options: [
+      'A. Have the tenant administrator acquire the Copilot Studio organization tenant license without assigning that license to individual makers.',
+      'B. Assign Microsoft 365 Copilot licenses to the intended users individually or through a group.',
+      'C. Assign a Copilot Studio User License to each designated maker who will create and manage agents.',
+      'D. Assign only Microsoft 365 Copilot licenses to the makers and use those licenses as their Copilot Studio creator entitlements.',
+      "E. Assign the Copilot Studio organization tenant license directly to each designated maker as that user's creator license."
+    ],
+    correctOptions: ['A', 'B', 'C'],
+    solution: `<strong>Correct Answers: A, B, and C</strong><br><br>
+    Two separate services need to be licensed here. For <strong>Copilot Studio</strong>, the tenant needs the organization-level Copilot Studio tenant/capacity license, which the administrator acquires at the tenant level without assigning it to individual users (A), <strong>plus</strong> a per-maker <strong>Copilot Studio User License</strong> assigned to each of the 20 designated makers who will actually build and manage agents (C). Separately, because the same users must also use <strong>Microsoft 365 Copilot</strong>, that license must be assigned to them individually or via a group (B) — it is a distinct entitlement from Copilot Studio.<br><br>
+    D is incorrect: a Microsoft 365 Copilot license does not substitute for or grant Copilot Studio maker/authoring rights — the two are separate products with separate licenses. E is incorrect: the organization tenant license is a capacity-style purchase managed at the tenant level, not something assigned directly to an individual user as their personal creator license — that role is filled by the per-user Copilot Studio User License (C).`,
+    userChoices: []
+  },
+  {
+    id: 3027, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Confirming Microsoft Agent 365 Plan Capabilities Before Troubleshooting Missing Telemetry',
+    text: `<p>A tenant can view its agent inventory and use basic agent-governance functions in Microsoft Agent 365. However, the Microsoft 365 admin center does not show visualization or telemetry for agent activity. Administrators have not yet confirmed the tenant's Microsoft Agent 365 plan capabilities.</p>
+    <p>What should they do first?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Reconfigure Agent Registry inventory permissions because inventory access automatically enables activity telemetry.',
+      'B. Recreate the basic governance actions so their configuration generates visualization and telemetry.',
+      "C. Verify that the tenant's Microsoft Agent 365 plan includes observability and monitoring of agent activity.",
+      'D. Change Copilot Studio capacity monitoring because all Microsoft Agent 365 telemetry is controlled there.'
+    ],
+    correctOption: 'C',
+    solution: `<strong>Correct Answer: C — confirm the plan includes observability/monitoring</strong><br><br>
+    Not every Microsoft Agent 365 plan tier includes the same capability set. Basic <strong>inventory</strong> and <strong>governance</strong> functions can be available while <strong>observability and monitoring</strong> (visualization and telemetry of agent activity) is a separate, plan-dependent capability. Before troubleshooting further, administrators should first verify whether the tenant's current plan actually includes observability/monitoring — if it doesn't, no configuration change will produce the missing telemetry.<br><br>
+    A is a fabricated causal link — inventory permissions in Agent Registry don't automatically enable telemetry. B assumes the missing data is a configuration artifact of the governance actions themselves, skipping the more fundamental question of plan capability. D misattributes agent telemetry to <strong>Copilot Studio capacity monitoring</strong>, which tracks message/session consumption, not Microsoft Agent 365 activity visualization.`,
+    userChoice: null
+  },
+  {
+    id: 3028, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Sequencing the Initial Setup of Microsoft 365 Backup',
+    text: `<p>An organization is adopting Microsoft 365 Backup for selected Microsoft 365 content. No Azure subscription has been linked for Backup, Microsoft 365 Backup is not enabled, and no protection policies exist.</p>
+    <p>Which sequence should the administrator use?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Link an Azure subscription through pay-as-you-go and stop, because billing linkage immediately protects the selected content.',
+      'B. Create Azure Backup policies for the content and then enable Microsoft 365 Backup only if a restore is requested.',
+      'C. Create the workload protection policies, enable Microsoft 365 Backup, and then link an Azure subscription through pay-as-you-go.',
+      'D. Link an Azure subscription through pay-as-you-go, enable Microsoft 365 Backup for the organization, and then create the workload protection policies.'
+    ],
+    correctOption: 'D',
+    solution: `<strong>Correct Answer: D — link billing, enable the service, then create policies</strong><br><br>
+    Microsoft 365 Backup requires an <strong>Azure subscription linked through pay-as-you-go</strong> as its billing foundation before the service can be turned on at all. Once that link is in place, the administrator <strong>enables Microsoft 365 Backup</strong> for the organization, and only then can workload-specific <strong>protection policies</strong> be created to actually start protecting the selected content — policies have nothing to attach to until the service itself is enabled.<br><br>
+    A stops after billing linkage and mistakenly assumes that alone protects content — no protection occurs until Backup is enabled and policies exist. B and C both try to create protection policies before the prerequisites (billing linkage, enabling the service) are in place, which isn't a supported order — policies can't be created against a service that isn't yet enabled.`,
+    userChoice: null
+  },
+  {
+    id: 3029, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Combining Harmful-Event Alerts and Restore Notifications for Microsoft 365 Backup',
+    text: `<p>A backup operations team must receive email alerts about potentially harmful Microsoft 365 Backup events. The team must also be notified when restores are initiated or completed.</p>
+    <p>Which configuration meets both requirements?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Configure the Backup Notification List for potentially harmful events and opt in to routine-event notifications.',
+      'B. Configure the Backup Notification List for routine events only.',
+      'C. Configure the Backup Notification List for potentially harmful events only.',
+      'D. Use Azure cost alerts for harmful backup changes and use the Backup Notification List only for restores.'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — potentially harmful events plus opting in to routine events</strong><br><br>
+    The Microsoft 365 <strong>Backup Notification List</strong> separates alerts into categories: <strong>potentially harmful events</strong> (which the team needs for security-relevant activity) and <strong>routine events</strong>, which is the category that includes restore-initiated and restore-completed notifications and must be opted into separately. Configuring both — harmful-event alerts plus opting in to routine-event notifications — is the only combination that satisfies both stated requirements.<br><br>
+    B misses harmful-event alerts entirely. C misses the restore notifications, which live under the routine-events category, not the harmful-events category. D introduces <strong>Azure cost alerts</strong>, a billing/spend-monitoring feature with no relationship to backup security events — it isn't a mechanism for surfacing potentially harmful backup activity at all.`,
+    userChoice: null
+  },
+  {
+    id: 3030, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Configuring Group-Based Recipients for a Large Backup Notification Rotation',
+    text: `<p>A 45-person compliance rotation must receive Microsoft 365 Backup notifications. The team is already represented by one security group, and a relevant backup event occurred today. The administrator wants a supported recipient configuration without maintaining dozens of individual entries.</p>
+    <p>What should the administrator expect to configure?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Link one Azure pay-as-you-go subscription per recipient because billing linkage controls who receives backup notifications.',
+      'B. Create one backup protection policy per recipient because protection-policy membership controls notification delivery.',
+      'C. Add the security group to the Backup Notification List; recipients receive a daily email digest when at least one relevant event occurs.',
+      'D. Add all 45 people as individual recipients to one Backup Notification List because the individual-recipient limit is 50.'
+    ],
+    correctOption: 'C',
+    solution: `<strong>Correct Answer: C — add the security group directly to the Backup Notification List</strong><br><br>
+    The Microsoft 365 <strong>Backup Notification List</strong> supports adding an <strong>email-enabled security group</strong> as a recipient, not just individual users. Once the group is added, members receive a consolidated <strong>daily digest</strong> covering that day's relevant events rather than a separate per-event message per person. Since the compliance rotation is already represented by one security group, adding that group directly is the supported way to notify all 45 people without maintaining 45 individual entries.<br><br>
+    A and B invent mechanisms — <strong>Azure billing linkage</strong> and <strong>protection-policy membership</strong> — that have no bearing on who receives notification emails; neither controls notification recipients. D technically fits under a numeric limit, but it's the wrong approach given the requirement to avoid maintaining dozens of individual entries when a supported group-based option already exists.`,
+    userChoice: null
+  },
+  {
+    id: 3031, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Preparing the Network Connectivity Page by Configuring Office Locations First',
+    text: `<p>An administrator opens the Network connectivity page in the Microsoft 365 admin center for the first time. The page does not yet provide usable office assessments, a global performance map, or location-scoped issues.</p>
+    <p>What should the administrator do first?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      "A. Configure the organization's office locations so the page can produce tenant and location-scoped network views.",
+      'B. Start applying performance recommendations without associating the evidence with any office location.',
+      'C. Run a local connectivity test at one office and treat that result as the location configuration for every office.',
+      'D. Review the tenant-wide assessment before configuring locations because it automatically discovers every office.'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — configure office locations first</strong><br><br>
+    The <strong>Network connectivity</strong> page builds its office assessments, global performance map, and location-scoped issue views from <strong>configured office locations</strong> — without them, the page has no basis to scope data to a specific site. Defining the organization's office locations is therefore the necessary first step before any of the location-aware features become usable.<br><br>
+    B produces recommendations disconnected from any location, defeating the purpose of a location-scoped tool. C wrongly generalizes one office's local test result to every office — network conditions vary per site and can't be inferred from a single location. D is based on a false premise: the tenant-wide assessment does not automatically discover office locations; they must be configured manually.`,
+    userChoice: null
+  },
+  {
+    id: 3032, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Localizing a Degraded-Network Branch When the Tenant View Is Inconclusive',
+    text: `<p>Network connectivity locations are configured for four offices. The Microsoft 365 admin center shows degraded network quality at one branch, while the other offices are healthy. The tenant-level view does not reveal the root cause.</p>
+    <p>Which investigation approach should the network team use?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Use the admin-center location insight to identify the affected branch, and then run the Microsoft 365 connectivity test locally at that branch.',
+      'B. Use Service health to rank office network quality, and run a local connectivity test only if a Microsoft incident is listed.',
+      'C. Use only the admin-center aggregate because local testing cannot provide deeper root-cause evidence.',
+      'D. Skip the location comparison and run local tests at every office before reviewing any admin-center insight.'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — location insight to scope the branch, then a local connectivity test there</strong><br><br>
+    The admin center's <strong>location-scoped insight</strong> already narrows the problem to the one degraded branch — that's the fastest way to know where to look. Since the tenant-level view doesn't explain <strong>why</strong> that branch is degraded, the next step is to run the <strong>Microsoft 365 connectivity test locally</strong> at that specific branch, which captures path, DNS, and latency details from that site's actual network path that the tenant-wide aggregate can't reveal.<br><br>
+    B relies on <strong>Service health</strong>, which reports Microsoft-side incidents, not per-branch local network conditions — a branch-specific degradation is far more likely to be a local network issue than a Microsoft service incident. C stops short of the deeper diagnostic evidence a local test provides, exactly what the scenario says the tenant view is missing. D discards the useful location insight already available and wastes effort testing healthy offices that don't need investigation.`,
+    userChoice: null
+  },
+  {
+    id: 3033, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Determining Ownership of an Intermittent Service Disruption Before Remediation',
+    text: `<p>Users report an intermittent Microsoft 365 service disruption. A tenant configuration problem and a Microsoft-managed service incident are both plausible, and the operations lead must identify the next operational owner before remediation begins.</p>
+    <p>What should an administrator review?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Configure Service health email notifications first and infer ownership from whether an email arrives.',
+      'B. Review Service health to determine whether the issue is listed as requiring action by the organization or as an active issue Microsoft is working on.',
+      'C. Begin tenant-side remediation immediately because user reports alone establish that the organization owns the issue.',
+      'D. Wait for Microsoft remediation immediately because user reports alone establish that Microsoft owns the issue.'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — check Service health for advisory type/ownership</strong><br><br>
+    The <strong>Service health</strong> dashboard explicitly distinguishes between advisories that require <strong>action by the organization</strong> (e.g., a tenant misconfiguration) and active incidents that Microsoft is actively working on. Reviewing it directly answers the ownership question — whether the fix belongs to the tenant admin or is already being handled by Microsoft — before any remediation effort is spent in the wrong place.<br><br>
+    A introduces an unnecessary, indirect proxy (waiting on an email) instead of just checking the dashboard directly, and delays the ownership determination. C and D both jump to a remediation owner based purely on user reports, which can't distinguish a tenant-side misconfiguration from a Microsoft-side incident — that's precisely the ambiguity Service health is designed to resolve.`,
+    userChoice: null
+  },
+  {
+    id: 3034, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Scoping Service Health Notifications to Two Services, Two Recipients, and Incidents Only',
+    text: `<p>An operations team wants email notifications for new incidents and status changes that affect Exchange Online or SharePoint Online. Notifications must go to two operations addresses. The team does not want advisories or notifications for other services.</p>
+    <p>Which three settings should the administrator specify in Service health?</p>`,
+    note: 'NOTE: Each correct selection is worth one point.',
+    render: 'mcq',
+    multiSelect: true,
+    options: [
+      'A. Enter the two operations email addresses as the notification recipients.',
+      'B. Subscribe the two operations addresses to updates for one currently active incident.',
+      'C. Select only Exchange Online and SharePoint Online as the notification services.',
+      'D. Select incidents and exclude advisories as the notification issue types.',
+      'E. Select every Microsoft 365 service as a notification service.'
+    ],
+    correctOptions: ['A', 'C', 'D'],
+    solution: `<strong>Correct Answers: A, C, and D</strong><br><br>
+    Service health notification settings let an administrator scope alerts along three independent dimensions: <strong>who</strong> receives them — the two operations addresses entered as recipients (A); <strong>which services</strong> trigger them — restricting the service list to only Exchange Online and SharePoint Online (C); and <strong>which issue types</strong> qualify — selecting incidents while excluding advisories (D). Configuring all three together produces exactly the scoped, ongoing notification behavior the team wants.<br><br>
+    B describes subscribing to updates for a single already-active incident, which is a one-off, per-incident action — not a durable notification setting that covers <strong>future</strong> new incidents and status changes. E does the opposite of what's required by notifying on every service instead of restricting to the two named services.`,
+    userChoices: []
+  },
+  {
+    id: 3035, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Interpreting an Empty "Issues for Your Organization to Act On" Section',
+    text: `<p>An administrator can open Service health and view the rest of the page normally. The section labeled "Issues for your organization to act on" is absent.</p>
+    <p>What is the most accurate interpretation of that specific section's absence?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. The absence proves that Microsoft has no active incidents or advisories for the tenant.',
+      'B. The absence proves that every user-reported disruption should be left for Microsoft to remediate.',
+      'C. The section remains hidden until exactly two service-health notification email addresses are configured.',
+      "D. Service health has not detected any issues in the organization's environment that currently require organizational action."
+    ],
+    correctOption: 'D',
+    solution: `<strong>Correct Answer: D — no currently-actionable organizational issues</strong><br><br>
+    The <strong>"Issues for your organization to act on"</strong> section is specifically scoped to advisories/incidents that require action <strong>from the tenant</strong>. When it's absent, the accurate, narrow interpretation is that Service health currently has nothing in that specific category — it says nothing about the rest of the page, which can still show other Microsoft-side incidents or advisories not requiring tenant action.<br><br>
+    A overreaches: the absence of <strong>this specific section</strong> doesn't prove there are no active incidents or advisories anywhere on the page — only that none currently require organizational action. B draws an unsupported blanket conclusion about how <strong>every</strong> future disruption should be handled. C invents a dependency on notification email configuration that has no bearing on whether this section renders.`,
+    userChoice: null
+  },
+  {
+    id: 3036, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Providing a Persistent, Identity-Masking Inbox for a Rotating Service Desk',
+    text: `<p>A rotating service desk needs support@contoso.com as one persistent inbox that all operators can monitor. Replies must appear to recipients as coming from support@contoso.com rather than from an individual operator.</p>
+    <p>Which Exchange Online resource should an administrator create and assign to the operators?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      "A. A distribution group that delivers a separate copy to each operator's personal mailbox.",
+      'B. A shared mailbox with the service-desk operators added as members.',
+      'C. An individual user mailbox that forwards incoming mail to the operators.',
+      'D. A Microsoft 365 group mailbox used instead of assigning operators to a shared mailbox.'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — a shared mailbox with operators as members</strong><br><br>
+    An Exchange Online <strong>shared mailbox</strong> is exactly the resource built for this scenario: it provides a single persistent inbox that multiple operators can be granted access to, and — once operators have the appropriate permissions on it — replies sent from the mailbox display the shared mailbox's identity (support@contoso.com) rather than any individual operator's own address.<br><br>
+    A (distribution group) fragments the mailbox into separate personal-mailbox copies with no shared, persistent inbox and no ability to reply as the shared identity. C (an individual mailbox that forwards) ties the address to one person's mailbox rather than providing a shared, jointly-monitored inbox. D specifically calls out <strong>not</strong> using a shared mailbox in favor of a Microsoft 365 group mailbox, which is built around group collaboration/Outlook conversations rather than the reply-as-shared-identity behavior this scenario requires.`,
+    userChoice: null
+  },
+  {
+    id: 3037, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Configuring Full Access, Send As, and Shared Sent-Items Behavior for a Common Mailbox',
+    text: `<p>A support team uses an existing common mailbox. Each operator must be able to open the mailbox and manage its messages. Replies must display only the mailbox identity, and every operator must be able to review those replies in the mailbox's Sent Items folder.</p>
+    <p>Which three actions should an administrator take?</p>`,
+    note: 'NOTE: Each correct selection is worth one point.',
+    render: 'mcq',
+    multiSelect: true,
+    options: [
+      'A. Remove Full Access after Send As is granted to the operators.',
+      'B. Grant the operators Full Access permission to the mailbox.',
+      'C. Grant the operators Send on Behalf permission to the mailbox.',
+      'D. Enable the shared mailbox Sent Items options for messages sent from the mailbox.',
+      "E. Keep the default Sent Items behavior and use each operator's Sent Items folder as the record of sent replies.",
+      'F. Grant the operators Send As permission to the mailbox.'
+    ],
+    correctOptions: ['B', 'D', 'F'],
+    solution: `<strong>Correct Answers: B, D, and F</strong><br><br>
+    <strong>Full Access</strong> (B) lets each operator open the mailbox and manage its messages as if it were their own. <strong>Send As</strong> (F) makes replies display <strong>only</strong> the mailbox's identity — unlike Send on Behalf, which appends "on behalf of" the sender and would violate the identity-masking requirement. Finally, enabling the shared mailbox's <strong>Sent Items copy settings</strong> (D) — the message-copy-for-Send-As option — ensures replies sent using that permission are saved into the <strong>mailbox's own</strong> Sent Items folder, where every operator can see them, rather than only in the sending operator's personal Sent Items.<br><br>
+    A removes the very permission (Full Access) operators need to open and manage the mailbox — the requirement never asks for it to be revoked. C (Send on Behalf) fails the "display only the mailbox identity" requirement by showing the individual sender alongside the mailbox. E keeps the <strong>default</strong> behavior, where each operator's replies land only in their own personal Sent Items — that fails "every operator must be able to review those replies," since no single shared record would exist.`,
+    userChoices: []
+  },
+  {
+    id: 3038, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Making a Reply Identify Both the Sender and the Department Mailbox',
+    text: `<p>Nina already has access to a department mailbox and can manage its messages. When she sends a reply, the recipient-visible sender information must identify both Nina and the department mailbox.</p>
+    <p>Which permission should an administrator grant?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Send As',
+      'B. Send on Behalf',
+      'C. Full Access',
+      'D. Shared mailbox Sent Items'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — Send on Behalf</strong><br><br>
+    <strong>Send on Behalf</strong> permission produces recipient-visible sender text in the form "Nina on behalf of Department" — identifying <strong>both</strong> the individual sender and the mailbox, exactly matching the requirement. <strong>Send As</strong>, by contrast, makes the message appear to come from the mailbox alone, with no individual identity shown.<br><br>
+    A (Send As) hides Nina's identity entirely, showing only the department mailbox. C (Full Access) is what already lets Nina open and manage the mailbox's messages — it has no bearing on what sender information recipients see on outgoing mail. D (Shared mailbox Sent Items) controls where sent copies are filed, not what identity is displayed to recipients.`,
+    userChoice: null
+  },
+  {
+    id: 3039, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Restricting a Pending-Acquisition Workspace to Selected Parent-Team Members Only',
+    text: `<p>A product team contains 60 members. A pending-acquisition workspace must be available only to eight named people who are already members of the team. The workspace's participation model must be limited to selected members of the parent team, rather than include people who are outside that team.</p>
+    <p>Which channel should you create?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. A standard channel whose eight participants are promoted to team co-owners.',
+      'B. A standard channel in the existing team.',
+      'C. A shared channel containing the eight selected people.',
+      'D. A private channel containing the eight selected team members.'
+    ],
+    correctOption: 'D',
+    solution: `<strong>Correct Answer: D — a private channel scoped to the eight selected members</strong><br><br>
+    A <strong>private channel</strong> creates a distinct, restricted membership list inside an existing team, so it can be scoped to exactly the eight named individuals while excluding the other 52 team members. Its participation model draws from within the parent team, matching the requirement to exclude people outside the team entirely.<br><br>
+    A and B are <strong>standard channels</strong>, which are visible to every member of the team by default — neither restricts access to just eight people. C (a <strong>shared channel</strong>) is designed specifically to extend collaboration to people <strong>outside</strong> the team (including other teams or external organizations) — the opposite of "rather than include people who are outside that team," which this scenario explicitly rules out.`,
+    userChoice: null
+  },
+  {
+    id: 3040, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Syncing Team Roster from an Existing Group and Providing Owner Redundancy',
+    text: `<p>A department is creating a new Microsoft Teams team. An existing Microsoft 365 group is the authoritative roster, and additions or removals from that group must flow to Teams. The department also requires another person to manage team settings and membership if the initial owner is unavailable.</p>
+    <p>Which two actions should be taken?</p>`,
+    note: 'NOTE: Each correct selection is worth one point.',
+    render: 'mcq',
+    multiSelect: true,
+    options: [
+      'A. Create the team based on the existing Microsoft 365 group.',
+      'B. Promote another team member to owner.',
+      'C. Create an independent team and invite users manually whenever the group roster changes.',
+      'D. Create a private channel for the people who administer the roster.',
+      "E. Add another person as a team member without changing that person's role."
+    ],
+    correctOptions: ['A', 'B'],
+    solution: `<strong>Correct Answers: A and B</strong><br><br>
+    Creating the team <strong>based on the existing Microsoft 365 group</strong> (A) ties team membership directly to that group, so any addition or removal from the group automatically flows through to the team roster — satisfying the "authoritative roster" requirement without manual syncing. Promoting <strong>another team member to owner</strong> (B) gives a second person the rights to manage team settings and membership, so the team isn't left without administrative coverage if the initial owner becomes unavailable.<br><br>
+    C explicitly avoids linking the team to the group, requiring manual, error-prone invites every time the roster changes — the opposite of the "must flow" requirement. D (a private channel) doesn't grant anyone owner-level rights over the whole team's settings and membership. E leaves the added person as a regular member, which doesn't provide the management capability the department is asking for.`,
+    userChoices: []
+  },
+  {
+    id: 3041, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Collaborating with External Partner Users Without Creating a Separate Team',
+    text: `<p>A project is managed in an existing Microsoft Teams team. Only selected team members and two partner users who are not members of the team should collaborate in one channel. The rest of the team must not have access to that channel, and no separate team should be created.</p>
+    <p>Which channel approach should the owner use?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Create a shared channel and add the selected team members and partner users.',
+      'B. Create a private channel and add the selected team members and partner users.',
+      'C. Create a standard channel in the existing team.',
+      'D. Create a replacement team based on an existing Microsoft 365 group.'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — a shared channel including the partner users</strong><br><br>
+    A <strong>shared channel</strong> is purpose-built for exactly this scenario: extending collaboration to specific people who are <strong>not members of the parent team</strong> — including users from a partner organization — without adding them to the team itself and without creating a separate team. Only the people explicitly added to the shared channel (the selected team members plus the two partner users) get access; the rest of the team remains excluded.<br><br>
+    B (a private channel) is scoped to draw its membership from within the organization/parent team context rather than being designed for direct external-partner collaboration in the way shared channels are. C (a standard channel) is visible to the <strong>entire</strong> team by default, violating "the rest of the team must not have access." D directly contradicts the requirement that no separate team should be created.`,
+    userChoice: null
+  },
+  {
+    id: 3042, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Enforcing an Unoverridable Copilot-With-Transcript Meeting Setting',
+    text: `<p>An organization requires meetings created by affected organizers to start with Copilot available during and after the meeting, using a saved transcript. Organizers must not be able to change that Copilot meeting option.</p>
+    <p>Which policy configuration meets the requirement?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Configure the Recording & Transcription section without applying the enforced Copilot value.',
+      'B. Set the Copilot policy value to EnabledWithTranscript.',
+      'C. Turn transcription off and set the organizer option to During and after the meeting.',
+      'D. Turn transcription off and rely on a participant with permission to start transcription.'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — EnabledWithTranscript</strong><br><br>
+    The Teams meeting policy Copilot setting includes an <strong>EnabledWithTranscript</strong> value that makes Copilot available both during and after the meeting, powered by a saved transcript — and, unlike its "override" counterpart, this value is <strong>enforced</strong>: organizers cannot change the Copilot option for their meetings. Setting the policy to this value satisfies both the during/after availability requirement and the "organizers must not be able to change it" constraint in one configuration.<br><br>
+    A explicitly skips applying an enforced value, leaving the setting changeable — the opposite of what's required. C and D both turn <strong>transcription off</strong>, which removes the saved transcript the requirement depends on, and D additionally relies on ad hoc participant action rather than a policy-enforced organizer setting.`,
+    userChoice: null
+  },
+  {
+    id: 3043, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Supported Administrative Methods for Changing the Tenant Meeting Transcription Policy',
+    text: `<p>A Teams administrator must change the tenant's meeting transcription policy.</p>
+    <p>Which two supported administrative methods can the administrator use to manage that policy?</p>`,
+    note: 'NOTE: Each correct selection is worth one point.',
+    render: 'mcq',
+    multiSelect: true,
+    options: [
+      'A. Change only the meeting recording setting for affected organizers.',
+      'B. Use the AllowTranscription parameter for a CsTeamsMeetingPolicy PowerShell command.',
+      'C. Use the Recording & Transcription section in the Teams admin center.',
+      "D. Change the organizer's Copilot option in one meeting.",
+      'E. Ask a participant with permission to start transcription during each meeting.'
+    ],
+    correctOptions: ['B', 'C'],
+    solution: `<strong>Correct Answers: B and C</strong><br><br>
+    The tenant's meeting transcription policy is a property of the <strong>CsTeamsMeetingPolicy</strong>, manageable through two supported administrative paths: the <strong>AllowTranscription</strong> PowerShell parameter (B) for scripted or bulk policy management, and the <strong>Recording & Transcription</strong> section of the Teams admin center (C) for a GUI-based equivalent. Both directly change the policy itself, tenant-wide or per policy assignment.<br><br>
+    A changes a <strong>different</strong> setting (recording) rather than transcription, and only for affected organizers rather than the tenant policy. D changes a Copilot option for a single meeting, not the transcription policy. E is a manual, per-meeting workaround performed by a participant — it isn't an administrative method for managing the policy at all.`,
+    userChoices: []
+  },
+  {
+    id: 3044, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Identifying Overshared SharePoint Sites Before Selecting a Copilot-Readiness Remediation',
+    text: `<p>Before expanding Microsoft 365 Copilot, an organization exports its 100 most-used SharePoint sites. The immediate goal is to identify which of those sites have an overshared permission state before any remediation is selected.</p>
+    <p>What should the organization run next?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Restricted access control on every exported site.',
+      'B. A SharePoint Advanced Management Access Review for every SharePoint site.',
+      'C. A SharePoint Advanced Management permission state report.',
+      'D. Restricted SharePoint search for the tenant.'
+    ],
+    correctOption: 'C',
+    solution: `<strong>Correct Answer: C — a SharePoint Advanced Management permission state report</strong><br><br>
+    The <strong>permission state report</strong> is the identification-stage tool: it evaluates sites and surfaces which ones have an <strong>overshared</strong> permission posture, giving the organization the evidence needed before choosing a remediation path. Since the goal here is explicitly identification — "before any remediation is selected" — this report is the correct next step, scoped to the exported 100 sites.<br><br>
+    A applies a <strong>remediation</strong> (restricted access control) to every exported site indiscriminately, skipping the identification step the scenario asks for. B (an Access Review) is a governance/approval workflow more suited to reviewing access on sites <strong>already known</strong> to be overshared, not to first discovering which sites qualify. D (restricted search) affects discoverability, not permission assessment.`,
+    userChoice: null
+  },
+  {
+    id: 3045, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Reducing SharePoint Discoverability Without Assessing or Altering Permissions',
+    text: `<p>During a governed Microsoft 365 Copilot rollout, an organization wants sensitive SharePoint content to be harder for users to discover. The immediate change must target discoverability rather than assess or alter site permissions.</p>
+    <p>Which control should the organization consider?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. SharePoint Advanced Management permission state report.',
+      'B. Restricted access control on business-critical sites.',
+      'C. Restricted SharePoint search.',
+      'D. SharePoint Advanced Management Access Review.'
+    ],
+    correctOption: 'C',
+    solution: `<strong>Correct Answer: C — restricted SharePoint search</strong><br><br>
+    <strong>Restricted SharePoint search</strong> is the control that specifically targets <strong>discoverability</strong> — it limits which content surfaces in search results — without touching the underlying permission model at all. That makes it the direct match for a requirement that explicitly excludes assessing or altering permissions and asks only for reduced discoverability.<br><br>
+    A (a permission state report) is an <strong>assessment</strong> tool, which the requirement explicitly rules out. B (restricted access control) directly <strong>alters</strong> site permissions — also explicitly excluded. D (an Access Review) is likewise a permissions-assessment/approval workflow, not a discoverability control.`,
+    userChoice: null
+  },
+  {
+    id: 3046, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Reviewing All Overshared Sites While Enforcing Tighter Access on the Business-Critical Subset',
+    text: `<p>A SharePoint Advanced Management permission state report has already identified a set of overshared sites. The organization must now review access across all identified overshared sites and then enforce tighter access specifically on the business-critical sites in that set.</p>
+    <p>Which two actions meet the requirement?</p>`,
+    note: 'NOTE: Each correct selection is worth one point.',
+    render: 'mcq',
+    multiSelect: true,
+    options: [
+      'A. Run another permission state report for the identified overshared sites.',
+      'B. Start a SharePoint Advanced Management Access Review for all identified overshared sites.',
+      'C. Apply restricted access control to all identified overshared sites.',
+      'D. Implement restricted SharePoint search to reduce content discoverability.',
+      'E. Apply restricted access control to the business-critical sites.'
+    ],
+    correctOptions: ['B', 'E'],
+    solution: `<strong>Correct Answers: B and E</strong><br><br>
+    The two-stage requirement maps to two distinct actions: reviewing access across <strong>every</strong> identified overshared site is accomplished by starting a <strong>SharePoint Advanced Management Access Review</strong> scoped to that whole set (B). Enforcing <strong>tighter access</strong> specifically on the <strong>business-critical</strong> subset — not the entire overshared set — is accomplished by applying <strong>restricted access control</strong> narrowly to just those business-critical sites (E).<br><br>
+    A just repeats the identification step that's already been completed — it doesn't review access or enforce anything. C over-applies restricted access control to the <strong>entire</strong> overshared set, contradicting the requirement to enforce tighter access "specifically on the business-critical sites in that set." D (restricted search) changes discoverability, not access review or enforcement, and isn't part of either requested action.`,
+    userChoices: []
+  },
+  {
+    id: 3047, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Enabling Synchronized Accounts to Use Email and Microsoft 365 Apps',
+    text: `<p>A company synchronizes 48 employee accounts from on-premises Active Directory Domain Services to Microsoft 365. The employees now appear as users in Microsoft 365, but they cannot use email or other Microsoft 365 apps.</p>
+    <p>What should the administrator do next?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Add each employee as another Microsoft 365 user one at a time.',
+      'B. Assign Microsoft 365 licenses to the existing synchronized users.',
+      'C. Create separate cloud-only accounts for the employees.',
+      'D. Run directory synchronization again to create the same users a second time.'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — assign licenses to the already-synchronized users</strong><br><br>
+    Directory synchronization creates the <strong>user objects</strong> in Microsoft 365, but it does not grant access to services — that requires a <strong>license</strong>. Users appearing in Microsoft 365 without the ability to use email or other apps is the classic symptom of unlicensed synchronized accounts; assigning Microsoft 365 licenses to those 48 existing users is what activates their access to email and the rest of the suite.<br><br>
+    A tries to manually recreate accounts that already exist from sync — redundant and error-prone. C creates duplicate <strong>cloud-only</strong> identities instead of using the accounts that already exist, which would produce conflicting objects rather than fix the license gap. D re-running sync does nothing new — the users already exist; sync doesn't assign licenses.`,
+    userChoice: null
+  },
+  {
+    id: 3048, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Choosing the Correct Management Location for a Synchronized User Account',
+    text: `<p>An organization synchronizes its user accounts from on-premises Active Directory Domain Services to Microsoft 365. The help desk must change one of these synchronized user accounts.</p>
+    <p>Which management location should the help desk use?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. The Microsoft 365 admin center user record only.',
+      'B. A newly created cloud-only replacement account.',
+      'C. The on-premises Active Directory Domain Services management tools.',
+      'D. The Microsoft Entra admin center cloud user record only.'
+    ],
+    correctOption: 'C',
+    solution: `<strong>Correct Answer: C — manage the account on-premises</strong><br><br>
+    For a <strong>synchronized</strong> user, on-premises Active Directory is the <strong>source of authority</strong> — core attributes flow one-way from on-premises AD to the cloud via directory synchronization. Changes made directly in cloud admin portals to a synced object are typically overwritten or blocked on the next sync cycle, so the supported way to change such an account is to make the change in <strong>on-premises AD DS</strong> and let synchronization propagate it to Microsoft 365.<br><br>
+    A and D both attempt to edit the <strong>cloud-side</strong> record directly, which fights the direction of sync for an object whose authoritative source is on-premises. B creates an entirely separate cloud-only identity instead of managing the existing synchronized account — it doesn't change the account at all, it duplicates the user.`,
+    userChoice: null
+  },
+  {
+    id: 3049, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Bulk-Provisioning Cloud-Only Sign-Ins for a Finalized HR Roster',
+    text: `<p>A new division is onboarding 60 cloud-only employees. HR provides one finalized roster, and the organization has no directory synchronization deployment. Each employee needs a Microsoft 365 sign-in before licenses are assigned.</p>
+    <p>Which provisioning action should the administrator take?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Import the roster as a Microsoft 365 group and use its membership entries as the employee accounts.',
+      'B. Create mail contacts from the roster and synchronize the contacts as Microsoft 365 user accounts.',
+      'C. Use the Microsoft 365 admin center to add multiple users at once from the division roster.',
+      "D. Assign the division's licenses to the roster and let the license assignments generate the user accounts."
+    ],
+    correctOption: 'C',
+    solution: `<strong>Correct Answer: C — bulk-add users from the roster in the admin center</strong><br><br>
+    With no directory synchronization in place, user accounts must be created directly in the cloud. The Microsoft 365 admin center's <strong>bulk add users</strong> capability accepts a CSV-based roster and creates a genuine cloud-only sign-in (with credentials) for each of the 60 employees in one operation — exactly what's needed before licenses can be assigned.<br><br>
+    A treats <strong>group membership entries</strong> as if they were user accounts — a Microsoft 365 group doesn't create sign-in identities for people who don't already have accounts. B confuses <strong>mail contacts</strong> (external address references with no sign-in capability) with user accounts, and there's no synchronization deployment to convert them anyway. D has the causality backwards — licenses can only be assigned to accounts that already exist; assigning a license doesn't create the underlying user object.`,
+    userChoice: null
+  },
+  {
+    id: 3050, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Restricting Who May Send B2B Guest Invitations to Designated Admin Roles',
+    text: `<p>A company permits B2B collaboration, but only designated administrative roles may invite external users. Ordinary members and existing guest users must not be able to send invitations.</p>
+    <p>Which setting should the company configure?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Turn off invitations for everyone.',
+      'B. Limit who can invite guests to the designated roles.',
+      "C. Create a collaboration restriction for the guests' email domains.",
+      'D. Scope inbound and outbound B2B access to selected applications.'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — restrict guest invitations to the designated roles</strong><br><br>
+    Microsoft Entra external collaboration settings include a <strong>"guest invite settings"</strong> control that determines <strong>who</strong> is allowed to invite external users — it can be scoped to specific administrative roles only, excluding ordinary members and existing guests from sending invitations while B2B collaboration itself remains permitted.<br><br>
+    A turns off invitations entirely, which contradicts "a company permits B2B collaboration" — the company still wants some people (the designated roles) to be able to invite. C (domain-based collaboration restrictions) controls <strong>which domains</strong> can be invited to or from, not <strong>who</strong> is allowed to send invitations. D (cross-tenant access scoping) governs application-level access for already-established cross-tenant relationships, not invitation permissions.`,
+    userChoice: null
+  },
+  {
+    id: 3051, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Blocking a Single Domain from B2B Invitations Without Changing Who Can Invite',
+    text: `<p>Approved inviters may collaborate with external organizations from any domain except blocked.example. The policy must prevent new invitations to blocked.example without changing who is allowed to send invitations.</p>
+    <p>What should the administrator configure?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. A guest invitation setting that changes the permitted inviter roles.',
+      'B. A cross-tenant access scope for selected users and applications.',
+      'C. A collaboration restriction that denies invitations to blocked.example.',
+      'D. A collaboration restriction that allows only blocked.example.'
+    ],
+    correctOption: 'C',
+    solution: `<strong>Correct Answer: C — a deny-list collaboration restriction targeting blocked.example</strong><br><br>
+    Microsoft Entra's <strong>collaboration restrictions</strong> support a <strong>deny list</strong> approach: block invitations to specific named domains while leaving every other domain permitted by default. Configuring a deny entry for <strong>blocked.example</strong> achieves exactly "any domain except blocked.example" without touching who is allowed to send invitations at all — that's a separate, untouched setting.<br><br>
+    A changes <strong>inviter roles</strong>, which the requirement explicitly says must not change. B (cross-tenant access scope) governs application/user-level access for cross-tenant scenarios, not domain-level invitation blocking. D inverts the logic — an <strong>allow-list</strong> containing only blocked.example would permit invitations solely to that domain and block every other domain, the opposite of what's required.`,
+    userChoice: null
+  },
+  {
+    id: 3052, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE CHOICE',
+    title: 'Linking PIM Activation to a Service-Desk Record',
+    text: `<p>A Microsoft Entra role is already eligible in Privileged Identity Management, and activation already requires approval. Operations now requires every activation to be linked to the service-desk record that prompted the work.</p>
+    <p>Which additional activation requirement should the administrator configure?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Require ticket information.',
+      'B. Require approval from a service-desk approver.',
+      'C. Require multifactor authentication during activation.',
+      'D. Require a business justification.'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — require ticket information</strong><br><br>
+    PIM role settings include a dedicated <strong>"Require ticket information"</strong> activation requirement, which prompts the requester to enter a ticket number and system name at activation time — exactly the kind of link between an activation and the service-desk record that generated it.<br><br>
+    B is already satisfied — the question states approval is already required, and adding a second approver doesn't create a ticket linkage. C (MFA) verifies the requester's identity, not which service-desk record prompted the work. D (business justification) captures free-text reasoning but has no structured tie to a specific ticket or system, which is what "linked to the service-desk record" calls for.`,
+    userChoice: null
+  },
+  {
+    id: 3053, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE RESPONSE',
+    title: 'Requiring Written Justification and Approval for PIM Activation',
+    text: `<p>A Microsoft Entra role is already assigned as eligible in Privileged Identity Management. Policy requires every activation request to include a written business reason and to receive authorization from an approver.</p>
+    <p>Which two activation requirements should the administrator configure?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Change the assignment from eligible to active.',
+      'B. Require justification.',
+      'C. Require ticket information instead of a written business reason.',
+      'D. Require approval.',
+      'E. Remove the activation step for the role.'
+    ],
+    correctOption: ['B', 'D'],
+    solution: `<strong>Correct Answers: B and D — require justification, and require approval</strong><br><br>
+    The <strong>"Require justification"</strong> setting forces the requester to type a written business reason before activating, and the separate <strong>"Require approval"</strong> setting routes every activation to a designated approver for authorization. Together they satisfy both stated requirements without touching anything else about the assignment.<br><br>
+    A converts the assignment to standing (active) access, which removes the activation step entirely rather than adding requirements to it — the opposite of what's needed. C swaps the written business reason for a ticket-number field, which is a different requirement, not the one described. E eliminates activation altogether, which cannot enforce justification or approval on something that no longer happens.`,
+    userChoice: null
+  },
+  {
+    id: 3054, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE CHOICE',
+    title: 'Configuring Occasional Shared-Role Maintenance Access With No Standing Privilege',
+    text: `<p>Four administrators need the same Microsoft Entra role for occasional maintenance. The organization requires them to have no ready-to-use privilege between maintenance periods. Before using the role, an administrator must complete MFA, provide business justification, and obtain approval.</p>
+    <p>Which configuration should you use?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Create an eligible PIM role assignment and configure MFA, business justification, and approval as activation requirements.',
+      'B. Assign the role directly and use an approval process to review the assignment before each planned maintenance period.',
+      'C. Create an eligible PIM role assignment that requires activation, but configure only business justification for activation.',
+      'D. Create an active PIM role assignment and require administrators to record justification after each maintenance period.'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — eligible assignment with MFA, justification, and approval as activation requirements</strong><br><br>
+    An <strong>eligible</strong> PIM assignment grants no standing privilege — the role sits dormant until an administrator activates it, which satisfies "no ready-to-use privilege between maintenance periods." Configuring <strong>MFA, business justification, and approval</strong> together as activation requirements means every one of the four administrators must pass all three checks each time they need the role, matching every stated condition.<br><br>
+    B keeps the role permanently assigned (active), so privilege is standing at all times regardless of any later review — it fails "no ready-to-use privilege." C only enforces justification, silently dropping the required MFA and approval checks. D is also a standing active assignment, and recording justification <em>after</em> the fact doesn't gate access before use, let alone require MFA or approval.`,
+    userChoice: null
+  },
+  {
+    id: 3055, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE RESPONSE',
+    title: 'Group Families That Support Self-Service Group Management',
+    text: `<p>An organization is selecting group families for a Microsoft Entra self-service group management rollout.</p>
+    <p>Which two group families support the feature?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Security groups',
+      'B. Microsoft 365 groups',
+      'C. Mail-enabled security groups',
+      'D. Distribution lists'
+    ],
+    correctOption: ['A', 'B'],
+    solution: `<strong>Correct Answers: A and B — Security groups and Microsoft 365 groups</strong><br><br>
+    Self-service group management in Microsoft Entra ID lets end users create and manage their own group memberships, but it's only available for <strong>Security groups</strong> and <strong>Microsoft 365 groups</strong> — the two group types managed natively in Microsoft Entra ID.<br><br>
+    C (mail-enabled security groups) and D (distribution lists) are Exchange-managed group types synchronized into the directory rather than natively managed there, so they fall outside self-service group management's supported scope.`,
+    userChoice: null
+  },
+  {
+    id: 3056, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE CHOICE',
+    title: 'Delegating Departmental Group Membership Approval to a Business Owner',
+    text: `<p>A company uses Microsoft 365 groups for departmental collaboration. It wants each department's business owner to approve or deny membership requests and to manage routine membership without sending every request to a central administrator.</p>
+    <p>What should the company use?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Self-service group management based on a mail-enabled security group',
+      'B. Central administrator processing for every membership request',
+      'C. Self-service group management with the business owner as the group owner',
+      'D. Self-service group management based on a distribution list'
+    ],
+    correctOption: 'C',
+    solution: `<strong>Correct Answer: C — self-service group management with the business owner as the group owner</strong><br><br>
+    Self-service group management lets a designated <strong>group owner</strong> approve or deny join requests and manage routine membership directly, without involving a central administrator. Making each department's business owner the owner of that department's Microsoft 365 group puts approval authority exactly where the requirement wants it.<br><br>
+    A and D target group types (mail-enabled security group, distribution list) that self-service group management doesn't support — the scenario specifically uses Microsoft 365 groups. B is the opposite of the requirement, routing every request to a central administrator instead of the business owner.`,
+    userChoice: null
+  },
+  {
+    id: 3057, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE CHOICE',
+    title: 'Creating a Role-Assignable Group With the Correct Membership Type',
+    text: `<p>An identity team is creating a group whose members will receive a Microsoft Entra role through the group. During group creation, the team must choose whether Microsoft Entra roles can be assigned to the group and must set the membership type.</p>
+    <p>Which configuration should the team use?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Set Microsoft Entra roles can be assigned to the group to Yes, and select Dynamic Device membership.',
+      'B. Set Microsoft Entra roles can be assigned to the group to Yes, and select Dynamic User membership.',
+      'C. Set Microsoft Entra roles can be assigned to the group to Yes, and use the automatically selected Assigned membership type.',
+      'D. Set Microsoft Entra roles can be assigned to the group to No, and select Assigned membership.'
+    ],
+    correctOption: 'C',
+    solution: `<strong>Correct Answer: C — roles can be assigned set to Yes, with Assigned membership type</strong><br><br>
+    A group that can have Microsoft Entra roles assigned to it (a <strong>role-assignable group</strong>) must use <strong>Assigned</strong> membership — dynamic membership types aren't supported for role-assignable groups, so the portal locks the membership type to Assigned automatically once "Microsoft Entra roles can be assigned to the group" is set to Yes.<br><br>
+    A and B both select a dynamic membership type, which Microsoft Entra doesn't allow once role-assignability is enabled. D sets roles-can-be-assigned to No, meaning the group could never actually be granted a Microsoft Entra role — it fails the stated goal of having members receive a role through the group.`,
+    userChoice: null
+  },
+  {
+    id: 3058, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE CHOICE',
+    title: 'Scoping B2B Collaboration to a Specific Group and Application',
+    text: `<p>A company collaborates with another Microsoft Entra organization. Its inviter-role and partner-domain rules already meet policy. The company must now scope inbound and outbound B2B collaboration to a specific group and application for that organization.</p>
+    <p>Which settings should the administrator review?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. The setting that disables all guest invitations',
+      'B. Cross-tenant access settings',
+      'C. Collaboration domain allow and deny restrictions',
+      'D. Guest inviter-role settings'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — cross-tenant access settings</strong><br><br>
+    <strong>Cross-tenant access settings</strong> let an administrator configure organization-specific inbound and outbound B2B collaboration rules, including scoping access to selected <strong>users/groups</strong> and selected <strong>applications</strong> for a specific partner organization — exactly what's needed here.<br><br>
+    A would block all guest invitations, which contradicts the company's ongoing collaboration with the partner. C (collaboration domain restrictions) controls which domains can participate at all, not which groups or applications within an already-approved partner organization are in scope. D (guest inviter-role settings) governs who can send invitations — the question states that requirement already meets policy and isn't what needs to change.`,
+    userChoice: null
+  },
+  {
+    id: 3059, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE CHOICE',
+    title: 'Scoping Helpdesk Administrator to a Single Administrative Unit',
+    text: `<p>A company has a Microsoft Entra administrative unit named Northwest that contains the users supported by a regional service desk. A technician must perform Helpdesk Administrator tasks for Northwest users, but must not receive those management permissions for users elsewhere in the tenant.</p>
+    <p>What should the company configure?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Assign a Purview role group to the technician for the Northwest administrative unit.',
+      "B. Assign the Helpdesk Administrator role to the technician at tenant scope and use the Microsoft 365 admin center's filtered view.",
+      'C. Assign the Helpdesk Administrator role to the technician with scope limited to the Northwest administrative unit.',
+      'D. Make the technician an owner of a Microsoft 365 group that contains the Northwest users.'
+    ],
+    correctOption: 'C',
+    solution: `<strong>Correct Answer: C — assign Helpdesk Administrator scoped to the Northwest administrative unit</strong><br><br>
+    Assigning a Microsoft Entra role <strong>at administrative-unit scope</strong> restricts the role's management permissions to only the members of that administrative unit. Scoping Helpdesk Administrator to Northwest gives the technician exactly the permissions needed there, and none for users outside it.<br><br>
+    A assigns a Purview role group, which governs compliance and data-governance permissions, not Helpdesk Administrator directory tasks. B assigns the role at <strong>tenant</strong> scope — the technician would hold Helpdesk Administrator permissions everywhere, and a filtered admin-center view is only a display convenience, not a permissions boundary. D (group ownership) lets the technician manage the group's own membership, not perform Helpdesk Administrator actions like password resets on the users themselves.`,
+    userChoice: null
+  },
+  {
+    id: 3060, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE CHOICE',
+    title: "Extending Administrative-Unit Scope to a Member Group's Users",
+    text: `<p>A Microsoft Entra administrative unit contains a group named Branch-Staff. A support specialist already has a role scoped to the administrative unit that permits the required user-management action. The specialist can change the group's properties but cannot perform that action on the users who belong to Branch-Staff. The company must preserve administrative-unit scope.</p>
+    <p>What should an administrator do?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      "A. Replace the specialist's scoped role with a different role at the same administrative-unit scope.",
+      'B. Add the Branch-Staff users as members of the administrative unit.',
+      'C. Remove and then re-add only the Branch-Staff group to the administrative unit.',
+      "D. Change the specialist's existing role assignment to tenant scope."
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — add the Branch-Staff users as members of the administrative unit</strong><br><br>
+    Adding a group to an administrative unit brings only <strong>the group object itself</strong> into scope — a scoped administrator can manage the group's properties (like membership), but not the users who belong to it, unless those users are <strong>separately added as members of the administrative unit</strong>. Doing so extends the specialist's existing permitted action to those users while keeping everything scoped to the administrative unit.<br><br>
+    A swaps roles at the same scope, but the specialist already has a role that permits the action — the problem is scope reach, not role choice. C (removing and re-adding the group) doesn't change how group membership relates to administrative-unit scope; the users still aren't directly in scope. D removes administrative-unit scope entirely, granting tenant-wide permissions — the opposite of "preserve administrative-unit scope."`,
+    userChoice: null
+  },
+  {
+    id: 3061, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE CHOICE',
+    title: 'Administrative-Unit Scope Limits Management, Not Directory Browsing',
+    text: `<p>A company assigns a Microsoft Entra role to administrators with scope limited to a departmental administrative unit. In the Microsoft 365 admin center, users outside that unit are filtered from the administrators' view. A security requirement now states that those administrators must be unable to browse any directory objects outside the department from every Microsoft administration interface.</p>
+    <p>Which conclusion should guide the design?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Adding every departmental group to the administrative unit turns it into a general resource-access boundary.',
+      'B. Changing the scoped role to a tenant-scoped role will prevent browsing outside the administrative unit.',
+      'C. The filtered Microsoft 365 admin-center view proves that the administrative unit blocks directory browsing in every interface.',
+      'D. The administrative unit limits management permissions, but it does not by itself prevent browsing outside the unit through other interfaces.'
+    ],
+    correctOption: 'D',
+    solution: `<strong>Correct Answer: D — administrative-unit scope restricts management permissions, not directory-wide read/browse access</strong><br><br>
+    Administrative-unit scoping limits what a scoped role can <strong>manage</strong>. It doesn't by itself remove an administrator's ability to <strong>read or browse</strong> other directory objects through interfaces that rely on general directory-read access, such as Microsoft Graph or other admin tools — the Microsoft 365 admin center's filtered list is a UI convenience layered on top, not a universal browsing restriction. Meeting the stated requirement needs controls beyond administrative-unit scope alone.<br><br>
+    A is false — a group added to an administrative unit doesn't extend its own or the group's members' scope into a "general resource-access boundary." B is false — administrative-unit scope <em>restricts</em> permissions compared to tenant scope, so moving to tenant scope would broaden access, not restrict browsing. C overgeneralizes a single interface's filtered view into a guarantee across every interface, which the scenario explicitly says isn't the case.`,
+    userChoice: null
+  },
+  {
+    id: 3062, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE RESPONSE',
+    title: 'Representing and Bulk-Updating 120 External Supplier Contacts',
+    text: `<p>An organization must represent 120 people who work for an external supplier in Exchange Online. Each person must be represented by an object that holds the person's external email address. After creation, an administrator must bulk-update mail-related properties such as email addresses, MailTips, and custom attributes.</p>
+    <p>Which two actions should the administrator take?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      "A. Create mail contacts with the supplier personnel's external email addresses.",
+      'B. Use the Exchange admin center bulk-edit experience to update all 120 objects.',
+      'C. Use Get-MailContact and Set-MailContact in Exchange Online PowerShell for the mail-related property updates.',
+      'D. Use Get-Contact and Set-Contact for the email-address, MailTip, and custom-attribute updates.',
+      'E. Create mail users for the external supplier personnel.'
+    ],
+    correctOption: ['A', 'C'],
+    solution: `<strong>Correct Answers: A and C — create mail contacts, then bulk-update with Get-MailContact / Set-MailContact</strong><br><br>
+    A <strong>mail contact</strong> is the Exchange Online object type built to represent an external person by their external email address, without granting sign-in access. The <strong>Get-MailContact</strong> and <strong>Set-MailContact</strong> cmdlets are the correct family for scripting bulk updates to a mail contact's <strong>mail-related</strong> properties — email address, MailTip, and custom attributes — across all 120 objects at once.<br><br>
+    B (Exchange admin center bulk-edit) isn't built for efficiently updating this range of mail-related properties across 120 objects the way a PowerShell script is. D (Get-Contact/Set-Contact) manages a contact's general contact-information properties, not its mail-related properties like MailTip and custom attributes. E (mail users) is the wrong object type here — mail users are typically used when the external person also needs an Entra ID account, which isn't required by this scenario.`,
+    userChoice: null
+  },
+  {
+    id: 3063, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Bulk-Updating Custom Attributes and Address-List Visibility for 600 Mail Contacts',
+    text: `<p>An Exchange Online organization has 600 mail contacts. An administrator must apply a new custom attribute to all of them and hide the affected contacts from address lists.</p>
+    <p>Which management approach should the administrator use?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Use Get-Contact and Set-Contact because custom attributes and address-list visibility are organization contact-information properties.',
+      'B. Open each mail contact in the Exchange admin center and make the changes individually.',
+      'C. Use Exchange Online PowerShell to retrieve the mail contacts with Get-MailContact and update their mail-related properties with Set-MailContact.',
+      'D. Use a Microsoft Graph bulk update against Microsoft Entra user objects.'
+    ],
+    correctOption: 'C',
+    solution: `<strong>Correct Answer: C — Get-MailContact and Set-MailContact in Exchange Online PowerShell</strong><br><br>
+    Custom attributes and address-list (hidden-from-address-lists) visibility are <strong>mail-related</strong> properties of a mail contact, and <strong>Get-MailContact</strong> / <strong>Set-MailContact</strong> is the cmdlet family built to script updates to exactly those properties — the only practical way to apply the change consistently across 600 objects.<br><br>
+    A misclassifies these as general contact-information properties; <strong>Get-Contact/Set-Contact</strong> manage a different property set and can't set the mail-related attributes or address-list visibility. B doesn't scale to 600 objects and invites inconsistency. D is wrong on the object model — mail contacts aren't Microsoft Entra user objects, so a Graph update against user objects wouldn't reach them.`,
+    userChoice: null
+  },
+  {
+    id: 3064, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Editing Contact-Information Properties Without Touching Mail-Related Properties',
+    text: `<p>An administrator is maintaining one Exchange Online mail contact. The external email address, MailTip, custom attributes, and address-list visibility must remain unchanged. Only the object's organization and contact-information properties need to be revised.</p>
+    <p>Which cmdlet family should the administrator use?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Get-MailContact and Set-MailContact',
+      'B. Get-User and Set-User',
+      'C. Get-Contact and Set-Contact',
+      'D. Get-Mailbox and Set-Mailbox'
+    ],
+    correctOption: 'C',
+    solution: `<strong>Correct Answer: C — Get-Contact and Set-Contact</strong><br><br>
+    <strong>Get-Contact</strong> and <strong>Set-Contact</strong> manage a mail contact's general <strong>organization and contact-information</strong> properties (such as title, department, or phone number) without touching its mail-related properties — leaving the external email address, MailTip, custom attributes, and address-list visibility exactly as they were, which is what the scenario requires.<br><br>
+    A (Get-MailContact/Set-MailContact) is the cmdlet family for the <strong>mail-related</strong> properties the administrator must leave alone, so it's the wrong tool for this edit. B (Get-User/Set-User) targets mailbox-enabled user objects, not mail contacts. D (Get-Mailbox/Set-Mailbox) applies to mailboxes, and a mail contact has no mailbox to manage.`,
+    userChoice: null
+  },
+
+  // ============================================================
+  // MICROSOFT LEARN'S OFFICIAL AB-650 STUDY GUIDE QUESTIONS
+  // Administering Microsoft 365 and AI Services (beta).
+  // Original questions authored directly from the official Microsoft
+  // Learn "Skills measured" outline for AB-650 (updated 2026-07-27):
+  // https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/ab-650
+  // No verbatim exam-dump content of any kind.
+  // ============================================================
+  {
+    id: 3100, topic: 31, discussions: 0, isAB650Learn: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Adding and Verifying a Custom Domain in Microsoft 365',
+    text: `<p>You are onboarding a new company brand acquired by your organization. You need to add the domain <strong>contosoretail.com</strong> to your Microsoft 365 tenant so that mailboxes can be created using that domain, and you must prove ownership of the domain before Microsoft 365 will activate it for use.</p>
+    <p>What should you do to verify ownership of the domain?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Add a TXT (or MX) record with the value provided by Microsoft 365 to the domain\'s DNS zone at the domain registrar.',
+      'B. Assign a Microsoft 365 Copilot license to a user in the domain.',
+      'C. Create a Conditional Access policy scoped to the domain.',
+      'D. Enable Microsoft 365 Backup for the domain.'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — add the verification DNS record</strong><br><br>
+    When you add a custom domain in the Microsoft 365 admin center, Microsoft 365 generates a unique <strong>TXT or MX verification record</strong> that you publish in the domain's DNS zone (wherever the domain is hosted/registered). Once Microsoft 365 detects that record, ownership is confirmed and the domain becomes available for mailboxes, Teams, and other workloads.<br><br>
+    B (licensing), C (Conditional Access), and D (Backup) are all unrelated to domain ownership verification — none of them prove control over the domain's DNS.`,
+    userChoice: null
+  },
+  {
+    id: 3101, topic: 31, discussions: 0, isAB650Learn: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Diagnosing Poor Teams Call Quality with Network Connectivity Insights',
+    text: `<p>Users at a branch office frequently report poor audio quality during Microsoft Teams calls. You need to identify whether the branch office's network path to Microsoft 365 is contributing to the problem, without deploying any new on-premises hardware.</p>
+    <p>Which Microsoft 365 admin center capability should you use?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Network connectivity insights.',
+      'B. Message trace.',
+      'C. Compliance Manager.',
+      'D. The agent registry.'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — Network connectivity insights</strong><br><br>
+    <strong>Network connectivity insights</strong> in the Microsoft 365 admin center analyzes telemetry (including from the built-in network testing capability and, optionally, connected network devices) to surface per-location metrics such as latency, packet loss, and egress path quality to Microsoft 365 — directly useful for diagnosing whether a branch office's network is the source of poor Teams call quality, without deploying new hardware.<br><br>
+    B (message trace) reports on email delivery, unrelated to network path quality. C (Compliance Manager) tracks regulatory posture. D (agent registry) inventories AI agents — neither has any relationship to network diagnostics.`,
+    userChoice: null
+  },
+  {
+    id: 3102, topic: 31, discussions: 0, isAB650Learn: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Creating a Shared Mailbox for a Departmental Alias',
+    text: `<p>The Accounts Payable team wants a single email address, <strong>ap@contoso.com</strong>, that multiple team members can send and receive from, without each of them needing a separate license for the mailbox itself.</p>
+    <p>What should you create?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. A Microsoft 365 group with a group mailbox.',
+      'B. A shared mailbox, with team members granted Send As and Full Access permissions.',
+      'C. A dedicated user mailbox with a standalone Exchange Online license, shared via a forwarding rule.',
+      'D. A distribution list.'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — a shared mailbox</strong><br><br>
+    A <strong>shared mailbox</strong> is designed for exactly this scenario: multiple people can send and receive as the shared address once granted <strong>Full Access</strong> (to open/read the mailbox) and <strong>Send As</strong> or <strong>Send on Behalf</strong> permissions — and a shared mailbox itself does not require its own paid license under typical size limits, unlike a regular user mailbox.<br><br>
+    A (Microsoft 365 group mailbox) is closer to a collaborative team mailbox tied to a group, with different membership/permission semantics — more complexity than needed for a simple departmental alias. C requires an unnecessary paid license. D (distribution list) only forwards copies to members' own mailboxes — it isn't a mailbox anyone can send "as," and doesn't retain a shared conversation history.`,
+    userChoice: null
+  },
+  {
+    id: 3103, topic: 31, discussions: 0, isAB650Learn: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Disabling Copilot Meeting Transcription for a Sensitive Team',
+    text: `<p>The Legal team in Microsoft Teams handles privileged conversations and does not want Copilot to generate meeting transcripts or notes for any of their team meetings, while other teams in the organization should keep this capability.</p>
+    <p>What should you configure?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. A tenant-wide Copilot policy that disables transcription for everyone.',
+      'B. A Teams meeting policy scoped to the Legal team\'s members that disables transcription and Copilot in meetings.',
+      'C. A Conditional Access policy blocking Teams for the Legal team.',
+      'D. A sensitivity label applied to the Legal team\'s channel.'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — a scoped Teams meeting policy</strong><br><br>
+    <strong>Teams meeting policies</strong> include settings that control whether <strong>transcription</strong> and <strong>Copilot in meetings</strong> are available, and these policies can be assigned to specific users or groups — letting you disable the capability only for the Legal team's members while leaving it enabled tenant-wide for everyone else.<br><br>
+    A disables the feature for the entire organization, which is broader than required. C (Conditional Access blocking Teams) would prevent the Legal team from using Teams at all, not just transcription. D (a sensitivity label on a channel) governs content classification/protection, not whether Copilot transcribes meetings.`,
+    userChoice: null
+  },
+  {
+    id: 3104, topic: 32, discussions: 0, isAB650Learn: true, ab650Domain: 'govern',
+    type: 'MULTIPLE CHOICE',
+    title: 'Scoping Helpdesk Administration to a Single Region with Administrative Units',
+    text: `<p>Your organization has IT helpdesk staff dedicated to the EMEA region. You need to ensure these staff can reset passwords and manage user accounts only for EMEA-based users, and cannot see or manage users in other regions, without creating a separate Microsoft 365 tenant.</p>
+    <p>What should you create and use?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. A Microsoft Entra administrative unit scoped to EMEA users, with the helpdesk staff assigned a role (such as Helpdesk Administrator) at the administrative unit scope.',
+      'B. A separate Microsoft Entra tenant for EMEA.',
+      'C. A Conditional Access policy targeting EMEA IP ranges.',
+      'D. A dynamic distribution group for EMEA users.'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — an administrative unit with a scoped role assignment</strong><br><br>
+    <strong>Administrative units</strong> let you partition directory objects (like users) into a management boundary — such as "EMEA users" — and then assign an Entra role (e.g., <strong>Helpdesk Administrator</strong> or User Administrator) <strong>scoped to that administrative unit</strong>, so the assigned staff can only manage users within it, not the whole tenant.<br><br>
+    B is a drastic, costly overreaction that fragments identity and licensing across tenants. C (Conditional Access by IP) controls sign-in conditions, not administrative scope over user objects. D (a distribution group) is for email distribution, not delegated administration.`,
+    userChoice: null
+  },
+  {
+    id: 3105, topic: 32, discussions: 0, isAB650Learn: true, ab650Domain: 'govern',
+    type: 'MULTIPLE CHOICE',
+    title: 'Bulk-Updating User Attributes with Microsoft Graph PowerShell',
+    text: `<p>You need to update the <strong>department</strong> attribute for 400 users following a reorganization. The list of user principal names and their new department values is in a CSV file.</p>
+    <p>You need to make this change with minimal manual effort and without using a third-party tool.</p>
+    <p>What should you use?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Manually edit each user\'s profile in the Microsoft 365 admin center.',
+      'B. A Microsoft Graph PowerShell script that imports the CSV and calls Update-MgUser for each row.',
+      'C. A Conditional Access policy.',
+      'D. A Teams adaptive card workflow.'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — a Microsoft Graph PowerShell script</strong><br><br>
+    <strong>Microsoft Graph PowerShell</strong> is the supported way to script bulk directory changes: importing a CSV with <code>Import-Csv</code> and looping through it, calling <code>Update-MgUser</code> (or the equivalent Graph API call) for each row to set the <strong>department</strong> attribute — this is exactly the kind of bulk-management task Graph PowerShell is designed for, and needs no third-party tooling.<br><br>
+    A does not scale to 400 users with "minimal manual effort." C (Conditional Access) controls sign-in behavior, not user attributes. D (Teams adaptive cards) is a UI/notification mechanism, not a bulk directory-management tool.`,
+    userChoice: null
+  },
+  {
+    id: 3106, topic: 32, discussions: 0, isAB650Learn: true, ab650Domain: 'govern',
+    type: 'MULTIPLE CHOICE',
+    title: 'Restricting Which External Domains Can Be Invited as Guests',
+    text: `<p>Your organization wants to allow external collaboration in Microsoft Teams and SharePoint, but only with users from a short, approved list of partner organizations' email domains. Invitations to guests from any other domain must be blocked.</p>
+    <p>What should you configure?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. A Conditional Access policy blocking all external users.',
+      'B. Microsoft Entra external collaboration settings with an allowlist of the approved partner domains.',
+      'C. A DLP policy for Teams.',
+      'D. A retention policy for guest content.'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — external collaboration settings with a domain allowlist</strong><br><br>
+    Microsoft Entra <strong>external collaboration settings</strong> (guest/B2B settings) let you configure <strong>allow</strong> or <strong>deny</strong> lists of specific domains for guest invitations — using an allowlist here means invitations can only be sent to the approved partner domains, and invitations to any other domain are automatically blocked.<br><br>
+    A blocks external users entirely, which is more restrictive than "allow specific partners." C (DLP) governs what data can be shared, not who can be invited as a guest in the first place. D (retention policy) governs how long content is kept, unrelated to guest invitation restrictions.`,
+    userChoice: null
+  },
+  {
+    id: 3107, topic: 32, discussions: 0, isAB650Learn: true, ab650Domain: 'govern',
+    type: 'MULTIPLE CHOICE',
+    title: 'Blocking Users from Choosing Commonly Breached Passwords',
+    text: `<p>Your security team wants to prevent users from setting passwords that appear on known breached-password lists or that are simple variations of the company name (e.g., "Contoso2026!").</p>
+    <p>What should you implement?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Self-service password reset (SSPR) alone.',
+      'B. Microsoft Entra Password Protection, including a custom banned password list.',
+      'C. A Conditional Access sign-in frequency policy.',
+      'D. Multifactor authentication (MFA) registration campaign.'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — Microsoft Entra Password Protection with a custom banned list</strong><br><br>
+    <strong>Microsoft Entra Password Protection</strong> maintains a global list of commonly breached/weak passwords and also lets administrators define a <strong>custom banned password list</strong> — including company-specific terms and predictable variations — blocking users from setting those passwords (or close variants) during password change or reset.<br><br>
+    A (SSPR) lets users reset their own password but doesn't by itself enforce banned-password rules. C (sign-in frequency) controls how often re-authentication is required, unrelated to password content. D (MFA registration) strengthens sign-in with a second factor but does not stop weak password selection.`,
+    userChoice: null
+  },
+  {
+    id: 3108, topic: 32, discussions: 0, isAB650Learn: true, ab650Domain: 'govern',
+    type: 'MULTIPLE CHOICE',
+    title: 'Simulating a Phishing Attack to Train Employees',
+    text: `<p>Your security team wants to run a controlled, simulated phishing campaign against a specific department to measure how many employees click a suspicious link, and to automatically enroll anyone who clicks into a short security-awareness training module.</p>
+    <p>Which capability should you use?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Attack simulation training in Microsoft Defender for Office 365.',
+      'B. A DLP policy with a block action.',
+      'C. Safe Attachments dynamic delivery.',
+      'D. Litigation hold.'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — Attack simulation training</strong><br><br>
+    <strong>Attack simulation training</strong> in Microsoft Defender for Office 365 lets administrators launch realistic, controlled phishing (and other social-engineering) simulations against a chosen set of users, track who clicked or submitted credentials, and automatically assign follow-up <strong>training modules</strong> to those users — exactly matching the requirement.<br><br>
+    B (DLP block) prevents data leaving the organization but doesn't simulate phishing or train users. C (Safe Attachments) protects against real malicious attachments in production mail flow, not a training exercise. D (litigation hold) preserves mailbox content for legal purposes and is unrelated to security training.`,
+    userChoice: null
+  },
+  {
+    id: 3109, topic: 32, discussions: 0, isAB650Learn: true, ab650Domain: 'govern',
+    type: 'HOTSPOT',
+    title: 'Scoping a DLP Policy Across Multiple Microsoft 365 Locations',
+    text: `<p><strong>HOTSPOT</strong> — Your organization needs a Microsoft Purview DLP policy that detects credit card numbers being shared and applies consistently across Exchange email, SharePoint document libraries, and prompts/responses in Microsoft 365 Copilot.</p>
+    <p>For each statement, select Yes if the statement is true. Otherwise, select No.</p>`,
+    note: 'NOTE: Each correct selection is worth one point.',
+    render: 'hotspot_yesno',
+    statements: [
+      { text: 'A single DLP policy can include Exchange, SharePoint, and Copilot as locations within the same policy.', answer: 'Yes' },
+      { text: 'DLP policies can inspect and act on content that Copilot would otherwise surface in a response, such as blocking a summarization of a document containing a matched sensitive information type.', answer: 'Yes' },
+      { text: 'Once a DLP policy is scoped to specific locations, its conditions (such as the sensitive information type match) must be configured identically and cannot differ across locations.', answer: 'No' }
+    ],
+    solution: `• A single policy can span Exchange, SharePoint, and Copilot as locations: <span class="correct-badge">Yes</span><br>
+    • DLP can inspect/act on content Copilot would otherwise surface: <span class="correct-badge">Yes</span><br>
+    • Conditions must be identical and cannot differ across locations: <span class="correct-badge">No</span><br><br>
+    <em>Microsoft Purview DLP policies support choosing multiple <strong>locations</strong> — including Exchange email, SharePoint sites, OneDrive, Teams chat/channel messages, endpoints, and <strong>Microsoft 365 Copilot</strong> — within a single policy definition (Yes). DLP is integrated into the Copilot pipeline, so a policy can prevent Copilot from including matched sensitive content in a generated response, not just block traditional sharing (Yes). Within one policy, administrators can fine-tune rule conditions per location, so the claim that conditions must be identical across every location is false — they can differ (No).</em>`,
+    userSelections: {}
+  },
+  {
+    id: 3110, topic: 32, discussions: 0, isAB650Learn: true, ab650Domain: 'govern',
+    type: 'MULTIPLE CHOICE',
+    title: 'Continuously Monitoring Risky AI Interactions with Purview DSPM for AI',
+    text: `<p>Your compliance team wants ongoing visibility into risky Copilot and third-party AI app usage across the organization — such as prompts that reference sensitive information types, or unusually high-volume querying of confidential SharePoint sites through AI — surfaced as recurring insights rather than a one-time audit export.</p>
+    <p>Which Microsoft Purview capability should you use?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Data Security Posture Management (DSPM) for AI.',
+      'B. eDiscovery (Premium).',
+      'C. Retention policies.',
+      'D. Compliance Manager assessments.'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — Purview DSPM for AI</strong><br><br>
+    <strong>Data Security Posture Management (DSPM) for AI</strong> is purpose-built to give ongoing, recurring visibility into <strong>AI usage risk</strong> across Copilot and other AI apps — surfacing insights like risky prompts referencing sensitive data, unusual access patterns, and oversharing exposure — as a continuous monitoring capability rather than a one-off search.<br><br>
+    B (eDiscovery Premium) is a case-based legal search/hold tool, not a continuous risk-monitoring dashboard. C (retention policies) governs content lifecycle, not AI usage risk. D (Compliance Manager) tracks regulatory control implementation status, not AI interaction risk signals.`,
+    userChoice: null
+  },
+  {
+    id: 3111, topic: 33, discussions: 0, isAB650Learn: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Assessing Data Oversharing Risk Before Rolling Out Copilot',
+    text: `<p>Before broadly enabling Microsoft 365 Copilot, you need to identify SharePoint sites across the tenant that are shared far more broadly than necessary and would pose an oversharing risk once Copilot can reference their content.</p>
+    <p>Which tool should you use to assess this readiness gap?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. SharePoint Advanced Management data access governance reports.',
+      'B. Exchange mail flow rules.',
+      'C. Teams meeting policies.',
+      'D. Microsoft Entra Password Protection.'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — SharePoint Advanced Management data access governance reports</strong><br><br>
+    <strong>SharePoint Advanced Management</strong> includes <strong>data access governance</strong> reporting that identifies overshared sites — such as sites shared broadly with "Everyone" or with a large number of users who rarely access them — giving administrators a prioritized list of oversharing risk to remediate before Copilot can surface that content.<br><br>
+    B (mail flow rules), C (Teams meeting policies), and D (Password Protection) are all unrelated to assessing SharePoint sharing/oversharing risk.`,
+    userChoice: null
+  },
+  {
+    id: 3112, topic: 33, discussions: 0, isAB650Learn: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Preventing Copilot from Using Public Web Results in Responses',
+    text: `<p>Your organization wants Microsoft 365 Copilot and Copilot Chat to answer only using content from internal Microsoft 365 data (documents, email, Teams, etc.), and never blend in results from the public web.</p>
+    <p>What should you configure?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Turn off web search / web content access for Copilot at the tenant level.',
+      'B. Create a DLP policy blocking internet access.',
+      'C. Disable the SharePoint search service.',
+      'D. Remove Microsoft 365 Copilot licenses from all users.'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — turn off web search for Copilot</strong><br><br>
+    Microsoft 365 Copilot and Copilot Chat include a tenant-level setting for <strong>web content/web search</strong> access. Turning this off restricts Copilot to grounding its responses only in the organization's internal Microsoft 365 data (via Microsoft Graph), rather than blending in public web results — directly matching the requirement without disabling Copilot itself.<br><br>
+    B (a DLP policy blocking internet access) is not how Copilot's web-grounding behavior is controlled and would have much broader, unintended effects. C (disabling SharePoint search) would break internal search entirely, not just block web results. D removes Copilot altogether, which is far more than required.`,
+    userChoice: null
+  },
+  {
+    id: 3113, topic: 33, discussions: 0, isAB650Learn: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Allowing Departments to Self-Fund Their Own Copilot Licenses',
+    text: `<p>Your organization wants to allow individual departments to self-fund Microsoft 365 Copilot for their own users through a self-service purchase flow, rather than centralizing the purchase and rollout through IT procurement.</p>
+    <p>Which tenant-level Copilot setting controls whether this is allowed?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. AI disclaimer settings.',
+      'B. Self-service purchase and trial settings for Copilot.',
+      'C. Release preferences (Targeted release / Standard release).',
+      'D. Copilot in admin centers.'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — self-service purchase settings</strong><br><br>
+    Microsoft 365 admin center includes <strong>self-service purchase (and trial)</strong> settings that control whether individual users or department budget holders can buy licenses like Microsoft 365 Copilot directly, without going through centralized IT procurement — this is the exact toggle that governs the scenario.<br><br>
+    A (AI disclaimer) controls a notice shown to users about AI-generated content, unrelated to purchasing. C (release preferences) controls whether a tenant gets new features early (Targeted) or on the standard schedule, not who can buy licenses. D (Copilot in admin centers) controls whether Copilot assistance appears inside admin center UIs themselves, unrelated to license purchasing.`,
+    userChoice: null
+  },
+  {
+    id: 3114, topic: 33, discussions: 0, isAB650Learn: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Enabling a Third-Party Large Language Model Alongside Copilot',
+    text: `<p>Your organization has evaluated a third-party AI model provider and wants business users to be able to select that provider's model as an option within supported Microsoft 365 Copilot experiences, governed centrally by IT.</p>
+    <p>What must an administrator configure to make this available?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Manage third-party AI providers in the Microsoft 365 admin center, enabling and scoping the specific provider.',
+      'B. A Conditional Access policy allowlisting the provider\'s domain.',
+      'C. A Teams app permission policy.',
+      'D. A SharePoint site template.'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — manage third-party AI providers</strong><br><br>
+    Microsoft 365 admin center includes a dedicated <strong>third-party AI providers</strong> management area where an administrator can enable a vetted external model provider and control which users or groups can select it within supported Copilot experiences — this is the governed, supported path for extending Copilot with non-Microsoft models.<br><br>
+    B (Conditional Access allowlisting a domain) is a network/sign-in control, not the mechanism that exposes a third-party model as a selectable option inside Copilot. C (Teams app permission policy) governs Teams app installation, not AI model providers. D (a SharePoint site template) is unrelated entirely.`,
+    userChoice: null
+  },
+  {
+    id: 3115, topic: 33, discussions: 0, isAB650Learn: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Provisioning the Identity Behind a Custom Agent',
+    text: `<p>Your organization has published a custom agent built in Microsoft Copilot Studio that will read and write data in Microsoft 365 on behalf of users. You need to ensure the agent has its own manageable, auditable identity in Microsoft Entra — distinct from any human user's identity — so its access can be governed like any other principal.</p>
+    <p>Which capability provisions and manages this identity?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Microsoft Entra Agent ID.',
+      'B. A shared mailbox.',
+      'C. A Microsoft 365 group.',
+      'D. A guest user account.'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — Microsoft Entra Agent ID</strong><br><br>
+    <strong>Microsoft Entra Agent ID</strong> provisions and manages a distinct, first-class identity for AI agents — giving each agent its own lifecycle (creation, ownership, credentials, and eventual retirement), auditability, and the ability to apply the same governance tools used for other principals, such as access reviews and Conditional Access, directly to the agent's identity.<br><br>
+    B (shared mailbox), C (Microsoft 365 group), and D (guest user account) are all identity/collaboration constructs meant for people or shared communication — none of them are the purpose-built agent-identity mechanism in Entra.`,
+    userChoice: null
+  },
+  {
+    id: 3116, topic: 33, discussions: 0, isAB650Learn: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Requiring Strong Conditional Controls Before an Agent Reaches Sensitive Data',
+    text: `<p>An agent registered with Microsoft Entra Agent ID needs to call a connector that accesses a highly sensitive finance data source. Your security team wants this access to require the same strong, conditional controls you'd apply to a human administrator accessing that data — evaluated dynamically based on risk signals.</p>
+    <p>What should you configure for the agent's identity?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. A Conditional Access policy that targets the agent identity (or a workload identity/agent-scoped policy), applying access controls before the connector call is allowed.',
+      'B. A retention label on the finance data source.',
+      'C. A Teams meeting policy.',
+      'D. A shared mailbox delegate permission.'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — a Conditional Access policy targeting the agent identity</strong><br><br>
+    Because agents provisioned through <strong>Entra Agent ID</strong> are first-class identities, <strong>Conditional Access</strong> can target them (similarly to how workload identity Conditional Access policies target service principals) and require conditions — such as compliant location, risk level, or specific access packages — to be satisfied before the agent's call to a sensitive connector is allowed, mirroring the controls used for privileged human access.<br><br>
+    B (retention label) governs content lifecycle, not runtime access gating. C (Teams meeting policy) is unrelated to data-source access control. D (mailbox delegation) is a completely different, mailbox-specific permission model that doesn't apply to an agent calling a data connector.`,
+    userChoice: null
+  },
+  {
+    id: 3117, topic: 33, discussions: 0, isAB650Learn: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Reviewing and Approving Agents Before They Are Widely Available',
+    text: `<p>A developer has submitted a custom agent for organization-wide use. Before it becomes available to all employees, your governance team wants to review what data sources and connectors it uses, then formally approve or reject it.</p>
+    <p>Where should this review and decision take place?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. The agent registry, using its publish/request review workflow.',
+      'B. Exchange Online mail flow rules.',
+      'C. A SharePoint approval workflow built with Power Automate.',
+      'D. Microsoft Entra ID Protection risk policies.'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — the agent registry's review workflow</strong><br><br>
+    The <strong>agent registry</strong> is the central catalog of agents across the tenant and includes a formal <strong>submission/review</strong> workflow: an agent can be submitted for organization-wide publishing, and administrators review its details — including data sources and connectors used — before approving (publishing) or rejecting it, exactly matching the governance step described.<br><br>
+    B (mail flow rules) governs email routing. C (a custom Power Automate approval flow) could theoretically be built manually, but it isn't the native, purpose-built governance surface Microsoft provides for this. D (ID Protection risk policies) evaluates sign-in/user risk, not agent approval.`,
+    userChoice: null
+  },
+  {
+    id: 3118, topic: 33, discussions: 0, isAB650Learn: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Auditing Where an Agent Has Been Reading Sensitive Data',
+    text: `<p>Compliance has flagged a published agent as potentially accessing more data than its stated purpose requires. You need to review the agent's actual runtime activity — which data sources it queried and what sensitive information types it touched — over the past 30 days.</p>
+    <p>Which Agent 365 capability should you use?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Agent 365 activity monitoring.',
+      'B. Teams admin center analytics.',
+      'C. Exchange Online delivery reports.',
+      'D. SharePoint site usage reports.'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — Agent 365 activity monitoring</strong><br><br>
+    <strong>Agent 365</strong> provides activity monitoring specifically for registered agents — tracking what data sources and connectors an agent's runtime actually called, and surfacing sensitive-information-type exposure — which is exactly the evidence compliance needs to confirm whether the agent is accessing more than its stated purpose requires.<br><br>
+    B (Teams analytics), C (Exchange delivery reports), and D (SharePoint site usage reports) each report on a specific workload's own usage, none of which track an individual agent's cross-workload data access pattern.`,
+    userChoice: null
+  },
+  {
+    id: 3119, topic: 33, discussions: 0, isAB650Learn: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Forecasting and Controlling Spend on Pay-As-You-Go AI Consumption',
+    text: `<p>Your organization uses a mix of licensed Microsoft 365 Copilot seats and pay-as-you-go Copilot Studio message consumption. Finance wants visibility into current AI-related spend and the ability to be alerted before consumption-based costs exceed a monthly threshold.</p>
+    <p>What should you use to monitor and manage this?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Cost and usage management for AI services in the Microsoft 365 admin center / Copilot Control System.',
+      'B. Exchange Online protection reports.',
+      'C. Teams device management.',
+      'D. Microsoft Purview retention policies.'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — cost and usage management for AI services</strong><br><br>
+    The Microsoft 365 admin center (surfaced through the <strong>Copilot Control System</strong>) includes dedicated <strong>cost and usage management for AI services</strong>, showing consumption-based spend (such as Copilot Studio message capacity) alongside licensed seats, with the ability to set budget alerts — directly matching Finance's requirement for visibility and threshold alerting.<br><br>
+    B, C, and D each report on an unrelated workload (mail security, Teams devices, and content retention respectively) and provide no AI cost/consumption visibility.`,
+    userChoice: null
+  },
+  {
+    id: 3120, topic: 33, discussions: 0, isAB650Learn: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Getting a Single Pane of Glass for Copilot Adoption and Service Health',
+    text: `<p>Leadership wants one place to see both Microsoft 365 Copilot adoption trends across workloads (Word, Excel, Teams, etc.) and whether any Copilot-related services are currently experiencing degraded performance.</p>
+    <p>Which capability provides both of these in a unified view?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. The Copilot Control System.',
+      'B. Microsoft Purview Compliance Manager.',
+      'C. Microsoft Entra ID Protection.',
+      'D. Exchange admin center mail flow dashboard.'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — the Copilot Control System</strong><br><br>
+    The <strong>Copilot Control System</strong> is the unified administrative surface for AI in Microsoft 365 — bringing together <strong>usage and adoption reporting</strong> across Copilot-enabled workloads and <strong>service health</strong> specific to Copilot/AI services, giving leadership one place to check both adoption trends and current operational status.<br><br>
+    B (Compliance Manager) tracks regulatory control posture, not adoption or service health. C (ID Protection) is a risk-detection service for identities. D (Exchange mail flow dashboard) reports only on email delivery, not Copilot adoption or AI service health.`,
+    userChoice: null
   }
 
 ];
@@ -10466,6 +11914,18 @@ var AB650_SEQ = (function () {
   var ids = [];
   for (var i = 0; i < questions.length; i++) {
     if (questions[i].isAB650) ids.push(questions[i].id);
+  }
+  ids.sort(function (a, b) { return a - b; });
+  for (var j = 0; j < ids.length; j++) { m[ids[j]] = j + 1; }
+  return m;
+})();
+
+// Same idea, for the AB-650 official Microsoft Learn study-guide pool.
+var AB650LEARN_SEQ = (function () {
+  var m = {};
+  var ids = [];
+  for (var i = 0; i < questions.length; i++) {
+    if (questions[i].isAB650Learn) ids.push(questions[i].id);
   }
   ids.sort(function (a, b) { return a - b; });
   for (var j = 0; j < ids.length; j++) { m[ids[j]] = j + 1; }
@@ -10556,6 +12016,7 @@ function answersRevealed() {
 // ============================================================
 // Classify each question into an exam-style section by its behaviour.
 function sectionOf(q) {
+  if (q.isAB650Learn) return 'ab650learn';                // grouped AB-650 official-study-guide pool
   if (q.isAB650) return 'ab650';                          // grouped AB-650 ExamTopics-style pool
   if (q.isDP700) return 'dp700';                          // grouped DP-700 ExamTopics-style pool
   if (q.isExamTopics) return 'examtopics';               // grouped ExamTopics-style pool
@@ -10585,6 +12046,7 @@ const SECTION_DEFS = [
   { key: 'examtopics', name: 'AI-103 Questions from Exam Topics', icon: '📝', desc: 'AI-103 exam-style questions on the same topics seen in community exam discussions — originally authored with verified reasoning, no verbatim content.' },
   { key: 'dp700',     name: 'DP-700 Actual Exam Questions (Exam Topics)', icon: '🧱', desc: 'DP-700 (Implementing Data Engineering Solutions Using Microsoft Fabric) exam-style questions on the same topics seen in community exam discussions — originally authored with verified reasoning, no verbatim content.' },
   { key: 'ab650',     name: 'AB-650 Actual Exam Questions (Exam Topics)', icon: '🛡️', desc: 'AB-650 (Administering Microsoft 365 and AI Services) exam-style questions on the same topics seen in community exam discussions — originally authored with verified reasoning, no verbatim content.' },
+  { key: 'ab650learn', name: "Microsoft Learn's Official AB-650 Study Guide Questions", icon: '📗', desc: 'Original AB-650 practice questions authored directly from the official Microsoft Learn skills-measured outline — tenant/workload admin, Entra/Defender/Purview governance, and Copilot/Agent 365 AI services.' },
   { key: 'casestudy', name: 'Case Studies',     icon: '📕', desc: 'Scenario-based questions referencing a case study.' },
   { key: 'mc',        name: 'Multiple Choice',  icon: '🔘', desc: 'Single- and multi-answer questions.' },
   { key: 'dragdrop',  name: 'Drag & Drop',      icon: '🔀', desc: 'Drag values onto targets or arrange actions in the correct order.' },
@@ -10648,7 +12110,7 @@ function domainOf(q) {
 }
 
 function domainBadge(q) {
-  const d = q.isAB650 ? DOMAIN_AB650_DEFS[domainAB650Of(q)] : (q.isDP700 ? DOMAIN_DP700_DEFS[domainDP700Of(q)] : DOMAIN_DEFS[domainOf(q)]);
+  const d = (q.isAB650 || q.isAB650Learn) ? DOMAIN_AB650_DEFS[domainAB650Of(q)] : (q.isDP700 ? DOMAIN_DP700_DEFS[domainDP700Of(q)] : DOMAIN_DEFS[domainOf(q)]);
   if (!d) return '';
   return `<span class="domain-badge" style="--dchip:${d.color}">${d.short}</span>`;
 }
@@ -10663,10 +12125,12 @@ const SOURCE_DEFS = {
   cert103:  { short: 'AI-103 · Cert Practice',  label: 'AI-103 Certification Practice', color: '#e3008c', exam: 'AI-103' },
   et103:    { short: 'AI-103 · ExamTopics',     label: 'AI-103 ExamTopics',        color: '#8661c5', exam: 'AI-103' },
   dp700:    { short: 'DP-700 · ExamTopics',     label: 'DP-700 Actual Exam Questions (Exam Topics)', color: '#00863f', exam: 'DP-700' },
-  ab650:    { short: 'AB-650 · ExamTopics',     label: 'AB-650 Actual Exam Questions (Exam Topics)', color: '#e81123', exam: 'AB-650' }
+  ab650:    { short: 'AB-650 · ExamTopics',     label: 'AB-650 Actual Exam Questions (Exam Topics)', color: '#e81123', exam: 'AB-650' },
+  ab650learn: { short: 'AB-650 · MS Learn',     label: "Microsoft Learn's Official AB-650 Study Guide Questions", color: '#742774', exam: 'AB-650' }
 };
 
 function sourceOf(q) {
+  if (q.isAB650Learn) return 'ab650learn'; // AB-650 official-study-guide pool
   if (q.isAB650)       return 'ab650';      // AB-650 ExamTopics-style
   if (q.isDP700)       return 'dp700';      // DP-700 ExamTopics-style
   if (q.isLearnPool)   return 'learn102';   // AI-102 Microsoft Learn pool
@@ -11112,7 +12576,7 @@ function startSection(key) {
   const def = SECTION_DEFS.find(d => d.key === key);
   document.getElementById('sectionTitle').textContent = def.name;
   const prefixEl = document.getElementById('examCodePrefix');
-  if (prefixEl) prefixEl.textContent = key === 'ab650' ? 'AB-650:' : (key === 'dp700' ? 'DP-700:' : 'AI-102:');
+  if (prefixEl) prefixEl.textContent = (key === 'ab650' || key === 'ab650learn') ? 'AB-650:' : (key === 'dp700' ? 'DP-700:' : 'AI-102:');
   document.getElementById('sectionScreen').classList.add('hidden');
   document.getElementById('examUI').classList.remove('hidden');
   examStarted = true;
@@ -11648,8 +13112,13 @@ function renderQuestion() {
   const q = questions[currentQ];
   // Authentic Microsoft/Pearson VUE exam look is applied only to ExamTopics questions.
   const examUIEl = document.getElementById('examUI');
-  if (examUIEl) examUIEl.classList.toggle('exam-mode', !!(q.isExamTopics || q.isDP700 || q.isAB650));
-  if (q.isAB650) {
+  if (examUIEl) examUIEl.classList.toggle('exam-mode', !!(q.isExamTopics || q.isDP700 || q.isAB650 || q.isAB650Learn));
+  if (q.isAB650Learn) {
+    // AB-650 official-study-guide pool: sequential #1..#N under "Topic 1 - Exam A"
+    var ablNum = AB650LEARN_SEQ[q.id] || q.id;
+    document.getElementById('qId').textContent = `Question #${ablNum}`;
+    document.getElementById('qTopic').innerHTML = `${domainBadge(q)} ${sourceBadge(q)} <span class="topic-tag">Topic 1 - Exam A</span>`;
+  } else if (q.isAB650) {
     // AB-650 ExamTopics-style: sequential #1..#N under "Topic 1 - Exam A"
     var abNum = AB650_SEQ[q.id] || q.id;
     document.getElementById('qId').textContent = `Question #${abNum}`;
@@ -12845,7 +14314,7 @@ function submitExam() {
   if (bdEl) {
     const isAI103set = activeQuestions.some(qi => questions[qi].isExamTopics || questions[qi].isCertPractice);
     const isDP700set = activeQuestions.some(qi => questions[qi].isDP700);
-    const isAB650set = activeQuestions.some(qi => questions[qi].isAB650);
+    const isAB650set = activeQuestions.some(qi => questions[qi].isAB650 || questions[qi].isAB650Learn);
     const DOMS = isAB650set ? DOMAIN_AB650_DEFS : (isDP700set ? DOMAIN_DP700_DEFS : (isAI103set ? DOMAIN103_DEFS : DOMAIN_DEFS));
     const domOf = isAB650set ? domainAB650Of : (isDP700set ? domainDP700Of : (isAI103set ? domain103Of : domainOf));
     const dom = {};

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI-102: Designing and Implementing a Microsoft Azure AI Solution</title>
+<title>Microsoft Certification Exam Practise Simulation By Tebogo Maruping</title>
 <style>
   /* ============================================================
      Microsoft Certification / Pearson VUE (OnVUE) exam theme
@@ -1174,8 +1174,8 @@
       <div class="cover-logo-mark" aria-hidden="true">AI</div>
       <div class="cover-header-text">
         <div class="cover-cert-label">Microsoft Certification · AI-102</div>
-        <h1 class="cover-title">Designing &amp; Implementing a<br>Microsoft Azure AI Solution</h1>
-        <div class="cover-subtitle">Practice Simulation &nbsp;·&nbsp; Powered by Agentic AI Coach</div>
+        <h1 class="cover-title">Microsoft Certification Exam<br>Practise Simulation</h1>
+        <div class="cover-subtitle">By Tebogo Maruping &nbsp;·&nbsp; Powered by Agentic AI Coach</div>
       </div>
     </div>
 
@@ -1303,6 +1303,7 @@
       <div id="ai102Browser" class="ai102-browser"></div>
       <div id="progressDash" class="progress-dash"></div>
       <div id="examTopicsBrowser" class="et-browser"></div>
+      <div id="ab650Browser" class="et-browser"></div>
     </div>
   </div>
 </div>
@@ -11444,6 +11445,1319 @@ ORDER BY OrderYear`,
     A (Get-MailContact/Set-MailContact) is the cmdlet family for the <strong>mail-related</strong> properties the administrator must leave alone, so it's the wrong tool for this edit. B (Get-User/Set-User) targets mailbox-enabled user objects, not mail contacts. D (Get-Mailbox/Set-Mailbox) applies to mailboxes, and a mail contact has no mailbox to manage.`,
     userChoice: null
   },
+  {
+    id: 3065, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE CHOICE',
+    title: 'Piloting a Modern Authentication Method to a Single Group',
+    text: `<p>A company wants to make a modern authentication method available to members of a pilot group while keeping it unavailable to all other users during the pilot.</p>
+    <p>Which configuration should an administrator make?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Enable the method in the Authentication methods policy and target the pilot group.',
+      'B. Enable the method in the Authentication methods policy for all users, then ask non-pilot users not to register it.',
+      'C. Create a Conditional Access grant control for the pilot group instead of enabling the method in an authentication policy.',
+      "D. Add the method separately to each pilot user's current registrations without changing method availability policy."
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — enable the method in the Authentication methods policy, scoped to the pilot group</strong><br><br>
+    The converged <strong>Authentication methods policy</strong> supports per-method <strong>Include/Exclude</strong> group targeting, so an administrator can enable a modern method for exactly the pilot group while leaving it unavailable to everyone else — a policy-enforced boundary, not a request people can ignore.<br><br>
+    B relies on non-pilot users voluntarily not registering a method that policy actually makes available to them, which enforces nothing. C (a Conditional Access grant control) can require a method to be used at sign-in, but it doesn't control whether the method is available for registration in the first place. D doesn't touch method availability policy at all, so the method remains unavailable or available tenant-wide regardless of any per-user registration changes.`,
+    userChoice: null
+  },
+  {
+    id: 3066, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE CHOICE',
+    title: 'A Legacy MFA Policy Still Enabling a Method Disabled in the Authentication Methods Policy',
+    text: `<p>During authentication-method policy consolidation, an administrator disables a method in the Authentication methods policy. Testing shows that a user can still register and use the method because it remains enabled for that user through a legacy policy.</p>
+    <p>What must the administrator do to prevent use of the method?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Disable the method in every policy that can enable it for the user.',
+      "B. Convert the user's per-user MFA state and leave both method policies unchanged.",
+      "C. Delete the user's current registration but leave the legacy policy enabled.",
+      'D. Disable the method only in the Authentication methods policy and wait for its setting to synchronize to the legacy policy.'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — disable the method in every policy that can enable it for the user</strong><br><br>
+    A method can remain usable for a user as long as <strong>any</strong> applicable policy still enables it — the converged Authentication methods policy and a legacy per-user or org-wide MFA policy don't automatically reconcile with each other. To fully prevent use, the administrator must disable the method everywhere it could be granted for that user, including the legacy policy.<br><br>
+    B changes per-user MFA enrollment state but explicitly leaves both method policies unchanged, so the legacy policy can still enable the method. C removes only the current registration; the legacy policy staying enabled means the user could simply register the method again. D assumes the two policy systems synchronize automatically — they don't, so the legacy policy would continue enabling the method indefinitely.`,
+    userChoice: null
+  },
+  {
+    id: 3067, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE RESPONSE',
+    title: "Delegating Authentication-Method Availability Using Microsoft's Recommended Policy",
+    text: `<p>A security team must delegate day-to-day administration of authentication-method availability without assigning broader tenant administration duties. The delegated operator must use Microsoft's recommended policy for enabling methods.</p>
+    <p>Which two components should the design use?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Individual user registration maintenance as the availability policy',
+      'B. The Authentication methods policy as the method-management plane',
+      'C. Conditional Access grant controls as the only place where methods are enabled',
+      'D. The Authentication Policy Administrator role for the delegated operator'
+    ],
+    correctOption: ['B', 'D'],
+    solution: `<strong>Correct Answers: B and D — the Authentication methods policy, managed by an Authentication Policy Administrator</strong><br><br>
+    The <strong>Authentication methods policy</strong> is Microsoft's recommended, converged mechanism for controlling which authentication methods are available and to whom, making it the correct method-management plane. The <strong>Authentication Policy Administrator</strong> built-in role is scoped specifically to managing that policy, letting the delegated operator do day-to-day availability administration without receiving broader tenant-wide administrative permissions.<br><br>
+    A (per-user registration maintenance) isn't a policy mechanism — it doesn't control which methods are available tenant-wide, only an individual's own registered methods. C (Conditional Access grant controls) enforces which methods must be used at sign-in; it isn't where method availability itself is enabled.`,
+    userChoice: null
+  },
+  {
+    id: 3068, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE CHOICE',
+    title: 'Blocking Organization-Specific Strings From Passwords',
+    text: `<p>Users at a company frequently choose passwords containing the company's name, its product names, and the local sports team's name. The company must cause password-change requests containing these organization-specific strings to fail.</p>
+    <p>What should an administrator configure?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Change smart lockout settings for repeated failed sign-in attempts.',
+      'B. Add the organization-specific strings to the Microsoft Entra custom banned password list.',
+      'C. Create a Conditional Access policy that requires stronger passwords when users sign in.',
+      'D. Add the strings to a mail flow rule that rejects messages containing them.'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — add the strings to the Microsoft Entra custom banned password list</strong><br><br>
+    Microsoft Entra Password Protection's <strong>custom banned password list</strong> is built exactly for this: an administrator adds organization-specific terms — company name, product names, local references — and any password-change request containing one of those strings (or a close variation) is rejected.<br><br>
+    A (smart lockout) responds to repeated failed sign-in attempts, not password content. C — Conditional Access controls sign-in access conditions, not what characters or words a new password may contain. D (a mail flow rule) filters email message content and has no effect on password-change requests at all.`,
+    userChoice: null
+  },
+  {
+    id: 3069, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE CHOICE',
+    title: 'Observing On-Premises Password Protection Before Enforcing Rejection',
+    text: `<p>A company has installed and registered the Microsoft Entra Password Protection proxy service and DC agents in its on-premises AD DS environment. Before insecure passwords are rejected, the operations team wants to observe policy evaluations and determine whether existing processes would be disrupted.</p>
+    <p>Which rollout plan should the company use?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Remain in audit mode permanently because audit mode both logs and rejects insecure passwords.',
+      'B. Start in enforced mode to collect event-log evidence, and then move to audit mode to reject insecure passwords.',
+      'C. Start in audit mode, monitor the resulting event-log evidence, and then move to enforced mode when ready to reject insecure passwords.',
+      'D. Disable on-premises Password Protection until enforced mode can be enabled without prior observation.'
+    ],
+    correctOption: 'C',
+    solution: `<strong>Correct Answer: C — start in audit mode, observe, then move to enforced mode</strong><br><br>
+    On-premises Microsoft Entra Password Protection supports an <strong>audit mode</strong> that evaluates password changes against policy and logs what would have happened, without actually rejecting anything — exactly the observation step the operations team wants. Once event-log evidence shows no unexpected disruption, the administrator switches to <strong>enforced mode</strong> so insecure passwords actually get rejected.<br><br>
+    A is factually wrong — audit mode logs evaluations but does <em>not</em> reject passwords, so remaining in it permanently would never achieve rejection. B reverses the correct rollout order: starting in enforced mode rejects passwords immediately, giving the team no observation window before impact. D skips the built-in audit-then-enforce workflow entirely and delays adoption of a capability that already supports safe, observable rollout.`,
+    userChoice: null
+  },
+  {
+    id: 3070, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE CHOICE',
+    title: 'Prerequisite for Extending Password Protection to On-Premises AD DS',
+    text: `<p>A hybrid organization already maintains a custom banned password list in Microsoft Entra ID. It now wants password changes in its on-premises AD DS environment to be evaluated by Microsoft Entra Password Protection. Before an administrator chooses audit or enforce mode, which action addresses the required on-premises deployment prerequisite?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Set the on-premises policy to enforce mode and rely on the cloud custom banned password list without deploying on-premises components.',
+      'B. Install and register the Microsoft Entra Password Protection proxy service and DC agents in the on-premises AD DS environment.',
+      'C. Start audit mode on the domain controllers before installing or registering the proxy service and DC agents.',
+      'D. Add more organization-specific strings to the custom banned password list instead of deploying the proxy service and DC agents.'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — install and register the proxy service and DC agents on-premises</strong><br><br>
+    Extending the existing cloud custom banned password list to on-premises AD DS requires deploying the <strong>Microsoft Entra Password Protection proxy service</strong> (which relays policy from the cloud) and the <strong>DC agents</strong> (which evaluate password changes on domain controllers). Neither audit nor enforce mode can be selected until these on-premises components are installed and registered.<br><br>
+    A skips deployment entirely — without the proxy service and DC agents on-premises, on-premises AD DS password changes are never evaluated against the cloud policy regardless of mode. C puts mode selection before the prerequisite components even exist, which isn't possible. D changes the list's content, but the organization already maintains a custom banned password list — the missing piece is on-premises deployment, not additional banned strings.`,
+    userChoice: null
+  },
+  {
+    id: 3071, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE RESPONSE',
+    title: 'Preparing an SSPR Pilot for a Single Support Team',
+    text: `<p>A company will pilot self-service password reset (SSPR) with one support team before a tenant-wide rollout. Its SSPR policy requires users to complete two verification methods, and pilot users must be able to complete the workflow without administrator intervention.</p>
+    <p>Which two actions should the identity administrator take?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Keep only one contact method per pilot user even though the policy requires two verification methods.',
+      'B. Enable SSPR for All users so the pilot group can register.',
+      'C. Ensure each pilot user has at least two properly configured contact methods.',
+      'D. Set the SSPR scope to None until the company is ready for the tenant-wide rollout.',
+      "E. Enable SSPR for Selected users and choose the support team's group."
+    ],
+    correctOption: ['C', 'E'],
+    solution: `<strong>Correct Answers: C and E — configure two contact methods per pilot user, and scope SSPR to Selected with the support team's group</strong><br><br>
+    With the policy requiring <strong>two verification methods</strong>, each pilot user needs <strong>at least two properly configured contact methods</strong> registered, or they can't complete the reset workflow on their own. Setting SSPR's scope to <strong>Selected</strong> and choosing the support team's group limits the pilot to exactly the intended users while keeping everyone else unaffected — no administrator has to intervene per user.<br><br>
+    A directly contradicts the two-method policy requirement and would block pilot users from finishing SSPR. B (All users) exposes SSPR to the entire tenant, which isn't a controlled pilot. D (None) disables SSPR entirely, so pilot users couldn't use it at all — the opposite of piloting the feature.`,
+    userChoice: null
+  },
+  {
+    id: 3072, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE RESPONSE',
+    title: 'Correcting SSPR Failures Caused by Missing License and Malformed Contact Data',
+    text: `<p>SSPR is enabled for a Selected group. A user is a member of a nested group under that selected group, but the user cannot complete SSPR. Investigation shows that the user has no appropriate license and that the contact data on the account is malformed.</p>
+    <p>Which two corrections directly address the documented eligibility and usage boundaries?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Change the SSPR scope from Selected to None.',
+      'B. Leave the malformed contact data unchanged and reduce the account to one contact method.',
+      'C. Replace the nested-group design by enabling a second SSPR group separately in the Microsoft Entra admin center.',
+      "D. Correct the user's contact data in the directory.",
+      'E. Assign the user an appropriate license.'
+    ],
+    correctOption: ['D', 'E'],
+    solution: `<strong>Correct Answers: D and E — correct the contact data, and assign an appropriate license</strong><br><br>
+    Investigation identified two concrete root causes: <strong>malformed contact data</strong> and a <strong>missing appropriate license</strong>. Correcting the user's contact data in the directory lets it be used for verification, and assigning the right license satisfies SSPR's licensing eligibility requirement — both directly fix the documented problems without touching anything that's already working correctly (nested-group membership under the Selected scope is supported).<br><br>
+    A disables SSPR for everyone in scope, which doesn't fix this one user's license or data problems and breaks the pilot for others. B leaves the actual defect (malformed data) in place and reduces the account below the required verification methods, making things worse. C assumes the nested-group design itself is the problem, but nested groups under a Selected SSPR group are a supported configuration — the real causes are licensing and data quality.`,
+    userChoice: null
+  },
+  {
+    id: 3073, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE CHOICE',
+    title: "Expanding SSPR to Two Departments Within the Admin Center's Group-Selection Limit",
+    text: `<p>An organization is expanding SSPR beyond its original pilot. Only the Finance and Legal departments should be enabled during the next phase. Each department already has its own group, and all intended users have appropriate licenses and valid contact data. The administrator must work within the Microsoft Entra admin center's current SSPR group-selection boundary.</p>
+    <p>Which design should the administrator use?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Create one SSPR rollout group, nest the Finance and Legal groups in it, and select the rollout group for SSPR.',
+      'B. Select the Finance group and the Legal group as two separately enabled SSPR groups in the admin center.',
+      'C. Set SSPR to None and keep the departmental groups unchanged.',
+      'D. Enable SSPR for All users because more than one department is participating.'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — nest both departmental groups inside one rollout group and select that group for SSPR</strong><br><br>
+    The Microsoft Entra admin center's SSPR <strong>Selected</strong> scope only supports choosing a <strong>single group</strong>. To cover two departments within that boundary, the administrator creates one rollout group, adds the Finance and Legal groups as nested members, and selects the single rollout group for SSPR — this stays entirely within the documented group-selection limit while covering both departments.<br><br>
+    B assumes the admin center lets an administrator select two separate groups directly for SSPR, which isn't how the current Selected scope works. C disables SSPR entirely, failing to expand it at all. D (All users) enables SSPR tenant-wide, going well beyond the two intended departments.`,
+    userChoice: null
+  },
+  {
+    id: 3074, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE CHOICE',
+    title: 'Diagnosing a Specific Failed Authentication Event',
+    text: `<p>An organization is investigating a failed authentication event. The exact event is available for review, but the failure cause is not yet known. An identity support engineer has the required permissions. The engineer needs an event-specific analysis that explains what happened and recommends next actions.</p>
+    <p>Which administrative action should the engineer take?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Open Diagnose & solve problems and search for the captured authentication event.',
+      'B. Open Microsoft Entra audit logs and filter activity around the event.',
+      'C. Open Microsoft 365 Service health and check current incidents and advisories.',
+      'D. Open Conditional Access What If and enter the event conditions.'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — open Diagnose & solve problems and search for the captured authentication event</strong><br><br>
+    Opening <strong>Diagnose & solve problems</strong> and searching for the captured event starts the Microsoft Entra <strong>Sign-in diagnostic</strong>, which analyzes that specific sign-in event, explains what happened, and surfaces recommended next actions — precisely the event-specific analysis the engineer needs.<br><br>
+    B (audit logs) records administrative and directory changes, not sign-in failure diagnostics with root-cause explanations and recommendations. C (Service health) reports Microsoft-side service incidents, not the cause of one user's specific authentication failure. D (Conditional Access What If) simulates how policies would evaluate hypothetical sign-in conditions — it doesn't analyze an event that already occurred.`,
+    userChoice: null
+  },
+  {
+    id: 3075, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE RESPONSE',
+    title: 'Reading a Failed Sign-In Event Before Changing Policy',
+    text: `<p>A service-desk engineer has isolated a failed authentication event in the Microsoft Entra sign-in logs. Before changing any policy or authentication method, which two fields should the engineer examine for the error description and likely next steps?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Correlation ID',
+      'B. Additional Details',
+      'C. Application display name',
+      'D. IP address',
+      'E. Failure reason'
+    ],
+    correctOption: ['B', 'E'],
+    solution: `<strong>Correct Answers: B and E — Additional Details and Failure reason</strong><br><br>
+    The sign-in log's <strong>Failure reason</strong> field gives the plain-language error description for why the sign-in failed, and <strong>Additional Details</strong> supplements it with further context and troubleshooting or remediation guidance — together they're exactly what's needed to understand the error and likely next steps before touching any policy.<br><br>
+    A (Correlation ID) is used to cross-reference the event across logs or with Microsoft support, not to explain the failure itself. C (application display name) and D (IP address) are useful identifying context, but neither describes what went wrong or what to do about it.`,
+    userChoice: null
+  },
+  {
+    id: 3076, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE CHOICE',
+    title: 'Determining the Cause of a Flagged Sign-In Before Any Change',
+    text: `<p>A user who normally accesses Microsoft 365 successfully is now unable to complete an interactive sign-in. The service desk locates the failed attempt in Microsoft Entra and sees that the event has been flagged, but the available event details have not established whether authentication, policy evaluation, or another condition caused the failure. Administrators will consider changes only after the cause is understood.</p>
+    <p>Which action should the service desk take next?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      "A. Open the user's risky sign-ins and investigate the flagged record.",
+      "B. Search the audit logs for changes to the user's account and authentication methods.",
+      'C. Run Conditional Access What If for the user and target resource.',
+      'D. Run the Microsoft Entra Sign-in diagnostic for the affected event.'
+    ],
+    correctOption: 'D',
+    solution: `<strong>Correct Answer: D — run the Microsoft Entra Sign-in diagnostic for the affected event</strong><br><br>
+    The <strong>Sign-in diagnostic</strong> analyzes the specific failed event itself and determines whether authentication, policy evaluation, or another condition caused the failure — exactly the undetermined root cause the service desk needs resolved before administrators will consider any change.<br><br>
+    A (risky sign-ins) is a risk-detection view; the event being "flagged" doesn't confirm it's a risk-based failure specifically, and this view doesn't diagnose the actual cause. B (audit logs) shows what changed on the account, not why this sign-in attempt failed. C (Conditional Access What If) simulates a hypothetical sign-in against policies — it doesn't analyze the actual event that already occurred.`,
+    userChoice: null
+  },
+  {
+    id: 3077, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE RESPONSE',
+    title: 'Reviewing a Microsoft-Managed Conditional Access Policy Without Enforcing It',
+    text: `<p>A Microsoft-managed Conditional Access policy has appeared in Report-only state. The organization requires a 60-day internal review with no automatic enforcement during that period. If the policy is enabled later, an emergency access account must remain excluded.</p>
+    <p>Which two actions meet these requirements within the supported management boundary?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Leave the policy in Report-only for all 60 days and assume it cannot be enabled automatically.',
+      "B. Add the emergency access account to the policy's identity exclusions.",
+      'C. Delete the Microsoft-managed policy and recreate it after the review.',
+      'D. Set the Microsoft-managed policy state to Off during the review.',
+      'E. Immediately rebuild the policy as a custom policy solely to pause enforcement and exclude the emergency account.'
+    ],
+    correctOption: ['A', 'B'],
+    solution: `<strong>Correct Answers: A and B — stay in Report-only for the review period, and add the emergency account to identity exclusions</strong><br><br>
+    A Microsoft-managed Conditional Access policy stays in whichever state an administrator sets until changed — leaving it in <strong>Report-only</strong> collects evaluation signal without enforcing any grant or block controls, satisfying "no automatic enforcement" for the full 60 days. Adding the <strong>emergency access account to identity exclusions</strong> is a supported edit for Microsoft-managed policies, so the account stays protected whenever the policy is enabled later.<br><br>
+    C isn't within the supported management boundary — Microsoft-managed policies aren't meant to be deleted and recreated by administrators. D (Off) stops the policy from evaluating sign-ins at all, which forfeits the 60-day review's evaluation data rather than merely avoiding enforcement. E is unnecessary — state changes and identity exclusions on a Microsoft-managed policy already satisfy both requirements without rebuilding it as a custom policy.`,
+    userChoice: null
+  },
+  {
+    id: 3078, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE RESPONSE',
+    title: 'Blocking a High-Risk Background Agent With Conditional Access',
+    text: `<p>A background agent runs on a schedule and obtains tokens through client credentials. No user signs in, and the token subject is the agent's own identity. The security team wants Conditional Access to block this agent when its agent risk is high.</p>
+    <p>Which two configuration choices align with that access pattern and control goal?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Scope the Conditional Access policy to the agent identity.',
+      "B. Configure an on-behalf-of-user flow so the policy can evaluate the user's risk instead.",
+      'C. Scope the policy to a signed-in user because every access token has a user subject.',
+      'D. Configure Agent risk for High and select the Block grant control.',
+      'E. Configure High agent risk but select an allow-style grant rather than Block.'
+    ],
+    correctOption: ['A', 'D'],
+    solution: `<strong>Correct Answers: A and D — scope the policy to the agent identity, with Agent risk = High and Block</strong><br><br>
+    Because the token subject is the agent's own identity — no user ever signs in — the Conditional Access policy must be <strong>scoped to the agent identity</strong> rather than a user. Configuring the <strong>Agent risk</strong> condition for <strong>High</strong> combined with the <strong>Block</strong> grant control directly implements the security team's goal of blocking the agent whenever its risk reaches that level.<br><br>
+    B assumes an on-behalf-of-user flow exists here, but the scenario explicitly states no user signs in — there's no user risk to evaluate instead. C is factually wrong for this pattern: a client-credentials token for a background agent has no user subject, so scoping to a "signed-in user" doesn't match this access pattern. E selects High risk correctly but pairs it with an allow-style grant, which permits rather than blocks access — the opposite of the stated control goal.`,
+    userChoice: null
+  },
+  {
+    id: 3079, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE CHOICE',
+    title: 'Editing Beyond a Microsoft-Managed Policy While Keeping the Baseline Intact',
+    text: `<p>An organization receives a Microsoft-managed Conditional Access policy. The security architecture team wants to retain the managed policy as a Microsoft-maintained baseline but also needs a separate policy whose preconfigured conditions and controls can be changed beyond state and identity exclusions.</p>
+    <p>What should the team do?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Duplicate the Microsoft-managed policy, then make the broader changes in the resulting custom policy.',
+      'B. Set the Microsoft-managed policy to Report-only, which makes all of its conditions and controls editable.',
+      'C. Set the Microsoft-managed policy to Off and assume its preconfigured conditions and controls are thereby changed.',
+      'D. Directly replace the conditions and controls in the Microsoft-managed policy while keeping it Microsoft-maintained.'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — duplicate the policy, then edit the resulting custom policy freely</strong><br><br>
+    <strong>Duplicating</strong> the Microsoft-managed policy produces an independent <strong>custom</strong> policy whose conditions and controls can be changed without restriction, while the original Microsoft-managed policy stays untouched as the Microsoft-maintained baseline — satisfying both parts of the requirement at once.<br><br>
+    B is factually wrong — switching a Microsoft-managed policy's state to Report-only changes only its enforcement state, not what's editable; its conditions and controls remain fixed beyond state and identity exclusions. C is also wrong — turning the policy Off is another state change, not an edit to its preconfigured conditions or controls. D isn't possible — Microsoft-managed policies restrict direct edits to state and identity exclusions only, so their conditions and controls can't be directly replaced while the policy remains Microsoft-maintained.`,
+    userChoice: null
+  },
+  {
+    id: 3080, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE CHOICE',
+    title: 'Managing a Correlated Attack With Ownership, Classification, and Comments',
+    text: `<p>Microsoft Defender for Office 365 has associated several alerts and an automated investigation with the same developing attack. The security operations lead needs one place to prioritize the work, assign ownership, classify the case, and preserve progress comments as new related evidence arrives.</p>
+    <p>What should the team do?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Manage the attack from its entry in the Microsoft Defender XDR Incidents queue.',
+      'B. Use built-in alert tuning to suppress every alert in the developing attack.',
+      'C. Create a new alert policy to organize the already-related alerts and investigation.',
+      'D. Use email notifications as the primary record for ownership, classification, and comment history.',
+      'E. Track each alert as an independent case and avoid incident-level assignment or classification.'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — manage the attack from its Incidents queue entry</strong><br><br>
+    Microsoft Defender XDR automatically correlates related alerts and automated investigations from the same developing attack into a single <strong>incident</strong>. Working from that incident's entry in the <strong>Incidents queue</strong> gives the security operations lead one place to prioritize, assign ownership, classify severity/category, and add comments that persist as new related evidence is correlated in.<br><br>
+    B (alert tuning) suppresses future alerts matching a pattern — it doesn't provide a single management surface for an active attack. C creates redundant organization on top of correlation Defender XDR already performs automatically. D (email notifications) is a one-way alert channel, not a persistent record of ownership or comments. E abandons the incident-level view entirely, forcing the team to track already-correlated alerts as separate, disconnected cases.`,
+    userChoice: null
+  },
+  {
+    id: 3081, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE CHOICE',
+    title: 'Suppressing Alerts for Known-Benign Activity Without Disrupting AIR',
+    text: `<p>A security team repeatedly receives alerts for a well-understood benign activity. The team wants to suppress alerts for this common activity without interrupting AIR investigations or email notifications.</p>
+    <p>What should the team use?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. A process that manually resolves each related incident after review',
+      'B. A new alert policy that generates another alert for the same activity',
+      'C. A built-in Microsoft Defender XDR alert tuning rule',
+      'D. An Incidents queue filter that hides the related incidents from the current view'
+    ],
+    correctOption: 'C',
+    solution: `<strong>Correct Answer: C — a built-in Microsoft Defender XDR alert tuning rule</strong><br><br>
+    <strong>Alert tuning</strong> is purpose-built to suppress future alerts that match specific, well-understood conditions — such as this benign recurring activity — while leaving <strong>automated investigation and response (AIR)</strong> and email notifications for genuinely relevant alerts unaffected.<br><br>
+    A is manual, doesn't scale, and does nothing to stop the alerts from being generated in the first place. B makes the noise worse by adding a second alert policy for the same activity. D (a queue filter) only changes what one analyst currently sees — it doesn't suppress the alert at the source and has no effect for anyone else viewing the queue.`,
+    userChoice: null
+  },
+  {
+    id: 3082, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE CHOICE',
+    title: 'Generating an Alert for Unusual Mailbox File Deletion or External Sharing',
+    text: `<p>A compliance team wants an alert to be generated when cloud-mailbox users perform activity that matches defined conditions, such as an unusual level of file deletion or external sharing. Which Defender for Office 365 mechanism should an administrator configure?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. An incident classification applied after an alert is generated',
+      'B. An alert policy on the Alert policy page',
+      'C. A built-in alert tuning rule for benign activity',
+      'D. An assignment from the Incidents queue'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — an alert policy on the Alert policy page</strong><br><br>
+    An <strong>alert policy</strong> lets an administrator define the conditions that should trigger a new alert — such as an unusual level of file deletion or external sharing by cloud-mailbox users — and is configured on the Alert policy page precisely for this purpose: generating a new alert when matching activity occurs.<br><br>
+    A (incident classification) happens <em>after</em> an alert already exists; it doesn't define what triggers one. C (alert tuning) suppresses existing alerts for known-benign patterns — the opposite of generating a new alert for suspicious activity. D (an Incidents queue assignment) is a case-management action, not a mechanism for defining alert-triggering conditions.`,
+    userChoice: null
+  },
+  {
+    id: 3083, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE CHOICE',
+    title: "Deploying Defender for Office 365 With Microsoft's Baseline and Minimal Custom Maintenance",
+    text: `<p>An organization is deploying Defender for Office 365 protection to all recipients. No business requirement calls for settings that differ from Microsoft's recommended baseline, and the security team wants to minimize custom-policy maintenance.</p>
+    <p>Which strategy should the team use?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Turn on the Standard and/or Strict preset security policies and include all recipients.',
+      'B. Rely only on the unchanged default threat policies.',
+      'C. Create one custom anti-phishing policy for a small group and leave all other recipients outside the presets.',
+      'D. Create a custom policy for every threat-protection feature.'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — turn on the Standard and/or Strict preset security policies for all recipients</strong><br><br>
+    Microsoft's <strong>preset security policies</strong> (Standard and Strict) apply Microsoft-recommended, Microsoft-maintained protection settings across the relevant threat-protection features at once, and can be scoped to <strong>all recipients</strong>. Since no business requirement calls for deviating from that baseline, turning on the presets satisfies full-tenant protection with essentially no custom-policy maintenance.<br><br>
+    B (unchanged default policies) provides a much lower baseline level of protection than the Standard/Strict presets and isn't equivalent to deploying recommended protection. C leaves most of the organization outside any meaningful anti-phishing protection, and covers only one feature for a small group rather than full coverage. D maximizes exactly the custom-policy maintenance burden the team wants to minimize, and duplicates protection presets already provide out of the box.`,
+    userChoice: null
+  },
+  {
+    id: 3084, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE CHOICE',
+    title: 'Overriding Preset Anti-Phishing Protection for a Finance Group',
+    text: `<p>A finance group needs anti-phishing behavior that differs from the organization's broad preset protection. Some finance users are currently included in more than one anti-phishing policy. The custom behavior must determine what happens to matching messages for those users.</p>
+    <p>What should the administrator do?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Place the custom anti-phishing policy after another applicable policy and expect its different settings to override that policy.',
+      'B. Create an alert policy for phishing events instead of configuring a custom anti-phishing policy.',
+      'C. Include the finance users in multiple anti-phishing policies and expect the settings from all applicable policies to merge.',
+      'D. Create a custom anti-phishing policy scoped to the finance group and ensure it is the first applicable anti-phishing policy for those users.'
+    ],
+    correctOption: 'D',
+    solution: `<strong>Correct Answer: D — a custom policy scoped to the finance group, made first in precedence</strong><br><br>
+    For overlapping threat-protection policies, only the <strong>highest-precedence applicable policy</strong> actually determines what happens to a matching message — precedence order, not merging, decides the outcome. Creating a custom anti-phishing policy scoped to the finance group and placing it <strong>first</strong> in the order of precedence guarantees it's the policy that governs those users' matching messages.<br><br>
+    A gets the precedence order backwards — a policy placed <em>after</em> another applicable policy is never the one that's evaluated for those users; the earlier policy wins. B (an alert policy) only generates notifications about phishing events; it can't define anti-phishing detection or protection settings. C is factually wrong about how precedence works — anti-phishing policies don't merge settings across all applicable policies; only the first applicable one is used.`,
+    userChoice: null
+  },
+  {
+    id: 3085, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE CHOICE',
+    title: 'How Precedence Resolves Overlapping Threat-Protection Policies',
+    text: `<p>During a policy audit, an administrator confirms that a user and a specific message are in scope for Policy A and Policy B of the same threat-protection feature. Policy A is the first applicable policy in the order of precedence.</p>
+    <p>How is the message processed for that user?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Policy A determines what happens, and Policy B is not evaluated for that feature and item.',
+      'B. The policy with the strictest individual setting determines the result, regardless of precedence.',
+      'C. Policy A processes the message first, and Policy B then processes the result from Policy A.',
+      'D. Policy A and Policy B are both evaluated, and their settings are merged.'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — Policy A determines the outcome, and Policy B is not evaluated for that item</strong><br><br>
+    For a given threat-protection feature, when a user and message are in scope for more than one applicable policy, only the <strong>first policy in the order of precedence</strong> is actually evaluated and applied — here, Policy A. Policy B, despite also being in scope, is skipped for that specific feature and item.<br><br>
+    B is wrong — precedence order, not the strictness of individual settings, decides which policy applies; there's no cross-policy "strictest wins" comparison. C describes a sequential pipeline where both policies act on the message in turn, which isn't how precedence works — Policy B simply isn't evaluated. D describes merged settings from multiple policies, which contradicts the precedence-based, single-policy-applies model.`,
+    userChoice: null
+  },
+  {
+    id: 3086, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE CHOICE',
+    title: 'Analyzing Phishing Campaign Volume by Threat Family and Attacker Infrastructure',
+    text: `<p>Analysts suspect that a phishing campaign has affected multiple recipients. Before choosing remediation, they need to analyze the attack volume over time and compare evidence by threat family and attacker infrastructure.</p>
+    <p>Where should they begin?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. The Alert policy page',
+      'B. Explorer and real-time detections in Defender for Office 365',
+      'C. The anti-phishing policy editor',
+      'D. Action center History without first establishing the campaign evidence'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — Explorer and real-time detections in Defender for Office 365</strong><br><br>
+    <strong>Explorer</strong> (and its real-time detections view for lower-tier licensing) is the investigative tool built for analyzing threat volume trends over time and comparing evidence — including <strong>threat family</strong> and <strong>attacker infrastructure</strong> — across affected recipients before deciding on remediation.<br><br>
+    A (Alert policy page) is for configuring what triggers alerts, not for analyzing existing campaign evidence. C (the anti-phishing policy editor) configures protection settings; it has no campaign-analysis or trend view. D explicitly skips the analysis step the analysts need — jumping to remediation history without first establishing the campaign's scope and evidence gets the investigative order backwards.`,
+    userChoice: null
+  },
+  {
+    id: 3087, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE RESPONSE',
+    title: 'Remediating Delivered Malicious Email and Reviewing the Recorded Action',
+    text: `<p>An investigation has identified malicious email that was delivered to user mailboxes. The security team must act on the delivered messages and then review the recorded remediation.</p>
+    <p>Which two actions should the team take?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Resolve the related alert without taking an action against the email entity.',
+      'B. Create another alert policy and use its status as proof that the messages were remediated.',
+      'C. Review the remediation in Actions & Submissions > Action center > History.',
+      'D. Change a preventive threat policy and assume that the already-delivered messages are removed.',
+      'E. Use a supported remediation action, such as soft delete or hard delete, against the malicious email.'
+    ],
+    correctOption: ['C', 'E'],
+    solution: `<strong>Correct Answers: C and E — remediate the delivered email directly, then review it in Action center History</strong><br><br>
+    Acting on <strong>delivered</strong> messages requires a real remediation action against the email entity itself — <strong>soft delete or hard delete</strong> are the supported actions that actually remove the malicious email from mailboxes. <strong>Action center > History</strong> under Actions & Submissions is where completed remediation actions are recorded, giving the team the review they need after acting.<br><br>
+    A resolves the alert without touching the email at all, leaving the malicious messages sitting in mailboxes. B substitutes an alert policy's status for actual proof of remediation — an alert policy doesn't perform or record removal actions. D changes a <em>preventive</em> policy, which affects future mail flow, not messages that are already delivered; it does nothing to remove what's already sitting in mailboxes.`,
+    userChoice: null
+  },
+  {
+    id: 3088, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE CHOICE',
+    title: 'Assigning Training Directly Without a Prior Simulated Attack',
+    text: `<p>A security-awareness team needs to assign training directly to a selected group and launch it next month. The team does not need to test users with a simulated phishing attack first.</p>
+    <p>What should the team create?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. A Training campaign with the selected users and a future launch date and time',
+      'B. An alert policy that monitors whether the selected users start training',
+      'C. A one-time phishing simulation that eventually leads users to training',
+      'D. A simulation automation with attack payloads that launch when conditions are met'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — a Training campaign scoped to the selected users with a future launch date and time</strong><br><br>
+    A <strong>Training campaign</strong> in Attack simulation training assigns awareness training directly to a chosen group of users, with a schedulable future launch date and time — no simulated phishing attack is required first, matching exactly what the team needs.<br><br>
+    B (an alert policy) only monitors and notifies; it can't assign or deliver training itself. C bakes in a phishing simulation step the team explicitly doesn't need. D (a simulation automation) launches attack payloads under trigger conditions — that's a simulated-attack mechanism, not a direct-training assignment.`,
+    userChoice: null
+  },
+  {
+    id: 3089, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE RESPONSE',
+    title: 'Designing a Condition-Triggered Automated Phishing Exercise',
+    text: `<p>A security team wants safe phishing exercises to launch through an automated flow when chosen conditions are met. The exercises must use selected attack techniques and payloads.</p>
+    <p>Which two design choices satisfy the requirement?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Configure the automated flow with the required techniques, payloads, and launch conditions',
+      'B. Schedule a future Training campaign and omit attack techniques and payloads',
+      'C. Use a simulation automation rather than a direct Training campaign',
+      'D. Assign a Training campaign directly to users without configuring a simulated attack',
+      'E. Launch one manual simulation and treat it as a condition-driven automated flow'
+    ],
+    correctOption: ['A', 'C'],
+    solution: `<strong>Correct Answers: A and C — a simulation automation, configured with the required techniques, payloads, and launch conditions</strong><br><br>
+    A <strong>simulation automation</strong> — rather than a direct Training campaign — is the mechanism that launches simulated phishing exercises automatically when defined conditions are met. Configuring it with the specific <strong>attack techniques, payloads, and launch conditions</strong> the team chose satisfies both the automation trigger and the required attack content.<br><br>
+    B and D both describe a Training campaign, which assigns training directly to users and has no simulated-attack or condition-triggered launch mechanism — it can't do what the scenario asks. E is self-contradictory: a manually launched, one-time simulation isn't a condition-driven automated flow, regardless of how it's labeled.`,
+    userChoice: null
+  },
+  {
+    id: 3090, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE RESPONSE',
+    title: 'Prerequisites Before Configuring an Automated Attack Simulation Training Flow',
+    text: `<p>A security team plans to create an automated Attack simulation training flow that will later launch selected techniques and payloads when defined conditions are met. According to the setup guidance, which two prerequisites must the team confirm before it configures the flow?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Confirm that the administrators have the required permissions.',
+      'B. Confirm that training has already been assigned directly to the pilot users.',
+      'C. Confirm that the organization has the required licensing.',
+      'D. Confirm that a future launch date has already been set for a direct Training campaign.',
+      'E. Confirm that an attack technique and payload have already been selected for the automated flow.'
+    ],
+    correctOption: ['A', 'C'],
+    solution: `<strong>Correct Answers: A and C — confirm the required administrative permissions and the required licensing</strong><br><br>
+    Before configuring an automated Attack simulation training flow, the setup guidance calls for confirming two foundational prerequisites: that the administrators setting it up have the <strong>required permissions</strong>, and that the organization holds the <strong>required licensing</strong> for the feature. Both are access prerequisites independent of the flow's specific content.<br><br>
+    B and D both describe a separate, direct Training campaign — neither is a prerequisite for configuring an automated simulation flow. E puts technique-and-payload selection before the prerequisite check, but that's a configuration step performed while building the flow, not a precondition the team must confirm beforehand.`,
+    userChoice: null
+  },
+  {
+    id: 3091, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE RESPONSE',
+    title: 'DLP Locations Needed to Block Guest Access to a Document Shared in Teams',
+    text: `<p>A company uses Microsoft Teams for collaboration with guests. When a user shares a document containing regulated data in a Teams channel or chat, guests must be prevented from opening that document.</p>
+    <p>Which two locations must the DLP policy include to enforce this document protection?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Devices',
+      'B. SharePoint',
+      'C. Teams chat and channel messages',
+      'D. OneDrive',
+      'E. Exchange email'
+    ],
+    correctOption: ['B', 'D'],
+    solution: `<strong>Correct Answers: B and D — SharePoint and OneDrive</strong><br><br>
+    Files shared in a Teams channel are actually stored in <strong>SharePoint</strong>, and files shared in a Teams chat are stored in <strong>OneDrive</strong> — Teams itself doesn't host the document. To block a guest from opening a shared document that contains regulated data, the DLP policy's protection must be enforced at the underlying storage location, so it must include both SharePoint and OneDrive.<br><br>
+    C (Teams chat and channel messages) scans and can act on message text itself, but it doesn't enforce document-open protection for files whose content lives in SharePoint or OneDrive. A (Devices) governs endpoint-level activity like copying files to USB drives, unrelated to blocking document access in Teams. E (Exchange email) protects mail flow, which has no bearing on documents shared inside Teams channels or chats.`,
+    userChoice: null
+  },
+  {
+    id: 3092, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE CHOICE',
+    title: 'Scoping an Endpoint DLP Policy to a Specific Employee and Device',
+    text: `<p>A company creates a DLP policy for endpoint data movement. The policy should be enforced only when an intended employee uses an intended corporate device.</p>
+    <p>Which policy configuration satisfies the enforcement requirement?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Include Teams, then scope the policy to the intended employee and corporate device.',
+      'B. Include the Devices location and the intended corporate device, but exclude the employee from the policy scope.',
+      'C. Include the Devices location and the intended employee, but exclude the corporate device from the policy scope.',
+      'D. Include SharePoint and OneDrive, then scope the policy to the intended employee and corporate device.',
+      'E. Include the Devices location, the intended employee, and the intended corporate device in the policy scope.'
+    ],
+    correctOption: 'E',
+    solution: `<strong>Correct Answer: E — include the Devices location plus both the intended employee and the intended device</strong><br><br>
+    Endpoint data-movement DLP is enforced through the <strong>Devices</strong> location, and enforcing it only for a specific combination of person and hardware requires scoping the policy to <strong>both</strong> the intended employee <strong>and</strong> the intended corporate device together — leaving either one out of scope breaks the "only when this employee uses this device" condition.<br><br>
+    A and D select the wrong location entirely — Teams and SharePoint/OneDrive don't govern endpoint data-movement activity. B excludes the employee from scope, so the policy wouldn't apply to that person at all. C excludes the device from scope, so enforcement wouldn't be limited to the intended corporate device as required.`,
+    userChoice: null
+  },
+  {
+    id: 3093, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE CHOICE',
+    title: 'Addressing Oversharing Across SharePoint, On-Premises, and a Non-Microsoft Cloud App',
+    text: `<p>A compliance architect must address oversharing across SharePoint, an on-premises file share, and a non-Microsoft cloud application. The architect wants a location-aware Microsoft Purview control that can target all three data sources.</p>
+    <p>Which approach should the architect choose?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Configure a sensitivity label policy as the location-selection control for all three sources.',
+      'B. Configure Microsoft Purview DLP for the Microsoft 365 location and the added on-premises and non-Microsoft cloud locations.',
+      'C. Configure a retention policy as the location-selection control for oversharing.',
+      'D. Configure only the Teams DLP location for the organization.',
+      'E. Configure only the Endpoint DLP Devices location and scope it to all employees and devices.'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — one Microsoft Purview DLP policy spanning Microsoft 365, on-premises, and non-Microsoft cloud locations</strong><br><br>
+    Microsoft Purview DLP supports <strong>location-aware</strong> policies that can extend beyond Microsoft 365 to include an <strong>on-premises repository</strong> location and <strong>non-Microsoft cloud app</strong> locations (via Defender for Cloud Apps integration) within the same policy — letting one control target all three of the architect's data sources.<br><br>
+    A (sensitivity label policy) and C (retention policy) aren't location-selection controls for DLP-style oversharing enforcement; they govern classification and lifecycle, not data-loss locations. D (Teams DLP only) and E (Endpoint Devices only) each cover a single location and miss the other two sources entirely.`,
+    userChoice: null
+  },
+  {
+    id: 3094, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE CHOICE',
+    title: 'Detecting an Organization-Specific Identifier With No Protection or Lifecycle Action',
+    text: `<p>A compliance team needs Microsoft Purview to identify items that contain an organization-specific identifier. The identifier can be detected by a custom regular expression or by a function. No protection or lifecycle action is part of this requirement.</p>
+    <p>What should the team configure?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. A sensitivity label policy',
+      'B. An automatic sensitivity-labeling configuration',
+      'C. A sensitive information type',
+      'D. A DLP policy',
+      'E. A retention label'
+    ],
+    correctOption: 'C',
+    solution: `<strong>Correct Answer: C — a sensitive information type</strong><br><br>
+    A custom <strong>sensitive information type (SIT)</strong> is defined purely as a detection pattern — built from a custom <strong>regular expression</strong> or a <strong>function</strong> — that identifies matching content without attaching any protection or lifecycle action. That's exactly the detection-only requirement described.<br><br>
+    A and B (sensitivity label policy / automatic labeling) apply classification and often protection actions to matching content — beyond the pure detection this requirement calls for. D (a DLP policy) enforces protective actions like blocking or alerting, not just detection. E (a retention label) applies lifecycle actions, which the requirement explicitly excludes.`,
+    userChoice: null
+  },
+  {
+    id: 3095, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE RESPONSE',
+    title: 'Designing a Sensitivity Label Policy With a Default Label and Justified Downgrades',
+    text: `<p>A company is designing a sensitivity label policy. The full classification catalog must be available to every employee, new items must start with the General classification, and lowering or removing a classification must require an accountable reason.</p>
+    <p>Which three policy settings implement these requirements?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Set General as the default label for items.',
+      'B. Require justification to remove a label or lower its classification.',
+      'C. Configure automatic labeling for content that meets selected conditions.',
+      'D. Create a sensitive information type by using a custom regular expression.',
+      'E. Configure manual labeling as the only method for new items.',
+      'F. Publish all labels to all users.'
+    ],
+    correctOption: ['A', 'B', 'F'],
+    solution: `<strong>Correct Answers: A, B, and F — set General as default, require justification for downgrades, and publish all labels to all users</strong><br><br>
+    Setting <strong>General as the default label</strong> ensures every new item starts at that classification. Enabling the <strong>justification requirement</strong> for removing a label or lowering its classification means any downgrade must include an accountable reason. <strong>Publishing all labels to all users</strong> makes the full classification catalog available to every employee — the three settings together implement all three stated requirements.<br><br>
+    C (automatic labeling) and D (a custom-regex sensitive information type) are detection/automation mechanisms unrelated to the default-label, justification, or catalog-availability requirements described. E (manual labeling only) contradicts nothing stated but doesn't by itself establish the required default classification for new items — that's what setting General as the default label accomplishes.`,
+    userChoice: null
+  },
+  {
+    id: 3096, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE CHOICE',
+    title: 'Choosing a Deployment Plan Within Documented Sensitivity-Label Support',
+    text: `<p>Before designing label settings, an information protection team must choose a deployment plan made up only of workloads and containers explicitly documented as supporting sensitivity labels.</p>
+    <p>Which plan meets that evidence boundary?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Use sensitivity labels with Word documents, Teams meetings, SharePoint and OneDrive site containers, and Microsoft 365 groups.',
+      'B. Use sensitivity labels with Word documents, Teams meetings, endpoint devices, and Microsoft 365 groups.',
+      'C. Use sensitivity labels with Outlook items, Teams meetings, on-premises file shares, and Microsoft 365 groups.',
+      'D. Use sensitivity labels with Word documents, Teams chat messages, SharePoint and OneDrive site containers, and Microsoft 365 groups.',
+      'E. Use sensitivity labels with Excel workbooks, PowerPoint presentations, non-Microsoft cloud apps, and Microsoft 365 groups.'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — Word documents, Teams meetings, SharePoint and OneDrive site containers, and Microsoft 365 groups</strong><br><br>
+    Every item in this plan is explicitly documented sensitivity-label support: Office file types like Word documents, <strong>Teams meetings</strong>, container-level labeling for <strong>SharePoint sites and OneDrive</strong>, and <strong>Microsoft 365 groups</strong> can all carry or be governed by sensitivity labels.<br><br>
+    B lists endpoint devices as a labelable target, but devices aren't a documented sensitivity-label container — device-level controls belong to endpoint DLP, not label application. C includes on-premises file shares, which aren't documented as a directly labelable container (the on-premises scanner labels individual files, not the share as a container). D lists Teams <em>chat messages</em>, but documented support covers Teams meetings, not chat messages. E lists non-Microsoft cloud apps, which aren't a documented sensitivity-label target — that's the domain of Defender for Cloud Apps / DLP, not label application.`,
+    userChoice: null
+  },
+  {
+    id: 3097, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE CHOICE',
+    title: 'Applying One Broad Lifecycle Baseline Without Item-Level Selection',
+    text: `<p>A compliance team defines one lifecycle baseline for all content in two identified Microsoft 365 workloads. No item-level exceptions are currently required. The team wants the configuration to apply broadly rather than depend on users or matching criteria selecting individual items.</p>
+    <p>Which mechanism should you implement first?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Publish a retention label for users to apply manually to items in both workloads.',
+      'B. Create a retention policy for the two identified workloads.',
+      'C. Publish separate retention labels for each workload and require item owners to apply the appropriate label.',
+      'D. Automatically apply retention labels only when items match selected keywords or searchable properties.'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — a retention policy scoped to the two identified workloads</strong><br><br>
+    A <strong>retention policy</strong> applies a lifecycle baseline broadly across an entire location or workload, without depending on any user action or item-by-item matching — exactly the "apply broadly" behavior the team wants for a uniform baseline with no item-level exceptions yet.<br><br>
+    A and C both use retention <strong>labels</strong> applied manually, which depends entirely on users choosing to label individual items — the opposite of a broad, user-independent baseline. D also uses labels, auto-applied via keyword or property matching on individual items — that's item-level selection criteria, not a broad workload-wide baseline.`,
+    userChoice: null
+  },
+  {
+    id: 3098, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE CHOICE',
+    title: 'Overriding a Broad Retention Policy for a Project-Code Subset Without User Selection',
+    text: `<p>A broad retention policy already applies the standard lifecycle settings to a project workload. A subset of documents containing a defined project code needs different lifecycle handling, and administrators want the subset identified without relying on users to select the control.</p>
+    <p>Which approach should they use?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Change the broad retention policy so the different handling applies to every item in the workload.',
+      'B. Set a default sensitivity label on every item in the workload.',
+      'C. Create another workload-wide retention policy for all project documents.',
+      'D. Create a retention label for the different handling and automatically apply it by using the project code as a keyword or searchable property.',
+      'E. Publish a retention label for users to apply manually to the subset.'
+    ],
+    correctOption: 'D',
+    solution: `<strong>Correct Answer: D — a retention label, auto-applied using the project code as a keyword or searchable property</strong><br><br>
+    A retention <strong>label</strong> that's <strong>auto-applied</strong> based on matching the project code as a keyword or searchable property identifies exactly the intended subset without any user selecting it, and a label's settings take precedence over the workload's broader retention policy for the items it's applied to — giving that subset different lifecycle handling.<br><br>
+    A applies the different handling to the entire workload, not just the project-code subset. B (a sensitivity label) governs classification and protection, not retention lifecycle behavior. C creates another broad, workload-wide policy — it can't target only documents containing a specific project code. E depends on users manually applying the label, which the requirement explicitly wants to avoid.`,
+    userChoice: null
+  },
+  {
+    id: 3099, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'govern',
+    type: 'MULTIPLE RESPONSE',
+    title: 'Auto-Applying a Retention Label to Regulated Data, Learned Examples, and Cloud Attachments',
+    text: `<p>An organization has already created a retention label and now wants Microsoft Purview to apply it automatically to three classes of items: content containing regulated data, content recognized from learned examples, and files shared as cloud attachments.</p>
+    <p>Which three application criteria should the organization configure?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Publication for users to apply the label manually',
+      'B. Cloud attachments',
+      'C. A workload-wide retention policy',
+      'D. A trainable classifier',
+      'E. A sensitive information match'
+    ],
+    correctOption: ['B', 'D', 'E'],
+    solution: `<strong>Correct Answers: B, D, and E — cloud attachments, a trainable classifier, and a sensitive information match</strong><br><br>
+    Each requirement maps to a specific auto-apply criterion: a <strong>sensitive information match</strong> detects content containing regulated data (via sensitive information types), a <strong>trainable classifier</strong> recognizes content based on learned examples rather than fixed patterns, and the <strong>cloud attachments</strong> condition auto-applies a retention label to files shared as cloud attachments in email or chat.<br><br>
+    A (manual publication) requires a user to apply the label themselves, which isn't automatic application at all. C (a workload-wide retention policy) is a separate mechanism entirely — a policy applies its own lifecycle settings broadly, rather than auto-applying this specific label based on the three defined content criteria.`,
+    userChoice: null
+  },
+  {
+    id: 3121, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE RESPONSE',
+    title: 'Reviewing Evidence Before Acting on a Generative AI Data-Sharing Alert',
+    text: `<p>Endpoint DLP raises an alert after a user attempts to share regulated data with a third-party generative AI site from an onboarded Windows computer. Before deciding on remediation, alert disposition, or policy adjustment, which three evidence sets should the investigator review in the DLP alert?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. The DLP policy configuration history',
+      'B. The matched events',
+      'C. The alert details',
+      'D. The related user activities',
+      'E. Aggregate data-security posture trends'
+    ],
+    correctOption: ['B', 'C', 'D'],
+    solution: `<strong>Correct Answers: B, C, and D — the matched events, the alert details, and the related user activities</strong><br><br>
+    Investigating a specific DLP alert means reviewing the evidence tied to that event: the <strong>alert details</strong> summarize what triggered it, the <strong>matched events</strong> show exactly what content matched the policy conditions, and the <strong>related user activities</strong> provide surrounding context for the user's behavior — together giving the investigator what's needed to decide on remediation, disposition, or policy adjustment.<br><br>
+    A (policy configuration history) documents how the policy has changed over time, not evidence about this specific alert. E (aggregate posture trends) is a broad, organization-wide view — useful for spotting patterns across many events, but not the event-specific evidence needed to investigate this one alert.`,
+    userChoice: null
+  },
+  {
+    id: 3122, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE RESPONSE',
+    title: 'Completing Post-Investigation Handling With Remediation and Accountability',
+    text: `<p>A Microsoft Purview DLP alert was triggered when an analyst pasted customer financial data into a third-party generative AI site. The investigator has reviewed the alert details, related user activities, and matched events and has confirmed the exposure. The response lead must now complete the post-investigation handling with remediation and auditable accountability.</p>
+    <p>Which three actions should the response lead take?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Modify the DLP policy automatically solely because this alert occurred.',
+      'B. Update the alert or incident status to reflect the current handling state.',
+      'C. Assign an owner and document the response decision.',
+      'D. Repeat the initial evidence review and leave the status unchanged until a second alert occurs.',
+      'E. Move the individual case to an aggregate AI posture dashboard instead of recording case ownership.',
+      'F. Apply a remediation action appropriate to the confirmed exposure.'
+    ],
+    correctOption: ['B', 'C', 'F'],
+    solution: `<strong>Correct Answers: B, C, and F — update the status, assign an owner with documented rationale, and remediate</strong><br><br>
+    Completing post-investigation handling with auditable accountability means <strong>updating the alert or incident status</strong> to reflect where handling stands, <strong>assigning an owner and documenting the response decision</strong> so the choice is traceable, and <strong>applying a remediation action</strong> appropriate to the exposure that's already been confirmed — together these close the loop with a clear, accountable record.<br><br>
+    A changes the policy automatically based on a single alert, without any deliberate review of whether that change is warranted. D repeats work already completed by the investigator and stalls handling rather than completing it. E discards individual case ownership in favor of an aggregate view, which removes the auditable accountability the requirement specifically calls for.`,
+    userChoice: null
+  },
+  {
+    id: 3123, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Warning Users on Generative AI Paste Attempts While Allowing Override',
+    text: `<p>Contoso permits employees to use a third-party generative AI site for research from Windows computers that are onboarded to Microsoft Purview. Security wants to interrupt attempts to paste sensitive information into the site, but users must retain the ability to proceed after seeing the policy warning.</p>
+    <p>Which configuration best meets the requirement?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Use an aggregate AI posture dashboard as the endpoint enforcement control.',
+      'B. Update the status of each resulting DLP alert without changing endpoint behavior.',
+      'C. Rely on investigators to review alert details and matched events after each paste attempt.',
+      'D. Configure Endpoint DLP to block every matching attempt without an override.',
+      'E. Configure an Endpoint DLP policy to warn users when they share sensitive information with the generative AI site and allow the warning to be overridden.'
+    ],
+    correctOption: 'E',
+    solution: `<strong>Correct Answer: E — an Endpoint DLP policy that warns and allows the warning to be overridden</strong><br><br>
+    An Endpoint DLP <strong>warn-with-override</strong> action interrupts the paste attempt with a policy warning while still letting the user proceed if they choose to — exactly matching the requirement to interrupt the action without permanently blocking legitimate research use of the generative AI site.<br><br>
+    A (a dashboard) is a reporting view, not an enforcement control that can interrupt a paste action. B doesn't change endpoint behavior at all, so nothing is interrupted in the moment. C is a purely after-the-fact investigative process — it doesn't stop or warn on the paste attempt as it happens. D blocks every attempt with no override, which removes the ability to proceed that the requirement explicitly preserves.`,
+    userChoice: null
+  },
+  {
+    id: 3124, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Comparing AI Agent Risk Trends Across Microsoft and Third-Party Environments',
+    text: `<p>A security director needs to compare oversharing, exfiltration, and unusual access patterns associated with AI agents across Microsoft and third-party environments. The team must filter sensitive-data usage and DLP activity and evaluate posture trends rather than investigate one isolated event.</p>
+    <p>Which Microsoft Purview capability should the team use?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. A compliance-control assessment that tracks regulatory control completion',
+      'B. DSPM AI observability dashboards and reports',
+      'C. The evidence view for a single DLP alert',
+      'D. A raw audit search limited to one known interaction',
+      'E. An Endpoint DLP block applied before the material risk signal is identified'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — DSPM AI observability dashboards and reports</strong><br><br>
+    <strong>Data Security Posture Management (DSPM) for AI</strong> provides observability dashboards and reports built specifically to compare oversharing, exfiltration, and unusual access patterns for AI agents across Microsoft and third-party environments, with filtering by sensitive-data usage and DLP activity — a posture-trend view rather than a single-event investigation.<br><br>
+    A (a compliance-control assessment) tracks regulatory control completion status, not AI agent risk-pattern trends. C and D both zoom into a single alert or interaction, which is the opposite of the broad, trend-level comparison the director needs. E jumps straight to enforcement before the material risk signal has even been identified, skipping the analysis step entirely.`,
+    userChoice: null
+  },
+  {
+    id: 3125, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Remediating Overexposed Files Behind an AI-Related Sharing Spike',
+    text: `<p>A DSPM Outcome card shows a sharp rise in risky sharing incidents involving AI activity. Review confirms that affected files are available to more users than their owners intended because of existing sharing permissions, with no signs of suspicious user behavior. The security team must address the current exposure.</p>
+    <p>What should it do next?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Export the related audit events for review by the security operations team.',
+      'B. Apply a default sensitivity label across all SharePoint and OneDrive content.',
+      'C. Launch an investigation into users associated with the incidents.',
+      'D. Refine the Outcome dashboard filters to isolate the affected sites and AI apps.',
+      'E. Use the Outcome workflow to reduce access to the files involved in the risky sharing incidents.'
+    ],
+    correctOption: 'E',
+    solution: `<strong>Correct Answer: E — use the Outcome workflow to reduce access to the affected files</strong><br><br>
+    Since the root cause is confirmed as <strong>overly broad sharing permissions</strong> rather than suspicious behavior, the exposure is fixed by directly <strong>reducing access</strong> to the files involved — the DSPM Outcome workflow provides that remediation action, closing the actual overexposure that was identified.<br><br>
+    A (exporting audit events) and C (launching a user investigation) both treat this as a behavioral or investigative problem, but the review already ruled out suspicious behavior — the cause is permissions, not conduct. B applies a broad default label across all SharePoint and OneDrive content, which is far wider than the specific files actually involved and doesn't itself reduce access. D only adjusts what the dashboard displays — it's an analysis step, not a remediation of the exposure itself.`,
+    userChoice: null
+  },
+  {
+    id: 3126, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: "Evidencing a Quarter-Over-Quarter Improvement in Data-Security Posture",
+    text: `<p>After completing actions recommended under a DSPM outcome, the organization begins its quarterly governance review. No current alert requires investigation. The CISO wants evidence showing whether the program's data-security posture improved since the previous quarter.</p>
+    <p>Which approach should the team use?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Report counts and dispositions from newly opened suspicious-activity investigations.',
+      "B. Use the status of the most recent DLP alert as the quarter's progress indicator.",
+      'C. Review the Outcome card and its grouped reporting and analytics for trends in policy coverage, risky sharing, and improvement.',
+      'D. Compare one representative raw audit event from the start of the quarter with one from the end.',
+      'E. Repeat the prior remediation actions and report their completion status as progress.'
+    ],
+    correctOption: 'C',
+    solution: `<strong>Correct Answer: C — review the Outcome card's grouped reporting and analytics for posture trends</strong><br><br>
+    The <strong>Outcome card's grouped reporting and analytics</strong> are built to show trends over time — policy coverage, risky sharing levels, and overall improvement — giving the CISO exactly the quarter-over-quarter posture evidence being asked for, independent of whether any single alert currently needs investigation.<br><br>
+    A reports on unrelated new investigations, not posture change since last quarter. B ties progress to a single alert's status, which reflects one point-in-time event, not a trend. D compares two individual raw events, which is far too narrow a sample to represent posture change across an entire quarter. E only confirms that earlier actions were completed — it doesn't measure whether posture actually improved as a result.`,
+    userChoice: null
+  },
+  {
+    id: 3127, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Fixing a Missing In-App Copilot Experience Caused by an Unsupported Update Channel',
+    text: `<p>A pilot group has Microsoft 365 Copilot licenses and can sign in to the Microsoft 365 desktop apps, but the expected in-app Copilot experiences are not delivered. A configuration report shows that every pilot device uses Semi-Annual Enterprise Channel.</p>
+    <p>Which change directly addresses the documented deployment gate?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Purchase an additional Copilot license for every already licensed pilot user.',
+      'B. Wait seven days for Viva Insights data processing before changing the update channel.',
+      'C. Use the Copilot Dashboard to make the client feature appear.',
+      'D. Move the pilot devices from Semi-Annual Enterprise Channel to a supported Microsoft 365 Apps update channel.',
+      'E. Clean up unused SharePoint sites as the direct client-delivery fix.'
+    ],
+    correctOption: 'D',
+    solution: `<strong>Correct Answer: D — move the devices to a supported Microsoft 365 Apps update channel</strong><br><br>
+    In-app Copilot experiences are documented to require the Microsoft 365 apps to run on a <strong>supported update channel</strong> — Semi-Annual Enterprise Channel is too infrequently updated to include the builds that deliver Copilot features. Moving pilot devices to a supported channel (such as Current Channel or Monthly Enterprise Channel) directly removes this deployment gate.<br><br>
+    A doesn't help — the users are already licensed; the missing piece is client capability, not license count. B (waiting for Viva Insights processing) addresses a completely different concern — dashboard reporting data, not in-app feature delivery. C (the Copilot Dashboard) is a reporting tool with no ability to make client features appear. E (SharePoint cleanup) has no bearing on which Microsoft 365 Apps build a device is running.`,
+    userChoice: null
+  },
+  {
+    id: 3128, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Establishing a Deployment-Readiness Baseline While the Dashboard Is Still Populating',
+    text: `<p>A tenant's Copilot pilot is working in the Microsoft 365 apps. Leadership now wants a baseline for deployment readiness and later wants to track adoption and impact. One Copilot license that includes the Viva Insights service plan was assigned two days ago, but the Copilot Dashboard still contains little data.</p>
+    <p>What should the administrator do?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Move the working pilot to a different Microsoft 365 Apps update channel to populate the dashboard.',
+      'B. Assign 50 Viva Insights licenses because one qualifying Copilot license cannot start data processing.',
+      'C. Use the Copilot Dashboard for the baseline and allow up to seven days after license assignment for data processing.',
+      'D. Conclude immediately that the tenant is not ready because the dashboard is sparse after two days.',
+      'E. Use only a client update report as the baseline for readiness, adoption, and impact.'
+    ],
+    correctOption: 'C',
+    solution: `<strong>Correct Answer: C — use the Copilot Dashboard, allowing up to seven days for data to process</strong><br><br>
+    The Copilot Dashboard is the correct tool for establishing a deployment-readiness baseline and later tracking adoption and impact, and its documented behavior is that data processing can take <strong>up to seven days</strong> after license assignment. At only two days in, sparse data is expected, not a sign of misconfiguration.<br><br>
+    A is unnecessary — the pilot is already working, and changing update channels has no effect on dashboard data-processing timing. B misapplies the licensing threshold: a single Copilot license that includes the Viva Insights service plan already qualifies to start processing; 50 Viva Insights licenses is the alternative path when no Copilot license is assigned, not a requirement on top of one that already qualifies. D draws a conclusion before the documented seven-day processing window has even elapsed. E ignores the dashboard entirely in favor of a report that isn't built to measure adoption or impact.`,
+    userChoice: null
+  },
+  {
+    id: 3129, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE RESPONSE',
+    title: 'Meeting the License-Assignment Threshold to Start Copilot Dashboard Data Processing',
+    text: `<p>A tenant has 32 assigned Viva Insights licenses and no assigned Copilot licenses. The administrator needs Copilot Dashboard data processing to start.</p>
+    <p>Which two changes would each independently satisfy a documented license-assignment threshold for starting data processing?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Assign at least one Copilot license that includes the Viva Insights service plan.',
+      'B. Export day-level metrics before meeting either license-assignment threshold.',
+      'C. Move all Microsoft 365 Apps devices to a supported Copilot update channel.',
+      'D. Keep the assignments unchanged and wait seven days.',
+      'E. Increase the number of assigned Viva Insights licenses to at least 50.'
+    ],
+    correctOption: ['A', 'E'],
+    solution: `<strong>Correct Answers: A and E — assign at least one qualifying Copilot license, or reach 50 assigned Viva Insights licenses</strong><br><br>
+    Copilot Dashboard data processing starts once <strong>either</strong> documented threshold is independently met: assigning <strong>at least one Copilot license that includes the Viva Insights service plan</strong>, or reaching <strong>at least 50 assigned Viva Insights licenses</strong> on their own. At 32 Viva Insights licenses and zero Copilot licenses, the tenant currently satisfies neither path.<br><br>
+    B tries to export metrics before either threshold is met, which skips the actual requirement — there's no data to export yet. C (update channel) affects in-app Copilot feature delivery, not the dashboard's data-processing license threshold. D just waits without changing the license assignments that are the actual blocker — seven days won't start processing if neither threshold is ever met.`,
+    userChoice: null
+  },
+  {
+    id: 3130, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Setting a Restrictive Default OneDrive Sharing-Link Role That Users Can Still Override',
+    text: `<p>An audit finds that newly created OneDrive sharing links default to an access role that allows recipients to modify files. Most recipients only need to consume the content, but users must retain the ability to deliberately select a different role when collaboration requires it.</p>
+    <p>Which tenant-level sharing default should the administrator configure?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Make People with existing access the default sharing-link type.',
+      'B. Set the default sharing-link role to Review.',
+      'C. Set the default sharing-link role to View.',
+      'D. Set the default sharing-link scope to Specific people.'
+    ],
+    correctOption: 'C',
+    solution: `<strong>Correct Answer: C — set the default sharing-link role to View</strong><br><br>
+    Setting the tenant-level default sharing-link <strong>role</strong> to <strong>View</strong> matches how most recipients actually use shared content — consuming it without modifying it — while still letting a user deliberately switch the link's role to Edit (or another role) at share time whenever collaboration genuinely requires it.<br><br>
+    A changes the sharing-link <strong>type</strong> (who a link resolves to), not the access role that controls modify permissions — it doesn't address the "allows recipients to modify files" problem. B (Review) is a more restrictive editing-adjacent role intended for specific reviewer workflows, not the general "just consume the content" default most recipients need. D changes the link's audience scope, not the permission role — it doesn't stop the link from granting modify access when it's still used.`,
+    userChoice: null
+  },
+  {
+    id: 3131, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Resolving a Legacy IRM Grounding Barrier While Preserving Protection Intent',
+    text: `<p>A legal team can open a set of protected documents and the intended SharePoint permissions are correct, but Microsoft 365 Copilot does not use the documents for grounding. The documents use legacy Information Rights Management (IRM). The organization must preserve protection intent while resolving the Copilot data-readiness barrier caused by legacy Information Rights Management.</p>
+    <p>What should the administrator implement?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Use Microsoft Purview sensitivity labeling for the documents instead of relying on legacy IRM protection.',
+      'B. Create a DLP policy even though no transfer or activity-enforcement requirement is present.',
+      'C. Remove all protection from the documents so that Copilot can use them.',
+      'D. Apply retention labels as a substitute for document protection and grounding compatibility.',
+      'E. Restrict SharePoint sharing further even though intended access and permissions are already correct.'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — replace legacy IRM with Microsoft Purview sensitivity labeling</strong><br><br>
+    <strong>Legacy IRM</strong> protection isn't compatible with Copilot's data-readiness requirements for grounding, while <strong>Microsoft Purview sensitivity labels</strong> are the documented, Copilot-compatible mechanism for protecting documents that also preserves the organization's protection intent — resolving the grounding barrier without weakening security.<br><br>
+    B introduces a DLP policy for a problem that isn't a transfer- or activity-enforcement issue at all — it wouldn't touch the IRM/grounding incompatibility. C abandons protection intent entirely just to work around the barrier, which the requirement explicitly says must be preserved. D substitutes a lifecycle mechanism (retention labels) for a protection mechanism — retention labels don't provide document protection or resolve grounding compatibility. E tightens SharePoint sharing further, but the scenario already states permissions and access are correct — the actual blocker is the IRM format, not sharing scope.`,
+    userChoice: null
+  },
+  {
+    id: 3132, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE RESPONSE',
+    title: "How a Tenant-Level SharePoint Sharing Change Affects OneDrive and Copilot",
+    text: `<p>A company is reviewing the impact of a proposed tenant-level SharePoint sharing-policy change before enabling Microsoft 365 Copilot. The change would restrict external sharing, link types, and default permissions. The OneDrive team asks how the change would affect its service and Copilot.</p>
+    <p>Which two statements should the administrator provide?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. The controls can change what OneDrive content Copilot can surface in responses.',
+      'B. The policy change will make every legacy IRM-protected document available for Copilot grounding.',
+      "C. Copilot will ignore users' existing OneDrive permissions after the policy change.",
+      'D. The tenant-level SharePoint sharing policies also apply to OneDrive because OneDrive uses SharePoint Online as its underlying platform.',
+      'E. The policies affect SharePoint sites only; OneDrive requires an unrelated tenant policy.'
+    ],
+    correctOption: ['A', 'D'],
+    solution: `<strong>Correct Answers: A and D — the controls affect what Copilot can surface, and they apply to OneDrive too</strong><br><br>
+    Because <strong>OneDrive is built on SharePoint Online</strong> as its underlying platform, tenant-level SharePoint sharing policies — external sharing, link types, and default permissions — also govern OneDrive content, not just SharePoint sites. Since Copilot always respects users' existing permissions when grounding responses, tightening these sharing controls <strong>changes what OneDrive content Copilot can surface</strong> in its answers.<br><br>
+    B is unrelated — a sharing-policy change affects permission scope, not the document protection format; it has no effect on legacy IRM-protected documents becoming grounding-compatible. C is factually wrong — Copilot always honors a user's existing permissions rather than ignoring them. E is also factually wrong and directly contradicted by D — the policies aren't SharePoint-only; they extend to OneDrive by design.`,
+    userChoice: null
+  },
+  {
+    id: 3133, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Disabling Public Web Search for One Regulated Group While Preserving It Elsewhere',
+    text: `<p>A regulated finance group must continue using Microsoft 365 Copilot and Microsoft 365 Copilot Chat, but neither experience may use public web search for that group. Other departments should retain their current web-search behavior.</p>
+    <p>What should the administrator configure?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Block the Copilot app for the finance group.',
+      'B. Ask each finance user to turn off the Web content toggle and leave the admin policy unchanged.',
+      'C. Remove all curated bookmarks from Copilot Search for the finance group.',
+      'D. Assign the Allow web search in Copilot policy to the finance group and turn web search off.'
+    ],
+    correctOption: 'D',
+    solution: `<strong>Correct Answer: D — assign the Allow web search in Copilot policy to the finance group, set to off</strong><br><br>
+    The <strong>Allow web search in Copilot</strong> admin policy, scoped and assigned specifically to the finance group with web search turned <strong>off</strong>, disables public web search for that group across both Copilot and Copilot Chat while leaving the tenant's default policy — and other departments' current web-search behavior — untouched.<br><br>
+    A blocks the Copilot app entirely for the finance group, which contradicts the requirement that they must continue using both Copilot and Copilot Chat. B relies on individual users voluntarily disabling a per-user toggle rather than an enforced admin policy — nothing stops them from turning it back on. C (removing bookmarks) has nothing to do with public web search behavior at all.`,
+    userChoice: null
+  },
+  {
+    id: 3134, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE RESPONSE',
+    title: 'How the Per-User Web Content Toggle Interacts With the Admin Web-Search Policy',
+    text: `<p>An administrator currently permits web search for a research group. A user in that group does not want real-time web content included in Copilot responses. Later, the administrator turns off web search for the group.</p>
+    <p>Which two statements describe the supported behavior?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. The user must be assigned a different Copilot license before the Web content toggle can be changed.',
+      'B. While the admin policy permits web search, the user can turn off the Web content toggle to exclude real-time web content.',
+      'C. After the administrator turns off web search, the Web content toggle is off and dimmed, and the user cannot turn it on.',
+      "D. The user can override the disabled admin policy by turning on the Web content toggle.",
+      "E. Turning off the Web content toggle changes the group's Allow web search in Copilot policy assignment."
+    ],
+    correctOption: ['B', 'C'],
+    solution: `<strong>Correct Answers: B and C — the user can opt out while search is permitted; once admin-disabled, the toggle is locked off</strong><br><br>
+    While the admin policy <strong>permits</strong> web search, an individual user retains a personal <strong>Web content toggle</strong> they can turn off to exclude real-time web content from their own Copilot responses, without affecting anyone else. Once the administrator turns web search <strong>off</strong> for the group, the admin policy takes precedence — the toggle becomes off and dimmed, and the user can no longer re-enable it.<br><br>
+    A invents a licensing prerequisite that doesn't exist for using the toggle. D is factually wrong — a user cannot override a disabled admin policy; the toggle is locked, not just defaulted off. E reverses cause and effect — the per-user toggle is a personal preference layered under the policy; it doesn't reach back and change the group's admin policy assignment.`,
+    userChoice: null
+  },
+  {
+    id: 3135, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'One Policy Governing No-Web-Search for Both Copilot and Copilot Chat',
+    text: `<p>A company is validating that one centrally managed control can enforce the same no-web-search requirement for a project group in both Microsoft 365 Copilot and Microsoft 365 Copilot Chat.</p>
+    <p>Which validation result is accurate?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Turning off the Allow web search in Copilot policy for the group governs web search in both experiences.',
+      'B. Each user must disable Web content separately because no admin control spans both experiences.',
+      'C. A separate web-search policy must be configured for each of the two experiences.',
+      'D. Publishing a Copilot Search acronym disables web search in both experiences.'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — the Allow web search in Copilot policy, turned off, governs web search in both experiences</strong><br><br>
+    The <strong>Allow web search in Copilot</strong> admin policy is a single, centrally managed control that governs web-search behavior for a group across <strong>both</strong> Microsoft 365 Copilot and Microsoft 365 Copilot Chat — turning it off for the project group satisfies the "one control, both experiences" validation.<br><br>
+    B is factually wrong — an admin control does span both experiences, so per-user manual disabling isn't required to meet this requirement. C assumes two separate policies are needed, which contradicts the documented single-policy design. D confuses an unrelated feature — a Copilot Search acronym affects internal search terminology, not web-search enforcement.`,
+    userChoice: null
+  },
+  {
+    id: 3136, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Explaining Different Search Experiences Purely by License Eligibility',
+    text: `<p>Two users select the Search module. One user has an eligible Microsoft 365 Copilot license and sees Copilot Search. The other user does not have an eligible license and sees Microsoft Search. No custom search content is required.</p>
+    <p>What should the administrator conclude?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. The administrator must create a connector before either user can access Copilot Search.',
+      'B. The administrator must enable web search for the second user.',
+      'C. License eligibility explains both experiences; no setup action is required.',
+      'D. The administrator must publish an acronym to replace Microsoft Search with Copilot Search.'
+    ],
+    correctOption: 'C',
+    solution: `<strong>Correct Answer: C — license eligibility alone explains the difference; no action is needed</strong><br><br>
+    Which search experience a user sees in the Search module is determined by whether they hold an <strong>eligible Microsoft 365 Copilot license</strong> — the licensed user correctly sees Copilot Search, and the unlicensed user correctly sees Microsoft Search. Since no custom search content is required here, this is expected, working behavior with nothing to configure.<br><br>
+    A invents a connector requirement that isn't needed for the licensed user to already be seeing Copilot Search successfully. B (enabling web search) addresses a completely different setting — it has no bearing on which search module experience a user is licensed to see. D misapplies acronym publishing, which affects internal search terminology, not which search experience appears based on licensing.`,
+    userChoice: null
+  },
+  {
+    id: 3137, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Making a Draft Acronym Appear in Copilot Search Results',
+    text: `<p>Users already access Copilot Search successfully. An administrator adds a new internal acronym in Draft state so subject-matter experts can review it. After review is complete, users report that the acronym still does not appear in results.</p>
+    <p>What should the administrator do?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Leave the acronym in Draft and wait for Copilot Search to publish it automatically.',
+      'B. Move the acronym to the Published state.',
+      'C. Assign every user another eligible Copilot license.',
+      'D. Create a connector solely to make the Draft acronym visible.',
+      'E. Turn on the Allow web search in Copilot policy.'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — move the acronym to the Published state</strong><br><br>
+    Content added in <strong>Draft</strong> state is intended for subject-matter expert review only and doesn't appear in Copilot Search results until it's <strong>moved to Published</strong>. Since review is already complete, publishing the acronym is the step that makes it appear in results.<br><br>
+    A is wrong — Draft content doesn't publish itself automatically; a deliberate publish action is required. C is unnecessary — users already access Copilot Search successfully, so licensing isn't the blocker. D (a connector) is for pulling in external content sources, not for changing an acronym's Draft/Published state. E (web search) is an unrelated setting that has no effect on whether internal acronym content appears in results.`,
+    userChoice: null
+  },
+  {
+    id: 3138, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE RESPONSE',
+    title: 'Restricting Admin-Center Copilot Use While Allowing Self-Service Licensing',
+    text: `<p>A company wants administrators to retain their existing admin roles but not use Microsoft 365 Copilot in the Microsoft 365, Exchange, SharePoint, or Teams admin centers. The company also wants employees to be able to purchase a Microsoft 365 Copilot license without admin approval.</p>
+    <p>Which two tenant-setting states meet the requirements?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Restrict the setting that permits users to purchase a Microsoft 365 Copilot license without admin approval.',
+      "B. Remove the administrators' admin roles.",
+      'C. Restrict the setting that allows admins to access Microsoft 365 Copilot in admin centers.',
+      'D. Allow the setting that permits users to purchase a Microsoft 365 Copilot license without admin approval.',
+      'E. Allow the image-generation scenario for all users.'
+    ],
+    correctOption: ['C', 'D'],
+    solution: `<strong>Correct Answers: C and D — restrict Copilot in admin centers, allow self-service license purchase</strong><br><br>
+    <strong>Restricting</strong> the setting that allows admins to use Copilot inside the Microsoft 365, Exchange, SharePoint, and Teams admin centers removes Copilot access there while leaving the administrators' actual admin roles fully intact. Separately, <strong>allowing</strong> the setting that permits users to purchase a Copilot license without admin approval satisfies the self-service licensing requirement — these are two independent tenant settings, each configured to the state the requirements call for.<br><br>
+    A does the opposite of what's needed — restricting self-service purchase would block employees from buying licenses without approval. B removes the admin roles entirely, but the company wants administrators to <em>retain</em> their existing roles, just without admin-center Copilot access. E (image generation) is an unrelated Copilot capability setting that has no bearing on either stated requirement.`,
+    userChoice: null
+  },
+  {
+    id: 3139, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE RESPONSE',
+    title: 'Behavior of PowerPoint and Copilot Chat When Image Generation Is Denied',
+    text: `<p>A tenant does not allow the Copilot image-generation scenario. During validation, testers use PowerPoint and Copilot Chat.</p>
+    <p>Which two outcomes are consistent with this state?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. In PowerPoint, Copilot can still create, design, and edit new images.',
+      'B. The denied image-generation state automatically prevents admins from using Copilot in admin centers.',
+      'C. In Copilot Chat, Copilot does not generate new images and does not return stock or brand images.',
+      'D. In PowerPoint, Copilot can respond with stock or brand images instead of generating a new image.',
+      'E. In Copilot Chat, Copilot returns stock or brand images whenever generation is denied.'
+    ],
+    correctOption: ['C', 'D'],
+    solution: `<strong>Correct Answers: C and D — Copilot Chat returns nothing image-related; PowerPoint can fall back to stock/brand images</strong><br><br>
+    With image generation denied, <strong>Copilot Chat</strong> simply doesn't generate new images and doesn't substitute stock or brand images either — that capability is unavailable there. In <strong>PowerPoint</strong>, however, Copilot can respond by offering stock or brand images as a fallback instead of generating a new one, since PowerPoint's design assistance has that alternative path.<br><br>
+    A is wrong — denying image generation blocks PowerPoint from creating new images; that capability is off, not still available. B is unrelated — the image-generation setting doesn't govern admin-center Copilot access at all, those are separate controls. E is wrong for Copilot Chat specifically — unlike PowerPoint, it doesn't fall back to stock or brand images when generation is denied.`,
+    userChoice: null
+  },
+  {
+    id: 3140, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Making Copilot Chat Appear Consistently Across Apps Without an App-Store Search',
+    text: `<p>All employees already have access to Copilot Chat. The help desk wants Copilot Chat to appear consistently in the Microsoft 365 Copilot app, Outlook, and Teams so users do not have to find it in an app store. No access restriction is required.</p>
+    <p>What should the administrator configure?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Block Copilot through Integrated Apps.',
+      'B. Set pinning to Pin Copilot Chat in Microsoft 365 apps.',
+      'C. Turn off the Allow web search in Copilot policy.',
+      'D. Set pinning to Do not pin Copilot Chat in Microsoft 365 apps.'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — set pinning to Pin Copilot Chat in Microsoft 365 apps</strong><br><br>
+    Setting the <strong>pinning</strong> control to <strong>Pin</strong> makes Copilot Chat surface consistently and directly inside the Microsoft 365 Copilot app, Outlook, and Teams — no app-store search needed — which is exactly the visibility outcome the help desk wants, with no access restriction involved.<br><br>
+    A (blocking through Integrated Apps) is an access-restriction action, but the requirement explicitly says no restriction is needed — this would remove access rather than just improve visibility. C (web search) is an unrelated setting that has no bearing on where Copilot Chat is pinned. D pins it in the opposite direction — Do not pin — which is the reverse of what's needed.`,
+    userChoice: null
+  },
+  {
+    id: 3141, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE RESPONSE',
+    title: 'Blocking Copilot for a Contractor Group Across All Required Surfaces',
+    text: `<p>A company wants to prevent a contractor group from accessing Copilot while allowing employees to retain access. The restriction must cover the Microsoft 365 Copilot app, Teams, Outlook, and Copilot Chat on the web.</p>
+    <p>Which two statements describe the appropriate implementation?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Turn off web search for the contractor group; this removes Copilot access from all required surfaces.',
+      'B. Integrated Apps blocking covers Copilot in the Microsoft 365 Copilot app, Teams, Outlook, and Copilot Chat on the web.',
+      'C. Use Integrated Apps to configure Copilot availability or blocking for the contractor group.',
+      'D. Integrated Apps can control Copilot only for the entire tenant, not for specific users or groups.',
+      'E. Set Copilot Chat to Do not pin; this alone prevents contractors from acquiring or accessing it.'
+    ],
+    correctOption: ['B', 'C'],
+    solution: `<strong>Correct Answers: B and C — Integrated Apps controls Copilot availability across all four surfaces, scoped to the group</strong><br><br>
+    <strong>Integrated Apps</strong> blocking is documented to cover Copilot across the Microsoft 365 Copilot app, Teams, Outlook, and Copilot Chat on the web all at once, and it can be scoped to a specific group — letting the administrator restrict the contractor group specifically while employees retain access.<br><br>
+    A is wrong — turning off web search only affects web-search behavior within Copilot; it doesn't remove access to Copilot itself from any surface. D is factually wrong — Integrated Apps supports scoping to specific users or groups, not just the entire tenant. E only changes pinning/visibility, which doesn't prevent access — a user can still acquire and use an app that simply isn't pinned.`,
+    userChoice: null
+  },
+  {
+    id: 3142, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE RESPONSE',
+    title: 'Unpinning Copilot Chat While Keeping the Copilot App Installable for Everyone',
+    text: `<p>An organization whose tenant is outside the European Economic Area and Switzerland does not want Copilot Chat pinned in Teams or Outlook. However, every employee must remain able to obtain the Copilot app from the app store.</p>
+    <p>Which two administrative choices meet both requirements?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. In Integrated Apps, allow only a designated pilot group to install the Copilot app.',
+      'B. Set Copilot Chat to Pin in Microsoft 365 apps.',
+      'C. Block the Copilot app through Integrated Apps for all users.',
+      'D. Set Copilot Chat to Do not pin in Microsoft 365 apps.',
+      'E. In Integrated Apps, allow all users in the organization to install the Copilot app.'
+    ],
+    correctOption: ['D', 'E'],
+    solution: `<strong>Correct Answers: D and E — Do not pin Copilot Chat, and allow all users to install the Copilot app</strong><br><br>
+    Setting <strong>Copilot Chat to Do not pin</strong> in Microsoft 365 apps satisfies the requirement that it not appear pinned in Teams or Outlook, while <strong>allowing all users in the organization to install the Copilot app</strong> through Integrated Apps keeps every employee able to obtain it from the app store — pinning and installability are independent settings, so both requirements can be met together.<br><br>
+    A restricts installation to a pilot group only, contradicting "every employee must remain able to obtain" the app. B pins Copilot Chat, the opposite of what's wanted. C blocks the app entirely for all users, which also contradicts the requirement that everyone remain able to obtain it.`,
+    userChoice: null
+  },
+  {
+    id: 3143, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Satisfying the Billing Prerequisite That Makes Cowork Accessible',
+    text: `<p>Users can find Cowork in the app and submit access requests, but they still cannot use Cowork. The organization has approved the service for production use and now wants to satisfy the prerequisite that makes Cowork accessible.</p>
+    <p>What should the administrator do?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Enable usage-based billing for Cowork.',
+      'B. Turn on the Cowork Browsing tenant setting.',
+      'C. Make Cowork undiscoverable, and then make it discoverable again.',
+      'D. Keep Cowork discoverable and approve each in-app request without enabling billing.'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — Enable usage-based billing for Cowork</strong><br><br>
+    Discoverability and in-app access requests only control whether users can <em>find</em> Cowork and ask for it — they don't make the service usable on their own. Cowork's production use requires <strong>usage-based (metered) billing</strong> to be turned on at the tenant level; until that prerequisite is satisfied, approved requests still leave users unable to actually use it.<br><br>
+    B is a browsing capability toggle, not the billing prerequisite that unlocks use. C only cycles discoverability, which the scenario already confirms works. D approves requests but does nothing about the missing billing prerequisite, so users would remain blocked.`,
+    userChoice: null
+  },
+  {
+    id: 3144, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Disabling Cowork Browser Tasks Tenant-Wide Without Losing Other Capabilities',
+    text: `<p>A company permits employees to use Cowork but prohibits Cowork from performing browser tasks anywhere in the organization. Other Cowork capabilities must remain available.</p>
+    <p>Which setting should an administrator change?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Keep Cowork discoverable but deny every access request submitted in the app.',
+      'B. Disable usage-based billing for Cowork.',
+      'C. Turn off the Cowork Browsing tenant setting.',
+      'D. Make Cowork undiscoverable to end users.'
+    ],
+    correctOption: 'C',
+    solution: `<strong>Correct Answer: C — Turn off the Cowork Browsing tenant setting</strong><br><br>
+    Cowork's browser-task capability is controlled by its own dedicated <strong>Browsing</strong> tenant setting, separate from the rest of the service. Turning that one setting off removes only the browser-task capability tenant-wide while leaving employees able to use Cowork's other capabilities, exactly as required.<br><br>
+    A denies every access request, which would block Cowork entirely rather than leaving other capabilities available. B affects billing/usability of Cowork as a whole, not specifically browser tasks. D removes Cowork from discovery altogether, which is broader than the requirement calls for.`,
+    userChoice: null
+  },
+  {
+    id: 3145, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Scoping a Third-Party AI Provider to a Microsoft Entra Security Group',
+    text: `<p>A third-party AI provider is enabled for Microsoft 365 Copilot and Copilot Studio. Only members of an existing Microsoft Entra security group may use the provider, and access must follow group membership changes without assigning individual users.</p>
+    <p>What should an administrator configure?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Assign the provider separately to each current member as an individual user.',
+      'B. Set the provider access choice to No users.',
+      'C. Assign permissions independently for each model offered by the provider.',
+      'D. Assign permission for the AI provider to the approved Microsoft Entra security group.'
+    ],
+    correctOption: 'D',
+    solution: `<strong>Correct Answer: D — Assign permission for the AI provider to the approved Microsoft Entra security group</strong><br><br>
+    Third-party AI provider access can be scoped directly to a <strong>Microsoft Entra security group</strong>. Assigning the provider to the group means access automatically tracks group membership — adding or removing members changes who can use the provider without the administrator touching individual assignments, which is exactly what the requirement asks for.<br><br>
+    A assigns access per individual user, so membership changes wouldn't automatically apply and the assignment would need constant manual upkeep. B removes access for everyone, the opposite of what's needed. C manages permissions per model rather than per provider access boundary, and still wouldn't tie access to the group.`,
+    userChoice: null
+  },
+  {
+    id: 3146, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Enforcing a Tenant-Wide Block on OpenAI-Operated Models at the Provider Boundary',
+    text: `<p>A compliance directive requires that no user in the tenant can access OpenAI-operated models through Microsoft 365 Copilot experiences. The administrator must enforce the restriction at the provider access boundary.</p>
+    <p>Which action should the administrator take?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Leave the provider enabled and remove individual user assignments as users are discovered.',
+      'B. Under the setting that chooses which users can access OpenAI-operated models, select No users and save.',
+      'C. Remove access separately from each model exposed by the provider.',
+      'D. Assign provider access only to a Microsoft Entra compliance group.'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — Set the OpenAI-operated models access choice to No users</strong><br><br>
+    The provider access boundary for OpenAI-operated models exposes a direct setting controlling <strong>which users can access</strong> those models. Setting that choice to <strong>No users</strong> and saving enforces the restriction tenant-wide, in one place, at exactly the boundary the directive calls for.<br><br>
+    A reacts to individual users as they're discovered, leaving gaps until each is found — it doesn't enforce the restriction at the boundary. C manages models one at a time instead of the provider-level boundary, which is unnecessary and error-prone. D still leaves a group of users with access, which fails the "no user in the tenant" requirement.`,
+    userChoice: null
+  },
+  {
+    id: 3147, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE RESPONSE',
+    title: 'Making Future Default Federated Connectors Start Unavailable With One Reviewed Exception',
+    text: `<p>A tenant cannot review each newly released default federated Copilot connector before it appears. Administrators therefore require current and future default federated connectors to start unavailable. One connector has completed review and must remain available as an exception.</p>
+    <p>Which two actions should the administrators take?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Disable each currently listed connector individually while leaving the tenant toggle enabled.',
+      'B. Disable the tenant toggle and leave every connector in the disabled state.',
+      'C. Use staged rollout on the approved connector while leaving the tenant toggle enabled for all default connectors.',
+      'D. Selectively enable the approved connector while the global disable setting remains active.',
+      'E. Disable the tenant toggle for default federated connectors.'
+    ],
+    correctOption: ['D', 'E'],
+    solution: `<strong>Correct Answers: D and E — Turn off the tenant toggle, then selectively re-enable the one approved connector</strong><br><br>
+    <strong>Disabling the tenant toggle for default federated connectors (E)</strong> makes every current connector unavailable and flips the default so any newly released connector also starts unavailable — solving the "cannot review before it appears" problem for good. That alone would also disable the one connector that already passed review, so administrators must <strong>selectively enable the approved connector while the global disable setting remains active (D)</strong>, keeping it available as the documented exception without reopening the tenant-wide default.<br><br>
+    A only touches connectors that currently exist and leaves the tenant toggle enabled, so any future connector still starts available — it doesn't solve the core requirement. B disables everything with no mechanism left to keep the approved connector available. C never turns off the global default, so future connectors keep arriving enabled by default.`,
+    userChoice: null
+  },
+  {
+    id: 3148, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE RESPONSE',
+    title: 'Layering a Group-Scoped Exception on Top of a Tenant-Wide Federated Connector Disable',
+    text: `<p>A tenant keeps the global federated-connector toggle disabled. The finance connector is the only approved exception, and even that connector must be available only to the Finance Pilot Microsoft Entra group.</p>
+    <p>Which two connector-level actions create this layered exception without enabling default rollout for the tenant?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Selectively enable the finance connector while the global disable setting remains active.',
+      'B. Add staging for the finance connector and specify the Finance Pilot group.',
+      'C. Selectively enable the finance connector for the organization and leave staged rollout unconfigured.',
+      'D. Rely on future connectors to follow default rollout behavior.',
+      'E. Enable the tenant toggle before configuring the finance connector.'
+    ],
+    correctOption: ['A', 'B'],
+    solution: `<strong>Correct Answers: A and B — Selectively enable the finance connector, then scope it with staged rollout</strong><br><br>
+    Because the global toggle stays disabled, the finance connector needs its own <strong>selective enable (A)</strong> just to become an exception at all — that's the first layer. On top of that, <strong>adding staging and specifying the Finance Pilot group (B)</strong> narrows that exception so the connector is available only to that group rather than the whole organization — the second layer. Together they create the layered exception the requirement describes, and neither one touches the tenant-wide toggle.<br><br>
+    C enables the connector for the entire organization instead of just the Finance Pilot group, missing the group-scoping requirement. D does nothing to configure the finance connector itself. E would enable default rollout for the tenant, which the requirement explicitly says must not happen.`,
+    userChoice: null
+  },
+  {
+    id: 3149, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Restricting an Already-Enabled Connector to a Pilot Group via Staged Rollout',
+    text: `<p>An enabled federated connector has passed technical validation. During a pilot, the connector must be available only to members of a designated Microsoft Entra security group. The organization does not want to change the tenant-wide default for other connectors.</p>
+    <p>What should an administrator configure for this connector?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Enable the tenant toggle so that the connector follows default rollout behavior.',
+      'B. Disable the tenant toggle for federated connectors.',
+      'C. Selectively enable the connector while leaving staged rollout unconfigured.',
+      "D. Choose Add staging in the connector's Staged Rollout column and specify the pilot group."
+    ],
+    correctOption: 'D',
+    solution: `<strong>Correct Answer: D — Add staging on the connector and specify the pilot group</strong><br><br>
+    The connector is already enabled, so the only thing missing is scoping it to the pilot group. <strong>Add staging</strong> in the connector's Staged Rollout column, with the designated group specified, restricts that one connector to the pilot group — a per-connector change that leaves the tenant-wide default and every other connector untouched.<br><br>
+    A and B both change tenant-wide behavior, which the organization explicitly does not want. C leaves staged rollout unconfigured, so the connector would remain available tenant-wide rather than scoped to the pilot group — it doesn't satisfy the "only to members of a designated group" requirement.`,
+    userChoice: null
+  },
 
   // ============================================================
   // MICROSOFT LEARN'S OFFICIAL AB-650 STUDY GUIDE QUESTIONS
@@ -12310,6 +13624,7 @@ function goToSections() {
 
   renderAI102Browser();
   renderExamTopicsBrowser();
+  renderAB650Browser();
   renderProgressDash();
 }
 
@@ -12531,6 +13846,71 @@ function renderExamTopicsBrowser() {
     <div class="et-type-grid">${typeCards}</div>
     <div class="et-group-label" style="margin-top:16px">Coverage by official AI-103 domain</div>
     <div class="et-dom-grid">${domCards}</div>`;
+}
+
+// ── AB-650 Actual Exam Questions — grouped by official skill domain ──
+function ab650DomainIndices(domainKey) {
+  const arr = [];
+  questions.forEach((q, i) => {
+    if (!q.isAB650) return;
+    if (domainAB650Of(q) !== domainKey) return;
+    arr.push(i);
+  });
+  return arr;
+}
+
+function renderAB650Browser() {
+  const el = document.getElementById('ab650Browser');
+  if (!el) return;
+  const total = questions.filter(q => q.isAB650).length;
+  if (!total) { el.innerHTML = ''; return; }
+
+  const domCards = Object.entries(DOMAIN_AB650_DEFS).map(([k, d]) => {
+    const n = ab650DomainIndices(k).length;
+    const dis = n === 0;
+    const pct = total ? Math.round((n / total) * 100) : 0;
+    return `<div class="et-dom ${dis?'disabled':''}" ${dis?'':`onclick="startAB650Filtered('${k}')" role="button" tabindex="0"`}>
+      <div class="et-dom-head">
+        <span class="domain-badge" style="--dchip:${d.color}">${d.short}</span>
+        <span class="et-dom-count">${n}</span>
+      </div>
+      <div class="et-dom-name">${d.name}</div>
+      <div class="et-dom-bar"><span style="width:${pct}%;background:${d.color}"></span></div>
+      <div class="et-dom-meta">${pct}% of pool · exam weight ${d.weight}</div>
+    </div>`;
+  }).join('');
+
+  el.innerHTML = `
+    <div class="et-title"><span class="coach-orb" style="display:inline-block;vertical-align:middle"></span> AB-650 Actual Exam Questions — browse the ${total} questions</div>
+    <div class="et-sub">Grouped by official skill-measured domain. Pick one to focus that objective area, or use the section card above for the full mixed set. Each launches a timed, scored set.</div>
+    <div class="et-group-label">Coverage by official AB-650 domain</div>
+    <div class="et-dom-grid">${domCards}</div>`;
+}
+
+function startAB650Filtered(domainKey) {
+  const idx = ab650DomainIndices(domainKey);
+  if (!idx.length) return;
+  const def = DOMAIN_AB650_DEFS[domainKey];
+  currentSection = 'ab650:domain:' + domainKey;
+  activeQuestions = idx;
+  pos = 0;
+  currentQ = activeQuestions[0];
+  reviewMode = false;
+  flagged.clear();
+  caseStudyCollapsed = false;
+  csActiveTab = -1;
+  stageMode = false;
+  activeQuestions.forEach(i => resetQuestion(questions[i]));
+  timeLeft = Math.max(300, activeQuestions.length * 90);
+  document.getElementById('sectionTitle').textContent = `AB-650 · ${def.short}`;
+  { const p = document.getElementById('examCodePrefix'); if (p) p.textContent = 'AB-650:'; }
+  document.getElementById('sectionScreen').classList.add('hidden');
+  document.getElementById('examUI').classList.remove('hidden');
+  examStarted = true;
+  clearInterval(timerInterval);
+  buildNav();
+  renderQuestion();
+  startTimer();
 }
 
 function startExamTopicsFiltered(kind, value) {

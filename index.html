@@ -12758,6 +12758,568 @@ ORDER BY OrderYear`,
     A and B both change tenant-wide behavior, which the organization explicitly does not want. C leaves staged rollout unconfigured, so the connector would remain available tenant-wide rather than scoped to the pilot group — it doesn't satisfy the "only to members of a designated group" requirement.`,
     userChoice: null
   },
+  {
+    id: 3150, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE RESPONSE',
+    title: 'Triggering Agent-Sponsorship Notifications From the Right Lifecycle Workflow Categories',
+    text: `<p>An identity-governance team is designing Lifecycle Workflows that can notify stakeholders when an agent identity's sponsor changes roles or leaves the organization.</p>
+    <p>In which two workflow template categories can the supported agent-sponsorship notification tasks trigger?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Any template category when the task is scheduled to recur',
+      'B. Leaver',
+      'C. Mover',
+      'D. Joiner'
+    ],
+    correctOption: ['B', 'C'],
+    solution: `<strong>Correct Answers: B and C — Leaver and Mover</strong><br><br>
+    A sponsor <strong>leaving the organization</strong> maps to the <strong>Leaver</strong> template category, and a sponsor <strong>changing roles</strong> maps to the <strong>Mover</strong> category — those are exactly the two lifecycle events the scenario describes, and the supported agent-sponsorship notification tasks trigger within those categories.<br><br>
+    A is wrong because recurrence is a scheduling detail, not a template category, and doesn't make the notification tasks available anywhere they wouldn't otherwise trigger. D (Joiner) covers new-hire onboarding events, not a change to an existing sponsor's role or their departure, so it doesn't fit either described trigger.`,
+    userChoice: null
+  },
+  {
+    id: 3151, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Notifying Cosponsors of Continuity Without Implying Sponsorship Reassignment',
+    text: `<p>An agent identity already has a sponsor and several cosponsors. If the sponsor leaves, governance policy requires an automated notice to the cosponsors so they can maintain continuity. The workflow must send a notification only; it must not imply that sponsorship is reassigned.</p>
+    <p>Which Lifecycle Workflows task should be used?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Send email to cosponsors about sponsor changes',
+      'B. Automatically replace the departing sponsor with the first cosponsor',
+      'C. Send email to manager about sponsorship changes',
+      'D. Place the cosponsor email task in a joiner workflow'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — Send email to cosponsors about sponsor changes</strong><br><br>
+    The sponsor leaving is a <strong>Leaver</strong> event, and the requirement is a plain notification to the <strong>cosponsors</strong> — which is exactly what the "Send email to cosponsors about sponsor changes" task does, with no automatic reassignment implied.<br><br>
+    B automatically reassigns sponsorship to the first cosponsor, directly contradicting "must not imply that sponsorship is reassigned." C sends the notice to the manager instead of the cosponsors, the wrong audience. D places the task in a joiner workflow, but a sponsor leaving is a leaver-type event, not a joiner-type one.`,
+    userChoice: null
+  },
+  {
+    id: 3152, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Adding a Manager-Notification Task to an Existing Mover Workflow',
+    text: `<p>A mover workflow detects that the sponsor of an agent identity has changed roles. Policy requires the supported automated notice to be sent to the manager, while the agent's cosponsors must not be the notification audience. The workflow is not expected to transfer sponsorship.</p>
+    <p>Which task should the administrator add?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Send email to cosponsors about sponsor changes',
+      'B. Move the manager-notification task to a joiner workflow',
+      'C. Send email to manager about sponsorship changes',
+      'D. Reassign sponsorship to the manager instead of sending a notification'
+    ],
+    correctOption: 'C',
+    solution: `<strong>Correct Answer: C — Send email to manager about sponsorship changes</strong><br><br>
+    A sponsor changing roles is a <strong>Mover</strong> event, and the mover workflow already exists — the administrator just needs to add the task that notifies the <strong>manager</strong>. "Send email to manager about sponsorship changes" is a plain notification, matching both the required audience and the "notification only" nature of the requirement.<br><br>
+    A notifies cosponsors, which the requirement explicitly excludes as the audience. B is unnecessary and wrong — the event is already correctly a mover trigger, so moving the task to a joiner workflow would put it in a category that never fires for this event. D reassigns sponsorship, which the scenario explicitly says is not expected.`,
+    userChoice: null
+  },
+  {
+    id: 3153, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Scoping Conditional Access to the User in a Delegated Token-Exchange Flow',
+    text: `<p>A support agent receives a delegated token after an employee signs in. To call a downstream service, the agent exchanges that delegated token for another access token. Security must apply Conditional Access to the identity that is the subject of this flow.</p>
+    <p>Which target should the administrator configure?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Only the downstream service as the audience',
+      'B. A linked agent user account',
+      "C. The agent identity used by the agent identity blueprint",
+      'D. The employee population, by targeting users and groups'
+    ],
+    correctOption: 'D',
+    solution: `<strong>Correct Answer: D — Target the employee population, by targeting users and groups</strong><br><br>
+    Because the agent receives its token only <strong>after an employee signs in</strong> and then exchanges that delegated token on the employee's behalf, the token subject throughout the exchange remains the <strong>employee</strong> — not the agent. Conditional Access must therefore target the <strong>employee population</strong> (users and groups), matching the delegated (on-behalf-of) pattern rather than an unattended, agent-subject pattern.<br><br>
+    A scopes by audience/resource rather than by the identity that is the subject of the flow, which doesn't satisfy the requirement to apply the policy to that identity. B and C both target the agent's own identity, which is correct only for autonomous flows where no user signs in and the agent itself is the token subject — not this delegated, user-initiated exchange.`,
+    userChoice: null
+  },
+  {
+    id: 3154, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Scoping Conditional Access for an Unattended Agent Using Its Own Blueprint Credentials',
+    text: `<p>An unattended procurement agent calls a protected API. No employee signs in, and the agent requests the API token by using its own identity and credentials managed through its agent identity blueprint.</p>
+    <p>Which identity should Conditional Access target for this request?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. All employees who can submit procurement requests',
+      'B. The agent identity',
+      'C. Only the protected API as the audience',
+      'D. An agent user account associated with the workload'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — The agent identity</strong><br><br>
+    No employee signs in, and the agent obtains the token using its <strong>own identity and credentials</strong> managed through its agent identity blueprint — the token subject is the agent itself. Conditional Access must therefore be scoped to the <strong>agent identity</strong>, consistent with unattended, credential-based access patterns.<br><br>
+    A targets employees, but no employee is part of this request at all. C scopes by audience/resource, not by the identity that is the subject of the request. D describes a different, user-account-style pattern that doesn't match a blueprint-managed agent identity making its own credentialed request.`,
+    userChoice: null
+  },
+  {
+    id: 3155, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Identifying the Requesting Subject for a Digital Worker\u2019s Agent User OAuth Token',
+    text: `<p>A digital worker runs without a human interface and uses the agent user OAuth flow to obtain a token for a business resource. Token inspection confirms that the token was issued to the digital worker's user account.</p>
+    <p>Which principal should Conditional Access evaluate as the requesting subject?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      "A. The digital worker's agent user account",
+      'B. Only the business resource named as the token audience',
+      "C. The employees who receive the digital worker's output",
+      'D. The agent identity from the identity blueprint'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — The digital worker's agent user account</strong><br><br>
+    Token inspection directly confirms the token was issued to the <strong>digital worker's agent user account</strong> — that account is the documented requesting subject for the agent user OAuth flow, so Conditional Access should evaluate that principal.<br><br>
+    B scopes by audience/resource rather than by requesting subject. C names people who consume the output, not the identity that requested the token. D describes a separate blueprint-managed agent identity pattern, which doesn't match what the token inspection evidence in this scenario actually shows.`,
+    userChoice: null
+  },
+  {
+    id: 3156, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Closing an Ownerless-Agent Governance Gap Without Overreacting to Unconfirmed Risk',
+    text: `<p>During a quarterly governance review, an administrator finds several deployed agents with no owner recorded. The agents are still in use, and there is no evidence that they are compromised.</p>
+    <p>Which action most directly closes the governance gap?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Block every affected agent as a confirmed security risk',
+      'B. Use the ownerless-agent governance view to prioritize the affected agents and assign each a designated owner',
+      'C. Review usage analytics and leave the owner field unchanged',
+      'D. Move the affected agents into the pending-request approval workflow'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — Use the ownerless-agent governance view and assign each agent a designated owner</strong><br><br>
+    The stated gap is a missing owner, not a confirmed compromise — the <strong>ownerless-agent governance view</strong> exists specifically to surface and prioritize agents like these, and <strong>assigning each a designated owner</strong> directly closes that governance gap while the agents remain in productive use.<br><br>
+    A treats the agents as a confirmed security risk despite the scenario stating there's no evidence of compromise — an overreaction that isn't supported by the facts. C reviews analytics but explicitly leaves the actual gap (the missing owner) unresolved. D routes the agents into an approval workflow meant for new requests, not a mechanism for assigning ownership to already-deployed agents.`,
+    userChoice: null
+  },
+  {
+    id: 3157, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Routing an Ownership Assignment Without Expanding a Monitoring-Only Analyst\u2019s Access',
+    text: `<p>A governance analyst can view the agent Overview and detects an active agent without an owner. The analyst's current permissions are monitoring-only. To have ownership assigned without granting the analyst broader standing access, to whom should the analyst route the change?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. A user in the AI Administrator or Global Administrator role',
+      'B. The owner of a data source used by the agent',
+      'C. Any operator in a monitoring-only role',
+      'D. Any user who can view the agent Overview'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — A user in the AI Administrator or Global Administrator role</strong><br><br>
+    Assigning ownership is a governance change that requires standing administrative permission — routing it to a <strong>user in the AI Administrator or Global Administrator role</strong> gets the change made by someone who already holds the necessary rights, without the analyst's own monitoring-only access being expanded.<br><br>
+    B has no documented authority over agent ownership just because they own a data source the agent happens to use. C is another monitoring-only role and doesn't have the standing rights to assign ownership either. D is far too broad — the ability to view the agent Overview doesn't imply any permission to change ownership, and routing to "any" such user doesn't guarantee the change is made by someone authorized.`,
+    userChoice: null
+  },
+  {
+    id: 3158, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Blocking Outside-Publisher Agents Tenant-Wide by Provenance',
+    text: `<p>An organization permits agents built by Microsoft and agents built internally. It must prevent every user from viewing or installing agents supplied by outside publishers, while leaving the two permitted categories available. The requirement applies by agent provenance across the tenant, not to a named agent or a selected user population.</p>
+    <p>Which setting should an administrator configure?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Block each currently known outside-publisher agent individually in the agent Registry.',
+      'B. Set User access to No users for the organization.',
+      'C. Set User access to Specific users/groups and select the users who may use agents.',
+      'D. In Allowed agent types, retain the Microsoft and organization-built categories and disable the outside-publisher category.'
+    ],
+    correctOption: 'D',
+    solution: `<strong>Correct Answer: D — In Allowed agent types, keep Microsoft and organization-built enabled and disable the outside-publisher category</strong><br><br>
+    The requirement is scoped by <strong>provenance</strong> (who built the agent), applies tenant-wide, and must leave two whole categories available — that's exactly what <strong>Allowed agent types</strong> controls. Disabling only the outside-publisher category there blocks every such agent for every user while leaving the Microsoft and organization-built categories untouched.<br><br>
+    A only handles agents that currently exist and requires ongoing manual upkeep as new outside-publisher agents appear — it doesn't apply by provenance going forward. B blocks everyone from every agent, including the two permitted categories, which is broader than required. C is a user/group-level control, not a provenance-level one, and the requirement explicitly says it must not apply to a selected user population.`,
+    userChoice: null
+  },
+  {
+    id: 3159, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Combining Agent User Access With an Independent Agent Registry Assignment',
+    text: `<p>An administrator configures Agent User access as Specific users/groups and selects the Research group. Members of the Operations group are not selected, but a separate Agent Registry assignment gives them permission to install and use catalog agents. Assuming the relevant agent type is allowed, who can use the agents?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Only members of the Operations group',
+      'B. Members of neither group',
+      'C. Members of both groups',
+      'D. Only members of the Research group'
+    ],
+    correctOption: 'C',
+    solution: `<strong>Correct Answer: C — Members of both groups</strong><br><br>
+    Agent User access and an <strong>Agent Registry assignment</strong> are independent, cumulative grants. The Research group gets access because it was selected under Agent User access, and the Operations group gets access through its own separate Agent Registry assignment — neither grant depends on or is limited by the other, so both groups end up able to use the agents.<br><br>
+    A ignores that the Research group was explicitly selected under Agent User access. B and D each drop one of the two independently valid grants — the scenario describes two separate paths to access, and both remain in effect at the same time.`,
+    userChoice: null
+  },
+  {
+    id: 3160, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Allowed Agent Types Overriding a Pilot Group\u2019s User Access Selection',
+    text: `<p>A tenant has already selected a pilot group under Agent User access. An administrator then disables "Allow apps and agents built by external publishers" under Allowed agent types. Pilot users browse the Agent store.</p>
+    <p>Which result is expected for agents built by external publishers?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. They remain visible to the pilot group because user access overrides the type setting',
+      'B. They appear only to users who also have an Agent Registry assignment',
+      'C. They no longer appear to users in the Agent store',
+      'D. They remain visible but their install button is disabled for every user'
+    ],
+    correctOption: 'C',
+    solution: `<strong>Correct Answer: C — They no longer appear to users in the Agent store</strong><br><br>
+    <strong>Allowed agent types</strong> gates by provenance ahead of any user-level selection. Disabling the external-publisher category there removes those agents from the Agent store entirely — the earlier pilot-group selection under Agent User access doesn't override a type that's been disabled, because the type gate applies first.<br><br>
+    A has the precedence backwards — user access does not override a disabled type. B invents an exception for Agent Registry assignments that isn't part of how the type-level gate works. D assumes the agents stay visible with only installation blocked, but disabling the type removes them from the store rather than just disabling their install action.`,
+    userChoice: null
+  },
+  {
+    id: 3161, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Choosing an Inventory That Covers Agents Without a Microsoft Entra Agent ID',
+    text: `<p>A governance team must produce one inventory of Microsoft agents, partner agents, and internally developed agents. Some internally developed agents do not have a Microsoft Entra Agent ID.</p>
+    <p>Which administrative inventory should the team use?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. The agent list in the Microsoft Entra admin center',
+      'B. A top-platform summary in the agent Overview',
+      'C. The pending agent request queue',
+      'D. The comprehensive agent registry in Agent 365'
+    ],
+    correctOption: 'D',
+    solution: `<strong>Correct Answer: D — The comprehensive agent registry in Agent 365</strong><br><br>
+    The requirement is one inventory covering agents from every source, including internally developed agents that <strong>lack a Microsoft Entra Agent ID</strong>. The <strong>comprehensive agent registry in Agent 365</strong> is built to catalog agents broadly rather than only those already represented as an Entra identity, so it's the inventory that satisfies the "one inventory of all three sources" requirement.<br><br>
+    A is scoped to identities registered in Microsoft Entra, so agents without a Microsoft Entra Agent ID would be missing — it can't produce a complete inventory here. B is a summary view, not a comprehensive inventory. C tracks pending requests, not an inventory of already-deployed agents.`,
+    userChoice: null
+  },
+  {
+    id: 3162, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Isolating Partner-Owned Agents in the Registry by Publisher Type',
+    text: `<p>An agent inventory contains agents created on several development platforms and deployed through multiple channels. An auditor must isolate agents owned and distributed by external partners, while excluding Microsoft agents and agents published by the organization.</p>
+    <p>Which registry filter should the auditor use?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Publisher Type',
+      'B. Platform',
+      'C. Data source',
+      'D. Channel'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — Publisher Type</strong><br><br>
+    The requirement is defined entirely by <strong>who owns and distributes</strong> the agent — Microsoft, the organization, or an external partner — which is exactly what the <strong>Publisher Type</strong> filter isolates. Filtering to the partner value excludes Microsoft agents and organization-published agents in one step.<br><br>
+    B (Platform) reflects the development platform an agent was built on, not who owns/distributes it. C (Data source) reflects what the agent connects to, unrelated to publisher ownership. D (Channel) reflects how an agent is deployed, not who published it — the scenario explicitly says the inventory spans multiple channels, so channel can't be the isolating filter.`,
+    userChoice: null
+  },
+  {
+    id: 3163, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE RESPONSE',
+    title: 'Splitting Responsibilities Between Agent 365 Discovery and Microsoft Entra Identity Control',
+    text: `<p>An organization is defining administrative responsibilities after adopting the converged agent-management approach.</p>
+    <p>Which two assignments align with the documented separation of responsibilities?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Use Agent 365 as the central place to discover and manage agents',
+      'B. Use the Microsoft Entra agent list as the comprehensive inventory for agents that do not have an Entra agent identity',
+      'C. Replace Microsoft Entra identity and access controls with Agent 365 inventory controls',
+      'D. Use Publisher Type to determine the platform on which each agent was built',
+      'E. Continue to use Microsoft Entra for agent identity and access control'
+    ],
+    correctOption: ['A', 'E'],
+    solution: `<strong>Correct Answers: A and E — Agent 365 for discovery/management, Microsoft Entra for identity and access control</strong><br><br>
+    The documented converged approach splits responsibilities cleanly: <strong>Agent 365</strong> becomes the central place to <strong>discover and manage</strong> agents across sources, while <strong>Microsoft Entra continues to own identity and access control</strong> for the agents that have an Entra agent identity — the two systems complement rather than replace each other.<br><br>
+    B is wrong because the Entra agent list can't be comprehensive — it only covers agents that already have an Entra agent identity, missing others by definition. C incorrectly describes Agent 365 as replacing Entra identity/access controls, which contradicts the documented separation. D confuses Publisher Type (who owns/distributes an agent) with platform (what it was built on) — the filter doesn't determine platform at all.`,
+    userChoice: null
+  },
+  {
+    id: 3164, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Publishing a Reviewed Agent With Pilot Users, Policy Template, and Permissions in One Release',
+    text: `<p>An administrator has finished reviewing a newly requested agent. The agent should be available only to a pilot group, and the administrator must apply the organization's protection template and accept the required permissions as part of release.</p>
+    <p>Which action should the administrator take?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Wait for the request to enter Update pending, and then approve it while users continue using a previous version.',
+      'B. Select Publish to store, and then complete the wizard for the pilot users, policy template, and required permissions.',
+      "C. Select Update in store so that the pilot group receives the agent's first published version.",
+      'D. Select Publish to store without choosing users or a policy template, and configure both after release.'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — Publish to store, then complete the wizard for pilot users, policy template, and permissions</strong><br><br>
+    This is a first-time release of a newly reviewed agent, and the requirements — pilot-only availability, the protection template, and accepting required permissions — must all be handled <strong>as part of release</strong>. <strong>Publish to store</strong> is the release action for a not-yet-published agent, and its wizard is exactly where users, the policy template, and permissions are configured together in one pass.<br><br>
+    A describes an update-approval flow for an agent that's already published with a previous version in use — this agent has never been published, so there's no previous version to fall back to. C (Update in store) is for revising an already-published agent, not releasing one for the first time. D explicitly defers users and the policy template to after release, contradicting "as part of release."`,
+    userChoice: null
+  },
+  {
+    id: 3165, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Publishing an Approved Revision After the Expected Pending-Review Access Behavior',
+    text: `<p>A developer submits a revision to an agent that is already available in the store. The revision appears in Pending approval, and employees can still use the previous version while the administrator reviews the changes. The administrator approves the revision.</p>
+    <p>What should the administrator do next?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Wait until the previous version becomes unavailable, and then select Update in store.',
+      'B. Select Update in store; access to the previous version before approval is expected.',
+      'C. Reject the revision because continued access to the previous version indicates that the update failed.',
+      'D. Select Publish to store and process the revision as a new requested agent.'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — Select Update in store; continued access to the previous version during review is expected</strong><br><br>
+    Employees keeping access to the previous version while a revision sits in <strong>Pending approval</strong> is the documented, expected behavior — it isn't a fault to correct. Once the administrator approves the revision, the next step is to <strong>select Update in store</strong>, which publishes the approved revision for an agent that's already in the store.<br><br>
+    A treats the expected pending-review behavior as something to wait out, adding an unnecessary and undocumented step. C misreads normal pending-review behavior as a failure and rejects a revision that was correctly approved. D treats the revision as a brand-new agent request, but this is an update to an already-published agent, which uses Update in store rather than Publish to store.`,
+    userChoice: null
+  },
+  {
+    id: 3166, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Describing Expected Employee Access During an Unreviewed Agent Revision',
+    text: `<p>A developer publishes a revision to an agent that employees already use. The administrator has not yet reviewed or approved the revision. Support must tell employees what access behavior to expect during the review.</p>
+    <p>Which statement is correct?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. The update appears in Pending approval with Update pending status, and users continue using the previous version during review.',
+      'B. The update appears in Pending approval with Update pending status, and user access to the agent pauses while review continues.',
+      'C. The update appears in Pending approval with Update pending status, and users choose between both agent versions while review continues.',
+      'D. The update appears in Pending approval with Update pending status, and users begin using the revised version while review continues.'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — Pending approval with Update pending status; employees continue using the previous version during review</strong><br><br>
+    An unreviewed revision to an already-published agent lands in <strong>Pending approval</strong> with an <strong>Update pending</strong> status, and the documented, expected behavior is that employees keep using the <strong>previous, already-approved version</strong> uninterrupted while the administrator reviews the changes.<br><br>
+    B is wrong — access doesn't pause; the previous version stays available. C invents a version-choice experience that isn't part of the documented behavior. D is wrong — the revised version only becomes available to employees after the administrator approves and publishes it, not while it's still pending.`,
+    userChoice: null
+  },
+  {
+    id: 3167, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Making a Registry Agent Immediately Unusable Org-Wide While Keeping It Restorable',
+    text: `<p>A security review finds that an agent already listed in the Microsoft 365 agent Registry must become unusable across the entire organization immediately after the governance decision is applied. The organization wants to retain the agent in its managed inventory so access can be restored later if the review outcome changes.</p>
+    <p>Which action should an administrator take?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Upload a packaged copy of the agent as a custom agent in the Registry.',
+      'B. Remove the agent from the pinned-agent configuration in each channel where it appears.',
+      'C. Use the Registry control to block the agent for the entire organization.',
+      'D. Remove the agent\u2019s installations from the user groups that currently have it.'
+    ],
+    correctOption: 'C',
+    solution: `<strong>Correct Answer: C — Use the Registry control to block the agent for the entire organization</strong><br><br>
+    <strong>Block</strong> is the documented Registry control that makes an already-listed agent immediately unusable tenant-wide in one action, while leaving the Registry object itself intact — exactly satisfying "unusable immediately" plus "retain in managed inventory so access can be restored later."<br><br>
+    A creates a separate duplicate object instead of controlling the existing one, and does nothing to stop use of the original. B only affects pinning in specific channels, leaving the agent usable elsewhere — it isn't an organization-wide block. D removes current installations for existing users but doesn't prevent new installs or fully guarantee immediate, organization-wide unusability the way the Block control does.`,
+    userChoice: null
+  },
+  {
+    id: 3168, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Bringing a Never-Registered Custom Agent Under Organizational Management First',
+    text: `<p>An internal development team provides a custom agent package that has never been added to the tenant's agent Registry. Administrators must first bring the agent under organizational management; user access and distribution will be decided later.</p>
+    <p>What should an administrator do?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Install the agent for selected users as though it already existed in the Registry.',
+      'B. Publish the package as a requested agent directly to the store.',
+      "C. Block the agent for the entire organization before creating its Registry record.",
+      'D. Upload the custom agent by using the agent Registry.'
+    ],
+    correctOption: 'D',
+    solution: `<strong>Correct Answer: D — Upload the custom agent by using the agent Registry</strong><br><br>
+    The requirement is to bring the agent under organizational management <strong>first</strong>, without yet deciding access or distribution. Uploading the custom agent through the <strong>agent Registry</strong> creates that managed record for a package that never existed there, satisfying exactly that first step while leaving user access and distribution for later.<br><br>
+    A treats the agent as already under management when it isn't — there's no Registry object to install from yet. B skips straight to store distribution, deciding that question before it's meant to be decided. C tries to block an agent before its Registry record exists, which is out of order — there's nothing yet to apply that control to.`,
+    userChoice: null
+  },
+  {
+    id: 3169, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Restoring Organization-Wide Access to the Same Registry Object After a Block',
+    text: `<p>An agent already in the tenant Registry was made unusable across the organization during an investigation. The investigation is complete, and governance has approved restoring organization-wide access to the same Registry object. No new package has been supplied.</p>
+    <p>What should the administrator do?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Use Block again to confirm the existing restriction.',
+      'B. Install the agent only for a pilot group and leave the organization-wide restriction unchanged.',
+      'C. Upload the custom agent again to create a replacement Registry object.',
+      'D. Use Unblock for the agent.'
+    ],
+    correctOption: 'D',
+    solution: `<strong>Correct Answer: D — Use Unblock for the agent</strong><br><br>
+    The agent was made unusable through the Registry's <strong>Block</strong> control on its existing object, and governance has approved restoring access to that <strong>same</strong> object with no new package involved. <strong>Unblock</strong> is the direct reversal of Block, restoring organization-wide access to that exact Registry object with nothing else to configure.<br><br>
+    A reapplies the existing restriction instead of lifting it, the opposite of what governance approved. B restores access only to a pilot group and explicitly leaves the organization-wide restriction in place, which doesn't satisfy "restoring organization-wide access." C is unnecessary and wrong — no new package was supplied, and creating a replacement object abandons the original Registry object governance approved restoring.`,
+    userChoice: null
+  },
+  {
+    id: 3170, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Preventing Invocation of a Usable Registry Tool While Keeping It Available for Reassessment',
+    text: `<p>A connector tool is already listed in the Agent Tools registry and is currently usable. A new control requires that no agent or workflow invoke the tool, but the registry entry must remain available for later reassessment.</p>
+    <p>Which action should an administrator take?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Reject the tool request as though administrative intake were still pending.',
+      'B. Unblock the selected tool.',
+      "C. Approve the tool request and grant the server's Microsoft Entra permissions.",
+      'D. Block the selected tool.'
+    ],
+    correctOption: 'D',
+    solution: `<strong>Correct Answer: D — Block the selected tool</strong><br><br>
+    The tool is already registered and usable, so intake is already complete — the requirement is only to stop invocation while keeping the registry entry intact for later reassessment. <strong>Block</strong> does exactly that: it makes the already-listed tool immediately unusable by any agent or workflow while leaving its Registry object in place to reassess later.<br><br>
+    A treats a settled, usable registration as though intake were still pending, which misrepresents its actual state. B (Unblock) is the reverse action and would keep or restore usability, the opposite of the requirement. C approves and grants new permissions, which has nothing to do with stopping invocation of an already-usable tool.`,
+    userChoice: null
+  },
+  {
+    id: 3171, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE RESPONSE',
+    title: 'Reviewing and Provisioning a Preview MCP Server Registration to Reach Approval',
+    text: `<p>A developer registers a remote MCP server for a controlled, nonproduction evaluation. The registration creates an administrative request. The organization is treating the capability as preview and will not use it for production.</p>
+    <p>Which two administrative actions are required to produce an approval outcome?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Review the server details and declared tools, and approve the request only if they are acceptable.',
+      'B. Move the server directly into production because preview access indicates an official release.',
+      'C. Use Unblock on the declared tools instead of reviewing the pending request.',
+      'D. Treat developer registration as sufficient administrative approval.',
+      "E. Upon approval, grant the required Microsoft Entra permissions for the server."
+    ],
+    correctOption: ['A', 'E'],
+    solution: `<strong>Correct Answers: A and E — Review and approve based on server details/tools, then grant the required Microsoft Entra permissions</strong><br><br>
+    Registration only <strong>creates</strong> the administrative request; it doesn't approve itself. An administrator must <strong>review the server details and declared tools and approve only if acceptable (A)</strong>, and once approved, <strong>grant the required Microsoft Entra permissions for the server (E)</strong> — these are the two documented actions that actually produce an approval outcome for a pending registration.<br><br>
+    B is wrong — the scenario explicitly states this is a nonproduction, preview evaluation, not an official release. C misapplies Unblock (a reversal control for an already-registered, currently-blocked item) in place of the actual review step for a pending request. D is wrong because developer registration only creates the request; it doesn't constitute administrative approval on its own.`,
+    userChoice: null
+  },
+  {
+    id: 3172, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Starting an Estate-Wide Investigation With Usage and Reliability Filters Rather Than One Session',
+    text: `<p>An operations team must decide where to investigate first across its agent estate. No incident identifies a specific session. A current eligibility check has already confirmed that Usage/Observability filters are available for the tenant. The team wants to find high-impact agents, unused agents, and agents that may need attention because of reliability signals.</p>
+    <p>Where should the team start?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Open the Activity record for one arbitrarily selected session and inspect its trigger, action, and status.',
+      'B. Wait for a specific failed session to be reported before choosing any agent to investigate.',
+      'C. Rank agents only by static Registry metadata without using recent activity or reliability signals.',
+      'D. Use Agent Map filters based on recent usage and reliability signals.'
+    ],
+    correctOption: 'D',
+    solution: `<strong>Correct Answer: D — Use Agent Map filters based on recent usage and reliability signals</strong><br><br>
+    With no specific session to investigate and Usage/Observability filters already confirmed available, the <strong>Agent Map</strong> filtered by recent usage and reliability signals is the estate-wide starting point — it surfaces high-impact agents, unused agents, and agents flagged by reliability signals all at once, exactly the three things the team is looking for.<br><br>
+    A drills into a single, arbitrarily chosen session, which can't represent the whole estate or surface unused agents. B is passive and waits for an incident that the scenario says doesn't exist. C explicitly excludes recent activity and reliability signals, the very inputs the requirement depends on.`,
+    userChoice: null
+  },
+  {
+    id: 3173, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE RESPONSE',
+    title: 'Distinguishing Execution-Path Evidence From Contextual Summary in a Failed Agent Session',
+    text: `<p>A support engineer investigates a session after a user reports that an emailed account-change request was not applied. Contextual fields suggest that the agent understood the request, but the engineer must verify the actual execution path and outcome.</p>
+    <p>Which three observations provide direct evidence that the email started the session, the Dynamics 365 update was attempted, and the session failed?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. The Trigger entry records "Email received at 09:12."',
+      'B. The AI-generated summary says "The agent handled the account request."',
+      'C. The Action or tool call entry records "Update Dynamics 365 record."',
+      'D. The Title entry reads "Customer account email."',
+      'E. The Status entry is Failed.',
+      'F. The Thought process entry says "Updating the account is the best next step."'
+    ],
+    correctOption: ['A', 'C', 'E'],
+    solution: `<strong>Correct Answers: A, C, and E — Trigger, Action/tool call, and Status entries</strong><br><br>
+    Each of the three required facts has a corresponding execution-path field: the <strong>Trigger</strong> entry (A) is direct evidence the email started the session, the <strong>Action or tool call</strong> entry (C) is direct evidence the Dynamics 365 update was actually attempted, and the <strong>Status</strong> entry (E) is direct evidence the session failed. Together they trace what actually happened, not just what the agent intended.<br><br>
+    B is a summary characterization, not a record of what was executed. D is a label for the session and doesn't evidence the trigger, action, or outcome. F reflects the agent's stated intent ("best next step") before acting — reasoning, not proof that the update was actually attempted or of its result — which is exactly the "understood the request" context the engineer must verify against.`,
+    userChoice: null
+  },
+  {
+    id: 3174, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Identifying the Residual Operating Risk After a Group-Scoped DLP Policy Is Deployed',
+    text: `<p>A company is preparing an Agent 365 instance for production. A Teams prompt can start a workflow that reads encrypted SharePoint files and sends an email. A Microsoft Purview DLP policy scopes the instance through a security group and blocks supported interactions. The governance lead wants one recurring review owned by the agent owner.</p>
+    <p>Which review addresses the operating risk that remains after the policy is deployed?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Review sensitivity-label encryption permissions and trace VIEW and EXTRACT changes through the dependent Teams and email workflow runs.',
+      'B. Review explicit SharePoint sharing grants and trace sharing changes through the dependent Teams and email workflow runs.',
+      'C. Review DLP activity and trace blocked Teams interactions through the dependent SharePoint and email workflow runs.',
+      "D. Review the policy's security-group membership and trace scoping changes through the dependent SharePoint and email workflow runs."
+    ],
+    correctOption: 'D',
+    solution: `<strong>Correct Answer: D — Review the policy's security-group membership and trace scoping changes</strong><br><br>
+    The DLP policy already blocks the interactions it covers, so the risk that <strong>remains</strong> is that its coverage is scoped through a <strong>security group</strong> whose membership can drift over time — additions or removals silently change which instance activity the policy actually governs. A recurring review of the <strong>group's membership</strong>, traced through the dependent workflow runs, is what keeps the policy's scope aligned with intent.<br><br>
+    A addresses sensitivity-label encryption permissions, a separate concern from DLP scoping. B tracks sharing grants, which the DLP policy doesn't control. C reviews what the policy already actively blocks — useful operational monitoring, but not the residual risk of the scope itself silently changing, which is what the governance lead is asking to catch.`,
+    userChoice: null
+  },
+  {
+    id: 3175, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Granting an Agent Instance Usage Rights on an Encrypted, Already-Shared File',
+    text: `<p>A company uses an agent instance to summarize a contract stored in SharePoint. The contract has already been explicitly shared with the agent instance. The contract's sensitivity label encrypts the file, and the company must retain both the label and encryption. The label currently grants access broadly to users in the organization, but the agent still cannot open the file.</p>
+    <p>What should the administrator change?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Remove encryption from the sensitivity label while leaving the label name applied to the contract.',
+      'B. Share the contract with the agent instance again through a SharePoint members group.',
+      'C. Keep the broad organizational encryption grant and add any authenticated users to the label.',
+      "D. Configure the label's encryption permissions to grant the agent instance both VIEW and EXTRACT usage rights."
+    ],
+    correctOption: 'D',
+    solution: `<strong>Correct Answer: D — Grant the agent instance VIEW and EXTRACT usage rights in the label's encryption permissions</strong><br><br>
+    SharePoint sharing and the label's <strong>encryption usage rights</strong> are separate gates — the agent already has sharing access, but the label's broad organizational grant doesn't automatically include the agent instance as its own principal. Explicitly adding the agent instance to the label's encryption permissions with <strong>VIEW and EXTRACT</strong> is what lets it actually decrypt and read the content, while both the label and encryption remain in place as required.<br><br>
+    A removes the encryption the company must retain. B repeats sharing, which the scenario already confirms is done — sharing isn't the blocker here. C keeps a broad grant that still doesn't specifically name the agent instance, so the underlying gap remains unresolved.`,
+    userChoice: null
+  },
+  {
+    id: 3176, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Satisfying the Prerequisite for an Agent-Specific Compliance-Gap Evaluation',
+    text: `<p>Contoso opens a selected agent in the Agent 365 agent details experience. The governance team wants to start the agent-specific compliance-gap evaluation, but the capability is unavailable until its documented assessment prerequisite exists.</p>
+    <p>Which assessment must be available for the selected agent?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. A data-protection assessment is available for the selected agent.',
+      'B. An AI baseline assessment is available for the selected agent.',
+      'C. A deployment-readiness assessment is available for the selected agent.',
+      'D. A permissions-risk assessment is available for the selected agent.'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — An AI baseline assessment is available for the selected agent</strong><br><br>
+    The agent-specific compliance-gap evaluation is documented as depending on an existing <strong>AI baseline assessment</strong> for that agent — without the baseline in place first, the compliance-gap capability stays unavailable in the agent details experience.<br><br>
+    A, C, and D name assessment types that aren't the documented prerequisite for this specific capability — none of them is the baseline the compliance-gap evaluation is built on top of.`,
+    userChoice: null
+  },
+  {
+    id: 3177, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'ai',
+    type: 'MULTIPLE CHOICE',
+    title: 'Recognizing a Current Residency Gap in Agent 365 Observability',
+    text: `<p>A regulated workload can use a cloud observability service only if the service supports Microsoft 365 Advanced Data Residency (ADR). An architect is assessing Agent 365 observability before onboarding the workload.</p>
+    <p>What should the architect conclude?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      "A. Run an AI baseline assessment because it changes the observability service's residency capability.",
+      'B. Record a compliance gap because Agent 365 observability does not currently support ADR.',
+      'C. Enable ADR for Agent 365 observability in the tenant and proceed with onboarding.',
+      'D. Create a retention policy to add ADR support to Agent 365 observability.'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — Record a compliance gap; Agent 365 observability does not currently support ADR</strong><br><br>
+    Because the regulated workload's requirement (ADR support) is not met by Agent 365 observability today, the correct architectural conclusion is to <strong>record a compliance gap</strong> rather than proceed as if the requirement were satisfied — onboarding a regulated workload onto a service that doesn't meet its residency requirement would violate the stated condition.<br><br>
+    A confuses an unrelated assessment type with a residency capability toggle — running it doesn't change what the observability service supports. C assumes ADR can simply be enabled for this service, which isn't the case. D misapplies a retention policy, a records-management control, as if it could add data-residency support — it can't.`,
+    userChoice: null
+  },
 
   // ============================================================
   // MICROSOFT LEARN'S OFFICIAL AB-650 STUDY GUIDE QUESTIONS

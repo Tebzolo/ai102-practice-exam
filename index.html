@@ -13321,6 +13321,131 @@ ORDER BY OrderYear`,
     userChoice: null
   },
 
+  {
+    id: 3178, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE RESPONSE',
+    title: 'Governing a Shared Credit Cap and Threshold Alert for a Named-User Copilot Pilot',
+    text: `<p>An AI Administrator must govern Copilot Credit consumption for a pilot made up of individually named users. The pilot must have a shared monthly credit cap, and the finance team must receive email before consumption reaches a defined threshold. The organization's billing method must remain unchanged.</p>
+    <p>Which three actions should the administrator take?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      "A. Use the Consumption tab as the only control for the pilot's monthly spending.",
+      'B. Change the billing method in the policy to enforce the monthly cap.',
+      'C. Define a usage-threshold alert that emails the finance team.',
+      'D. Configure a limited monthly budget for the spending policy.',
+      'E. Place the pilot users in a security group and target that group by selecting Specific groups in the spending policy.',
+      'F. Keep the default All users scope and identify the pilot users only in the alert recipients.'
+    ],
+    correctOption: ['C', 'D', 'E'],
+    solution: `<strong>Correct Answers: C, D, and E — a usage-threshold alert, a limited monthly budget, and a security-group-scoped spending policy</strong><br><br>
+    A <strong>limited monthly budget</strong> in the spending policy establishes the shared credit cap, a <strong>usage-threshold alert</strong> sends the finance team email before consumption reaches the defined threshold, and placing pilot users in a <strong>security group</strong> targeted via Specific groups scopes the whole policy to exactly the named pilot users — none of these three touches the billing method.<br><br>
+    A treats the Consumption tab as an enforcement control, but it's a reporting view — it can't cap spending or trigger alerts on its own. B changes the billing method, which the requirement explicitly says must remain unchanged. F keeps the policy scoped to All users rather than just the pilot group, so the shared cap and alert would apply organization-wide instead of to the individually named pilot users.`,
+    userChoice: null
+  },
+  {
+    id: 3179, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Analyzing What Is Driving a Copilot Credit Increase Over Time',
+    text: `<p>Northwind's monthly Copilot Credit total rose after a broad rollout. A cost analyst must determine what is driving the increase and compare how the pattern changed over time.</p>
+    <p>Which Cost management surface should the analyst use?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. The monthly budget limit settings in a spending policy',
+      'B. The billing method settings for the active policy',
+      'C. The Consumption tab in the Cost management dashboard',
+      'D. The usage-threshold alert settings in a spending policy'
+    ],
+    correctOption: 'C',
+    solution: `<strong>Correct Answer: C — the Consumption tab in the Cost management dashboard</strong><br><br>
+    The <strong>Consumption tab</strong> is the analysis surface built to show what's driving Copilot Credit usage and how consumption patterns have changed over time — exactly what a cost analyst investigating a rising monthly total needs.<br><br>
+    A, B, and D are all spending-<em>policy configuration</em> settings — a budget limit, a billing method, and an alert threshold — each controls or constrains spending going forward, but none of them is an analysis view for understanding what has already driven a usage increase or how it trended over time.`,
+    userChoice: null
+  },
+  {
+    id: 3180, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Comparing Copilot Use Across Microsoft 365 Applications to Target Training',
+    text: `<p>Microsoft 365 Copilot has been deployed across the company. An enablement lead now needs to compare observed Copilot use across Microsoft 365 applications so training can focus on application workloads with weak adoption.</p>
+    <p>Which report detail should the lead use?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. The application-integration detail in the Microsoft 365 admin center Copilot Usage report.',
+      'B. The app-readiness detail in the Copilot Readiness report.',
+      'C. The top-agents detail in the Copilot Usage report.',
+      'D. The license-eligibility detail in the Copilot Readiness report.'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — the application-integration detail in the Copilot Usage report</strong><br><br>
+    The <strong>application-integration detail</strong> in the Copilot Usage report shows observed Copilot use broken down by Microsoft 365 application, letting the enablement lead directly compare adoption across applications and identify the workloads with weak usage to target for training.<br><br>
+    B (app-readiness) and D (license-eligibility) both come from the <strong>Readiness</strong> report, which measures whether users and apps are set up to use Copilot — not how much they're actually using it. C (top-agents) breaks usage down by agent, not by Microsoft 365 application, so it doesn't support comparing application-level adoption.`,
+    userChoice: null
+  },
+  {
+    id: 3181, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE RESPONSE',
+    title: 'Reviewing Engagement Decline and Agent Popularity From the Copilot Usage Report',
+    text: `<p>After a broad Copilot rollout, an operations team must determine whether user engagement is declining and identify which Copilot agents are used most frequently.</p>
+    <p>Which three outputs from the Microsoft 365 admin center Copilot Usage report directly support this review?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Active usage trends over time.',
+      'B. Potential technical blockers for deployment.',
+      'C. License eligibility for users who meet Copilot licensing prerequisites.',
+      'D. The number of users who accessed Copilot.',
+      'E. The most frequently used Copilot agents.',
+      'F. Microsoft 365 applications that are being used with Copilot.'
+    ],
+    correctOption: ['A', 'D', 'E'],
+    solution: `<strong>Correct Answers: A, D, and E — active usage trends, active user counts, and the most frequently used agents</strong><br><br>
+    <strong>Active usage trends over time</strong> and the <strong>number of users who accessed Copilot</strong> together reveal whether engagement is rising or declining, and the <strong>most frequently used Copilot agents</strong> detail directly answers which agents see the heaviest use — exactly the two things this review needs.<br><br>
+    B (technical blockers) and C (license eligibility) are both details from the <strong>Readiness</strong> report, which assesses deployment prerequisites rather than actual observed engagement or agent usage. F (applications used with Copilot) is a real Usage report detail, but it addresses which apps are used, not engagement trend or agent popularity — it isn't needed for this specific review.`,
+    userChoice: null
+  },
+  {
+    id: 3182, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: 'Prioritizing Feature-Specific Enablement With Feature-Level Adoption Trends',
+    text: `<p>A company completed a phased Copilot rollout. Leaders need to compare user-adoption trends for individual Copilot features, not merely determine which Microsoft 365 applications are in use. They will use the findings to prioritize feature-specific enablement.</p>
+    <p>Which capability should they use?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Advanced reporting that integrates an external organizational outcome metric.',
+      'B. The Copilot readiness report in the Microsoft 365 admin center.',
+      'C. Feature-level user-adoption trends in the Adoption tab of the Copilot Dashboard in Viva Insights.',
+      'D. App-level trends in the Copilot Dashboard without reviewing the feature-level trends.'
+    ],
+    correctOption: 'C',
+    solution: `<strong>Correct Answer: C — feature-level adoption trends in the Copilot Dashboard's Adoption tab</strong><br><br>
+    The Copilot Dashboard's <strong>Adoption tab</strong> breaks user-adoption trends down by <strong>individual feature</strong>, not just by which application is in use — exactly the granularity leaders need to prioritize enablement for specific underused features.<br><br>
+    A (advanced reporting with an external metric) is built for correlating Copilot usage with outside organizational metrics, not for comparing adoption trends across individual features. B (the Readiness report) measures deployment prerequisites, not feature-level adoption. D explicitly stops at app-level trends, which is the exact limitation the leaders want to move past — they need the feature-level detail, not a substitute for it.`,
+    userChoice: null
+  },
+  {
+    id: 3183, topic: 30, discussions: 0, isAB650: true, ab650Domain: 'configure',
+    type: 'MULTIPLE CHOICE',
+    title: "Analyzing Copilot Usage Against a Business Unit's Own Success Metric",
+    text: `<p>A business unit evaluates success by the time required to complete a case, but that metric is maintained outside standard Copilot reports. Leaders want to analyze Copilot usage against this organizational metric and use the resulting insight to adjust deployment and usage plans.</p>
+    <p>Which measurement design should they use?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      "A. Use the Microsoft 365 admin center Copilot readiness report to measure the business unit's case-completion outcome.",
+      'B. Incorporate the case-completion metric into customizable advanced Copilot reporting and analyze it with Copilot usage data.',
+      'C. Track the case-completion metric separately and avoid incorporating it into the Copilot reporting analysis.',
+      'D. Use only feature-level adoption trends in the Copilot Dashboard as a substitute for the case-completion metric.'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — incorporate the case-completion metric into customizable advanced Copilot reporting</strong><br><br>
+    <strong>Advanced Copilot reporting</strong> is built to be customizable, allowing an organization's own external metrics — like this business unit's case-completion time — to be incorporated and analyzed alongside Copilot usage data, giving leaders the combined insight they need to adjust deployment and usage plans.<br><br>
+    A misapplies the Readiness report, which measures deployment prerequisites, not a business unit's own outcome metric — it has no mechanism to track case-completion time. C keeps the metric siloed from Copilot data entirely, which defeats the stated goal of analyzing usage <em>against</em> that metric. D substitutes a generic feature-adoption view for the specific organizational metric leaders actually want measured, losing the case-completion signal entirely.`,
+    userChoice: null
+  },
+
   // ============================================================
   // MICROSOFT LEARN'S OFFICIAL AB-650 STUDY GUIDE QUESTIONS
   // Administering Microsoft 365 and AI Services (beta).

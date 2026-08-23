@@ -1304,6 +1304,7 @@
       <div id="progressDash" class="progress-dash"></div>
       <div id="examTopicsBrowser" class="et-browser"></div>
       <div id="ab650Browser" class="et-browser"></div>
+      <div id="ms102Browser" class="et-browser"></div>
     </div>
   </div>
 </div>
@@ -13873,9 +13874,1171 @@ ORDER BY OrderYear`,
     The <strong>Copilot Control System</strong> is the unified administrative surface for AI in Microsoft 365 — bringing together <strong>usage and adoption reporting</strong> across Copilot-enabled workloads and <strong>service health</strong> specific to Copilot/AI services, giving leadership one place to check both adoption trends and current operational status.<br><br>
     B (Compliance Manager) tracks regulatory control posture, not adoption or service health. C (ID Protection) is a risk-detection service for identities. D (Exchange mail flow dashboard) reports only on email delivery, not Copilot adoption or AI service health.`,
     userChoice: null
+  },
+
+  // ============================================================
+  // MS-102 ACTUAL EXAM QUESTIONS (Exam Topics) — Microsoft 365 Administrator
+  // Case study section + standalone domain questions.
+  // Original questions inspired by community exam-discussion topics;
+  // no verbatim ExamTopics/braindump content reproduced.
+  // ============================================================
+  {
+    id: 3184, topic: 33, discussions: 0, isMS102: true, ms102Domain: 'tenant',
+    isCaseStudy: true,
+    caseTitle: 'Fabrikam, Inc.',
+    type: 'MULTIPLE CHOICE',
+    title: 'Case Study: DNS Record Required to Add a Domain Name',
+    caseStudy: `<h3>Overview</h3>
+    <p><strong>Fabrikam, Inc.</strong> is an electronics company that produces consumer products. Fabrikam has 10,000 employees worldwide, with a main office in London and branch offices in major cities across Europe, Asia, and the United States.</p>
+    <h3>Existing Environment — Active Directory Environment</h3>
+    <p>The network contains an Active Directory forest named <em>fabrikam.com</em>. The forest holds all identities used for user and computer authentication. Each department is represented by a top-level organizational unit (OU) that contains several child OUs for user accounts and computer accounts.</p>
+    <p>All users authenticate to on-premises applications by signing in to their device using a UPN in the format <em>username@fabrikam.com</em>. Fabrikam does <strong>not</strong> plan to implement identity federation.</p>
+    <h3>Network Infrastructure</h3>
+    <p>Each office has a high-speed internet connection. Each office contains two domain controllers, all configured as DNS servers. The public zone for fabrikam.com is managed by an external DNS server.</p>
+    <p>All users connect to an on-premises Microsoft Exchange Server 2016 organization, accessing email via Outlook Anywhere, Outlook on the web, or the Microsoft Outlook app for iOS. All Exchange servers have the latest cumulative updates. All shared company documents are stored on a Microsoft SharePoint Server farm.</p>
+    <h3>Planned Changes</h3>
+    <p>Fabrikam plans to implement a Microsoft 365 Enterprise subscription and move all email and shared documents to the subscription. Fabrikam plans to implement two pilot projects:</p>
+    <ul>
+      <li><strong>Project1:</strong> Move the mailboxes of 100 sales department users to Microsoft 365.</li>
+      <li><strong>Project2:</strong> After Project1 succeeds, enable Microsoft Teams in Microsoft 365 for the sales department users.</li>
+    </ul>
+    <p>Fabrikam also plans to create a group named <em>UserLicenses</em> that will manage the allocation of all Microsoft 365 bulk licenses.</p>
+    <h3>Technical Requirements</h3>
+    <ul>
+      <li>All users must be able to exchange email messages successfully during Project1 using their current email address.</li>
+      <li>Users must be able to authenticate to cloud services if Active Directory becomes unavailable.</li>
+      <li>A user named User1 must be able to view all DLP reports from the Microsoft Purview compliance portal.</li>
+      <li>Microsoft 365 Apps for enterprise applications must be installed from a network share only.</li>
+      <li>Disruptions to email access must be minimized.</li>
+    </ul>
+    <h3>Application Requirements</h3>
+    <p>An on-premises web application named App1 must allow users to complete their expense reports online. App1 must be available to users from the My Apps portal. The installation of feature updates for Microsoft 365 Apps for enterprise must be minimized.</p>
+    <h3>Security Requirements</h3>
+    <ul>
+      <li>After the migration to Microsoft 365, all users must continue to authenticate to their mailbox and to SharePoint sites using their UPN.</li>
+      <li>The membership of the UserLicenses group must be validated monthly. Unused user accounts must be removed from the group automatically.</li>
+      <li>After the migration to Microsoft 365, all users must be signed in to on-premises and cloud-based applications automatically.</li>
+      <li>The principle of least privilege must be used.</li>
+    </ul>`,
+    text: `<p>You are evaluating the required processes for Project1.</p>
+    <p>You need to recommend which DNS record must be created while adding a domain name for the project.</p>
+    <p>Which DNS record should you recommend?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. host (A)',
+      'B. host information (HINFO)',
+      'C. text (TXT)',
+      'D. pointer (PTR)'
+    ],
+    correctOption: 'C',
+    solution: `<strong>Correct Answer: C — text (TXT)</strong><br><br>
+    Adding a custom domain to Microsoft 365 requires proving ownership of the domain before it can be used. Microsoft 365 does this by having the administrator publish a specific <strong>TXT record</strong> (or, alternatively, an MX record) at the domain's public DNS zone; once that record is found, the domain is verified and can be added to the tenant.<br><br>
+    A (host/A) maps a name to an IPv4 address and plays no role in domain ownership verification. B (HINFO) publishes host hardware/OS information and is essentially unused for this purpose. D (PTR) supports reverse DNS lookups (IP-to-name), which has nothing to do with proving domain ownership to Microsoft 365.`,
+    userChoice: null
+  },
+  {
+    id: 3185, topic: 33, discussions: 0, isMS102: true, ms102Domain: 'identity',
+    isCaseStudy: true,
+    caseTitle: 'Fabrikam, Inc.',
+    type: 'MULTIPLE CHOICE',
+    title: 'Case Study: Authentication Strategy for the Pilot Projects',
+    caseStudy: `<h3>Overview</h3>
+    <p><strong>Fabrikam, Inc.</strong> is an electronics company that produces consumer products. Fabrikam has 10,000 employees worldwide, with a main office in London and branch offices in major cities across Europe, Asia, and the United States.</p>
+    <h3>Existing Environment — Active Directory Environment</h3>
+    <p>The network contains an Active Directory forest named <em>fabrikam.com</em>. The forest holds all identities used for user and computer authentication. Each department is represented by a top-level organizational unit (OU) that contains several child OUs for user accounts and computer accounts.</p>
+    <p>All users authenticate to on-premises applications by signing in to their device using a UPN in the format <em>username@fabrikam.com</em>. Fabrikam does <strong>not</strong> plan to implement identity federation.</p>
+    <h3>Network Infrastructure</h3>
+    <p>Each office has a high-speed internet connection. Each office contains two domain controllers, all configured as DNS servers. The public zone for fabrikam.com is managed by an external DNS server.</p>
+    <p>All users connect to an on-premises Microsoft Exchange Server 2016 organization, accessing email via Outlook Anywhere, Outlook on the web, or the Microsoft Outlook app for iOS. All Exchange servers have the latest cumulative updates. All shared company documents are stored on a Microsoft SharePoint Server farm.</p>
+    <h3>Planned Changes</h3>
+    <p>Fabrikam plans to implement a Microsoft 365 Enterprise subscription and move all email and shared documents to the subscription. Fabrikam plans to implement two pilot projects:</p>
+    <ul>
+      <li><strong>Project1:</strong> Move the mailboxes of 100 sales department users to Microsoft 365.</li>
+      <li><strong>Project2:</strong> After Project1 succeeds, enable Microsoft Teams in Microsoft 365 for the sales department users.</li>
+    </ul>
+    <p>Fabrikam also plans to create a group named <em>UserLicenses</em> that will manage the allocation of all Microsoft 365 bulk licenses.</p>
+    <h3>Technical Requirements</h3>
+    <ul>
+      <li>All users must be able to exchange email messages successfully during Project1 using their current email address.</li>
+      <li>Users must be able to authenticate to cloud services if Active Directory becomes unavailable.</li>
+      <li>A user named User1 must be able to view all DLP reports from the Microsoft Purview compliance portal.</li>
+      <li>Microsoft 365 Apps for enterprise applications must be installed from a network share only.</li>
+      <li>Disruptions to email access must be minimized.</li>
+    </ul>
+    <h3>Application Requirements</h3>
+    <p>An on-premises web application named App1 must allow users to complete their expense reports online. App1 must be available to users from the My Apps portal. The installation of feature updates for Microsoft 365 Apps for enterprise must be minimized.</p>
+    <h3>Security Requirements</h3>
+    <ul>
+      <li>After the migration to Microsoft 365, all users must continue to authenticate to their mailbox and to SharePoint sites using their UPN.</li>
+      <li>The membership of the UserLicenses group must be validated monthly. Unused user accounts must be removed from the group automatically.</li>
+      <li>After the migration to Microsoft 365, all users must be signed in to on-premises and cloud-based applications automatically.</li>
+      <li>The principle of least privilege must be used.</li>
+    </ul>`,
+    text: `<p>You need to ensure that all the sales department users can authenticate successfully during Project1 and Project2.</p>
+    <p>Which authentication strategy should you implement for the pilot projects?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. pass-through authentication',
+      'B. pass-through authentication and seamless SSO',
+      'C. password hash synchronization and seamless SSO',
+      'D. password hash synchronization'
+    ],
+    correctOption: 'C',
+    solution: `<strong>Correct Answer: C — password hash synchronization and seamless SSO</strong><br><br>
+    <strong>Password hash synchronization</strong> replicates a hash of each user's password to Microsoft Entra ID, so users can keep authenticating to cloud services with their current credentials even if on-premises Active Directory becomes unavailable — a stated technical requirement. Pairing it with <strong>seamless SSO</strong> lets domain-joined users sign in to cloud apps automatically without re-entering credentials, satisfying the security requirement for automatic sign-in to on-premises and cloud-based applications.<br><br>
+    A and B both rely on <strong>pass-through authentication</strong>, which validates sign-ins directly against on-premises Active Directory in real time — if Active Directory becomes unavailable, cloud authentication fails too, violating the stated requirement. D (password hash sync alone) meets the availability requirement but drops seamless SSO, so users would be prompted for credentials rather than signed in automatically.`,
+    userChoice: null
+  },
+  {
+    id: 3186, topic: 33, discussions: 0, isMS102: true, ms102Domain: 'identity',
+    isCaseStudy: true,
+    caseTitle: 'Fabrikam, Inc.',
+    type: 'MULTIPLE CHOICE',
+    title: 'Case Study: Least-Privilege Role for Viewing DLP Reports',
+    caseStudy: `<h3>Overview</h3>
+    <p><strong>Fabrikam, Inc.</strong> is an electronics company that produces consumer products. Fabrikam has 10,000 employees worldwide, with a main office in London and branch offices in major cities across Europe, Asia, and the United States.</p>
+    <h3>Existing Environment — Active Directory Environment</h3>
+    <p>The network contains an Active Directory forest named <em>fabrikam.com</em>. The forest holds all identities used for user and computer authentication. Each department is represented by a top-level organizational unit (OU) that contains several child OUs for user accounts and computer accounts.</p>
+    <p>All users authenticate to on-premises applications by signing in to their device using a UPN in the format <em>username@fabrikam.com</em>. Fabrikam does <strong>not</strong> plan to implement identity federation.</p>
+    <h3>Network Infrastructure</h3>
+    <p>Each office has a high-speed internet connection. Each office contains two domain controllers, all configured as DNS servers. The public zone for fabrikam.com is managed by an external DNS server.</p>
+    <p>All users connect to an on-premises Microsoft Exchange Server 2016 organization, accessing email via Outlook Anywhere, Outlook on the web, or the Microsoft Outlook app for iOS. All Exchange servers have the latest cumulative updates. All shared company documents are stored on a Microsoft SharePoint Server farm.</p>
+    <h3>Planned Changes</h3>
+    <p>Fabrikam plans to implement a Microsoft 365 Enterprise subscription and move all email and shared documents to the subscription. Fabrikam plans to implement two pilot projects:</p>
+    <ul>
+      <li><strong>Project1:</strong> Move the mailboxes of 100 sales department users to Microsoft 365.</li>
+      <li><strong>Project2:</strong> After Project1 succeeds, enable Microsoft Teams in Microsoft 365 for the sales department users.</li>
+    </ul>
+    <p>Fabrikam also plans to create a group named <em>UserLicenses</em> that will manage the allocation of all Microsoft 365 bulk licenses.</p>
+    <h3>Technical Requirements</h3>
+    <ul>
+      <li>All users must be able to exchange email messages successfully during Project1 using their current email address.</li>
+      <li>Users must be able to authenticate to cloud services if Active Directory becomes unavailable.</li>
+      <li>A user named User1 must be able to view all DLP reports from the Microsoft Purview compliance portal.</li>
+      <li>Microsoft 365 Apps for enterprise applications must be installed from a network share only.</li>
+      <li>Disruptions to email access must be minimized.</li>
+    </ul>
+    <h3>Application Requirements</h3>
+    <p>An on-premises web application named App1 must allow users to complete their expense reports online. App1 must be available to users from the My Apps portal. The installation of feature updates for Microsoft 365 Apps for enterprise must be minimized.</p>
+    <h3>Security Requirements</h3>
+    <ul>
+      <li>After the migration to Microsoft 365, all users must continue to authenticate to their mailbox and to SharePoint sites using their UPN.</li>
+      <li>The membership of the UserLicenses group must be validated monthly. Unused user accounts must be removed from the group automatically.</li>
+      <li>After the migration to Microsoft 365, all users must be signed in to on-premises and cloud-based applications automatically.</li>
+      <li>The principle of least privilege must be used.</li>
+    </ul>`,
+    text: `<p>You need to ensure that User1 can view the DLP reports from the Microsoft Purview compliance portal. The solution must follow the principle of least privilege.</p>
+    <p>Which role should you assign to User1?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Hygiene Management',
+      'B. Security Reader',
+      'C. Security Administrator',
+      'D. Records Management'
+    ],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — Security Reader</strong><br><br>
+    <strong>Security Reader</strong> grants read-only access to security-related information across Microsoft 365, including the ability to <strong>view DLP reports</strong> in the Microsoft Purview compliance portal — exactly the access User1 needs, and nothing more, satisfying least privilege.<br><br>
+    A (Hygiene Management) is scoped to anti-malware/anti-spam quarantine management, not DLP reporting. C (Security Administrator) can view the same reports but also grants broad read-<em>and-write</em> management permissions across security configuration — far more than "view reports only" requires. D (Records Management) governs retention and records-management configuration, unrelated to viewing DLP reports.`,
+    userChoice: null
+  },
+  {
+    id: 3187, topic: 33, discussions: 0, isMS102: true, ms102Domain: 'identity',
+    isCaseStudy: true,
+    caseTitle: 'Fabrikam, Inc.',
+    type: 'HOTSPOT',
+    title: 'Case Study: SSO and Authentication Availability After Azure AD Connect Configuration',
+    caseStudy: `<h3>Overview</h3>
+    <p><strong>Fabrikam, Inc.</strong> is an electronics company that produces consumer products. Fabrikam has 10,000 employees worldwide, with a main office in London and branch offices in major cities across Europe, Asia, and the United States.</p>
+    <h3>Existing Environment — Active Directory Environment</h3>
+    <p>The network contains an Active Directory forest named <em>fabrikam.com</em>. The forest holds all identities used for user and computer authentication. Each department is represented by a top-level organizational unit (OU) that contains several child OUs for user accounts and computer accounts.</p>
+    <p>All users authenticate to on-premises applications by signing in to their device using a UPN in the format <em>username@fabrikam.com</em>. Fabrikam does <strong>not</strong> plan to implement identity federation.</p>
+    <h3>Network Infrastructure</h3>
+    <p>Each office has a high-speed internet connection. Each office contains two domain controllers, all configured as DNS servers. The public zone for fabrikam.com is managed by an external DNS server.</p>
+    <p>All users connect to an on-premises Microsoft Exchange Server 2016 organization, accessing email via Outlook Anywhere, Outlook on the web, or the Microsoft Outlook app for iOS. All Exchange servers have the latest cumulative updates. All shared company documents are stored on a Microsoft SharePoint Server farm.</p>
+    <h3>Planned Changes</h3>
+    <p>Fabrikam plans to implement a Microsoft 365 Enterprise subscription and move all email and shared documents to the subscription. Fabrikam plans to implement two pilot projects:</p>
+    <ul>
+      <li><strong>Project1:</strong> Move the mailboxes of 100 sales department users to Microsoft 365.</li>
+      <li><strong>Project2:</strong> After Project1 succeeds, enable Microsoft Teams in Microsoft 365 for the sales department users.</li>
+    </ul>
+    <p>Fabrikam also plans to create a group named <em>UserLicenses</em> that will manage the allocation of all Microsoft 365 bulk licenses.</p>
+    <h3>Technical Requirements</h3>
+    <ul>
+      <li>All users must be able to exchange email messages successfully during Project1 using their current email address.</li>
+      <li>Users must be able to authenticate to cloud services if Active Directory becomes unavailable.</li>
+      <li>A user named User1 must be able to view all DLP reports from the Microsoft Purview compliance portal.</li>
+      <li>Microsoft 365 Apps for enterprise applications must be installed from a network share only.</li>
+      <li>Disruptions to email access must be minimized.</li>
+    </ul>
+    <h3>Application Requirements</h3>
+    <p>An on-premises web application named App1 must allow users to complete their expense reports online. App1 must be available to users from the My Apps portal. The installation of feature updates for Microsoft 365 Apps for enterprise must be minimized.</p>
+    <h3>Security Requirements</h3>
+    <ul>
+      <li>After the migration to Microsoft 365, all users must continue to authenticate to their mailbox and to SharePoint sites using their UPN.</li>
+      <li>The membership of the UserLicenses group must be validated monthly. Unused user accounts must be removed from the group automatically.</li>
+      <li>After the migration to Microsoft 365, all users must be signed in to on-premises and cloud-based applications automatically.</li>
+      <li>The principle of least privilege must be used.</li>
+    </ul>`,
+    text: `<p><strong>HOTSPOT</strong> — You create the Microsoft 365 tenant. You implement Azure AD Connect as shown in the following exhibit.</p>
+    <div class="code-block">Azure AD Connect — Sync Status<br>
+    Sync Status: Enabled &nbsp;|&nbsp; Last Sync: Less than 1 hour ago &nbsp;|&nbsp; Password Hash Sync: Enabled<br><br>
+    User Sign-in<br>
+    Federation: Disabled (0 domains)<br>
+    Seamless single sign-on: Disabled (0 domains)<br>
+    Pass-through authentication: Disabled (0 agents)</div>
+    <p>For each statement, select the answer choice that completes the statement based on the information presented in the exhibit.</p>`,
+    note: 'NOTE: Each correct selection is worth one point.',
+    render: 'casestudy_hotspot',
+    solution: `• <strong>During Project1, sales department users can access ___ applications by using SSO:</strong> <span class="correct-badge">only cloud-based</span><br>
+    • <strong>If Active Directory becomes unavailable during Project1, sales department users can access the resources:</strong> <span class="correct-badge">in the cloud only</span><br><br>
+    <em>The exhibit shows only Password Hash Synchronization enabled; Federation, Seamless SSO, and Pass-through authentication are all disabled. With password hash sync alone (no seamless SSO), a user's Azure AD sign-in session provides SSO across cloud-based applications that trust Microsoft Entra ID, but there's no mechanism extending that session to on-premises applications, which still require separate on-premises (Kerberos/NTLM) authentication — so SSO reaches cloud-based applications only. Because password hashes are already synchronized to the cloud, authentication to cloud services doesn't depend on Active Directory being reachable — so if Active Directory becomes unavailable, users can still authenticate to resources in the cloud, but not to on-premises resources that require a live Active Directory for authentication.</em>`,
+    dropdowns: {
+      'sso-scope': {
+        label: "During Project1, sales department users can access ___ applications by using SSO.",
+        options: ['both on-premises and cloud-based', 'only cloud-based', 'only on-premises'],
+        correct: 'only cloud-based'
+      },
+      'ad-outage-scope': {
+        label: 'If Active Directory becomes unavailable during Project1, sales department users can access the resources ___.',
+        options: ['both on-premises and in the cloud', 'in the cloud only', 'on-premises only'],
+        correct: 'in the cloud only'
+      }
+    },
+    userSelections: {}
+  }
+  ,
+  // ── MS-102 additional standalone questions (Tenant / Identity / Security / Compliance) ──
+  {
+    id: 3188, topic: 34, discussions: 0, isMS102: true, ms102Domain: 'tenant',
+    type: 'MULTIPLE CHOICE',
+    title: 'Identify Users Licensed via Group Membership',
+    text: `<p>Your company has a Microsoft 365 subscription.</p>
+    <p>You need to identify all the users in the subscription who are licensed for Office 365 through a group membership. The solution must include the name of the group used to assign the license.</p>
+    <p>What should you use?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Active users in the Microsoft 365 admin center',
+      'B. Reports in the Microsoft Purview compliance portal',
+      'C. the Licenses blade in the Microsoft Entra admin center',
+      'D. Reports in the Microsoft 365 admin center'
+    ],
+    correctOption: 'C',
+    solution: `<strong>Correct Answer: C — the Licenses blade in the Microsoft Entra admin center</strong><br><br>
+    In the Microsoft Entra admin center, under <em>Billing &gt; Licenses &gt; All products</em>, selecting a product and viewing licensed users shows, for each user, whether the license was assigned directly or inherited through group-based licensing — and if so, which group assigned it.<br><br>
+    Active users in the Microsoft 365 admin center shows which licenses a user has but not the assigning group. Reports in the compliance portal and the M365 admin center report on activity and usage, not license assignment source.`,
+    userChoice: null
+  },
+  {
+    id: 3189, topic: 34, discussions: 0, isMS102: true, ms102Domain: 'identity',
+    type: 'HOTSPOT',
+    title: 'Dynamic Group Rule for Guest Users in a "Support" Department',
+    text: `<p>You have a Microsoft 365 subscription that contains the users shown in the following table.</p>
+    <div class="code-block">Name &nbsp;| Type &nbsp;&nbsp;| Department<br>
+    User1 | Guest &nbsp;| IT support<br>
+    User2 | Guest &nbsp;| SupportCore<br>
+    User3 | Member | IT support</div>
+    <p>You need to configure a dynamic user group that will include the guest users in any department that contains the word "Support".</p>
+    <p>How should you complete the membership rule? To answer, select the appropriate options in the answer area.</p>`,
+    note: 'NOTE: Each correct selection is worth one point.',
+    render: 'hotspot_generic',
+    solution: `• <strong>(user.userType</strong> ___ <strong>"Guest")</strong> → <span class="correct-badge">-eq</span><br>
+    • <strong>and (user.department</strong> ___ <strong>"Support")</strong> → <span class="correct-badge">-match</span><br><br>
+    <em>-eq "Guest" performs an exact match against the userType attribute, which is exactly "Guest" for guest accounts. For the department, -contains only tests for an exact match against a single value (or a value within a multi-valued attribute) — it will not match "IT support" or "SupportCore" as substrings. -match evaluates a regular expression against the attribute, so it correctly matches "Support" appearing anywhere within the department string.</em>`,
+    dropdowns: {
+      'usertype-op': {
+        label: '(user.userType ___ "Guest")',
+        options: ['-eq', '-in', '-ne', '-notMatch'],
+        correct: '-eq'
+      },
+      'department-op': {
+        label: 'and (user.department ___ "Support")',
+        options: ['-contains', '-in', '-match', '-startsWith'],
+        correct: '-match'
+      }
+    },
+    userSelections: {}
+  },
+  {
+    id: 3190, topic: 34, discussions: 0, isMS102: true, ms102Domain: 'tenant',
+    type: 'HOTSPOT',
+    title: 'Import 100 Users from a Legacy LDAP Directory',
+    text: `<p>Your company uses a legacy on-premises LDAP directory that contains 100 users.</p>
+    <p>The company purchases a Microsoft 365 subscription.</p>
+    <p>You need to import the 100 users into Microsoft 365 by using the Microsoft 365 admin center.</p>
+    <p>Which type of file should you use, and which properties are required? To answer, select the appropriate options in the answer area.</p>`,
+    note: 'NOTE: Each correct selection is worth one point.',
+    render: 'hotspot_generic',
+    solution: `• <strong>File type to use:</strong> <span class="correct-badge">CSV</span><br>
+    • <strong>Required properties for each user:</strong> <span class="correct-badge">User Name and Display Name</span><br><br>
+    <em>The Microsoft 365 admin center's bulk "Add multiple users" wizard accepts a CSV file built from Microsoft's own template. The template only requires the User Name (the UPN used to sign in) and Display Name columns for each row — every other column, including department, is optional.</em>`,
+    dropdowns: {
+      'file-type': {
+        label: 'File type to use:',
+        options: ['CSV', 'JSON', 'PST', 'XML'],
+        correct: 'CSV'
+      },
+      'required-props': {
+        label: 'Required properties for each user:',
+        options: ['Display Name and Department', 'First Name and Last Name', 'User Name and Department', 'User Name and Display Name'],
+        correct: 'User Name and Display Name'
+      }
+    },
+    userSelections: {}
+  },
+  {
+    id: 3191, topic: 34, discussions: 0, isMS102: true, ms102Domain: 'tenant',
+    type: 'MULTIPLE CHOICE',
+    title: 'Minimum Number of Group-Based Licensing Deployment Groups',
+    text: `<p>You have a Microsoft 365 subscription that contains the users shown in the following table.</p>
+    <div class="code-block">Name &nbsp;| Department<br>
+    User1 | Human resources<br>
+    User2 | Research<br>
+    User3 | Human resources<br>
+    User4 | Marketing</div>
+    <p>You need to configure group-based licensing to meet the following requirements:</p>
+    <ul>
+      <li>To all users, deploy an Office 365 E3 license without the Power Automate license option.</li>
+      <li>To all users, deploy an Enterprise Mobility + Security E5 license.</li>
+      <li>To the users in the research department only, deploy a Power BI Pro license.</li>
+      <li>To the users in the marketing department only, deploy a Visio Plan 2 license.</li>
+    </ul>
+    <p>What is the minimum number of deployment groups required?</p>`,
+    note: '',
+    render: 'mcq',
+    options: ['A. 1', 'B. 2', 'C. 3', 'D. 4', 'E. 5'],
+    correctOption: 'C',
+    solution: `<strong>Correct Answer: C — 3</strong><br><br>
+    A single group containing all four users can be assigned both the Office 365 E3 license (with the Power Automate service plan disabled) and the EMS E5 license, since every user needs those two products. A second group scoped to the research department only adds the Power BI Pro license. A third group scoped to the marketing department only adds the Visio Plan 2 license. Because a group can be assigned more than one product license simultaneously, the department-specific licenses don't need their own "all users" group — three groups in total cover every requirement.`,
+    userChoice: null
+  },
+  {
+    id: 3192, topic: 34, discussions: 0, isMS102: true, ms102Domain: 'tenant',
+    type: 'MULTIPLE CHOICE',
+    title: 'Role Required to View Service Health Advisories',
+    text: `<p>You have a Microsoft 365 subscription.</p>
+    <p>You view the Service health overview and see several active advisories for Exchange Online, the Microsoft 365 suite, Microsoft Teams, OneDrive for Business, and SharePoint Online.</p>
+    <p>You need to ensure that a user named User1 can view the advisories to investigate the service health issues.</p>
+    <p>Which role should you assign to User1?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Message Center Reader',
+      'B. Reports Reader',
+      'C. Service Support Administrator',
+      'D. Compliance Administrator'
+    ],
+    correctOption: 'C',
+    solution: `<strong>Correct Answer: C — Service Support Administrator</strong><br><br>
+    Service Support Administrator can open and view the Service health dashboard, read all the health advisories, and open support tickets. Message Center Reader only reads Message center announcements about upcoming feature changes, not service incidents. Reports Reader and Compliance Administrator don't grant access to the Service health advisories at all.`,
+    userChoice: null
+  },
+  {
+    id: 3193, topic: 34, discussions: 0, isMS102: true, ms102Domain: 'identity',
+    type: 'HOTSPOT',
+    title: 'Active vs. Eligible PIM Role Assignments Over Time',
+    text: `<p>You have a Microsoft 365 E5 subscription that contains the users shown in the following table.</p>
+    <div class="code-block">Name &nbsp;&nbsp;| Member of<br>
+    Admin1 | Group1<br>
+    Admin2 | Group2<br>
+    Admin3 | Group1, Group2</div>
+    <p>You add the following assignment for the User Administrator role:</p>
+    <ul>
+      <li>Scope type: Directory</li>
+      <li>Selected members: Group1</li>
+      <li>Assignment type: <strong>Active</strong></li>
+      <li>Assignment starts: Mar 15, 2023</li>
+      <li>Assignment ends: Aug 15, 2023</li>
+    </ul>
+    <p>You add the following assignment for the Exchange Administrator role:</p>
+    <ul>
+      <li>Scope type: Directory</li>
+      <li>Selected members: Group2</li>
+      <li>Assignment type: <strong>Eligible</strong></li>
+      <li>Assignment starts: Jun 15, 2023</li>
+      <li>Assignment ends: Oct 15, 2023</li>
+    </ul>
+    <p>For each of the following statements, select Yes if the statement is true. Otherwise, select No.</p>`,
+    note: 'NOTE: Each correct selection is worth one point.',
+    render: 'hotspot_yesno',
+    solution: `• On July 15, 2023, Admin1 can reset the password of a user: <span class="correct-badge">Yes</span><br>
+    • On June 20, 2023, Admin2 can manage Microsoft Exchange Online: <span class="correct-badge">No</span><br>
+    • On May 1, 2023, Admin3 can reset the password of a user: <span class="correct-badge">Yes</span><br><br>
+    <em>Admin1 (Group1) has an <strong>Active</strong> User Administrator assignment from Mar 15–Aug 15, 2023 — an active assignment grants standing permissions with no activation step, so on Jul 15 Admin1 can already reset passwords. Admin2 (Group2) only has an <strong>Eligible</strong> Exchange Administrator assignment — eligibility alone grants no permissions; Admin2 would first have to activate the role in PIM before being able to manage Exchange Online, so on Jun 20 Admin2 cannot yet do so. Admin3 belongs to both Group1 and Group2; the Group1 membership gives Admin3 the same Active User Administrator assignment as Admin1 (Mar 15–Aug 15), so on May 1, Admin3 can reset a user's password.</em>`,
+    statements: [
+      { text: 'On July 15, 2023, Admin1 can reset the password of a user.', answer: 'Yes' },
+      { text: 'On June 20, 2023, Admin2 can manage Microsoft Exchange Online.', answer: 'No' },
+      { text: 'On May 1, 2023, Admin3 can reset the password of a user.', answer: 'Yes' }
+    ],
+    userSelections: {}
+  },
+  {
+    id: 3194, topic: 34, discussions: 0, isMS102: true, ms102Domain: 'tenant',
+    type: 'MULTIPLE CHOICE',
+    title: 'Who Microsoft Contacts After a Data Breach',
+    text: `<p>You have a Microsoft 365 subscription.</p>
+    <p>You have an Azure AD tenant that contains the users shown in the following table.</p>
+    <div class="code-block">Name &nbsp;| Role<br>
+    User1 | Security Administrator<br>
+    User2 | Global Administrator<br>
+    User3 | Service Support Administrator</div>
+    <p>You configure Tenant properties as shown in the following exhibit:</p>
+    <div class="code-block">Technical contact: User1@contoso.com<br>
+    Global privacy contact: (blank)<br>
+    Privacy statement URL: http://contoso.com/privacy</div>
+    <p>Which users will be contacted by Microsoft if the tenant experiences a data breach?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. User1 only',
+      'B. User2 only',
+      'C. User3 only',
+      'D. User1 and User2 only',
+      'E. User2 and User3 only'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — User1 only</strong><br><br>
+    In the Microsoft 365 admin center's Organization profile settings, the <strong>Technical contact</strong> is the person Microsoft notifies about service incidents and data breaches. The <strong>Global privacy contact</strong> would additionally be notified for privacy-related matters, but that field is blank here — so it plays no part. Role assignments (Global Administrator, Service Support Administrator) don't determine who Microsoft directly contacts; that's governed entirely by the tenant's configured contact fields, so only User1 (the technical contact) is notified.`,
+    userChoice: null
+  },
+  {
+    id: 3195, topic: 34, discussions: 0, isMS102: true, ms102Domain: 'identity',
+    type: 'MULTIPLE CHOICE',
+    title: 'Best Action Before Implementing Directory Synchronization',
+    text: `<p>Your network contains an Active Directory forest named <em>contoso.local</em>.</p>
+    <p>You purchase a Microsoft 365 subscription.</p>
+    <p>You plan to move to Microsoft 365 and to implement a hybrid deployment solution for the next 12 months.</p>
+    <p>You need to prepare for the planned move to Microsoft 365. What is the best action to perform before you implement directory synchronization?</p>
+    <p>More than one answer choice may achieve the goal. Select the <strong>BEST</strong> answer.</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Purchase a third-party X.509 certificate.',
+      'B. Create an external forest trust.',
+      'C. Rename the Active Directory forest.',
+      'D. Purchase a custom domain name.'
+    ],
+    correctOption: 'D',
+    solution: `<strong>Correct Answer: D — Purchase a custom domain name</strong><br><br>
+    contoso.local uses a non-routable, non-verifiable top-level domain suffix. Before running directory synchronization, users' UPN suffixes need to match a domain that can be added to and verified in Microsoft 365 (e.g. contoso.com), otherwise synced accounts fall back to the default *.onmicrosoft.com UPN. Buying and verifying a routable custom domain now — and later adding it as a UPN suffix in AD — gives users a seamless, predictable sign-in experience once sync begins.<br><br>
+    A third-party certificate is only relevant if implementing AD FS federation, which isn't required here. Renaming the forest or creating an external forest trust are far more disruptive and unnecessary just to prepare for directory sync.`,
+    userChoice: null
+  },
+  {
+    id: 3196, topic: 34, discussions: 0, isMS102: true, ms102Domain: 'identity',
+    type: 'MULTIPLE CHOICE',
+    title: 'Group Type to Assign a Directory Role and App Access Together',
+    text: `<p>You have a Microsoft 365 subscription.</p>
+    <p>You configure a new Azure AD enterprise application named App1. App1 requires that a user be assigned the Reports Reader role.</p>
+    <p>Which type of group should you use to assign the Reports Reader role and to access App1?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. a Microsoft 365 group that has assigned membership',
+      'B. a Microsoft 365 group that has dynamic user membership',
+      'C. a security group that has assigned membership',
+      'D. a security group that has dynamic user membership'
+    ],
+    correctOption: 'C',
+    solution: `<strong>Correct Answer: C — a security group that has assigned membership</strong><br><br>
+    Azure AD directory roles (like Reports Reader) can only be assigned to a role-assignable <strong>security group</strong> — Microsoft 365 groups aren't supported as role-assignable groups. In addition, a group used for role assignment must have <strong>assigned</strong> (static) membership; dynamic membership groups can't be made role-assignable, because dynamic evaluation could otherwise grant a directory role to users automatically without an administrator explicitly approving each addition. The same security group can also be assigned to App1 in Enterprise applications, satisfying both requirements with one group.`,
+    userChoice: null
+  },
+  {
+    id: 3197, topic: 34, discussions: 0, isMS102: true, ms102Domain: 'compliance',
+    type: 'MULTIPLE CHOICE',
+    title: 'Alert Policy for Exchange Online Admin Privilege Elevation',
+    text: `<p>You have a new Microsoft 365 E5 tenant.</p>
+    <p>You need to enable an alert policy that will be triggered when an elevation of Microsoft Exchange Online administrative privileges is detected.</p>
+    <p>What should you do first?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Enable auditing.',
+      'B. Enable Microsoft 365 usage analytics.',
+      'C. Create an insider risk management policy.',
+      'D. Create a communication compliance policy.'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — Enable auditing</strong><br><br>
+    Alert policies in the Microsoft Purview compliance portal — including the built-in "elevation of Exchange admin privilege" alert — rely entirely on activity recorded in the unified audit log. In a brand-new tenant, auditing may not yet be turned on, so the very first step is to enable auditing; only once audit events are being recorded can an alert policy detect and fire on that activity.<br><br>
+    Usage analytics reports on adoption metrics, not privilege changes. Insider risk management and communication compliance policies address different scenarios (data exfiltration/policy violations and inappropriate messaging, respectively), not admin role elevation alerting.`,
+    userChoice: null
+  },
+  {
+    id: 3198, topic: 34, discussions: 0, isMS102: true, ms102Domain: 'security',
+    type: 'MULTIPLE CHOICE',
+    title: 'Change the Data Storage Region for Microsoft Defender for Endpoint',
+    text: `<p>Your network contains an on-premises Active Directory domain named contoso.com. The domain contains 1,000 Windows 10 devices.</p>
+    <p>You perform a proof-of-concept (PoC) deployment of Microsoft Defender for Endpoint for 10 test devices. During the onboarding process, you configure Microsoft Defender for Endpoint-related data to be stored in the United States.</p>
+    <p>You plan to onboard all the devices. You need to store the Microsoft Defender for Endpoint data in Europe.</p>
+    <p>What should you do first?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Delete the workspace.',
+      'B. Create a workspace.',
+      'C. Onboard a new device.',
+      'D. Offboard the test devices.'
+    ],
+    correctOption: 'D',
+    solution: `<strong>Correct Answer: D — Offboard the test devices</strong><br><br>
+    The data storage location for Microsoft Defender for Endpoint is locked in the first time a device is onboarded and can't simply be changed afterward. To reset it, every currently onboarded device must first be offboarded; once the tenant has no onboarded devices for a period, the data storage location can be selected again (this time, Europe) before onboarding the full device fleet.`,
+    userChoice: null
+  },
+  {
+    id: 3199, topic: 34, discussions: 0, isMS102: true, ms102Domain: 'security',
+    type: 'MULTIPLE CHOICE',
+    title: 'Remove a User from the Restricted Entities List',
+    text: `<p>You have a Microsoft 365 E5 subscription that contains a user named User1.</p>
+    <p>User1 exceeds the default daily limit of allowed email messages and is on the Restricted entities list.</p>
+    <p>You need to remove User1 from the Restricted entities list.</p>
+    <p>What should you use?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. the Exchange admin center',
+      'B. the Microsoft Purview compliance portal',
+      'C. the Microsoft 365 admin center',
+      'D. the Microsoft 365 Defender portal',
+      'E. the Microsoft Entra admin center'
+    ],
+    correctOption: 'D',
+    solution: `<strong>Correct Answer: D — the Microsoft 365 Defender portal</strong><br><br>
+    When a mailbox exceeds outbound sending limits, it's added to the <strong>Restricted entities</strong> page, found under <em>Email &amp; collaboration &gt; Review &gt; Restricted entities</em> in the Microsoft 365 Defender portal (security.microsoft.com). From there an admin (with the Organization Management or Security Administrator role) reviews the account and unblocks it — restrictions typically clear within about an hour afterward. This page isn't exposed in the Exchange admin center, the M365 admin center, the Entra admin center, or the Purview compliance portal.`,
+    userChoice: null
+  },
+  {
+    id: 3200, topic: 34, discussions: 0, isMS102: true, ms102Domain: 'security',
+    type: 'MULTIPLE CHOICE',
+    title: 'Scope Unsafe-Link Protection to the Research Department Only',
+    text: `<p>Your company has a Microsoft 365 E5 subscription.</p>
+    <p>Users in the research department work with sensitive data.</p>
+    <p>You need to prevent the research department users from accessing potentially unsafe websites by using hyperlinks embedded in email messages and documents. Users in other departments must not be restricted.</p>
+    <p>What should you do?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Create a data loss prevention (DLP) policy that has a Content is shared condition.',
+      'B. Modify the Safe Links global settings.',
+      'C. Create a data loss prevention (DLP) policy that has a Content contains condition.',
+      'D. Create a new Safe Links policy.'
+    ],
+    correctOption: 'D',
+    solution: `<strong>Correct Answer: D — Create a new Safe Links policy</strong><br><br>
+    Safe Links (in Microsoft Defender for Office 365) rewrites and time-of-click checks URLs in email and Office documents. A dedicated Safe Links policy can be scoped to just the research department, applying stricter link protection only to them. Modifying the <strong>global</strong> Safe Links settings would apply the change tenant-wide, affecting users in other departments too — which the requirement explicitly rules out. DLP policies control sensitive data handling and sharing, not whether a hyperlink destination is checked for safety.`,
+    userChoice: null
+  },
+  {
+    id: 3201, topic: 34, discussions: 0, isMS102: true, ms102Domain: 'security',
+    type: 'HOTSPOT',
+    title: 'Microsoft Defender for Endpoint RBAC — Device Group and Role Scope',
+    text: `<p>You have an Azure AD tenant that contains the users shown in the following table.</p>
+    <div class="code-block">Name &nbsp;| Member of<br>
+    User1 | Group1<br>
+    User2 | Group2<br>
+    User3 | Group3</div>
+    <p>Your company uses Microsoft Defender for Endpoint. Microsoft Defender for Endpoint contains the roles shown in the following table.</p>
+    <div class="code-block">Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| Permission &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| Assigned user group<br>
+    Microsoft Defender for Endpoint administrator (default) | View data, Alerts investigation, Active remediation actions, Manage security settings | Group3<br>
+    Role1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| View data, Alerts investigation &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| Group1<br>
+    Role2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| View data &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| Group2</div>
+    <p>Microsoft Defender for Endpoint contains the device groups shown in the following table.</p>
+    <div class="code-block">Rank | Device group &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| Device name | User access<br>
+    1 &nbsp;&nbsp;&nbsp;| ATP1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| Device1 &nbsp;&nbsp;&nbsp;&nbsp;| Group1<br>
+    Last &nbsp;| Ungrouped devices (default) | Device2 &nbsp;&nbsp;&nbsp;&nbsp;| Group2</div>
+    <p>For each of the following statements, select Yes if the statement is true. Otherwise, select No.</p>`,
+    note: 'NOTE: Each correct selection is worth one point.',
+    render: 'hotspot_yesno',
+    solution: `• User1 can run an antivirus scan on Device2: <span class="correct-badge">No</span><br>
+    • User2 can collect an investigation package from Device2: <span class="correct-badge">No</span><br>
+    • User3 can isolate Device1: <span class="correct-badge">Yes</span><br><br>
+    <em>User1 (Role1: View data, Alerts investigation) lacks the "Active remediation actions" permission an antivirus scan requires, and Device2 (Ungrouped devices) grants access only to Group2 — User1 fails on both counts. User2 (Role2: View data only) also lacks "Active remediation actions", which collecting an investigation package requires, even though Device2's access does include Group2. User3 (the default Microsoft Defender for Endpoint administrator role, via Group3) has full permissions including remediation actions, and the default admin role automatically has access to every device group — including ATP1 — so User3 can isolate Device1.</em>`,
+    statements: [
+      { text: 'User1 can run an antivirus scan on Device2.', answer: 'No' },
+      { text: 'User2 can collect an investigation package from Device2.', answer: 'No' },
+      { text: 'User3 can isolate Device1.', answer: 'Yes' }
+    ],
+    userSelections: {}
+  },
+  {
+    id: 3202, topic: 34, discussions: 0, isMS102: true, ms102Domain: 'compliance',
+    type: 'HOTSPOT',
+    title: 'Least-Privilege Alert Policy for Malware in Email',
+    text: `<p>You have a Microsoft 365 E5 tenant.</p>
+    <p>You need to ensure that administrators are notified when a user receives an email message that contains malware. The solution must use the principle of least privilege.</p>
+    <p>Which type of policy should you create, and which Microsoft Purview solutions role is required to create the policy? To answer, select the appropriate options in the answer area.</p>`,
+    note: 'NOTE: Each correct selection is worth one point.',
+    render: 'hotspot_generic',
+    solution: `• <strong>Policy type:</strong> <span class="correct-badge">Alert</span><br>
+    • <strong>Role:</strong> <span class="correct-badge">Security Administrator</span><br><br>
+    <em>Notifying admins about malware-containing email is exactly what an <strong>alert policy</strong> in Microsoft Purview is for (there's even a built-in template for it). Creating and managing alert policies requires, at minimum, the Security Administrator role; Quarantine Administrator and Communication Compliance Administrator don't include alert-policy management, and Organization Management is far broader than the least-privilege requirement calls for.</em>`,
+    dropdowns: {
+      'policy-type': {
+        label: 'Policy type:',
+        options: ['Alert', 'Threat', 'Compliance'],
+        correct: 'Alert'
+      },
+      'role': {
+        label: 'Role:',
+        options: ['Quarantine Administrator', 'Security Administrator', 'Organization Management', 'Communication Compliance Administrators'],
+        correct: 'Security Administrator'
+      }
+    },
+    userSelections: {}
+  },
+  {
+    id: 3203, topic: 34, discussions: 0, isMS102: true, ms102Domain: 'security',
+    type: 'MULTIPLE CHOICE',
+    title: 'Compare Current Safe Links Configuration to Microsoft Recommendations',
+    text: `<p>You have a Microsoft 365 E5 subscription.</p>
+    <p>You need to compare the current Safe Links configuration to the Microsoft recommended configurations.</p>
+    <p>What should you use?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Microsoft Purview',
+      'B. Azure AD Identity Protection',
+      'C. Microsoft Secure Score',
+      'D. the configuration analyzer'
+    ],
+    correctOption: 'D',
+    solution: `<strong>Correct Answer: D — the configuration analyzer</strong><br><br>
+    The configuration analyzer, in the Microsoft Defender portal under Email &amp; collaboration policies, compares your current Exchange Online Protection and Defender for Office 365 policies — including Safe Links — against Microsoft's Standard and Strict recommended baselines, and flags every setting that drifts from the recommendation.<br><br>
+    Purview covers compliance/data-governance solutions rather than mail-flow security policy tuning, Identity Protection is about risky sign-ins/users, and Secure Score gives a broad numeric security posture score rather than a setting-by-setting Safe Links comparison.`,
+    userChoice: null
+  },
+  {
+    id: 3204, topic: 34, discussions: 0, isMS102: true, ms102Domain: 'security',
+    type: 'MULTIPLE CHOICE',
+    title: 'Allow Access to a Partner Portal Blocked by SmartScreen',
+    text: `<p>You have a Microsoft 365 E5 subscription that uses Microsoft Defender for Endpoint.</p>
+    <p>When users attempt to access the portal of a partner company, they receive a message stating the website is blocked by their organization (Microsoft Defender SmartScreen).</p>
+    <p>You need to enable user access to the partner company's portal.</p>
+    <p>Which Microsoft Defender for Endpoint setting should you modify?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Alert notifications',
+      'B. Alert suppression',
+      'C. Custom detections',
+      'D. Advanced hunting',
+      'E. Indicators'
+    ],
+    correctOption: 'E',
+    solution: `<strong>Correct Answer: E — Indicators</strong><br><br>
+    The partner portal's URL/domain is being blocked as an indicator of compromise. Under <em>Settings &gt; Endpoints &gt; Indicators</em>, you add the site as an <strong>Allow</strong> indicator (IP address/URL/domain), which overrides the SmartScreen block and lets users reach it. Alert notifications and suppression only govern how existing alerts are surfaced or hidden, not whether a site is blocked; custom detections and advanced hunting are for building and investigating new detection logic, not remediating an existing indicator-based block.`,
+    userChoice: null
+  },
+  {
+    id: 3205, topic: 34, discussions: 0, isMS102: true, ms102Domain: 'security',
+    type: 'HOTSPOT',
+    title: 'Attack Simulation Training Available on Microsoft 365 E3',
+    text: `<p>You have a Microsoft 365 E3 subscription.</p>
+    <p>You plan to launch Attack simulation training for all users.</p>
+    <p>Which social engineering technique and training experience will be available? To answer, select the appropriate options in the answer area.</p>`,
+    note: 'NOTE: Each correct selection is worth one point.',
+    render: 'hotspot_generic',
+    solution: `• <strong>Social engineering technique:</strong> <span class="correct-badge">Credential harvest</span><br>
+    • <strong>Training experience:</strong> <span class="correct-badge">Mass Market Phishing</span><br><br>
+    <em>Attack simulation training's full feature set requires Microsoft Defender for Office 365 Plan 2 (included in E5). For customers on Microsoft 365 E3 without that add-on, Microsoft offers only a limited trial subset: the Credential Harvest payload technique, and the "ISA Phishing" or "Mass Market Phishing" training experiences — no other social engineering techniques or training experiences are available on the E3 trial.</em>`,
+    dropdowns: {
+      'social-eng': {
+        label: 'Social engineering technique:',
+        options: ['Credential harvest', 'Link to malware', 'Malware attachment'],
+        correct: 'Credential harvest'
+      },
+      'training-exp': {
+        label: 'Training experience:',
+        options: ['Identity Theft', 'Mass Market Phishing', 'Web Phishing'],
+        correct: 'Mass Market Phishing'
+      }
+    },
+    userSelections: {}
+  },
+  {
+    id: 3206, topic: 34, discussions: 0, isMS102: true, ms102Domain: 'security',
+    type: 'MULTIPLE CHOICE',
+    title: 'Block Malicious File Downloads from Teams, OneDrive, and SharePoint',
+    text: `<p>You have a Microsoft 365 subscription that uses Microsoft Defender for Office 365.</p>
+    <p>You need to ensure that users are prevented from opening or downloading malicious files from Microsoft Teams, OneDrive, or SharePoint Online.</p>
+    <p>What should you do?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Create a new Anti-malware policy.',
+      'B. Configure the Safe Links global settings.',
+      'C. Create a new Anti-phishing policy.',
+      'D. Configure the Safe Attachments global settings.'
+    ],
+    correctOption: 'D',
+    solution: `<strong>Correct Answer: D — Configure the Safe Attachments global settings</strong><br><br>
+    Safe Attachments protection for SharePoint, OneDrive, and Microsoft Teams is enabled through a single <strong>global setting</strong> (not a per-recipient Safe Attachments policy) that scans files as they're uploaded and blocks users from opening or downloading any file that's detected as malicious. Anti-malware and anti-phishing policies protect inbound email, and Safe Links checks hyperlinks — neither controls file downloads inside Teams/OneDrive/SharePoint.`,
+    userChoice: null
+  },
+  {
+    id: 3207, topic: 34, discussions: 0, isMS102: true, ms102Domain: 'security',
+    type: 'HOTSPOT',
+    title: 'Rank-Ordered Device Group Membership Evaluation',
+    text: `<p>You have a Microsoft 365 E5 subscription that uses Microsoft Defender for Endpoint. Microsoft Defender for Endpoint includes the device groups shown in the following table.</p>
+    <div class="code-block">Rank | Device group | Members<br>
+    1 &nbsp;&nbsp;&nbsp;| Group1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| Tag Equals demo And OS In Windows 10<br>
+    2 &nbsp;&nbsp;&nbsp;| Group2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| Tag Equals demo<br>
+    3 &nbsp;&nbsp;&nbsp;| Group3 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| Domain Equals adatum.com<br>
+    4 &nbsp;&nbsp;&nbsp;| Group4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| Domain Equals adatum.com And OS In Windows 10<br>
+    Last &nbsp;| Ungrouped devices (default) | Not applicable</div>
+    <p>You onboard a computer named computer1 to Microsoft Defender for Endpoint. computer1 is domain-joined to adatum.com and runs Windows 10 64-bit.</p>
+    <p>Use the drop-down menus to select the answer choice that completes each statement.</p>`,
+    note: 'NOTE: Each correct selection is worth one point.',
+    render: 'hotspot_generic',
+    solution: `• Computer1 will be a member of: <span class="correct-badge">Group3 only</span><br>
+    • If you add the tag demo to Computer1, the computer will be a member of: <span class="correct-badge">Group1 only</span><br><br>
+    <em>Device group membership is evaluated top-down by rank, and a device joins only the first (highest-ranked) group whose criteria it matches — it does not join every matching group. Without the "demo" tag, computer1 fails the Group1/Group2 criteria (both require Tag Equals demo) but matches Group3 (domain adatum.com), which outranks Group4, so it joins Group3 only. Once the "demo" tag is added, computer1 now matches Group1 (Tag Equals demo And OS In Windows 10) — the highest-ranked match — so evaluation stops there and it joins Group1 only, even though it would also match Group2, Group3, and Group4.</em>`,
+    dropdowns: {
+      'membership-1': {
+        label: 'Computer1 will be a member of [answer choice].',
+        options: ['Group3 only', 'Group4 only', 'Group3 and Group4 only', 'Ungrouped devices'],
+        correct: 'Group3 only'
+      },
+      'membership-2': {
+        label: 'If you add the tag demo to Computer1, the computer will be a member of [answer choice].',
+        options: ['Group1 only', 'Group1 and Group2 only', 'Group1, Group2, Group3, and Group4', 'Ungrouped devices'],
+        correct: 'Group1 only'
+      }
+    },
+    userSelections: {}
+  },
+  {
+    id: 3208, topic: 34, discussions: 0, isMS102: true, ms102Domain: 'compliance',
+    type: 'HOTSPOT',
+    title: 'Email & Collaboration Reports for ZAP Quarantines and Malicious Link Clicks',
+    text: `<p>You have a Microsoft 365 E5 subscription that uses Microsoft Defender for Office 365.</p>
+    <p>The subscription has the default inbound anti-spam policy and a custom Safe Attachments policy.</p>
+    <p>You need to identify the following information:</p>
+    <ul>
+      <li>The number of email messages quarantined by zero-hour auto purge (ZAP).</li>
+      <li>The number of times users clicked a malicious link in an email message.</li>
+    </ul>
+    <p>Which Email &amp; collaboration report should you use? To answer, select the appropriate options in the answer area.</p>`,
+    note: 'NOTE: Each correct selection is worth one point.',
+    render: 'hotspot_generic',
+    solution: `• <strong>To identify the number of emails quarantined by ZAP:</strong> <span class="correct-badge">Threat protection status report</span><br>
+    • <strong>To identify the number of times users clicked a malicious link in an email:</strong> <span class="correct-badge">URL threat protection report</span><br><br>
+    <em>The Threat protection status report can be viewed by detection technology, and one of its views is specifically "Zero-hour auto purge (ZAP)", showing how many messages ZAP quarantined after delivery. The URL threat protection report shows click verdicts for URLs in email, letting you see how many clicks were on links judged malicious. Mailflow status and Spoof detections report on different aspects (overall mail volume/verdicts and spoof intelligence, respectively) and don't surface either metric.</em>`,
+    dropdowns: {
+      'zap-report': {
+        label: 'To identify the number of emails quarantined by ZAP:',
+        options: ['Mailflow status report', 'Spoof detections', 'Threat protection status report', 'URL threat protection'],
+        correct: 'Threat protection status report'
+      },
+      'click-report': {
+        label: 'To identify the number of times users clicked a malicious link in an email:',
+        options: ['Mailflow status report', 'Spoof detections', 'Threat protection status report', 'URL threat protection'],
+        correct: 'URL threat protection'
+      }
+    },
+    userSelections: {}
+  },
+  {
+    id: 3209, topic: 34, discussions: 0, isMS102: true, ms102Domain: 'security',
+    type: 'MULTIPLE CHOICE',
+    title: 'Service Source on the Microsoft 365 Defender Incidents Page',
+    text: `<p>You have a Microsoft 365 tenant.</p>
+    <p>You plan to manage incidents in the tenant by using Microsoft 365 Defender.</p>
+    <p>Which Microsoft service source will appear on the Incidents page of the Microsoft 365 Defender portal?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Microsoft Sentinel',
+      'B. Microsoft Defender for Cloud',
+      'C. Azure Arc',
+      'D. Microsoft Defender for Identity'
+    ],
+    correctOption: 'D',
+    solution: `<strong>Correct Answer: D — Microsoft Defender for Identity</strong><br><br>
+    Microsoft 365 Defender natively correlates signals from its own suite of workloads — Defender for Endpoint, Defender for Office 365, Defender for Cloud Apps, Defender for Identity, and Azure AD Identity Protection — into unified incidents. Microsoft Defender for Cloud and Azure Arc are Azure infrastructure/hybrid-management services outside that native set. Microsoft Sentinel can be connected to pull M365 Defender incidents in, but that's an optional, explicitly configured integration rather than a source that appears automatically.`,
+    userChoice: null
+  },
+  {
+    id: 3210, topic: 34, discussions: 0, isMS102: true, ms102Domain: 'identity',
+    type: 'MULTIPLE CHOICE',
+    multiSelect: true,
+    title: 'Prepare the Environment for Pass-Through Authentication',
+    text: `<p>Your network contains an on-premises Active Directory domain named <em>contoso.local</em>. The domain contains five domain controllers.</p>
+    <p>Your company purchases Microsoft 365 and creates an Azure AD tenant named <em>contoso.onmicrosoft.com</em>.</p>
+    <p>You plan to install Azure AD Connect on a member server and implement pass-through authentication.</p>
+    <p>You need to prepare the environment for the planned implementation of pass-through authentication.</p>
+    <p>Which three actions should you perform? Each correct answer presents part of the solution.</p>`,
+    note: 'NOTE: Each correct selection is worth one point.',
+    render: 'mcq',
+    options: [
+      'A. From a domain controller, install an Authentication Agent.',
+      'B. From the Microsoft Entra admin center, configure an authentication method.',
+      'C. From Active Directory Domains and Trusts, add a UPN suffix.',
+      'D. Modify the email address attribute for each user account.',
+      'E. From the Microsoft Entra admin center, add a custom domain name.',
+      'F. Modify the User logon name for each user account.'
+    ],
+    correctOptions: ['A', 'C', 'E'],
+    solution: `<strong>Correct Answer: A, C, and E</strong><br><br>
+    An Authentication Agent must be installed (typically on a member server, but can also run on a domain controller) so on-premises password validation requests from Azure AD can be handled directly against Active Directory (A). Because contoso.local isn't a routable, publicly verifiable domain, a custom domain name (e.g. contoso.com) needs to be added and verified in the Entra admin center (E), and a matching UPN suffix needs to be added in Active Directory Domains and Trusts (C) so on-premises accounts can be given UPNs that align with the verified domain — giving users a clean sign-in experience once synchronization and PTA are live.<br><br>
+    Selecting PTA as the sign-in method is done as part of running the Azure AD Connect installation wizard itself, not as a separate prerequisite step; modifying every user's email address attribute or logon name individually isn't required up front — UPNs can be updated in bulk or over time.`,
+    userChoices: []
+  },
+  {
+    id: 3211, topic: 34, discussions: 0, isMS102: true, ms102Domain: 'identity',
+    type: 'HOTSPOT',
+    title: 'Security Defaults — First Sign-In MFA Method and Registration Window',
+    text: `<p>You have a new Microsoft 365 E5 tenant. Security defaults is set to Yes.</p>
+    <p>A user signs in to the tenant for the first time.</p>
+    <p>Which multi-factor authentication (MFA) method can the user use, and how many days does the user have to register for MFA? To answer, select the appropriate options in the answer area.</p>`,
+    note: 'NOTE: Each correct selection is worth one point.',
+    render: 'hotspot_generic',
+    solution: `• <strong>MFA method:</strong> <span class="correct-badge">Notification to the Microsoft Authenticator app</span><br>
+    • <strong>Number of days:</strong> <span class="correct-badge">14</span><br><br>
+    <em>Security defaults require every user to register for MFA using the Microsoft Authenticator app specifically — no other method (phone call, text message, security questions, email) is offered. Users are given a 14-day grace period from their first sign-in to complete Authenticator registration before MFA enforcement begins.</em>`,
+    dropdowns: {
+      'mfa-method': {
+        label: 'MFA method:',
+        options: ['Call to phone', 'Email message', 'Security questions', 'Text message to phone', 'Notification to Microsoft Authenticator app'],
+        correct: 'Notification to Microsoft Authenticator app'
+      },
+      'num-days': {
+        label: 'Number of days:',
+        options: ['7', '14', '30', '60'],
+        correct: '14'
+      }
+    },
+    userSelections: {}
+  },
+  {
+    id: 3212, topic: 34, discussions: 0, isMS102: true, ms102Domain: 'identity',
+    type: 'MULTIPLE CHOICE',
+    title: 'Objects Synced to Azure AD by Default',
+    text: `<p>Your network contains an on-premises Active Directory domain named contoso.com. The domain contains the objects shown in the following table.</p>
+    <div class="code-block">Name &nbsp;&nbsp;| Configuration<br>
+    Group1 | Global security group<br>
+    User1 &nbsp;| Enabled user account<br>
+    User2 &nbsp;| Disabled user account</div>
+    <p>You configure Azure AD Connect to sync contoso.com to Azure AD, with no additional sync scope or filtering configured.</p>
+    <p>Which objects will sync to Azure AD?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Group1 only',
+      'B. User1 and User2 only',
+      'C. Group1 and User1 only',
+      'D. Group1, User1, and User2'
+    ],
+    correctOption: 'D',
+    solution: `<strong>Correct Answer: D — Group1, User1, and User2</strong><br><br>
+    By default, without any OU, domain, or group-based sync filtering configured, Azure AD Connect synchronizes every user and group object in scope — this includes global security groups and both enabled <strong>and disabled</strong> user accounts. A disabled account is not automatically excluded from synchronization; it will appear in Azure AD simply marked as disabled. Excluding disabled accounts (or any other object) requires explicit filtering to be configured, which isn't the case here.`,
+    userChoice: null
+  },
+  {
+    id: 3213, topic: 34, discussions: 0, isMS102: true, ms102Domain: 'identity',
+    type: 'MULTIPLE CHOICE',
+    title: 'Minimum Number of Conditional Access Policies Required',
+    text: `<p>You have a Microsoft 365 subscription.</p>
+    <p>You need to create Conditional Access policies to meet the following requirements:</p>
+    <ul>
+      <li>All users must use multi-factor authentication (MFA) when they sign in from outside the corporate network.</li>
+      <li>Users must only be able to sign in from outside the corporate network if the sign-in originates from a compliant device.</li>
+      <li>All users must be blocked from signing in from outside the United States and Canada.</li>
+      <li>Only users in the R&amp;D department must be blocked from signing in from both Android and iOS devices.</li>
+      <li>Only users in the finance department must be able to sign in to an Azure AD enterprise application named App1. All other users must be blocked from signing in to App1.</li>
+    </ul>
+    <p>What is the minimum number of Conditional Access policies you should create?</p>`,
+    note: '',
+    render: 'mcq',
+    options: ['A. 2', 'B. 4', 'C. 5', 'D. 6', 'E. 7', 'F. 8'],
+    correctOption: 'B',
+    solution: `<strong>Correct Answer: B — 4</strong><br><br>
+    A single Conditional Access policy can only apply one grant behavior — either a "Grant access" control (like requiring MFA and/or a compliant device) or a "Block access" control, not both. So the outside-corporate-network requirements split into two policies: one granting access outside the corporate network only when MFA and a compliant device are both satisfied, and a separate policy blocking sign-in from outside the United States and Canada. A third policy blocks the R&amp;D department from Android and iOS devices. A fourth policy scopes App1 to the finance department, blocking every other user from it. That's 4 policies in total — there's no way to combine a block control and a grant control into a single policy, which is why the count can't be reduced further.`,
+    userChoice: null
+  },
+  {
+    id: 3214, topic: 34, discussions: 0, isMS102: true, ms102Domain: 'identity',
+    type: 'HOTSPOT',
+    title: 'Least-Privilege Tool to Identify Directory Synchronization Issues',
+    text: `<p>Your network contains an on-premises Active Directory domain.</p>
+    <p>You have a Microsoft 365 E5 subscription.</p>
+    <p>You plan to implement directory synchronization.</p>
+    <p>You need to identify potential synchronization issues for the domain. The solution must use the principle of least privilege.</p>
+    <p>What should you use? To answer, select the appropriate options in the answer area.</p>`,
+    note: 'NOTE: Each correct selection is worth one point.',
+    render: 'hotspot_generic',
+    solution: `• <strong>Tool:</strong> <span class="correct-badge">IdFix</span><br>
+    • <strong>Required group membership:</strong> <span class="correct-badge">Domain Users</span><br><br>
+    <em>IdFix is Microsoft's purpose-built tool for discovering and remediating the AD object/attribute problems (duplicate or invalid UPNs and proxy addresses, unsupported characters, etc.) that block directory synchronization. Simply running IdFix to identify issues only requires read access to Active Directory, which any member of the Domain Users group already has — no elevated group such as Domain Admins or Enterprise Admins is needed just to scan for problems, satisfying least privilege.</em>`,
+    dropdowns: {
+      'tool': {
+        label: 'Tool:',
+        options: ['AccessChk', 'Azure AD Connect', 'Active Directory Explorer', 'IdFix'],
+        correct: 'IdFix'
+      },
+      'group': {
+        label: 'Required group membership:',
+        options: ['Domain Admins', 'Domain Users', 'Server Operators', 'Enterprise Admins'],
+        correct: 'Domain Users'
+      }
+    },
+    userSelections: {}
+  },
+  {
+    id: 3215, topic: 34, discussions: 0, isMS102: true, ms102Domain: 'identity',
+    type: 'HOTSPOT',
+    title: 'Conditional Access with Trusted Locations vs. Legacy Per-User MFA',
+    text: `<p>You have an Azure AD tenant named contoso.com that contains the users shown in the following table.</p>
+    <div class="code-block">Name &nbsp;| Member of | Multi-factor authentication (MFA) status<br>
+    User1 | Group1 &nbsp;&nbsp;| Disabled<br>
+    User2 | Group1 &nbsp;&nbsp;| Enforced</div>
+    <p>Multi-factor authentication (MFA) is configured to use the trusted locations shown in the following table.</p>
+    <div class="code-block">Name &nbsp;&nbsp;&nbsp;&nbsp;| IP address range &nbsp;| Trusted location<br>
+    Location1 | 131.107.20.0/24 &nbsp;| Yes<br>
+    Location2 | 131.107.50.0/24 &nbsp;| Yes</div>
+    <p>You create a Conditional Access policy that has the following configurations:</p>
+    <ul>
+      <li>Users or workload identities assignments: All users</li>
+      <li>Cloud apps or actions assignment: App1</li>
+      <li>Conditions: Include all trusted locations</li>
+      <li>Grant access: Require multi-factor authentication</li>
+    </ul>
+    <p>For each of the following statements, select Yes if the statement is true. Otherwise, select No.</p>`,
+    note: 'NOTE: Each correct selection is worth one point.',
+    render: 'hotspot_yesno',
+    solution: `• When User1 connects to App1 from a device that has an IP address of 131.107.50.10, User1 must use MFA: <span class="correct-badge">Yes</span><br>
+    • When User2 connects to App1 from a device that has an IP address of 131.107.20.15, User2 must use MFA: <span class="correct-badge">Yes</span><br>
+    • When User2 connects to App1 from a device that has an IP address of 131.107.5.5, User2 must use MFA: <span class="correct-badge">Yes</span><br><br>
+    <em>The policy's location condition is set to Include: All trusted locations, so the policy applies — and requires MFA — whenever a sign-in comes from 131.107.20.0/24 or 131.107.50.0/24, regardless of a user's legacy per-user MFA status; Conditional-Access-enforced MFA works independently of the classic Disabled/Enabled/Enforced per-user setting. That covers User1 from 131.107.50.10 and User2 from 131.107.20.15. For User2 signing in from 131.107.5.5 (outside both trusted ranges, so this Conditional Access policy doesn't apply there), User2's legacy per-user MFA status is <strong>Enforced</strong> — which independently requires MFA everywhere, regardless of location or any Conditional Access policy scope — so MFA is still required.</em>`,
+    statements: [
+      { text: 'When User1 connects to App1 from a device that has an IP address of 131.107.50.10, User1 must use MFA.', answer: 'Yes' },
+      { text: 'When User2 connects to App1 from a device that has an IP address of 131.107.20.15, User2 must use MFA.', answer: 'Yes' },
+      { text: 'When User2 connects to App1 from a device that has an IP address of 131.107.5.5, User2 must use MFA.', answer: 'Yes' }
+    ],
+    userSelections: {}
+  },
+  {
+    id: 3216, topic: 34, discussions: 0, isMS102: true, ms102Domain: 'identity',
+    type: 'MULTIPLE CHOICE',
+    title: 'Require MFA for Only One of Two Registered Applications',
+    text: `<p>You have a Microsoft 365 subscription.</p>
+    <p>You register two applications named App1 and App2 to Azure AD.</p>
+    <p>You need to ensure that users who connect to App1 require multi-factor authentication (MFA). MFA is required only for App1.</p>
+    <p>What should you do?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. From the Microsoft Entra admin center, create a conditional access policy.',
+      'B. From the Microsoft 365 admin center, configure the Modern authentication settings.',
+      'C. From the Enterprise applications blade of the Microsoft Entra admin center, configure the Users settings.',
+      'D. From Multi-Factor Authentication, configure the service settings.'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — create a Conditional Access policy</strong><br><br>
+    A Conditional Access policy scoped to the App1 cloud app (under Cloud apps or actions), with a grant control requiring MFA, applies that requirement only when users sign in to App1 — App2 is left untouched. Legacy per-user MFA and the Multi-Factor Authentication service settings apply per-user across every app a user signs in to, not per-application. Modern authentication settings just control which authentication protocol client apps use, and the Users settings on an enterprise app control who can be assigned the app, not MFA enforcement.`,
+    userChoice: null
+  },
+  {
+    id: 3217, topic: 34, discussions: 0, isMS102: true, ms102Domain: 'identity',
+    type: 'HOTSPOT',
+    title: 'Passwordless Phone Sign-In — Per-User Registration Scope',
+    text: `<p>You have a Microsoft 365 E5 subscription.</p>
+    <p>You have the users shown in the following table.</p>
+    <div class="code-block">Name &nbsp;| Member of | MFA method registered<br>
+    User1 | Group1 &nbsp;&nbsp;| Microsoft Authenticator app (push notification)<br>
+    User2 | Group1 &nbsp;&nbsp;| Microsoft Authenticator app (push notification)<br>
+    User3 | Group1 &nbsp;&nbsp;| None</div>
+    <p>You configure an Authenticator authentication method policy to enable passwordless sign-in as shown in the following exhibit:</p>
+    <div class="code-block">Enable and Target &nbsp;| Configure<br>
+    Enable: On<br>
+    Include: Select groups → Group1<br>
+    Registration: Optional<br>
+    Authentication mode: Any</div>
+    <p>Both User1 and User2 report they are NOT prompted for passwordless sign-in once User1 sets up phone sign-in in the Microsoft Authenticator app.</p>
+    <p>For each of the following statements, select Yes if the statement is true. Otherwise, select No.</p>`,
+    note: 'NOTE: Each correct selection is worth one point.',
+    render: 'hotspot_yesno',
+    solution: `• User1 will be prompted for passwordless authentication once User1 sets up phone sign-in in the Microsoft Authenticator app: <span class="correct-badge">Yes</span><br>
+    • User1 will be prompted for passwordless authentication once User2 sets up phone sign-in in the Microsoft Authenticator app: <span class="correct-badge">No</span><br>
+    • User3 can use passwordless authentication without setting it up: <span class="correct-badge">No</span><br><br>
+    <em>Passwordless phone sign-in registration is per-user: the policy targets Group1 (which covers all three users), but each individual only becomes eligible to be prompted for passwordless sign-in after registering phone sign-in themselves in their own Authenticator app. User1 setting up phone sign-in makes User1 (not User2) eligible for passwordless prompts. Since User3 has no MFA method registered at all, User3 can't use passwordless sign-in — or any MFA method — without first completing registration.</em>`,
+    statements: [
+      { text: 'User1 will be prompted for passwordless authentication once User1 sets up phone sign-in in the Microsoft Authenticator app.', answer: 'Yes' },
+      { text: 'User1 will be prompted for passwordless authentication once User2 sets up phone sign-in in the Microsoft Authenticator app.', answer: 'No' },
+      { text: 'User3 can use passwordless authentication without setting it up.', answer: 'No' }
+    ],
+    userSelections: {}
+  },
+  {
+    id: 3218, topic: 34, discussions: 0, isMS102: true, ms102Domain: 'compliance',
+    type: 'MULTIPLE CHOICE',
+    title: 'Identify and Report on PII Stored in SharePoint and Teams',
+    text: `<p>You have a Microsoft 365 E5 subscription.</p>
+    <p>You plan to implement Microsoft Purview policies to meet the following requirements:</p>
+    <ul>
+      <li>Identify documents that are stored in Microsoft Teams and SharePoint that contain Personally Identifiable Information (PII).</li>
+      <li>Report on shared documents that contain PII.</li>
+    </ul>
+    <p>What should you create?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. a data loss prevention (DLP) policy',
+      'B. a retention policy',
+      'C. an alert policy',
+      'D. a Microsoft Defender for Cloud Apps policy'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — a data loss prevention (DLP) policy</strong><br><br>
+    A DLP policy scoped to Teams and SharePoint locations, with a "Content contains sensitive info type" condition matching PII (like national ID or credit card numbers), both detects matching documents and gives you built-in DLP reports showing where and how often that content is shared — meeting both requirements in a single policy. Retention policies govern how long content is kept, not whether it contains sensitive data; alert policies notify on activity rather than scan document content for PII; and Defender for Cloud Apps policies govern cloud app usage/risk, not document-content classification.`,
+    userChoice: null
+  },
+  {
+    id: 3219, topic: 34, discussions: 0, isMS102: true, ms102Domain: 'compliance',
+    type: 'MULTIPLE CHOICE',
+    title: 'Which Resources a Sensitivity Label Container Can Be Applied To',
+    text: `<p>You have a Microsoft 365 E5 subscription that contains the resources shown in the following table.</p>
+    <div class="code-block">Name &nbsp;&nbsp;| Type<br>
+    Group1 | Microsoft 365 group<br>
+    Group2 | Distribution group<br>
+    Site1 &nbsp;| Microsoft SharePoint site</div>
+    <p>You create a sensitivity label as shown in the exhibit.</p>
+    <p>To which resource can you apply the label?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. Group1 only',
+      'B. Group2 only',
+      'C. Site1 only',
+      'D. Group1 and Group2 only',
+      'E. Group1, Group2, and Site1'
+    ],
+    correctOption: 'A',
+    solution: `<strong>Correct Answer: A — Group1 only</strong><br><br>
+    A sensitivity label configured with container-management settings (privacy, external sharing, access controls) can only be applied to <strong>Microsoft 365 groups</strong> (which includes Teams and group-connected SharePoint sites). Group2 is a legacy <strong>distribution group</strong>, not a Microsoft 365 group, so container labels don't apply to it. Site1, described simply as a Microsoft SharePoint site rather than a group-connected one, isn't itself a labelable container in this scenario either — the label governs the Microsoft 365 group, and any SharePoint site connected to that group inherits its settings indirectly, but Site1 as listed isn't a direct target.`,
+    userChoice: null
+  },
+  {
+    id: 3220, topic: 34, discussions: 0, isMS102: true, ms102Domain: 'identity',
+    type: 'HOTSPOT',
+    title: 'Identity Protection — Detect Leaked Credentials and Enable Self-Remediation',
+    text: `<p>You have a Microsoft 365 E5 subscription.</p>
+    <p>You need to implement identity protection. The solution must meet the following requirements:</p>
+    <ul>
+      <li>Identify when a user's credentials are compromised and shared on the dark web.</li>
+      <li>Provide users that have compromised credentials with the ability to self-remediate.</li>
+    </ul>
+    <p>What should you configure? To answer, select the appropriate options in the answer area.</p>`,
+    note: 'NOTE: Each correct selection is worth one point.',
+    render: 'hotspot_generic',
+    solution: `• <strong>To identify when users have compromised credentials, configure:</strong> <span class="correct-badge">A user risk policy</span><br>
+    • <strong>To enable self-remediation, select:</strong> <span class="correct-badge">Require password change</span><br><br>
+    <em>Azure AD Identity Protection's "leaked credentials" detection — matching credentials found for sale or posted publicly, including on the dark web — raises a user's <strong>user risk</strong> level, which a user risk policy acts on. Pairing that policy's remediation control with "Require password change" (alongside self-service password reset) lets an affected user clear their own risk by simply changing their password, without needing an administrator to intervene.</em>`,
+    dropdowns: {
+      'detect-config': {
+        label: 'To identify when users have compromised credentials, configure:',
+        options: ['A registration policy', 'A sign-in risk policy', 'A user risk policy', 'A multifactor authentication registration policy'],
+        correct: 'A user risk policy'
+      },
+      'remediate-config': {
+        label: 'To enable self-remediation, select:',
+        options: ['Generate a temporary password', 'Require multi-factor authentication', 'Require password change'],
+        correct: 'Require password change'
+      }
+    },
+    userSelections: {}
+  },
+  {
+    id: 3221, topic: 34, discussions: 0, isMS102: true, ms102Domain: 'identity',
+    type: 'HOTSPOT',
+    title: 'Azure AD Connect Domain/OU Filtering Combined with Group Filtering',
+    text: `<p>Your network contains an on-premises Active Directory domain and a Microsoft 365 subscription. The domain contains the users shown in the following table.</p>
+    <div class="code-block">Name &nbsp;| Member of | In organizational unit (OU)<br>
+    User1 | Group1 &nbsp;&nbsp;| OU1<br>
+    User2 | Group2 &nbsp;&nbsp;| OU1</div>
+    <p>The domain contains the groups shown in the following table.</p>
+    <div class="code-block">Name &nbsp;&nbsp;| Member of | In OU<br>
+    Group1 | None &nbsp;&nbsp;&nbsp;&nbsp;| Sales<br>
+    Group2 | Group1 &nbsp;| OU1</div>
+    <p>You are deploying Azure AD Connect. You configure Domain and OU filtering to synchronize only OU1, and you configure group-based filtering scoped to Group1.</p>
+    <p>For each of the following statements, select Yes if the statement is true. Otherwise, select No.</p>`,
+    note: 'NOTE: Each correct selection is worth one point.',
+    render: 'hotspot_yesno',
+    solution: `• User1 syncs to Azure AD: <span class="correct-badge">Yes</span><br>
+    • User2 syncs to Azure AD: <span class="correct-badge">No</span><br>
+    • Group2 syncs to Azure AD: <span class="correct-badge">Yes</span><br><br>
+    <em>With group-based filtering, an object must be a <strong>direct</strong> member of the filter group (Group1) — nested membership through another group doesn't count. User1 is directly in Group1 and lives in the synced OU1, so User1 syncs. User2 is a direct member of Group2, not of Group1, so the group filter excludes User2 even though User2 is also in OU1. Group2 is itself a direct member of Group1, and Group2's own object lives in OU1 (the synced OU), so Group2 syncs — even though Group1 (the filter group) is in the Sales OU, which isn't in the synced OU scope, that doesn't prevent Group2 (a direct member sitting in the correct OU) from syncing.</em>`,
+    statements: [
+      { text: 'User1 syncs to Azure AD.', answer: 'Yes' },
+      { text: 'User2 syncs to Azure AD.', answer: 'No' },
+      { text: 'Group2 syncs to Azure AD.', answer: 'Yes' }
+    ],
+    userSelections: {}
+  },
+  {
+    id: 3222, topic: 34, discussions: 0, isMS102: true, ms102Domain: 'compliance',
+    type: 'MULTIPLE CHOICE',
+    multiSelect: true,
+    title: 'DLP Conditions Available Across All Locations',
+    text: `<p>You have a Microsoft 365 E5 subscription.</p>
+    <p>You plan to create a data loss prevention (DLP) policy that will be applied to all available locations.</p>
+    <p>Which conditions can you use in the DLP rules of the policy?</p>`,
+    note: '',
+    render: 'mcq',
+    options: [
+      'A. sensitive info types',
+      'B. content search queries',
+      'C. keywords',
+      'D. sensitivity labels'
+    ],
+    correctOptions: ['A', 'D'],
+    solution: `<strong>Correct Answer: A and D</strong><br><br>
+    "Content contains sensitive info type" and "Content contains sensitivity label" are conditions supported across every DLP location (Exchange, SharePoint, OneDrive, Teams, on-premises repositories, and devices), which is why they're available on a policy scoped to all locations. A saved content search query isn't a native DLP rule condition, and a plain keyword list isn't a standalone condition either — keyword matching is expressed through a (location-limited) custom sensitive info type rather than directly as a rule condition.`,
+    userChoices: []
+  },
+  {
+    id: 3223, topic: 34, discussions: 0, isMS102: true, ms102Domain: 'compliance',
+    type: 'HOTSPOT',
+    multiSelect: true,
+    title: 'Auto-Encrypt SharePoint/OneDrive Content and Enable Co-Authoring',
+    text: `<p>You have a Microsoft 365 E5 subscription.</p>
+    <p>You need to meet the following requirements:</p>
+    <ul>
+      <li>Automatically encrypt documents stored in Microsoft OneDrive and SharePoint.</li>
+      <li>Enable co-authoring for Microsoft Office documents encrypted by using a sensitivity label.</li>
+    </ul>
+    <p>Which two settings should you use in the Microsoft Purview compliance portal? To answer, select the appropriate settings in the answer area.</p>`,
+    note: 'NOTE: Each correct selection is worth one point.',
+    render: 'mcq',
+    options: [
+      'A. Catalog',
+      'B. Audit',
+      'C. Content search',
+      'D. Communication compliance',
+      'E. Data loss prevention',
+      'F. eDiscovery',
+      'G. Data lifecycle management',
+      'H. Information protection',
+      'I. Information barriers',
+      'J. Insider risk management',
+      'K. Records management',
+      'L. Privacy Risk Management',
+      'M. Privacy Subject Rights Requests',
+      'N. Settings'
+    ],
+    correctOptions: ['H', 'E'],
+    solution: `<strong>Correct Answer: H — Information protection, and E — Data loss prevention</strong><br><br>
+    <strong>Information protection</strong> is where sensitivity labels are created and where the "Co-authoring for files with sensitivity labels" setting is turned on, which is required to let multiple users co-author documents that are encrypted by a label. <strong>Data loss prevention</strong> is used to build a policy that automatically applies (and can auto-label with encryption) a sensitivity label to content stored in OneDrive and SharePoint when it matches defined conditions, achieving the automatic-encryption requirement. Records management, eDiscovery, and the other solutions listed address retention, investigation holds, or unrelated governance scenarios — not label creation, encryption automation, or co-authoring.`,
+    userChoice: null
   }
 
 ];
+
 
 // ============================================================
 // AI-103 ExamTopics sequential numbering
@@ -13927,6 +15090,18 @@ var AB650LEARN_SEQ = (function () {
   var ids = [];
   for (var i = 0; i < questions.length; i++) {
     if (questions[i].isAB650Learn) ids.push(questions[i].id);
+  }
+  ids.sort(function (a, b) { return a - b; });
+  for (var j = 0; j < ids.length; j++) { m[ids[j]] = j + 1; }
+  return m;
+})();
+
+// Same idea, for the MS-102 ExamTopics-style pool (includes its case studies).
+var MS102_SEQ = (function () {
+  var m = {};
+  var ids = [];
+  for (var i = 0; i < questions.length; i++) {
+    if (questions[i].isMS102) ids.push(questions[i].id);
   }
   ids.sort(function (a, b) { return a - b; });
   for (var j = 0; j < ids.length; j++) { m[ids[j]] = j + 1; }
@@ -14020,6 +15195,7 @@ function sectionOf(q) {
   if (q.isAB650Learn) return 'ab650learn';                // grouped AB-650 official-study-guide pool
   if (q.isAB650) return 'ab650';                          // grouped AB-650 ExamTopics-style pool
   if (q.isDP700) return 'dp700';                          // grouped DP-700 ExamTopics-style pool
+  if (q.isMS102) return 'ms102';                          // grouped MS-102 ExamTopics-style pool (incl. its case studies)
   if (q.isExamTopics) return 'examtopics';               // grouped ExamTopics-style pool
   if (q.isCertPractice) return 'certpractice';           // grouped certification-practice pool
   if (q.isLearnPool) return 'learn';                     // grouped Microsoft Learn pool
@@ -14048,6 +15224,7 @@ const SECTION_DEFS = [
   { key: 'dp700',     name: 'DP-700 Actual Exam Questions (Exam Topics)', icon: '🧱', desc: 'DP-700 (Implementing Data Engineering Solutions Using Microsoft Fabric) exam-style questions on the same topics seen in community exam discussions — originally authored with verified reasoning, no verbatim content.' },
   { key: 'ab650',     name: 'AB-650 Actual Exam Questions (Exam Topics)', icon: '🛡️', desc: 'AB-650 (Administering Microsoft 365 and AI Services) exam-style questions on the same topics seen in community exam discussions — originally authored with verified reasoning, no verbatim content.' },
   { key: 'ab650learn', name: "Microsoft Learn's Official AB-650 Study Guide Questions", icon: '📗', desc: 'Original AB-650 practice questions authored directly from the official Microsoft Learn skills-measured outline — tenant/workload admin, Entra/Defender/Purview governance, and Copilot/Agent 365 AI services.' },
+  { key: 'ms102',     name: 'MS-102 Actual Exam Questions (Exam Topics)', icon: '🏢', desc: 'MS-102 (Microsoft 365 Administrator) exam-style questions and case studies on the same topics seen in community exam discussions — originally authored with verified reasoning, no verbatim content.' },
   { key: 'casestudy', name: 'Case Studies',     icon: '📕', desc: 'Scenario-based questions referencing a case study.' },
   { key: 'mc',        name: 'Multiple Choice',  icon: '🔘', desc: 'Single- and multi-answer questions.' },
   { key: 'dragdrop',  name: 'Drag & Drop',      icon: '🔀', desc: 'Drag values onto targets or arrange actions in the correct order.' },
@@ -14086,6 +15263,16 @@ const DOMAIN_AB650_DEFS = {
 
 function domainAB650Of(q) { return q.ab650Domain || 'govern'; }
 
+// ── Official MS-102 skill domains (Microsoft 365 Administrator, 2026 outline) ──
+const DOMAIN_MS102_DEFS = {
+  tenant:   { name: 'Deploy and Manage a Microsoft 365 Tenant',                    short: 'Tenant Mgmt',    weight: '25–30%', weightPct: 27, color: '#c19c00' },
+  identity: { name: 'Implement and Manage Identity and Access',                    short: 'Identity',       weight: '15–20%', weightPct: 17, color: '#0078d4' },
+  security: { name: 'Manage Security and Threats Using Microsoft Defender XDR',    short: 'Defender XDR',   weight: '30–35%', weightPct: 32, color: '#e81123' },
+  compliance:{ name: 'Manage Compliance Using Microsoft Purview',                  short: 'Purview',        weight: '15–20%', weightPct: 17, color: '#8661c5' }
+};
+
+function domainMS102Of(q) { return q.ms102Domain || 'tenant'; }
+
 // per-question domain overrides keyed by "topic:id" (for topics that mix domains)
 const DOMAIN_OVERRIDES = {
   // Topic 2 is mostly Vision, but a couple are speech/NLP handled below by keyword
@@ -14111,7 +15298,7 @@ function domainOf(q) {
 }
 
 function domainBadge(q) {
-  const d = (q.isAB650 || q.isAB650Learn) ? DOMAIN_AB650_DEFS[domainAB650Of(q)] : (q.isDP700 ? DOMAIN_DP700_DEFS[domainDP700Of(q)] : DOMAIN_DEFS[domainOf(q)]);
+  const d = q.isMS102 ? DOMAIN_MS102_DEFS[domainMS102Of(q)] : (q.isAB650 || q.isAB650Learn) ? DOMAIN_AB650_DEFS[domainAB650Of(q)] : (q.isDP700 ? DOMAIN_DP700_DEFS[domainDP700Of(q)] : DOMAIN_DEFS[domainOf(q)]);
   if (!d) return '';
   return `<span class="domain-badge" style="--dchip:${d.color}">${d.short}</span>`;
 }
@@ -14127,13 +15314,15 @@ const SOURCE_DEFS = {
   et103:    { short: 'AI-103 · ExamTopics',     label: 'AI-103 ExamTopics',        color: '#8661c5', exam: 'AI-103' },
   dp700:    { short: 'DP-700 · ExamTopics',     label: 'DP-700 Actual Exam Questions (Exam Topics)', color: '#00863f', exam: 'DP-700' },
   ab650:    { short: 'AB-650 · ExamTopics',     label: 'AB-650 Actual Exam Questions (Exam Topics)', color: '#e81123', exam: 'AB-650' },
-  ab650learn: { short: 'AB-650 · MS Learn',     label: "Microsoft Learn's Official AB-650 Study Guide Questions", color: '#742774', exam: 'AB-650' }
+  ab650learn: { short: 'AB-650 · MS Learn',     label: "Microsoft Learn's Official AB-650 Study Guide Questions", color: '#742774', exam: 'AB-650' },
+  ms102:    { short: 'MS-102 · ExamTopics',     label: 'MS-102 Actual Exam Questions (Exam Topics)', color: '#c19c00', exam: 'MS-102' }
 };
 
 function sourceOf(q) {
   if (q.isAB650Learn) return 'ab650learn'; // AB-650 official-study-guide pool
   if (q.isAB650)       return 'ab650';      // AB-650 ExamTopics-style
   if (q.isDP700)       return 'dp700';      // DP-700 ExamTopics-style
+  if (q.isMS102)       return 'ms102';      // MS-102 ExamTopics-style (incl. case studies)
   if (q.isLearnPool)   return 'learn102';   // AI-102 Microsoft Learn pool
   if (q.isCertPractice) return 'cert103';   // AI-103 certification practice
   if (q.isExamTopics)  return 'et103';      // AI-103 ExamTopics-style
@@ -14312,6 +15501,7 @@ function goToSections() {
   renderAI102Browser();
   renderExamTopicsBrowser();
   renderAB650Browser();
+  renderMS102Browser();
   renderProgressDash();
 }
 
@@ -14600,6 +15790,71 @@ function startAB650Filtered(domainKey) {
   startTimer();
 }
 
+// ── MS-102 Actual Exam Questions — grouped by official skill domain ──
+function ms102DomainIndices(domainKey) {
+  const arr = [];
+  questions.forEach((q, i) => {
+    if (!q.isMS102) return;
+    if (domainMS102Of(q) !== domainKey) return;
+    arr.push(i);
+  });
+  return arr;
+}
+
+function renderMS102Browser() {
+  const el = document.getElementById('ms102Browser');
+  if (!el) return;
+  const total = questions.filter(q => q.isMS102).length;
+  if (!total) { el.innerHTML = ''; return; }
+
+  const domCards = Object.entries(DOMAIN_MS102_DEFS).map(([k, d]) => {
+    const n = ms102DomainIndices(k).length;
+    const dis = n === 0;
+    const pct = total ? Math.round((n / total) * 100) : 0;
+    return `<div class="et-dom ${dis?'disabled':''}" ${dis?'':`onclick="startMS102Filtered('${k}')" role="button" tabindex="0"`}>
+      <div class="et-dom-head">
+        <span class="domain-badge" style="--dchip:${d.color}">${d.short}</span>
+        <span class="et-dom-count">${n}</span>
+      </div>
+      <div class="et-dom-name">${d.name}</div>
+      <div class="et-dom-bar"><span style="width:${pct}%;background:${d.color}"></span></div>
+      <div class="et-dom-meta">${pct}% of pool · exam weight ${d.weight}</div>
+    </div>`;
+  }).join('');
+
+  el.innerHTML = `
+    <div class="et-title"><span class="coach-orb" style="display:inline-block;vertical-align:middle"></span> MS-102 Actual Exam Questions — browse the ${total} questions</div>
+    <div class="et-sub">Grouped by official skill-measured domain, including case-study questions. Pick one to focus that objective area, or use the section card above for the full mixed set. Each launches a timed, scored set.</div>
+    <div class="et-group-label">Coverage by official MS-102 domain</div>
+    <div class="et-dom-grid">${domCards}</div>`;
+}
+
+function startMS102Filtered(domainKey) {
+  const idx = ms102DomainIndices(domainKey);
+  if (!idx.length) return;
+  const def = DOMAIN_MS102_DEFS[domainKey];
+  currentSection = 'ms102:domain:' + domainKey;
+  activeQuestions = idx;
+  pos = 0;
+  currentQ = activeQuestions[0];
+  reviewMode = false;
+  flagged.clear();
+  caseStudyCollapsed = false;
+  csActiveTab = -1;
+  stageMode = false;
+  activeQuestions.forEach(i => resetQuestion(questions[i]));
+  timeLeft = Math.max(300, activeQuestions.length * 90);
+  document.getElementById('sectionTitle').textContent = `MS-102 · ${def.short}`;
+  { const p = document.getElementById('examCodePrefix'); if (p) p.textContent = 'MS-102:'; }
+  document.getElementById('sectionScreen').classList.add('hidden');
+  document.getElementById('examUI').classList.remove('hidden');
+  examStarted = true;
+  clearInterval(timerInterval);
+  buildNav();
+  renderQuestion();
+  startTimer();
+}
+
 function startExamTopicsFiltered(kind, value) {
   const idx = etIndices(kind, value);
   if (!idx.length) return;
@@ -14643,7 +15898,7 @@ function startSection(key) {
   const def = SECTION_DEFS.find(d => d.key === key);
   document.getElementById('sectionTitle').textContent = def.name;
   const prefixEl = document.getElementById('examCodePrefix');
-  if (prefixEl) prefixEl.textContent = (key === 'ab650' || key === 'ab650learn') ? 'AB-650:' : (key === 'dp700' ? 'DP-700:' : 'AI-102:');
+  if (prefixEl) prefixEl.textContent = (key === 'ab650' || key === 'ab650learn') ? 'AB-650:' : (key === 'dp700' ? 'DP-700:' : (key === 'ms102' ? 'MS-102:' : 'AI-102:'));
   document.getElementById('sectionScreen').classList.add('hidden');
   document.getElementById('examUI').classList.remove('hidden');
   examStarted = true;
@@ -15179,7 +16434,7 @@ function renderQuestion() {
   const q = questions[currentQ];
   // Authentic Microsoft/Pearson VUE exam look is applied only to ExamTopics questions.
   const examUIEl = document.getElementById('examUI');
-  if (examUIEl) examUIEl.classList.toggle('exam-mode', !!(q.isExamTopics || q.isDP700 || q.isAB650 || q.isAB650Learn));
+  if (examUIEl) examUIEl.classList.toggle('exam-mode', !!(q.isExamTopics || q.isDP700 || q.isAB650 || q.isAB650Learn || q.isMS102));
   if (q.isAB650Learn) {
     // AB-650 official-study-guide pool: sequential #1..#N under "Topic 1 - Exam A"
     var ablNum = AB650LEARN_SEQ[q.id] || q.id;
@@ -15194,6 +16449,11 @@ function renderQuestion() {
     // DP-700 ExamTopics-style: sequential #1..#N under "Topic 1 - Exam A"
     var dpNum = DP700_SEQ[q.id] || q.id;
     document.getElementById('qId').textContent = `Question #${dpNum}`;
+    document.getElementById('qTopic').innerHTML = `${domainBadge(q)} ${sourceBadge(q)} <span class="topic-tag">Topic 1 - Exam A</span>`;
+  } else if (q.isMS102) {
+    // MS-102 ExamTopics-style (incl. case studies): sequential #1..#N under "Topic 1 - Exam A"
+    var msNum = MS102_SEQ[q.id] || q.id;
+    document.getElementById('qId').textContent = `Question #${msNum}`;
     document.getElementById('qTopic').innerHTML = `${domainBadge(q)} ${sourceBadge(q)} <span class="topic-tag">Topic 1 - Exam A</span>`;
   } else if (q.isExamTopics) {
     // AI-103 ExamTopics: sequential #1..#N under "Topic 1 - Exam A"
@@ -16382,8 +17642,9 @@ function submitExam() {
     const isAI103set = activeQuestions.some(qi => questions[qi].isExamTopics || questions[qi].isCertPractice);
     const isDP700set = activeQuestions.some(qi => questions[qi].isDP700);
     const isAB650set = activeQuestions.some(qi => questions[qi].isAB650 || questions[qi].isAB650Learn);
-    const DOMS = isAB650set ? DOMAIN_AB650_DEFS : (isDP700set ? DOMAIN_DP700_DEFS : (isAI103set ? DOMAIN103_DEFS : DOMAIN_DEFS));
-    const domOf = isAB650set ? domainAB650Of : (isDP700set ? domainDP700Of : (isAI103set ? domain103Of : domainOf));
+    const isMS102set = activeQuestions.some(qi => questions[qi].isMS102);
+    const DOMS = isMS102set ? DOMAIN_MS102_DEFS : (isAB650set ? DOMAIN_AB650_DEFS : (isDP700set ? DOMAIN_DP700_DEFS : (isAI103set ? DOMAIN103_DEFS : DOMAIN_DEFS)));
+    const domOf = isMS102set ? domainMS102Of : (isAB650set ? domainAB650Of : (isDP700set ? domainDP700Of : (isAI103set ? domain103Of : domainOf)));
     const dom = {};
     activeQuestions.forEach(qi => {
       const q = questions[qi];
@@ -16408,7 +17669,7 @@ function submitExam() {
     // overall progress line from persistent history
     const ps = progressSummary();
     const progLine = `<div class="bd-progress">📈 Overall progress: <strong>${ps.mastered}</strong> mastered · <strong>${ps.partial}</strong> partial · <strong>${ps.wrong}</strong> to review · ${ps.seen}/${ps.total} attempted across all sessions.</div>`;
-    bdEl.innerHTML = `<div class="bd-title">Score by official ${isAB650set ? 'AB-650' : (isDP700set ? 'DP-700' : (isAI103set ? 'AI-103' : 'AI-102'))} domain</div>${rows}${foot}${progLine}`;
+    bdEl.innerHTML = `<div class="bd-title">Score by official ${isMS102set ? 'MS-102' : (isAB650set ? 'AB-650' : (isDP700set ? 'DP-700' : (isAI103set ? 'AI-103' : 'AI-102')))} domain</div>${rows}${foot}${progLine}`;
     bdEl.style.display = 'block';
   }
 

@@ -411,6 +411,22 @@
   .section-count { text-align: center; font-size: 22px; font-weight: 700; color: var(--ms-blue); line-height: 1; }
   .section-count span { display: block; font-size: 10px; font-weight: 600; color: var(--ms-text-3); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
 
+  /* EXAM GROUPS (top-level exam-code picker) */
+  .examgroup-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 8px; }
+  .examgroup-card { display: flex; flex-direction: column; gap: 8px; border: 1px solid var(--ms-border); border-left: 4px solid var(--eg-color, var(--ms-blue)); border-radius: var(--radius); padding: 16px 18px; cursor: pointer; transition: all 0.15s; background: white; }
+  .examgroup-card:hover:not(.disabled) { border-color: var(--eg-color, var(--ms-blue)); background: var(--ms-panel-2); box-shadow: 0 2px 14px rgba(0,0,0,0.08); }
+  .examgroup-card.disabled { opacity: 0.45; cursor: not-allowed; }
+  .examgroup-top { display: flex; align-items: center; gap: 10px; }
+  .examgroup-icon { font-size: 22px; }
+  .examgroup-code { font-size: 16px; font-weight: 700; color: var(--ms-text); }
+  .examgroup-fullname { font-size: 12px; color: var(--ms-text-2); line-height: 1.4; flex: 1; }
+  .examgroup-bottom { display: flex; align-items: center; justify-content: space-between; margin-top: 2px; }
+  .examgroup-count { font-size: 13px; font-weight: 700; color: var(--eg-color, var(--ms-blue)); }
+  .examgroup-go { font-size: 13px; color: var(--ms-text-3); }
+  @media (max-width: 640px) { .examgroup-grid { grid-template-columns: 1fr; } }
+  .group-back { display: inline-flex; align-items: center; gap: 4px; background: none; border: none; color: var(--ms-blue); font-size: 13px; font-weight: 600; cursor: pointer; padding: 4px 0; margin-bottom: 14px; }
+  .group-back:hover { text-decoration: underline; }
+
   /* TODAY'S EXAM card + experience selector */
   .today-card { border: 2px solid var(--ms-blue); background: linear-gradient(180deg, var(--ms-panel-2), white); }
   .today-card:hover { box-shadow: 0 2px 14px rgba(0,103,184,0.25); }
@@ -1288,23 +1304,29 @@
   <div class="start-card" style="max-width:760px">
     <div class="start-card-header">
       <div class="ms-logo">Microsoft Certification</div>
-      <h1>Choose a Section</h1>
-      <div class="exam-code">Exam AI-102 · Practice Simulation</div>
+      <h1 id="sectionScreenTitle">Choose an Exam</h1>
+      <div class="exam-code" id="sectionScreenSubtitle">Practice Simulation</div>
     </div>
     <div class="start-card-body">
-      <div class="rules" style="margin-bottom:18px">
-        📋 Pick a question type to practice. Each section runs on its own, with its own timer and a score out of 1000 at the end. You can return here and try another section anytime.
-      </div>
-      <div class="rules" style="margin-bottom:18px; border-left:3px solid var(--ms-blue)">
-        🆕 <strong>Updated for Azure AI Foundry (Microsoft Foundry).</strong> The platform was renamed: <em>Azure AI Studio → Azure AI Foundry → Microsoft Foundry</em>; <em>Cognitive/Azure AI Services → Foundry Tools</em>; <em>Azure AI Agent Service → Foundry Agent Service</em>. New Foundry questions are mixed into the Multiple Choice and Hotspot sections (and the Generative AI / Agentic domains below).
-      </div>
-      <div id="sectionCards"></div>
-      <div id="domainLegend" class="domain-legend"></div>
-      <div id="ai102Browser" class="ai102-browser"></div>
       <div id="progressDash" class="progress-dash"></div>
-      <div id="examTopicsBrowser" class="et-browser"></div>
-      <div id="ab650Browser" class="et-browser"></div>
-      <div id="ms102Browser" class="et-browser"></div>
+
+      <div id="examGroups"></div>
+
+      <div id="groupDetail" class="hidden">
+        <button class="group-back" onclick="backToExamGroups()">← All Exams</button>
+        <div class="rules" style="margin-bottom:18px">
+          📋 Pick a question type to practice. Each section runs on its own, with its own timer and a score out of 1000 at the end. You can return here and try another section anytime.
+        </div>
+        <div id="groupFoundryNote" class="rules hidden" style="margin-bottom:18px; border-left:3px solid var(--ms-blue)">
+          🆕 <strong>Updated for Azure AI Foundry (Microsoft Foundry).</strong> The platform was renamed: <em>Azure AI Studio → Azure AI Foundry → Microsoft Foundry</em>; <em>Cognitive/Azure AI Services → Foundry Tools</em>; <em>Azure AI Agent Service → Foundry Agent Service</em>. New Foundry questions are mixed into the Multiple Choice and Hotspot sections (and the Generative AI / Agentic domains below).
+        </div>
+        <div id="sectionCards"></div>
+        <div id="domainLegend" class="domain-legend"></div>
+        <div id="ai102Browser" class="ai102-browser"></div>
+        <div id="examTopicsBrowser" class="et-browser"></div>
+        <div id="ab650Browser" class="et-browser"></div>
+        <div id="ms102Browser" class="et-browser"></div>
+      </div>
     </div>
   </div>
 </div>
@@ -15231,6 +15253,40 @@ const SECTION_DEFS = [
   { key: 'hotspot',   name: 'Hotspot',          icon: '🎯', desc: 'Dropdowns, code, and Yes/No statements.' }
 ];
 
+// ── Exam-code groups ───────────────────────────────────────────────
+// Every SECTION_DEFS key belongs to exactly one exam code. The section
+// picker is organized around these groups: pick an exam, then pick a
+// section/browser within it, instead of one long mixed list.
+const GROUP_DEFS = [
+  { key: 'ai102', code: 'AI-102', icon: '🧠', color: '#0067b8',
+    fullName: 'Designing and Implementing a Microsoft Azure AI Solution',
+    sections: ['learn', 'casestudy', 'mc', 'dragdrop', 'hotspot'],
+    hasDomainLegend: true, hasBrowser: 'ai102Browser', showFoundryNote: true },
+  { key: 'ai103', code: 'AI-103', icon: '🤖', color: '#8661c5',
+    fullName: 'Developing Solutions for the Microsoft AI Platform',
+    sections: ['certpractice', 'examtopics'],
+    hasBrowser: 'examTopicsBrowser' },
+  { key: 'dp700', code: 'DP-700', icon: '🧱', color: '#00863f',
+    fullName: 'Implementing Data Engineering Solutions Using Microsoft Fabric',
+    sections: ['dp700'] },
+  { key: 'ab650', code: 'AB-650', icon: '🛡️', color: '#e81123',
+    fullName: 'Administering Microsoft 365 and AI Services',
+    sections: ['ab650', 'ab650learn'],
+    hasBrowser: 'ab650Browser' },
+  { key: 'ms102', code: 'MS-102', icon: '🏢', color: '#c19c00',
+    fullName: 'Microsoft 365 Administrator',
+    sections: ['ms102'],
+    hasBrowser: 'ms102Browser' }
+];
+
+// Which exam group is currently open on the section screen. null = the
+// top-level "choose an exam" grid.
+let currentGroup = null;
+
+function groupCountOf(g) {
+  return g.sections.reduce((sum, key) => sum + indicesForSection(key).length, 0);
+}
+
 // ── Official AI-102 skill domains (Dec 2025 outline) ──────────────
 // Official AI-102 "Skills measured as of December 23, 2025" (exam retires 30 Jun 2026).
 // weightPct is the mid-point used to build the weighted Today's Exam blueprint.
@@ -15446,12 +15502,75 @@ function goToSections() {
   document.getElementById('resultsModal').classList.remove('show');
   const screen = document.getElementById('sectionScreen');
   screen.classList.remove('hidden');
+
+  renderProgressDash();
+  renderExamGroups();
+  if (currentGroup) {
+    renderGroupDetail(currentGroup);
+  } else {
+    document.getElementById('groupDetail').classList.add('hidden');
+    document.getElementById('sectionScreenTitle').textContent = 'Choose an Exam';
+    document.getElementById('sectionScreenSubtitle').textContent = 'Practice Simulation';
+  }
+}
+
+// Top-level grid: one card per exam code (AI-102, AI-103, DP-700, AB-650, MS-102).
+function renderExamGroups() {
+  const el = document.getElementById('examGroups');
+  if (!el) return;
+  el.innerHTML = `<div class="examgroup-grid">${GROUP_DEFS.map(g => {
+    const count = groupCountOf(g);
+    const disabled = count === 0;
+    return `<div class="examgroup-card ${disabled?'disabled':''}" style="--eg-color:${g.color}" ${disabled?'':`onclick="selectExamGroup('${g.key}')"`}>
+      <div class="examgroup-top">
+        <span class="examgroup-icon">${g.icon}</span>
+        <span class="examgroup-code">${g.code}</span>
+      </div>
+      <div class="examgroup-fullname">${g.fullName}</div>
+      <div class="examgroup-bottom">
+        <span class="examgroup-count">${count} questions</span>
+        <span class="examgroup-go">${disabled?'':'Open ›'}</span>
+      </div>
+    </div>`;
+  }).join('')}</div>`;
+}
+
+function selectExamGroup(key) {
+  try {
+    currentGroup = key;
+    goToSections();
+  } catch (e) {
+    console.error('selectExamGroup failed:', e);
+    alert('Could not open that exam group — check the browser console for details:\n' + e.message);
+  }
+}
+
+function backToExamGroups() {
+  currentGroup = null;
+  goToSections();
+}
+
+// Detail view for one exam group: its own section cards, domain legend
+// (if any), and question browser (if any). Everything else stays hidden
+// so a given exam's practice options never mix with another exam's.
+function renderGroupDetail(groupKey) {
+  const g = GROUP_DEFS.find(x => x.key === groupKey);
+  if (!g) { backToExamGroups(); return; }
+
+  document.getElementById('groupDetail').classList.remove('hidden');
+  document.getElementById('sectionScreenTitle').textContent = g.code;
+  document.getElementById('sectionScreenSubtitle').textContent = `${g.fullName} · Practice Simulation`;
+
+  const foundryNote = document.getElementById('groupFoundryNote');
+  if (foundryNote) foundryNote.classList.toggle('hidden', !g.showFoundryNote);
+
   const cards = document.getElementById('sectionCards');
+  const isAI102Group = groupKey === 'ai102';
   const todayCount = Math.min(TODAYS_EXAM_TARGET, questions.length);
   const expPills = ['novice', 'intermediate', 'experienced'].map(lvl =>
     `<button class="exp-pill ${experienceLevel===lvl?'active':''}" onclick="setExperience('${lvl}');document.querySelectorAll('.exp-pill').forEach(p=>p.classList.remove('active'));this.classList.add('active');">${lvl[0].toUpperCase()+lvl.slice(1)}</button>`
   ).join('');
-  const todayCard = `
+  const todayCard = isAI102Group ? `
     <div class="section-card today-card" onclick="startTodaysExam()">
       <div class="section-icon">📝</div>
       <div class="section-info">
@@ -15463,8 +15582,10 @@ function goToSections() {
     <div class="exp-block">
       <div class="exp-label">Your experience level <span class="exp-note">(survey only — does not change your questions, exactly like the real OnVUE exam)</span></div>
       <div class="exp-pills">${expPills}</div>
-    </div>`;
-  cards.innerHTML = todayCard + `<div class="section-subhead">Or practice one question type:</div>` + SECTION_DEFS.map(s => {
+    </div>` : '';
+
+  const groupSections = SECTION_DEFS.filter(s => g.sections.includes(s.key));
+  cards.innerHTML = todayCard + `<div class="section-subhead">${isAI102Group ? 'Or practice one question type:' : 'Practice one question type:'}</div>` + groupSections.map(s => {
     const count = indicesForSection(s.key).length;
     const disabled = count === 0;
     return `<div class="section-card ${disabled?'disabled':''} ${s.key==='learn'?'learn-card':''}" ${disabled?'':`onclick="startSection('${s.key}')"`}>
@@ -15477,32 +15598,49 @@ function goToSections() {
     </div>`;
   }).join('');
 
-  // domain breakdown across the whole bank
-  const domCount = {};
-  questions.forEach(q => { const dk = domainOf(q); domCount[dk] = (domCount[dk]||0)+1; });
+  // domain legend — only AI-102 currently has this generic clickable legend
   const legendEl = document.getElementById('domainLegend');
   if (legendEl) {
-    legendEl.innerHTML = `
-      <div class="domain-legend-title"><span class="coach-orb" style="display:inline-block;vertical-align:middle"></span> Coverage by official AI-102 domain</div>
-      <div class="domain-legend-grid">
-        ${Object.entries(DOMAIN_DEFS).map(([k, d]) => {
-          const n = domCount[k] || 0;
-          const dis = n === 0;
-          return `<div class="domain-legend-item ${dis?'disabled':''}" ${dis?'':`onclick="startDomain('${k}')" role="button" tabindex="0"`}>
-            <span class="domain-badge" style="--dchip:${d.color}">${d.short}</span>
-            <span class="domain-legend-meta">${n} questions · exam weight ${d.weight}</span>
-            ${dis?'':'<span class="domain-legend-go">›</span>'}
-          </div>`;
-        }).join('')}
-      </div>
-      <div class="domain-legend-hint">Click a domain to practice only those questions.</div>`;
+    if (isAI102Group) {
+      const domCount = {};
+      questions.forEach(q => { const dk = domainOf(q); domCount[dk] = (domCount[dk]||0)+1; });
+      legendEl.classList.remove('hidden');
+      legendEl.innerHTML = `
+        <div class="domain-legend-title"><span class="coach-orb" style="display:inline-block;vertical-align:middle"></span> Coverage by official AI-102 domain</div>
+        <div class="domain-legend-grid">
+          ${Object.entries(DOMAIN_DEFS).map(([k, d]) => {
+            const n = domCount[k] || 0;
+            const dis = n === 0;
+            return `<div class="domain-legend-item ${dis?'disabled':''}" ${dis?'':`onclick="startDomain('${k}')" role="button" tabindex="0"`}>
+              <span class="domain-badge" style="--dchip:${d.color}">${d.short}</span>
+              <span class="domain-legend-meta">${n} questions · exam weight ${d.weight}</span>
+              ${dis?'':'<span class="domain-legend-go">›</span>'}
+            </div>`;
+          }).join('')}
+        </div>
+        <div class="domain-legend-hint">Click a domain to practice only those questions.</div>`;
+    } else {
+      legendEl.classList.add('hidden');
+      legendEl.innerHTML = '';
+    }
   }
 
-  renderAI102Browser();
-  renderExamTopicsBrowser();
-  renderAB650Browser();
-  renderMS102Browser();
-  renderProgressDash();
+  // question browsers — only render/show the one that belongs to this group
+  const browserIds = ['ai102Browser', 'examTopicsBrowser', 'ab650Browser', 'ms102Browser'];
+  browserIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (g.hasBrowser === id) {
+      el.classList.remove('hidden');
+    } else {
+      el.classList.add('hidden');
+      el.innerHTML = '';
+    }
+  });
+  if (g.hasBrowser === 'ai102Browser') renderAI102Browser();
+  if (g.hasBrowser === 'examTopicsBrowser') renderExamTopicsBrowser();
+  if (g.hasBrowser === 'ab650Browser') renderAB650Browser();
+  if (g.hasBrowser === 'ms102Browser') renderMS102Browser();
 }
 
 // Persistent progress dashboard on the section screen.
